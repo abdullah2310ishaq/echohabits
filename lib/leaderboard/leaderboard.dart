@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/services/habit_service.dart';
+import '../core/services/profile_service.dart';
 
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
@@ -43,7 +44,7 @@ class Leaderboard extends StatelessWidget {
             'avatar': 'assets/profile.png',
           },
           {
-            'name': 'Liza',
+            'name': ProfileService.getUserName(),
             'rankTitle': currentUserRankTitle,
             'score': currentUserScore,
             'isCurrentUser': true,

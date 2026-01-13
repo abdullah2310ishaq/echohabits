@@ -1,9 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 /// Central app state for habits, today's tasks, and history.
 ///
-/// Uses in‑memory storage only (no persistence yet).
+/// Uses Hive for persistent local storage.
 class HabitService extends ChangeNotifier {
+  static const String _boxName = 'habitBox';
+  static const String _userHabitsKey = 'userHabits';
+  static const String _historyKey = 'history';
+  static const String _dailyScoreKey = 'dailyScore';
+  static const String _totalScoreKey = 'totalScore';
+  static const String _lastScoreResetDateKey = 'lastScoreResetDate';
+  static const String _lastDefaultResetKey = 'lastDefaultReset';
+  static const String _hiddenDefaultTaskIdsKey = 'hiddenDefaultTaskIds';
+  static const String _habitAddTimestampsKey = 'habitAddTimestamps';
+
+  static Box? _box;
+  
+  /// Map to track when habits were added (title -> timestamp)
+  final Map<String, DateTime> _habitAddTimestamps = {};
+
+  /// Initialize Hive box and load data
+  static Future<void> init() async {
+    _box = await Hive.openBox(_boxName);
+  }
+
+  /// Load all data from Hive
+  void loadData() {
+    if (_box == null) return;
+
+    // Load user habits
+    final savedHabits = _box!.get(_userHabitsKey);
+    if (savedHabits != null) {
+      _userHabits.clear();
+      _userHabits.addAll(List<Map<String, dynamic>>.from(savedHabits));
+    }
+
+    // Load history
+    final savedHistory = _box!.get(_historyKey);
+    if (savedHistory != null) {
+      _history.clear();
+      final historyList = List<Map<String, dynamic>>.from(savedHistory);
+      for (var entry in historyList) {
+        // Convert timestamp string back to DateTime
+        final entryCopy = Map<String, dynamic>.from(entry);
+        if (entryCopy['timestamp'] is String) {
+          entryCopy['timestamp'] = DateTime.parse(entryCopy['timestamp']);
+        }
+        _history.add(entryCopy);
+      }
+    }
+
+    // Load scores
+    _totalScore = _box!.get(_totalScoreKey, defaultValue: 2100);
+    _dailyScore = _box!.get(_dailyScoreKey, defaultValue: 0);
+
+    // Load dates
+    final lastResetStr = _box!.get(_lastScoreResetDateKey);
+    if (lastResetStr != null) {
+      _lastScoreResetDate = DateTime.parse(lastResetStr);
+    }
+
+    final lastDefaultResetStr = _box!.get(_lastDefaultResetKey);
+    if (lastDefaultResetStr != null) {
+      _lastDefaultReset = DateTime.parse(lastDefaultResetStr);
+    }
+
+    // Load hidden task IDs
+    final hiddenIds = _box!.get(_hiddenDefaultTaskIdsKey);
+    if (hiddenIds != null) {
+      _hiddenDefaultTaskIds.clear();
+      _hiddenDefaultTaskIds.addAll(Set<String>.from(hiddenIds));
+    }
+
+    // Load habit add timestamps
+    final savedTimestamps = _box!.get(_habitAddTimestampsKey);
+    if (savedTimestamps != null) {
+      _habitAddTimestamps.clear();
+      final timestampsMap = Map<String, dynamic>.from(savedTimestamps);
+      timestampsMap.forEach((key, value) {
+        if (value is String) {
+          _habitAddTimestamps[key] = DateTime.parse(value);
+        }
+      });
+    }
+
+    // Ensure scores are fresh (reset if needed)
+    _ensureScoreFresh();
+    _ensureDefaultTasksFresh();
+  }
+
+  /// Save all data to Hive
+  Future<void> _saveData() async {
+    if (_box == null) return;
+
+    // Save user habits
+    await _box!.put(_userHabitsKey, _userHabits);
+
+    // Save history (convert DateTime to String for storage)
+    final historyToSave = _history.map((entry) {
+      final entryCopy = Map<String, dynamic>.from(entry);
+      if (entryCopy['timestamp'] is DateTime) {
+        entryCopy['timestamp'] = (entryCopy['timestamp'] as DateTime).toIso8601String();
+      }
+      return entryCopy;
+    }).toList();
+    await _box!.put(_historyKey, historyToSave);
+
+    // Save scores
+    await _box!.put(_totalScoreKey, _totalScore);
+    await _box!.put(_dailyScoreKey, _dailyScore);
+
+    // Save dates
+    if (_lastScoreResetDate != null) {
+      await _box!.put(_lastScoreResetDateKey, _lastScoreResetDate!.toIso8601String());
+    }
+
+    if (_lastDefaultReset != null) {
+      await _box!.put(_lastDefaultResetKey, _lastDefaultReset!.toIso8601String());
+    }
+
+    // Save hidden task IDs
+    await _box!.put(_hiddenDefaultTaskIdsKey, _hiddenDefaultTaskIds.toList());
+
+    // Save habit add timestamps (convert DateTime to String)
+    final timestampsToSave = <String, String>{};
+    _habitAddTimestamps.forEach((key, value) {
+      timestampsToSave[key] = value.toIso8601String();
+    });
+    await _box!.put(_habitAddTimestampsKey, timestampsToSave);
+  }
+
   /// User‑added habits (from Habits page) that should appear on Home.
   final List<Map<String, dynamic>> _userHabits = [];
 
@@ -63,7 +190,7 @@ class HabitService extends ChangeNotifier {
   DateTime? _lastScoreResetDate;
   
   /// Total cumulative score (all-time)
-  int _totalScore = 2100; // Starting score
+  int _totalScore = 0; // Starting score
 
   List<Map<String, dynamic>> get userHabits => List.unmodifiable(_userHabits);
 
@@ -95,9 +222,21 @@ class HabitService extends ChangeNotifier {
     required String impact,
     required Color impactColor,
   }) {
-    // Prevent duplicates by title.
+    // Prevent duplicates by title (currently in list)
     if (_userHabits.any((habit) => habit['title'] == title)) {
       return;
+    }
+
+    // Check 24-hour cooldown - prevent adding same habit within 24 hours
+    final now = DateTime.now();
+    if (_habitAddTimestamps.containsKey(title)) {
+      final lastAdded = _habitAddTimestamps[title]!;
+      final hoursSinceAdded = now.difference(lastAdded).inHours;
+      
+      // If added within last 24 hours, don't allow
+      if (hoursSinceAdded < 24) {
+        return;
+      }
     }
 
     _userHabits.add({
@@ -110,6 +249,10 @@ class HabitService extends ChangeNotifier {
       'addedFromHabitsPage': true,
     });
 
+    // Track when this habit was added
+    _habitAddTimestamps[title] = now;
+
+    _saveData();
     notifyListeners();
   }
 
@@ -147,6 +290,7 @@ class HabitService extends ChangeNotifier {
       _totalScore += points;
     }
 
+    _saveData();
     notifyListeners();
   }
 
@@ -180,12 +324,14 @@ class HabitService extends ChangeNotifier {
       _totalScore += points;
     }
 
+    _saveData();
     notifyListeners();
   }
 
   /// Clear all user‑added habits.
   void clearHabits() {
     _userHabits.clear();
+    _saveData();
     notifyListeners();
   }
 
@@ -199,15 +345,22 @@ class HabitService extends ChangeNotifier {
     }
   }
   
-  /// Internal: ensure daily score resets at midnight (23:59)
+  /// Internal: ensure daily score resets at midnight (00:00)
   void _ensureScoreFresh() {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     
     if (_lastScoreResetDate == null || _lastScoreResetDate! != today) {
-      // Reset daily score at midnight
+      // Reset daily score at midnight (00:00)
       _dailyScore = 0;
       _lastScoreResetDate = today;
+      
+      // Clean up old habit timestamps (older than 24 hours)
+      _habitAddTimestamps.removeWhere((key, value) {
+        return now.difference(value).inHours >= 24;
+      });
+      
+      _saveData();
     }
   }
   
@@ -242,5 +395,118 @@ class HabitService extends ChangeNotifier {
       'status': isDone ? 'done' : 'skipped',
       'timestamp': DateTime.now(),
     });
+  }
+
+  /// Get total number of completed actions (only 'done' status)
+  int get totalActions {
+    return _history.where((entry) => entry['status'] == 'done').length;
+  }
+
+  /// Get current streak (consecutive days with at least one completed task)
+  int get currentStreak {
+    if (_history.isEmpty) return 0;
+    
+    final completedTasks = _history
+        .where((entry) => entry['status'] == 'done')
+        .toList();
+    
+    if (completedTasks.isEmpty) return 0;
+    
+    // Group by date
+    final Map<String, bool> daysWithTasks = {};
+    for (var entry in completedTasks) {
+      final timestamp = entry['timestamp'] as DateTime;
+      final dateKey = '${timestamp.year}-${timestamp.month}-${timestamp.day}';
+      daysWithTasks[dateKey] = true;
+    }
+    
+    // Calculate streak
+    final today = DateTime.now();
+    int streak = 0;
+    DateTime checkDate = DateTime(today.year, today.month, today.day);
+    
+    while (true) {
+      final dateKey = '${checkDate.year}-${checkDate.month}-${checkDate.day}';
+      if (daysWithTasks.containsKey(dateKey)) {
+        streak++;
+        checkDate = checkDate.subtract(const Duration(days: 1));
+      } else {
+        // If today has no tasks, check yesterday
+        if (streak == 0 && checkDate == DateTime(today.year, today.month, today.day)) {
+          checkDate = checkDate.subtract(const Duration(days: 1));
+          continue;
+        }
+        break;
+      }
+    }
+    
+    return streak;
+  }
+
+  /// Get average actions per day
+  double get averageActionsPerDay {
+    if (_history.isEmpty) return 0.0;
+    
+    final completedTasks = _history
+        .where((entry) => entry['status'] == 'done')
+        .toList();
+    
+    if (completedTasks.isEmpty) return 0.0;
+    
+    // Get date range
+    final dates = completedTasks
+        .map((entry) {
+          final timestamp = entry['timestamp'] as DateTime;
+          return DateTime(timestamp.year, timestamp.month, timestamp.day);
+        })
+        .toSet()
+        .toList();
+    
+    if (dates.isEmpty) return 0.0;
+    
+    dates.sort();
+    final firstDate = dates.first;
+    final lastDate = dates.last;
+    final daysDiff = lastDate.difference(firstDate).inDays + 1;
+    
+    if (daysDiff == 0) return completedTasks.length.toDouble();
+    
+    return completedTasks.length / daysDiff;
+  }
+
+  /// Get weekly score data for graph (last 7 days)
+  /// Returns list of daily scores for the past week
+  List<double> get weeklyScoreData {
+    final now = DateTime.now();
+    final List<double> weeklyScores = [];
+    
+    // Get last 7 days
+    for (int i = 6; i >= 0; i--) {
+      final date = now.subtract(Duration(days: i));
+      final dateKey = DateTime(date.year, date.month, date.day);
+      
+      // Calculate score for this day
+      double dayScore = 0.0;
+      for (var entry in _history) {
+        if (entry['status'] != 'done') continue;
+        
+        final timestamp = entry['timestamp'] as DateTime;
+        final entryDate = DateTime(timestamp.year, timestamp.month, timestamp.day);
+        
+        if (entryDate == dateKey) {
+          // Calculate score for this task
+          int points = 10; // base score
+          
+          // Check if we can determine impact from task data
+          // For now, use base score, can be enhanced later
+          dayScore += points;
+        }
+      }
+      
+      // Normalize to a scale (e.g., divide by 10 for better visualization)
+      weeklyScores.add(dayScore / 10.0);
+    }
+    
+    return weeklyScores;
   }
 }

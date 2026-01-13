@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'home/home_shell.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+import '../core/services/profile_service.dart';
 
 class ProfileFirst extends StatefulWidget {
   const ProfileFirst({super.key});
@@ -11,7 +16,9 @@ class ProfileFirst extends StatefulWidget {
 
 class _ProfileFirstState extends State<ProfileFirst> {
   final TextEditingController _nameController = TextEditingController();
+  final ImagePicker _imagePicker = ImagePicker();
   String? _selectedImagePath;
+  bool _isUsingDefaultImage = true;
 
   @override
   void dispose() {
@@ -131,13 +138,75 @@ class _ProfileFirstState extends State<ProfileFirst> {
     );
   }
 
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await _imagePicker.pickImage(source: source);
+      if (image != null) {
+        // Copy image to app directory for persistence
+        final appDir = await getApplicationDocumentsDirectory();
+        final fileName = path.basename(image.path);
+        final savedImage = File(path.join(appDir.path, fileName));
+        await File(image.path).copy(savedImage.path);
+        
+        setState(() {
+          _selectedImagePath = savedImage.path;
+          _isUsingDefaultImage = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error picking image: $e')),
+        );
+      }
+    }
+  }
+
+  Future<void> _showImageSourceDialog() async {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Choose from Gallery'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.gallery);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Take a Photo'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.image),
+              title: const Text('Use Default Image'),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  _selectedImagePath = null;
+                  _isUsingDefaultImage = true;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildProfilePicturePicker() {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {
-            // TODO: Implement image picker
-          },
+          onTap: _showImageSourceDialog,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -161,10 +230,15 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: ClipOval(
-                  child: Image.asset(
-                    _selectedImagePath ?? 'assets/profile.png',
-                    fit: BoxFit.cover,
-                  ),
+                  child: _isUsingDefaultImage || _selectedImagePath == null
+                      ? Image.asset(
+                          'assets/profile.png',
+                          fit: BoxFit.cover,
+                        )
+                      : Image.file(
+                          File(_selectedImagePath!),
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
               // Camera badge - positioned slightly more right and up
@@ -272,10 +346,24 @@ class _ProfileFirstState extends State<ProfileFirst> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
-                if (_nameController.text.isNotEmpty) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const HomeShell()),
+              onPressed: () async {
+                if (_nameController.text.trim().isNotEmpty) {
+                  // Save profile data to Hive
+                  await ProfileService.saveProfile(
+                    name: _nameController.text.trim(),
+                    imagePath: _isUsingDefaultImage ? null : _selectedImagePath,
+                  );
+                  
+                  if (mounted) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const HomeShell()),
+                    );
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter your name'),
+                    ),
                   );
                 }
               },

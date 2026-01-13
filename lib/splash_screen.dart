@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../core/services/profile_service.dart';
+import '../profile_first.dart';
+import '../home/home_shell.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -32,7 +35,22 @@ class _SplashScreenState extends State<SplashScreen>
       curve: const Interval(0.4, 1.0, curve: Curves.easeIn),
     );
 
-    _controller.forward();
+    _controller.forward().then((_) {
+      _navigateToNextScreen();
+    });
+  }
+
+  void _navigateToNextScreen() {
+    if (!mounted) return;
+
+    final isProfileSetup = ProfileService.isProfileSetupComplete();
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) =>
+            isProfileSetup ? const HomeShell() : const ProfileFirst(),
+      ),
+    );
   }
 
   @override

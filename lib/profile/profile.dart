@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:provider/provider.dart';
+import 'dart:io';
 import '../history/history.dart';
 import '../settings/settings.dart';
+import '../core/services/profile_service.dart';
+import '../core/services/habit_service.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<HabitService>(
+      builder: (context, habitService, child) {
+        return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -40,12 +46,7 @@ class Profile extends StatelessWidget {
                           radius: 33,
                           backgroundColor: Colors.white,
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/profile.png',
-                              fit: BoxFit.cover,
-                              width: 66,
-                              height: 66,
-                            ),
+                            child: _buildProfileImage(),
                           ),
                         ),
                       ),
@@ -55,9 +56,9 @@ class Profile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Liza',
-                              style: TextStyle(
+                            Text(
+                              ProfileService.getUserName(),
+                              style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF2E7D32),
@@ -138,7 +139,7 @@ class Profile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Green Score Chart Card
-                  _buildGreenScoreCard(),
+                  _buildGreenScoreCard(habitService),
                   const SizedBox(height: 16),
 
                   // Quick Stats Cards
@@ -148,7 +149,7 @@ class Profile extends StatelessWidget {
                         child: _buildStatCard(
                           svgAsset: 'assets/eco.svg',
                           iconColor: Colors.orange,
-                          value: '4.2',
+                          value: habitService.averageActionsPerDay.toStringAsFixed(1),
                           label: 'Avg Actions/Day',
                         ),
                       ),
@@ -157,7 +158,7 @@ class Profile extends StatelessWidget {
                         child: _buildStatCard(
                           svgAsset: 'assets/flame.svg',
                           iconColor: Colors.orange,
-                          value: '18',
+                          value: habitService.currentStreak.toString(),
                           label: 'Day Streak',
                         ),
                       ),
@@ -175,35 +176,30 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  SizedBox(
-                    height: 120,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        _buildBadgeCard(
-                          imageAsset: 'assets/firststep.png',
-                          label: 'First Step',
-                        ),
-                        const SizedBox(width: 12),
-                        _buildBadgeCard(
-                          icon: Icons.directions_bike,
-                          iconColor: Colors.blue,
-                          label: 'Cyclist',
-                        ),
-                        const SizedBox(width: 12),
-                        _buildBadgeCard(
-                          icon: Icons.water_drop,
-                          iconColor: Colors.blue,
-                          label: 'Water Saver',
-                        ),
-                        const SizedBox(width: 12),
-                        _buildBadgeCard(
-                          icon: Icons.bolt,
-                          iconColor: Colors.amber,
-                          label: 'Energy Pr',
-                        ),
-                      ],
-                    ),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      _buildBadgeCard(
+                        imageAsset: 'assets/firststep.png',
+                        label: 'First Step',
+                      ),
+                      _buildBadgeCard(
+                        icon: Icons.directions_bike,
+                        iconColor: Colors.blue,
+                        label: 'Cyclist',
+                      ),
+                      _buildBadgeCard(
+                        icon: Icons.water_drop,
+                        iconColor: Colors.blue,
+                        label: 'Water Saver',
+                      ),
+                      _buildBadgeCard(
+                        icon: Icons.bolt,
+                        iconColor: Colors.amber,
+                        label: 'Energy Pr',
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
 
@@ -255,19 +251,26 @@ class Profile extends StatelessWidget {
         ),
       ),
     );
+      },
+    );
   }
 
-  Widget _buildGreenScoreCard() {
-    // Sample data for the chart (Mon-Sun)
-    final List<FlSpot> spots = [
-      const FlSpot(0, 1.5), // Mon
-      const FlSpot(1, 2.0), // Tue
-      const FlSpot(2, 2.5), // Wed (current day)
-      const FlSpot(3, 2.8), // Thu (projected)
-      const FlSpot(4, 3.0), // Fri (projected)
-      const FlSpot(5, 3.2), // Sat (projected)
-      const FlSpot(6, 3.5), // Sun (projected)
-    ];
+  Widget _buildGreenScoreCard(HabitService habitService) {
+    // Get real weekly score data
+    final weeklyScores = habitService.weeklyScoreData;
+    
+    // Create spots for the chart (last 7 days)
+    final List<FlSpot> spots = [];
+    for (int i = 0; i < weeklyScores.length; i++) {
+      spots.add(FlSpot(i.toDouble(), weeklyScores[i]));
+    }
+    
+    // If no data, show zeros
+    if (spots.isEmpty) {
+      for (int i = 0; i < 7; i++) {
+        spots.add(FlSpot(i.toDouble(), 0));
+      }
+    }
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -297,9 +300,9 @@ class Profile extends StatelessWidget {
                   color: Colors.black87,
                 ),
               ),
-              const Text(
-                '2100',
-                style: TextStyle(
+              Text(
+                habitService.totalScore.toString(),
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF2E7D32),
@@ -328,20 +331,15 @@ class Profile extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        const days = [
-                          'Mon',
-                          'Tue',
-                          'Wed',
-                          'Thu',
-                          'Fri',
-                          'Sat',
-                          'Sun',
-                        ];
-                        if (value.toInt() >= 0 && value.toInt() < days.length) {
+                        // Get day names for last 7 days
+                        final now = DateTime.now();
+                        final dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                        final dayIndex = (now.weekday - 1 + value.toInt() - 6) % 7;
+                        if (value.toInt() >= 0 && value.toInt() < 7) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
-                              days[value.toInt()],
+                              dayNames[dayIndex],
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: Colors.black54,
@@ -356,31 +354,20 @@ class Profile extends StatelessWidget {
                   ),
                 ),
                 borderData: FlBorderData(show: false),
+                minY: 0,
+                maxY: weeklyScores.isEmpty ? 10 : (weeklyScores.reduce((a, b) => a > b ? a : b) * 1.2).clamp(1.0, double.infinity),
                 lineBarsData: [
-                  // Past data (solid line with area)
+                  // Real data line
                   LineChartBarData(
-                    spots: spots.sublist(0, 3), // Mon-Wed
+                    spots: spots,
                     isCurved: true,
                     color: const Color(0xFF2E7D32),
                     barWidth: 3,
-                    dotData: const FlDotData(show: false),
-                    belowBarData: BarAreaData(
-                      show: true,
-                      color: const Color(0xFF2E7D32).withOpacity(0.2),
-                    ),
-                  ),
-                  // Future data (dashed line)
-                  LineChartBarData(
-                    spots: spots.sublist(2), // Wed-Sun
-                    isCurved: true,
-                    color: const Color(0xFF2E7D32),
-                    barWidth: 3,
-                    dashArray: [5, 5],
                     dotData: FlDotData(
                       show: true,
                       getDotPainter: (spot, percent, barData, index) {
-                        if (index == 0) {
-                          // Highlight current day (Wed)
+                        // Highlight today (last day)
+                        if (index == spots.length - 1) {
                           return FlDotCirclePainter(
                             radius: 5,
                             color: Colors.white,
@@ -389,18 +376,19 @@ class Profile extends StatelessWidget {
                           );
                         }
                         return FlDotCirclePainter(
-                          radius: 0,
-                          color: Colors.transparent,
+                          radius: 3,
+                          color: const Color(0xFF2E7D32),
                         );
                       },
                     ),
-                    belowBarData: BarAreaData(show: false),
+                    belowBarData: BarAreaData(
+                      show: true,
+                      color: const Color(0xFF2E7D32).withOpacity(0.2),
+                    ),
                   ),
                 ],
                 minX: 0,
                 maxX: 6,
-                minY: 0,
-                maxY: 4,
               ),
             ),
           ),
@@ -416,7 +404,8 @@ class Profile extends StatelessWidget {
     required String label,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      height: 90, // Fixed height for both cards
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -432,8 +421,8 @@ class Profile extends StatelessWidget {
         children: [
           // Icon on the left
           Container(
-            width: 56,
-            height: 56,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
               color: const Color(0xFFE8F5E9),
               shape: BoxShape.circle,
@@ -441,8 +430,8 @@ class Profile extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 svgAsset,
-                width: 28,
-                height: 28,
+                width: 24,
+                height: 24,
                 colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
               ),
             ),
@@ -457,15 +446,15 @@ class Profile extends StatelessWidget {
                 Text(
                   value,
                   style: const TextStyle(
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   label,
-                  style: const TextStyle(fontSize: 14, color: Colors.black54),
+                  style: const TextStyle(fontSize: 12, color: Colors.black54),
                 ),
               ],
             ),
@@ -483,47 +472,68 @@ class Profile extends StatelessWidget {
     required String label,
   }) {
     return Container(
-      width: 100,
-      padding: const EdgeInsets.all(16),
+      width: 80,
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (imageAsset != null)
-            Image.asset(imageAsset, width: 40, height: 40, fit: BoxFit.contain)
+            Image.asset(imageAsset, width: 32, height: 32, fit: BoxFit.contain)
           else if (svgAsset != null)
             SvgPicture.asset(
               svgAsset,
-              width: 40,
-              height: 40,
+              width: 32,
+              height: 32,
               colorFilter: iconColor != null
                   ? ColorFilter.mode(iconColor, BlendMode.srcIn)
                   : null,
             )
           else if (icon != null && iconColor != null)
-            Icon(icon, color: iconColor, size: 40),
-          const SizedBox(height: 8),
+            Icon(icon, color: iconColor, size: 32),
+          const SizedBox(height: 6),
           Text(
             label,
             style: const TextStyle(
-              fontSize: 12,
+              fontSize: 11,
               fontWeight: FontWeight.w600,
               color: Colors.black87,
             ),
             textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildProfileImage() {
+    final imagePath = ProfileService.getProfileImagePath();
+    if (imagePath != null && File(imagePath).existsSync()) {
+      return Image.file(
+        File(imagePath),
+        fit: BoxFit.cover,
+        width: 66,
+        height: 66,
+      );
+    }
+    return Image.asset(
+      'assets/profile.png',
+      fit: BoxFit.cover,
+      width: 66,
+      height: 66,
     );
   }
 }

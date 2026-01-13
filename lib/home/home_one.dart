@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 import '../core/widgets/eco_toast.dart';
 import '../core/services/habit_service.dart';
+import '../core/services/profile_service.dart';
 
 class HomeOne extends StatelessWidget {
   const HomeOne({super.key});
@@ -37,14 +39,7 @@ class HomeOne extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 28,
                           backgroundColor: Colors.white,
-                          child: ClipOval(
-                            child: Image.asset(
-                              'assets/profile.png',
-                              fit: BoxFit.cover,
-                              width: 56,
-                              height: 56,
-                            ),
-                          ),
+                          child: ClipOval(child: _buildProfileImage()),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -53,17 +48,17 @@ class HomeOne extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Good Morning,',
-                              style: TextStyle(
+                            Text(
+                              '${ProfileService.getGreeting()},',
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            const Text(
-                              'Hi Liza 👋',
-                              style: TextStyle(
+                            Text(
+                              'Hi ${ProfileService.getUserName()} 👋',
+                              style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -505,6 +500,24 @@ class HomeOne extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
       ),
+    );
+  }
+
+  Widget _buildProfileImage() {
+    final imagePath = ProfileService.getProfileImagePath();
+    if (imagePath != null && File(imagePath).existsSync()) {
+      return Image.file(
+        File(imagePath),
+        fit: BoxFit.cover,
+        width: 56,
+        height: 56,
+      );
+    }
+    return Image.asset(
+      'assets/profile.png',
+      fit: BoxFit.cover,
+      width: 56,
+      height: 56,
     );
   }
 }
