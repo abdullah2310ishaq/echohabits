@@ -1,50 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../core/services/habit_service.dart';
 
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
+  String _getRankTitle(int score) {
+    if (score < 2000) {
+      return 'Green Starter';
+    } else if (score < 3000) {
+      return 'Eco Explorer';
+    } else if (score < 5000) {
+      return 'Eco Warrior';
+    } else if (score < 10000) {
+      return 'Nature Guardian';
+    } else {
+      return 'Eco Master';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Sample leaderboard data
-    final List<Map<String, dynamic>> rankings = [
-      {
-        'name': 'Sarah Chen',
-        'rankTitle': 'Eco Warrior',
-        'score': 2450,
-        'isCurrentUser': false,
-        'avatar': 'assets/profile.png',
-      },
-      {
-        'name': 'Mikes Ross',
-        'rankTitle': 'Nature Guardian',
-        'score': 2320,
-        'isCurrentUser': false,
-        'avatar': 'assets/profile.png',
-      },
-      {
-        'name': 'Liza',
-        'rankTitle': 'Eco Explorer',
-        'score': 2100,
-        'isCurrentUser': true,
-        'avatar': 'assets/profile.png',
-      },
-      {
-        'name': 'Alex T',
-        'rankTitle': 'Green Starter',
-        'score': 1950,
-        'isCurrentUser': false,
-        'avatar': 'assets/profile.png',
-      },
-      {
-        'name': 'Emma Wilson',
-        'rankTitle': 'Green Starter',
-        'score': 1800,
-        'isCurrentUser': false,
-        'avatar': 'assets/profile.png',
-      },
-    ];
+    return Consumer<HabitService>(
+      builder: (context, service, child) {
+        final currentUserScore = service.totalScore;
+        final currentUserRankTitle = _getRankTitle(currentUserScore);
+        
+        // Sample leaderboard data (dummy users)
+        final List<Map<String, dynamic>> rankings = [
+          {
+            'name': 'Sarah Chen',
+            'rankTitle': 'Eco Warrior',
+            'score': 2450,
+            'isCurrentUser': false,
+            'avatar': 'assets/profile.png',
+          },
+          {
+            'name': 'Mikes Ross',
+            'rankTitle': 'Nature Guardian',
+            'score': 2320,
+            'isCurrentUser': false,
+            'avatar': 'assets/profile.png',
+          },
+          {
+            'name': 'Liza',
+            'rankTitle': currentUserRankTitle,
+            'score': currentUserScore,
+            'isCurrentUser': true,
+            'avatar': 'assets/profile.png',
+          },
+          {
+            'name': 'Alex T',
+            'rankTitle': 'Green Starter',
+            'score': 1950,
+            'isCurrentUser': false,
+            'avatar': 'assets/profile.png',
+          },
+          {
+            'name': 'Emma Wilson',
+            'rankTitle': 'Green Starter',
+            'score': 1800,
+            'isCurrentUser': false,
+            'avatar': 'assets/profile.png',
+          },
+        ];
+        
+        // Sort by score (descending)
+        rankings.sort((a, b) => (b['score'] as int).compareTo(a['score'] as int));
 
-    return Scaffold(
+        return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -157,6 +181,8 @@ class Leaderboard extends StatelessWidget {
           ],
         ),
       ),
+    );
+      },
     );
   }
 

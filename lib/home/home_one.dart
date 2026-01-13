@@ -115,76 +115,99 @@ class HomeOne extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Daily Eco Score Card
-                  Container(
-                    padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF1F8F5),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      children: [
-                        // Title Row
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Consumer<HabitService>(
+                    builder: (context, service, child) {
+                      final dailyScore = service.dailyScore;
+                      final maxDailyScore = 100; // Max score per day
+                      final progress = (dailyScore / maxDailyScore).clamp(
+                        0.0,
+                        1.0,
+                      );
+
+                      // Determine next level based on total score
+                      String nextLevel = 'Eco Warrior';
+                      if (service.totalScore < 2000) {
+                        nextLevel = 'Eco Explorer';
+                      } else if (service.totalScore < 3000) {
+                        nextLevel = 'Eco Warrior';
+                      } else if (service.totalScore < 5000) {
+                        nextLevel = 'Nature Guardian';
+                      } else {
+                        nextLevel = 'Eco Master';
+                      }
+
+                      return Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F8F5),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
                           children: [
-                            const Text(
-                              'Daily Eco Score',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
+                            // Title Row
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Daily Eco Score',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: dailyScore.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF2E7D32),
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' / $maxDailyScore',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            // Progress Bar
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: LinearProgressIndicator(
+                                value: progress,
+                                minHeight: 10,
+                                backgroundColor: Colors.grey[300],
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  Color(0xFF2E7D32),
+                                ),
                               ),
                             ),
-                            RichText(
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: '85',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF2E7D32),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' / 100',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                ],
+                            const SizedBox(height: 8),
+                            // Next Level Text
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                'Next Level: $nextLevel',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black54,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
-                        // Progress Bar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: LinearProgressIndicator(
-                            value: 0.85,
-                            minHeight: 10,
-                            backgroundColor: Colors.grey[300],
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                              Color(0xFF2E7D32),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        // Next Level Text
-                        const Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            'Next Level: Eco Warrior',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),

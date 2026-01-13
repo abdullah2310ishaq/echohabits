@@ -55,10 +55,28 @@ class HabitService extends ChangeNotifier {
   final List<Map<String, dynamic>> _history = [];
 
   DateTime? _lastDefaultReset;
+  
+  /// Daily eco score (resets at midnight)
+  int _dailyScore = 0;
+  
+  /// Last date when score was reset
+  DateTime? _lastScoreResetDate;
+  
+  /// Total cumulative score (all-time)
+  int _totalScore = 2100; // Starting score
 
   List<Map<String, dynamic>> get userHabits => List.unmodifiable(_userHabits);
 
   List<Map<String, dynamic>> get history => List.unmodifiable(_history);
+  
+  /// Get daily eco score (resets at midnight)
+  int get dailyScore {
+    _ensureScoreFresh();
+    return _dailyScore;
+  }
+  
+  /// Get total cumulative score
+  int get totalScore => _totalScore;
 
   /// Default tasks that should be shown "Today" (icons included).
   List<Map<String, dynamic>> get todayDefaultTasks {
@@ -120,6 +138,14 @@ class HabitService extends ChangeNotifier {
       isDefault: true,
       isDone: isDone,
     );
+    
+    // Update score only if task is completed (not skipped)
+    if (isDone) {
+      _ensureScoreFresh();
+      final points = _calculateTaskScore(task);
+      _dailyScore += points;
+      _totalScore += points;
+    }
 
     notifyListeners();
   }
@@ -145,6 +171,14 @@ class HabitService extends ChangeNotifier {
       isDefault: false,
       isDone: isDone,
     );
+    
+    // Update score only if task is completed (not skipped)
+    if (isDone) {
+      _ensureScoreFresh();
+      final points = _calculateTaskScore(habit);
+      _dailyScore += points;
+      _totalScore += points;
+    }
 
     notifyListeners();
   }
@@ -163,6 +197,36 @@ class HabitService extends ChangeNotifier {
       _hiddenDefaultTaskIds.clear();
       _lastDefaultReset = now;
     }
+  }
+  
+  /// Internal: ensure daily score resets at midnight (23:59)
+  void _ensureScoreFresh() {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    
+    if (_lastScoreResetDate == null || _lastScoreResetDate! != today) {
+      // Reset daily score at midnight
+      _dailyScore = 0;
+      _lastScoreResetDate = today;
+    }
+  }
+  
+  /// Calculate score points for a completed task
+  int _calculateTaskScore(Map<String, dynamic> task) {
+    // Base score: 10 points per completed task
+    int baseScore = 10;
+    
+    // Bonus based on impact (if available)
+    final impact = task['impact'] as String?;
+    if (impact != null) {
+      if (impact.contains('High Impact')) {
+        baseScore += 5; // 15 total
+      } else if (impact.contains('Medium Impact')) {
+        baseScore += 2; // 12 total
+      }
+    }
+    
+    return baseScore;
   }
 
   void _addHistoryEntry({

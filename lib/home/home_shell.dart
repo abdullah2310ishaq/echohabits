@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'home_one.dart';
 import '../habits/habits_one.dart';
 import '../leaderboard/leaderboard.dart';
@@ -38,18 +39,26 @@ class _HomeShellState extends State<HomeShell> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.only(top: 12.0, bottom: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem(icon: Icons.home, label: 'Home', index: 0),
+                _buildNavItem(
+                  label: 'Home',
+                  index: 0,
+                  svgAsset: 'assets/home.svg',
+                ),
                 _buildNavItem(icon: Icons.list, label: 'Habits', index: 1),
                 _buildNavItem(
-                  icon: Icons.emoji_events,
                   label: 'Leaderboard',
                   index: 2,
+                  svgAsset: 'assets/leader.svg',
                 ),
-                _buildNavItem(icon: Icons.person, label: 'Profile', index: 3),
+                _buildNavItem(
+                  label: 'Profile',
+                  index: 3,
+                  svgAsset: 'assets/profile.svg',
+                ),
               ],
             ),
           ),
@@ -59,11 +68,13 @@ class _HomeShellState extends State<HomeShell> {
   }
 
   Widget _buildNavItem({
-    required IconData icon,
+    IconData? icon,
+    String? svgAsset,
     required String label,
     required int index,
   }) {
     final isActive = _currentIndex == index;
+    final iconSize = index == 0 ? 24.0 : 20.0;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -73,7 +84,18 @@ class _HomeShellState extends State<HomeShell> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: Colors.white, size: 24),
+          if (svgAsset != null)
+            SvgPicture.asset(
+              svgAsset,
+              width: iconSize,
+              height: iconSize,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
+            )
+          else if (icon != null)
+            Icon(icon, color: Colors.white, size: iconSize),
           const SizedBox(height: 4),
           Text(
             label,
