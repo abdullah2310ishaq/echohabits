@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../core/widgets/add_habit_dialog.dart';
 import '../core/widgets/eco_toast.dart';
+import '../core/services/habit_service.dart';
 
 class HabitsOne extends StatefulWidget {
   const HabitsOne({super.key});
@@ -649,10 +651,28 @@ class _HabitsOneState extends State<HabitsOne> {
                   impact: impact,
                   impactColor: impactColor,
                   onAdd: () {
-                    // TODO: Handle add habit - add to user's habits list
+                    // Find the habit category from the full habit data
+                    final habitData = _allHabits.firstWhere(
+                      (h) => h['title'] == title,
+                      orElse: () => {'category': 'All'},
+                    );
+
+                    final habitService = Provider.of<HabitService>(
+                      context,
+                      listen: false,
+                    );
+                    habitService.addHabit(
+                      title: title,
+                      category: habitData['category'] as String,
+                      difficulty: difficulty,
+                      difficultyColor: difficultyColor,
+                      impact: impact,
+                      impactColor: impactColor,
+                    );
+
                     EcoToast.show(
                       context,
-                      message: '$title Habit Added! Keep Going',
+                      message: '$title Added! Keep Going',
                       isSuccess: true,
                     );
                   },

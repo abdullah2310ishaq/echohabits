@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../core/services/habit_service.dart';
 
 class History extends StatefulWidget {
   const History({super.key});
@@ -10,60 +12,14 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> {
   String _selectedFilter = 'Weekly';
 
-  // Hardcoded history data
-  final List<Map<String, dynamic>> _historyItems = [
-    {
-      'habit': 'Biked or walked instead of driving',
-      'date': 'Thursday, Jan 01',
-    },
-    {
-      'habit': 'Brought a reusable shopping bag',
-      'date': 'Wednesday, Dec 31',
-    },
-    {
-      'habit': 'Took a 5-minute shower',
-      'date': 'Monday, Dec 29',
-    },
-    {
-      'habit': 'Used a reusable water bottle',
-      'date': 'Monday, Dec 29',
-    },
-    {
-      'habit': 'Biked or walked instead of driving',
-      'date': 'Sunday, Dec 28',
-    },
-    {
-      'habit': 'Brought a reusable shopping bag',
-      'date': 'Sunday, Dec 28',
-    },
-    {
-      'habit': 'Brought a reusable shopping bag',
-      'date': 'Sunday, Dec 28',
-    },
-    {
-      'habit': 'Biked or walked instead of driving',
-      'date': 'Saturday, Dec 27',
-    },
-    {
-      'habit': 'Used a reusable coffee cup',
-      'date': 'Saturday, Dec 27',
-    },
-    {
-      'habit': 'Switched off unused lights',
-      'date': 'Friday, Dec 26',
-    },
-    {
-      'habit': 'Composted kitchen waste',
-      'date': 'Friday, Dec 26',
-    },
-    {
-      'habit': 'Walked short distances',
-      'date': 'Thursday, Dec 25',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final habitService = Provider.of<HabitService>(context);
+    // Filter to show only completed tasks (status == 'done')
+    final history = habitService.history
+        .where((item) => item['status'] == 'done')
+        .toList();
+
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
@@ -105,13 +61,25 @@ class _HistoryState extends State<History> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: _historyItems.length,
+              itemCount: history.length,
               itemBuilder: (context, index) {
+                final item = history[index];
+                final String title = item['title'] as String;
+                final String status = item['status'] as String;
+                final bool isDefault = item['isDefault'] as bool? ?? false;
+                final DateTime timestamp = item['timestamp'] as DateTime;
+
+                final String dateLabel =
+                    '${timestamp.year}-${timestamp.month.toString().padLeft(2, '0')}-${timestamp.day.toString().padLeft(2, '0')}';
+                final String subtitle =
+                    '${isDefault ? 'Default task' : 'Habit'} • ${status == 'done' ? 'Completed' : 'Skipped'} • $dateLabel';
+
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: _buildHistoryCard(
-                    habit: _historyItems[index]['habit'] as String,
-                    date: _historyItems[index]['date'] as String,
+                    habit: title,
+                    date: subtitle,
+                    isDone: status == 'done',
                   ),
                 );
               },
@@ -156,6 +124,7 @@ class _HistoryState extends State<History> {
   Widget _buildHistoryCard({
     required String habit,
     required String date,
+    required bool isDone,
   }) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -177,12 +146,14 @@ class _HistoryState extends State<History> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: const Color(0xFFE8F5E9),
+              color: isDone
+                  ? const Color(0xFFE8F5E9)
+                  : const Color(0xFFFFEBEE),
               shape: BoxShape.circle,
             ),
-            child: const Icon(
-              Icons.check,
-              color: Color(0xFF2E7D32),
+            child: Icon(
+              isDone ? Icons.check : Icons.close,
+              color: isDone ? const Color(0xFF2E7D32) : Colors.redAccent,
               size: 24,
             ),
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import '../core/widgets/eco_toast.dart';
+import '../core/services/habit_service.dart';
 
 class HomeOne extends StatelessWidget {
   const HomeOne({super.key});
@@ -204,47 +206,118 @@ class HomeOne extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // Task Card 1
-                  _buildTaskCard(
-                    context: context,
-                    icon: Icons.directions_bike,
-                    title: 'Walked/ Biked instead of driving',
-                    tags: ['Transport', 'High Impact'],
-                    taskName: 'Walked/ Biked',
-                  ),
-                  const SizedBox(height: 12),
+                  // All tasks (habit-based + default)
+                  Consumer<HabitService>(
+                    builder: (context, service, child) {
+                      final habitTasks = service.userHabits;
+                      final defaultTasks = service.todayDefaultTasks;
+                      final hasAnyTasks =
+                          habitTasks.isNotEmpty || defaultTasks.isNotEmpty;
 
-                  // Task Card 2
-                  _buildTaskCard(
-                    context: context,
-                    icon: Icons.local_cafe,
-                    title: 'Used a reusable coffee cup',
-                    tags: ['Waste', 'Daily'],
-                    useSvg: true,
-                    svgAsset: 'assets/chae.svg',
-                    taskName: 'Coffee Cup',
-                  ),
-                  const SizedBox(height: 12),
+                      if (!hasAnyTasks) {
+                        // Empty state
+                        return _buildEmptyState(context);
+                      }
 
-                  // Task Card 3
-                  _buildTaskCard(
-                    context: context,
-                    icon: Icons.directions_bike,
-                    title: 'Walked/ Biked instead of driving',
-                    tags: ['Transport', 'High Impact'],
-                    taskName: 'Walked/ Biked',
-                  ),
-                  const SizedBox(height: 12),
+                      return Column(
+                        children: [
+                          // Habit-based tasks from Habits page (no icons)
+                          ...habitTasks.map((habit) {
+                            final tags = [
+                              habit['category'] as String,
+                              habit['impact'] as String,
+                            ];
+                            final String title = habit['title'] as String;
 
-                  // Task Card 4
-                  _buildTaskCard(
-                    context: context,
-                    icon: Icons.park,
-                    title: 'Afforestation/ Plant a tree for better environment',
-                    tags: ['Afforestation', 'Planting'],
-                    useSvg: true,
-                    svgAsset: 'assets/tree.svg',
-                    taskName: 'Afforestation',
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: _buildTaskCard(
+                                context: context,
+                                title: title,
+                                tags: tags,
+                                taskName: title,
+                                showIcon: false,
+                                onSkip: () {
+                                  service.completeHabitTask(
+                                    title,
+                                    isDone: false,
+                                  );
+                                  EcoToast.show(
+                                    context,
+                                    message:
+                                        'Skipped! Your streak needs consistency',
+                                    isSuccess: false,
+                                  );
+                                },
+                                onDone: () {
+                                  service.completeHabitTask(
+                                    title,
+                                    isDone: true,
+                                  );
+                                  EcoToast.show(
+                                    context,
+                                    message: '$title Done! Streak Strong',
+                                    isSuccess: true,
+                                  );
+                                },
+                              ),
+                            );
+                          }),
+
+                          // Default Echo tasks (with icons)
+                          ...defaultTasks.map((task) {
+                            final String id = task['id'] as String;
+                            final String title = task['title'] as String;
+                            final List<String> tags =
+                                (task['tags'] as List<dynamic>)
+                                    .cast<String>()
+                                    .toList();
+                            final IconData icon =
+                                task['icon'] as IconData? ?? Icons.check;
+                            final bool useSvg =
+                                task['useSvg'] as bool? ?? false;
+                            final String? svgAsset =
+                                task['svgAsset'] as String?;
+                            final String taskName =
+                                task['taskName'] as String? ?? title;
+
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: _buildTaskCard(
+                                context: context,
+                                icon: icon,
+                                title: title,
+                                tags: tags,
+                                useSvg: useSvg,
+                                svgAsset: svgAsset,
+                                taskName: taskName,
+                                showIcon: true,
+                                onSkip: () {
+                                  service.completeDefaultTask(
+                                    id,
+                                    isDone: false,
+                                  );
+                                  EcoToast.show(
+                                    context,
+                                    message:
+                                        'Skipped! Your streak needs consistency',
+                                    isSuccess: false,
+                                  );
+                                },
+                                onDone: () {
+                                  service.completeDefaultTask(id, isDone: true);
+                                  EcoToast.show(
+                                    context,
+                                    message: '$taskName Done',
+                                    isSuccess: true,
+                                  );
+                                },
+                              ),
+                            );
+                          }),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
@@ -257,12 +330,15 @@ class HomeOne extends StatelessWidget {
 
   Widget _buildTaskCard({
     required BuildContext context,
-    required IconData icon,
+    IconData? icon,
     required String title,
     required List<String> tags,
     bool useSvg = false,
     String? svgAsset,
     required String taskName,
+    bool showIcon = true,
+    VoidCallback? onSkip,
+    VoidCallback? onDone,
   }) {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -282,29 +358,31 @@ class HomeOne extends StatelessWidget {
         children: [
           Row(
             children: [
-              // Icon Box
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE8F5E9),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: useSvg && svgAsset != null
-                    ? Center(
-                        child: SvgPicture.asset(
-                          svgAsset,
-                          width: 24,
-                          height: 24,
-                          colorFilter: const ColorFilter.mode(
-                            Color(0xFF2E7D32),
-                            BlendMode.srcIn,
+              // Icon Box (only show if showIcon is true)
+              if (showIcon) ...[
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8F5E9),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: useSvg && svgAsset != null
+                      ? Center(
+                          child: SvgPicture.asset(
+                            svgAsset,
+                            width: 24,
+                            height: 24,
+                            colorFilter: const ColorFilter.mode(
+                              Color(0xFF2E7D32),
+                              BlendMode.srcIn,
+                            ),
                           ),
-                        ),
-                      )
-                    : Icon(icon, color: const Color(0xFF2E7D32), size: 24),
-              ),
-              const SizedBox(width: 12),
+                        )
+                      : Icon(icon, color: const Color(0xFF2E7D32), size: 24),
+                ),
+                const SizedBox(width: 12),
+              ],
               // Task Description
               Expanded(
                 child: Text(
@@ -349,13 +427,7 @@ class HomeOne extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () {
-                    EcoToast.show(
-                      context,
-                      message: 'Skipped! Your streak needs consistency',
-                      isSuccess: false,
-                    );
-                  },
+                  onPressed: onSkip,
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.black54,
                     side: BorderSide(color: Colors.grey[300]!),
@@ -373,13 +445,7 @@ class HomeOne extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    EcoToast.show(
-                      context,
-                      message: '$taskName Task Done! Streak Strong',
-                      isSuccess: true,
-                    );
-                  },
+                  onPressed: onDone,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2E7D32),
                     foregroundColor: Colors.white,
@@ -398,6 +464,23 @@ class HomeOne extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyState(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32.0),
+        child: const Text(
+          'No more tasks for the day',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.black54,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
