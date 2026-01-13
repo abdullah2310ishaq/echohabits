@@ -52,7 +52,7 @@ class HabitService extends ChangeNotifier {
     }
 
     // Load scores
-    _totalScore = _box!.get(_totalScoreKey, defaultValue: 2100);
+    _totalScore = _box!.get(_totalScoreKey, defaultValue: 0);
     _dailyScore = _box!.get(_dailyScoreKey, defaultValue: 0);
 
     // Load dates

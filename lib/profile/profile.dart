@@ -16,241 +16,245 @@ class Profile extends StatelessWidget {
     return Consumer<HabitService>(
       builder: (context, habitService, child) {
         return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 25),
-            // Header Section
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-              ),
-              child: Column(
-                children: [
-                  // Top Row: Avatar, Name, Settings
-                  Row(
+          backgroundColor: const Color(0xFFF5F5F5),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 25),
+                // Header Section
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Column(
                     children: [
-                      // Avatar with green border
-                      CircleAvatar(
-                        radius: 35,
-                        backgroundColor: const Color(0xFF2E7D32),
-                        child: CircleAvatar(
-                          radius: 33,
-                          backgroundColor: Colors.white,
-                          child: ClipOval(
-                            child: _buildProfileImage(),
+                      // Top Row: Avatar, Name, Settings
+                      Row(
+                        children: [
+                          // Avatar with green border
+                          CircleAvatar(
+                            radius: 35,
+                            backgroundColor: const Color(0xFF2E7D32),
+                            child: CircleAvatar(
+                              radius: 33,
+                              backgroundColor: Colors.white,
+                              child: ClipOval(child: _buildProfileImage()),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          // Name and Subtitle
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  ProfileService.getUserName(),
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF2E7D32),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                const Text(
+                                  'Making the world greener',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Settings Icon
+                          IconButton(
+                            icon: const Icon(
+                              Icons.settings,
+                              color: Colors.black87,
+                              size: 24,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SettingsScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      // ECO EXPLORER Badge
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE8F5E9),
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(
+                            color: const Color(0xFF2E7D32),
+                            width: 1,
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      // Name and Subtitle
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              ProfileService.getUserName(),
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF2E7D32),
-                              ),
+                            const Icon(
+                              Icons.emoji_events,
+                              color: Colors.amber,
+                              size: 20,
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(width: 8),
                             const Text(
-                              'Making the world greener',
+                              'ECO EXPLORER',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.black54,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2E7D32),
+                                letterSpacing: 0.5,
                               ),
                             ),
                           ],
                         ),
                       ),
-                      // Settings Icon
-                      IconButton(
-                        icon: const Icon(
-                          Icons.settings,
-                          color: Colors.black87,
-                          size: 24,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const SettingsScreen(),
+                    ],
+                  ),
+                ),
+
+                // Main Content
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Green Score Chart Card
+                      _buildGreenScoreCard(habitService),
+                      const SizedBox(height: 16),
+
+                      // Quick Stats Cards
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildStatCard(
+                              svgAsset: 'assets/eco.svg',
+                              iconColor: Colors.orange,
+                              value: habitService.averageActionsPerDay
+                                  .toStringAsFixed(1),
+                              label: 'Avg Actions/Day',
                             ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  // ECO EXPLORER Badge
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE8F5E9),
-                      borderRadius: BorderRadius.circular(24),
-                      border: Border.all(
-                        color: const Color(0xFF2E7D32),
-                        width: 1,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.emoji_events,
-                          color: Colors.amber,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'ECO EXPLORER',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF2E7D32),
-                            letterSpacing: 0.5,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Main Content
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Green Score Chart Card
-                  _buildGreenScoreCard(habitService),
-                  const SizedBox(height: 16),
-
-                  // Quick Stats Cards
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _buildStatCard(
-                          svgAsset: 'assets/eco.svg',
-                          iconColor: Colors.orange,
-                          value: habitService.averageActionsPerDay.toStringAsFixed(1),
-                          label: 'Avg Actions/Day',
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _buildStatCard(
-                          svgAsset: 'assets/flame.svg',
-                          iconColor: Colors.orange,
-                          value: habitService.currentStreak.toString(),
-                          label: 'Day Streak',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Badges Section
-                  const Text(
-                    'Badges',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: [
-                      _buildBadgeCard(
-                        imageAsset: 'assets/firststep.png',
-                        label: 'First Step',
-                      ),
-                      _buildBadgeCard(
-                        icon: Icons.directions_bike,
-                        iconColor: Colors.blue,
-                        label: 'Cyclist',
-                      ),
-                      _buildBadgeCard(
-                        icon: Icons.water_drop,
-                        iconColor: Colors.blue,
-                        label: 'Water Saver',
-                      ),
-                      _buildBadgeCard(
-                        icon: Icons.bolt,
-                        iconColor: Colors.amber,
-                        label: 'Energy Pr',
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-
-                  // History Section
-                  const Text(
-                    'History',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const History(),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildStatCard(
+                              svgAsset: 'assets/flame.svg',
+                              iconColor: Colors.orange,
+                              value: habitService.currentStreak.toString(),
+                              label: 'Day Streak',
+                            ),
                           ),
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: const Color(0xFF2E7D32),
-                        side: const BorderSide(
-                          color: Color(0xFF2E7D32),
-                          width: 1.5,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        ],
                       ),
-                      child: const Text(
-                        'View History',
+                      const SizedBox(height: 24),
+
+                      // Badges Section
+                      const Text(
+                        'Badges',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: 100,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            _buildBadgeCard(
+                              imageAsset: 'assets/firststep.png',
+                              label: 'First Step',
+                            ),
+                            const SizedBox(width: 12),
+                            _buildBadgeCard(
+                              icon: Icons.directions_bike,
+                              iconColor: Colors.blue,
+                              label: 'Cyclist',
+                            ),
+                            const SizedBox(width: 12),
+                            _buildBadgeCard(
+                              icon: Icons.water_drop,
+                              iconColor: Colors.blue,
+                              label: 'Water Saver',
+                            ),
+                            const SizedBox(width: 12),
+                            _buildBadgeCard(
+                              icon: Icons.bolt,
+                              iconColor: Colors.amber,
+                              label: 'Energy Pr',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+
+                      // History Section
+                      const Text(
+                        'History',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const History(),
+                              ),
+                            );
+                          },
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: const Color(0xFF2E7D32),
+                            side: const BorderSide(
+                              color: Color(0xFF2E7D32),
+                              width: 1.5,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                          child: const Text(
+                            'View History',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
       },
     );
   }
@@ -258,13 +262,13 @@ class Profile extends StatelessWidget {
   Widget _buildGreenScoreCard(HabitService habitService) {
     // Get real weekly score data
     final weeklyScores = habitService.weeklyScoreData;
-    
+
     // Create spots for the chart (last 7 days)
     final List<FlSpot> spots = [];
     for (int i = 0; i < weeklyScores.length; i++) {
       spots.add(FlSpot(i.toDouble(), weeklyScores[i]));
     }
-    
+
     // If no data, show zeros
     if (spots.isEmpty) {
       for (int i = 0; i < 7; i++) {
@@ -333,8 +337,17 @@ class Profile extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         // Get day names for last 7 days
                         final now = DateTime.now();
-                        final dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-                        final dayIndex = (now.weekday - 1 + value.toInt() - 6) % 7;
+                        final dayNames = [
+                          'Mon',
+                          'Tue',
+                          'Wed',
+                          'Thu',
+                          'Fri',
+                          'Sat',
+                          'Sun',
+                        ];
+                        final dayIndex =
+                            (now.weekday - 1 + value.toInt() - 6) % 7;
                         if (value.toInt() >= 0 && value.toInt() < 7) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 8),
@@ -355,7 +368,10 @@ class Profile extends StatelessWidget {
                 ),
                 borderData: FlBorderData(show: false),
                 minY: 0,
-                maxY: weeklyScores.isEmpty ? 10 : (weeklyScores.reduce((a, b) => a > b ? a : b) * 1.2).clamp(1.0, double.infinity),
+                maxY: weeklyScores.isEmpty
+                    ? 10
+                    : (weeklyScores.reduce((a, b) => a > b ? a : b) * 1.2)
+                          .clamp(1.0, double.infinity),
                 lineBarsData: [
                   // Real data line
                   LineChartBarData(
@@ -473,6 +489,7 @@ class Profile extends StatelessWidget {
   }) {
     return Container(
       width: 80,
+      height: 60,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
