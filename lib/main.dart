@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/home/home_shell.dart';
 import 'splash_Screen.dart';
 import 'profile_first.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      home: const ProfileFirst(),
+      home: const HomeShell(),
     );
   }
 }

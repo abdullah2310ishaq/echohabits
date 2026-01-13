@@ -95,15 +95,12 @@ class Leaderboard extends StatelessWidget {
                         Container(
                           width: 48,
                           height: 48,
-                          decoration: BoxDecoration(
-                            color: Colors.amber[300],
-                            shape: BoxShape.circle,
-                          ),
+                          decoration: BoxDecoration(shape: BoxShape.circle),
                           child: Center(
-                            child: SvgPicture.asset(
-                              'assets/leaderboard.svg',
-                              width: 28,
-                              height: 28,
+                            child: Image.asset(
+                              'assets/leader.png',
+                              width: 40,
+                              height: 40,
                             ),
                           ),
                         ),
@@ -113,9 +110,9 @@ class Leaderboard extends StatelessWidget {
                           child: Text(
                             'Better habits lead to better badges and greater progress.',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Colors.black87,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
@@ -136,8 +133,8 @@ class Leaderboard extends StatelessWidget {
                   const Text(
                     'Current eco habit rankings',
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
                   ),
