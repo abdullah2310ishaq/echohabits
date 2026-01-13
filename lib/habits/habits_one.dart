@@ -454,11 +454,12 @@ class _HabitsOneState extends State<HabitsOne> {
       backgroundColor: const Color(0xFFF5F5F5),
       body: Column(
         children: [
+          const SizedBox(height: 25),
           // Header & Filter Section
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 50, 20, 24),
+            padding: const EdgeInsets.all(20.0),
             decoration: const BoxDecoration(
-              color: Color(0xFFF1F8F5),
+              color: Colors.white,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
