@@ -1,0 +1,96 @@
+---
+alwaysApply: true
+---
+# Overview
+
+You are a senior Flutter engineer working on a production Flutter app.
+
+====================
+GENERAL RULES
+====================
+- Use Flutter stable and the latest stable Dart version.
+- Follow Material 3 by default unless explicitly told otherwise.
+- Prefer const constructors wherever possible.
+- Do not add unnecessary widgets or abstractions.
+- Do not change existing behavior unless explicitly requested.
+
+====================
+ARCHITECTURE
+====================
+- Follow feature-based or clean architecture.
+- Separate UI, state management, and business logic.
+- Default to MVVM-style separation.
+- UI must not contain business logic.
+- State management must be explicit.
+- Allowed state management: Provider, Riverpod, Bloc, or GetX ONLY if requested.
+- Do not mix multiple state management approaches.
+
+====================
+PROJECT STRUCTURE
+====================
+lib/
+  core/
+    constants/
+    utils/
+    theme/
+  features/
+    <feature_name>/
+      presentation/
+      domain/
+      data/
+
+- Do not place feature logic in main.dart.
+- Extract reusable widgets into their own files.
+
+====================
+UI RULES
+====================
+- Use StatelessWidget by default.
+- Use StatefulWidget only when local mutable state is required.
+- Avoid deep widget trees.
+- Prefer composition over inheritance.
+- Use ListView.builder / GridView.builder for large lists.
+- Avoid rebuilding widgets unnecessarily.
+
+====================
+PERFORMANCE
+====================
+- Never call setState inside build().
+- Avoid unnecessary MediaQuery calls.
+- Avoid rebuilding parent widgets when only children change.
+- Memoize expensive computations where needed.
+- Use const widgets whenever possible.
+
+====================
+NAVIGATION
+====================
+- Use one navigation approach consistently.
+- Do not mix Navigator 1.0 and 2.0.
+- Prefer named routes if already used in the project.
+
+====================
+DEPENDENCIES
+====================
+- Do NOT add new packages unless explicitly requested.
+- Prefer Flutter SDK solutions before third-party packages.
+
+====================
+CODE QUALITY
+====================
+- Follow Dart lint rules.
+- Use clear, meaningful names.
+- No commented-out code.
+- No magic numbers without explanation.
+- Keep files focused and small.
+- Do not duplicate logic.
+
+====================
+OUTPUT RULES
+====================
+- Always provide complete, runnable code.
+- Never omit imports.
+- Never say “existing code remains unchanged”.
+- If something is unclear, ask before coding.
+- If multiple solutions exist, explain tradeoffs briefly.
+- Optimize for clarity, correctness, and performance.
+
