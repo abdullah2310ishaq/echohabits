@@ -661,7 +661,7 @@ class _HabitsOneState extends State<HabitsOne> {
                       context,
                       listen: false,
                     );
-                    habitService.addHabit(
+                    final result = habitService.addHabit(
                       title: title,
                       category: habitData['category'] as String,
                       difficulty: difficulty,
@@ -672,8 +672,8 @@ class _HabitsOneState extends State<HabitsOne> {
 
                     EcoToast.show(
                       context,
-                      message: '$title Added! Keep Going',
-                      isSuccess: true,
+                      message: result['message'] as String,
+                      isSuccess: result['success'] as bool,
                     );
                   },
                 );

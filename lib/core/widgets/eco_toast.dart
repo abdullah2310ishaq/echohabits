@@ -10,7 +10,13 @@ class EcoToast {
   }) {
     // Remove previous toast if exists (prevent stacking)
     if (_currentOverlayEntry != null) {
-      _currentOverlayEntry!.remove();
+      try {
+        if (_currentOverlayEntry!.mounted) {
+          _currentOverlayEntry!.remove();
+        }
+      } catch (e) {
+        // Ignore errors if overlay is already removed
+      }
       _currentOverlayEntry = null;
     }
 
@@ -24,8 +30,15 @@ class EcoToast {
     overlay.insert(overlayEntry);
 
     Future.delayed(const Duration(seconds: 3), () {
-      overlayEntry.remove();
-      if (_currentOverlayEntry == overlayEntry) {
+      try {
+        if (overlayEntry.mounted) {
+          overlayEntry.remove();
+        }
+        if (_currentOverlayEntry == overlayEntry) {
+          _currentOverlayEntry = null;
+        }
+      } catch (e) {
+        // Ignore errors if overlay is already removed
         _currentOverlayEntry = null;
       }
     });

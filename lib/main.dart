@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) {
         final service = HabitService();
-        service.loadData();
+        service.loadData(); // Will complete asynchronously
         return service;
       },
       child: MaterialApp(
