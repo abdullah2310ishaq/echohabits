@@ -54,15 +54,15 @@ class HomeOne extends StatelessWidget {
                             const Text(
                               'Good Morning,',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 color: Colors.black54,
-                                fontWeight: FontWeight.normal,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             const Text(
                               'Hi Liza 👋',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
@@ -176,7 +176,7 @@ class HomeOne extends StatelessWidget {
                           child: Text(
                             'Next Level: Eco Warrior',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: Colors.black54,
                             ),
                           ),
@@ -197,8 +197,8 @@ class HomeOne extends StatelessWidget {
                   const Text(
                     "Today's Eco Tasks",
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
                   ),
@@ -310,8 +310,8 @@ class HomeOne extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
                 ),
@@ -343,7 +343,7 @@ class HomeOne extends StatelessWidget {
               }).toList(),
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 22),
           // Action Buttons
           Row(
             children: [
@@ -366,7 +366,7 @@ class HomeOne extends StatelessWidget {
                   ),
                   child: const Text(
                     'Skip',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 19),
                   ),
                 ),
               ),
@@ -391,7 +391,7 @@ class HomeOne extends StatelessWidget {
                   ),
                   child: const Text(
                     'Done',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 19),
                   ),
                 ),
               ),

@@ -530,8 +530,8 @@ class _HabitsOneState extends State<HabitsOne> {
                 const Text(
                   'Pick a Habit to Add',
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 21,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
                 ),
@@ -564,7 +564,7 @@ class _HabitsOneState extends State<HabitsOne> {
     required Color impactColor,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -587,12 +587,12 @@ class _HabitsOneState extends State<HabitsOne> {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 14),
                 // Metadata Row
                 Row(
                   children: [
@@ -631,8 +631,8 @@ class _HabitsOneState extends State<HabitsOne> {
           ),
           // Add Button
           Container(
-            width: 48,
-            height: 48,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(12),
