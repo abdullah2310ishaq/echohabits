@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
+import '../core/services/locale_service.dart';
 import 'language_selection.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
     final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!launched && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not open link')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.couldNotOpenLink)),
       );
     }
   }
@@ -21,25 +24,36 @@ class SettingsScreen extends StatelessWidget {
     final options = [
       _SettingsOption(
         iconPath: 'assets/settings/accounts.svg',
-        title: 'Account',
+        title: AppLocalizations.of(context)!.account,
         onTap: () {
           // TODO: Navigate to account settings
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Account settings coming soon')),
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.accountSettingsComingSoon,
+              ),
+            ),
           );
         },
       ),
       _SettingsOption(
         iconPath: 'assets/settings/language.svg',
-        title: 'Language',
-        trailingBuilder: (_) => const Text(
-          'English',
-          style: TextStyle(
-            fontSize: 14,
-            color: Color(0xFF2E7D32),
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: AppLocalizations.of(context)!.language,
+        trailingBuilder: (_) {
+          final localeService = Provider.of<LocaleService>(
+            context,
+            listen: false,
+          );
+          final currentLocale = localeService.getCurrentLocale();
+          return Text(
+            SettingsScreen._getLanguageName(currentLocale.languageCode),
+            style: const TextStyle(
+              fontSize: 14,
+              color: Color(0xFF2E7D32),
+              fontWeight: FontWeight.w600,
+            ),
+          );
+        },
         onTap: () {
           Navigator.push(
             context,
@@ -48,10 +62,13 @@ class SettingsScreen extends StatelessWidget {
             ),
           ).then((selectedLanguage) {
             if (selectedLanguage != null && context.mounted) {
-              // TODO: Update app locale with selected language
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Language changed to $selectedLanguage'),
+                  content: Text(
+                    AppLocalizations.of(
+                      context,
+                    )!.languageChangedTo(selectedLanguage),
+                  ),
                   duration: const Duration(seconds: 2),
                 ),
               );
@@ -61,17 +78,21 @@ class SettingsScreen extends StatelessWidget {
       ),
       _SettingsOption(
         iconPath: 'assets/settings/share.svg',
-        title: 'Share App',
+        title: AppLocalizations.of(context)!.shareApp,
         onTap: () {
           // TODO: Implement share functionality
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Share functionality coming soon')),
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.shareFunctionalityComingSoon,
+              ),
+            ),
           );
         },
       ),
       _SettingsOption(
         iconPath: 'assets/settings/rate.svg',
-        title: 'Rate Us',
+        title: AppLocalizations.of(context)!.rateUs,
         onTap: () => _openExternal(
           context,
           'https://play.google.com/store/apps/details?id=com.ecohabittracker.app',
@@ -79,12 +100,13 @@ class SettingsScreen extends StatelessWidget {
       ),
       _SettingsOption(
         iconPath: 'assets/settings/support.svg',
-        title: 'Support',
-        onTap: () => _openExternal(context, 'mailto:support@ecohabittracker.com'),
+        title: AppLocalizations.of(context)!.support,
+        onTap: () =>
+            _openExternal(context, 'mailto:support@ecohabittracker.com'),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/privacypolicy.svg',
-        title: 'Privacy Policy',
+        title: AppLocalizations.of(context)!.privacyPolicy,
         onTap: () => _openExternal(
           context,
           'https://sites.google.com/view/ecohabittracker/privacy-policy',
@@ -92,7 +114,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       _SettingsOption(
         iconPath: 'assets/settings/terms.svg',
-        title: 'Terms of Service',
+        title: AppLocalizations.of(context)!.termsOfService,
         onTap: () => _openExternal(
           context,
           'https://sites.google.com/view/ecohabittracker/terms-of-service',
@@ -100,7 +122,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       _SettingsOption(
         iconPath: 'assets/settings/logout.svg',
-        title: 'Logout',
+        title: AppLocalizations.of(context)!.logout,
         onTap: () {
           // TODO: Implement logout functionality
           showDialog(
@@ -115,18 +137,18 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      'Logout',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.logout,
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Are you sure you want to logout?',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.areYouSureYouWantToLogout,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black54,
                       ),
@@ -146,9 +168,9 @@ class SettingsScreen extends StatelessWidget {
                               ),
                               padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
-                            child: const Text(
-                              'Cancel',
-                              style: TextStyle(
+                            child: Text(
+                              AppLocalizations.of(context)!.cancel,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -162,8 +184,12 @@ class SettingsScreen extends StatelessWidget {
                               Navigator.of(context).pop();
                               // TODO: Handle logout
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Logout functionality coming soon'),
+                                SnackBar(
+                                  content: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.logoutFunctionalityComingSoon,
+                                  ),
                                 ),
                               );
                             },
@@ -176,9 +202,9 @@ class SettingsScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               elevation: 0,
                             ),
-                            child: const Text(
-                              'Logout',
-                              style: TextStyle(
+                            child: Text(
+                              AppLocalizations.of(context)!.logout,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -202,15 +228,12 @@ class SettingsScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black87,
-          ),
+          icon: const Icon(Icons.arrow_back, color: Colors.black87),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          'Settings',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.settings,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -237,6 +260,22 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  static String _getLanguageName(String code) {
+    const languageNames = {
+      'en': 'English',
+      'es': 'Español',
+      'fr': 'Français',
+      'de': 'Deutsch',
+      'it': 'Italiano',
+      'pt': 'Português',
+      'ru': 'Русский',
+      'zh': '中文',
+      'ja': '日本語',
+      'ko': '한국어',
+    };
+    return languageNames[code] ?? 'English';
   }
 }
 
@@ -267,9 +306,7 @@ class _SettingsTile extends StatelessWidget {
       color: Color(0xFF2E7D32),
     );
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-      ),
+      decoration: BoxDecoration(color: Colors.transparent),
       child: InkWell(
         onTap: option.onTap,
         child: Padding(
@@ -293,12 +330,7 @@ class _SettingsTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 14),
-              Expanded(
-                child: Text(
-                  option.title,
-                  style: textStyle,
-                ),
-              ),
+              Expanded(child: Text(option.title, style: textStyle)),
               if (option.trailingBuilder != null)
                 Padding(
                   padding: const EdgeInsets.only(right: 8),

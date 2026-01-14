@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/services/profile_service.dart';
 
 class ProfileFirst extends StatefulWidget {
@@ -92,9 +93,9 @@ class _ProfileFirstState extends State<ProfileFirst> {
                         const SizedBox(height: 8),
 
                         // Header Section
-                        const Text(
-                          'Set up your profile',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.setUpYourProfile,
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
@@ -104,9 +105,11 @@ class _ProfileFirstState extends State<ProfileFirst> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Let's personalize your eco journey",
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(
+                                context,
+                              )!.letsPersonalizeYourEcoJourney,
+                              style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,
                               ),
@@ -147,7 +150,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
         final fileName = path.basename(image.path);
         final savedImage = File(path.join(appDir.path, fileName));
         await File(image.path).copy(savedImage.path);
-        
+
         setState(() {
           _selectedImagePath = savedImage.path;
           _isUsingDefaultImage = false;
@@ -156,7 +159,11 @@ class _ProfileFirstState extends State<ProfileFirst> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error picking image: $e')),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.errorPickingImage(e.toString()),
+            ),
+          ),
         );
       }
     }
@@ -171,7 +178,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
           children: [
             ListTile(
               leading: const Icon(Icons.photo_library),
-              title: const Text('Choose from Gallery'),
+              title: Text(AppLocalizations.of(context)!.chooseFromGallery),
               onTap: () {
                 Navigator.pop(context);
                 _pickImage(ImageSource.gallery);
@@ -179,7 +186,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
             ),
             ListTile(
               leading: const Icon(Icons.camera_alt),
-              title: const Text('Take a Photo'),
+              title: Text(AppLocalizations.of(context)!.takeAPhoto),
               onTap: () {
                 Navigator.pop(context);
                 _pickImage(ImageSource.camera);
@@ -187,7 +194,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
             ),
             ListTile(
               leading: const Icon(Icons.image),
-              title: const Text('Use Default Image'),
+              title: Text(AppLocalizations.of(context)!.useDefaultImage),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -231,10 +238,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 clipBehavior: Clip.antiAlias,
                 child: ClipOval(
                   child: _isUsingDefaultImage || _selectedImagePath == null
-                      ? Image.asset(
-                          'assets/profile.png',
-                          fit: BoxFit.cover,
-                        )
+                      ? Image.asset('assets/profile.png', fit: BoxFit.cover)
                       : Image.file(
                           File(_selectedImagePath!),
                           fit: BoxFit.cover,
@@ -272,9 +276,9 @@ class _ProfileFirstState extends State<ProfileFirst> {
           ),
         ),
         const SizedBox(height: 12),
-        const Text(
-          'Tap to upload photo',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.tapToUploadPhoto,
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.black54,
             fontWeight: FontWeight.w300,
@@ -301,9 +305,9 @@ class _ProfileFirstState extends State<ProfileFirst> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Your Name',
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.yourName,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
               color: Colors.black87,
@@ -315,7 +319,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color(0xFFF5F5F5),
-              hintText: 'e.g. Liza',
+              hintText: AppLocalizations.of(context)!.nameHint,
               hintStyle: const TextStyle(color: Colors.black38),
               prefixIcon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -353,16 +357,20 @@ class _ProfileFirstState extends State<ProfileFirst> {
                     name: _nameController.text.trim(),
                     imagePath: _isUsingDefaultImage ? null : _selectedImagePath,
                   );
-                  
+
                   if (mounted) {
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const HomeShell()),
+                      MaterialPageRoute(
+                        builder: (context) => const HomeShell(),
+                      ),
                     );
                   }
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Please enter your name'),
+                    SnackBar(
+                      content: Text(
+                        AppLocalizations.of(context)!.pleaseEnterYourName,
+                      ),
                     ),
                   );
                 }
@@ -376,9 +384,12 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 ),
                 elevation: 0,
               ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              child: Text(
+                AppLocalizations.of(context)!.continueButton,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

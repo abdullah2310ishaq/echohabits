@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
+import '../core/services/locale_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -78,8 +81,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   @override
   void initState() {
     super.initState();
-    // Set default language to English
-    _selectedLanguage = 'en';
+    // Get current locale from service
+    final localeService = Provider.of<LocaleService>(context, listen: false);
+    _selectedLanguage = localeService.getCurrentLocale().languageCode;
   }
 
   @override
@@ -93,9 +97,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           icon: const Icon(Icons.close, color: Color(0xFF2E7D32), size: 28),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          'Choose a Language',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.chooseALanguage,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -107,9 +111,15 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
             padding: const EdgeInsets.only(right: 16),
             child: ElevatedButton(
               onPressed: _selectedLanguage != null
-                  ? () {
-                      // TODO: Save selected language and update app locale
-                      Navigator.of(context).pop(_selectedLanguage);
+                  ? () async {
+                      final localeService = Provider.of<LocaleService>(
+                        context,
+                        listen: false,
+                      );
+                      await localeService.setLocaleByCode(_selectedLanguage!);
+                      if (context.mounted) {
+                        Navigator.of(context).pop(_selectedLanguage);
+                      }
                     }
                   : null,
               style: ElevatedButton.styleFrom(
@@ -124,9 +134,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 ),
                 elevation: 0,
               ),
-              child: const Text(
-                'Next',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              child: Text(
+                AppLocalizations.of(context)!.next,
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
             ),
           ),

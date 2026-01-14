@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'dart:io';
 import '../history/history.dart';
 import '../settings/settings.dart';
@@ -63,9 +64,11 @@ class Profile extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 4),
-                                const Text(
-                                  'Making the world greener',
-                                  style: TextStyle(
+                                Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.makingTheWorldGreener,
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.black54,
                                   ),
@@ -114,9 +117,9 @@ class Profile extends StatelessWidget {
                               size: 20,
                             ),
                             const SizedBox(width: 8),
-                            const Text(
-                              'ECO EXPLORER',
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(context)!.ecoExplorer,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF2E7D32),
@@ -137,7 +140,7 @@ class Profile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Green Score Chart Card
-                      _buildGreenScoreCard(habitService),
+                      _buildGreenScoreCard(context, habitService),
                       const SizedBox(height: 16),
 
                       // Quick Stats Cards
@@ -149,7 +152,9 @@ class Profile extends StatelessWidget {
                               iconColor: Colors.orange,
                               value: habitService.averageActionsPerDay
                                   .toStringAsFixed(1),
-                              label: 'Avg Actions/Day',
+                              label: AppLocalizations.of(
+                                context,
+                              )!.avgActionsPerDay,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -158,7 +163,7 @@ class Profile extends StatelessWidget {
                               svgAsset: 'assets/flame.svg',
                               iconColor: Colors.orange,
                               value: habitService.currentStreak.toString(),
-                              label: 'Day Streak',
+                              label: AppLocalizations.of(context)!.dayStreak,
                             ),
                           ),
                         ],
@@ -166,9 +171,9 @@ class Profile extends StatelessWidget {
                       const SizedBox(height: 24),
 
                       // Badges Section
-                      const Text(
-                        'Badges',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.badges,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
@@ -182,25 +187,25 @@ class Profile extends StatelessWidget {
                           children: [
                             _buildBadgeCard(
                               imageAsset: 'assets/firststep.png',
-                              label: 'First Step',
+                              label: AppLocalizations.of(context)!.firstStep,
                             ),
                             const SizedBox(width: 12),
                             _buildBadgeCard(
                               icon: Icons.directions_bike,
                               iconColor: Colors.blue,
-                              label: 'Cyclist',
+                              label: AppLocalizations.of(context)!.cyclist,
                             ),
                             const SizedBox(width: 12),
                             _buildBadgeCard(
                               icon: Icons.water_drop,
                               iconColor: Colors.blue,
-                              label: 'Water Saver',
+                              label: AppLocalizations.of(context)!.waterSaver,
                             ),
                             const SizedBox(width: 12),
                             _buildBadgeCard(
                               icon: Icons.bolt,
                               iconColor: Colors.amber,
-                              label: 'Energy Pr',
+                              label: AppLocalizations.of(context)!.energyPr,
                             ),
                           ],
                         ),
@@ -208,9 +213,9 @@ class Profile extends StatelessWidget {
                       const SizedBox(height: 24),
 
                       // History Section
-                      const Text(
-                        'History',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.history,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
@@ -238,9 +243,9 @@ class Profile extends StatelessWidget {
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
-                          child: const Text(
-                            'View History',
-                            style: TextStyle(
+                          child: Text(
+                            AppLocalizations.of(context)!.viewHistory,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -259,7 +264,7 @@ class Profile extends StatelessWidget {
     );
   }
 
-  Widget _buildGreenScoreCard(HabitService habitService) {
+  Widget _buildGreenScoreCard(BuildContext context, HabitService habitService) {
     // Get real weekly score data
     final weeklyScores = habitService.weeklyScoreData;
 
@@ -296,9 +301,9 @@ class Profile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Green Score',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.greenScore,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
@@ -337,14 +342,15 @@ class Profile extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         // Get day names for last 7 days
                         final now = DateTime.now();
+                        final l10n = AppLocalizations.of(context)!;
                         final dayNames = [
-                          'Mon',
-                          'Tue',
-                          'Wed',
-                          'Thu',
-                          'Fri',
-                          'Sat',
-                          'Sun',
+                          l10n.monday,
+                          l10n.tuesday,
+                          l10n.wednesday,
+                          l10n.thursday,
+                          l10n.friday,
+                          l10n.saturday,
+                          l10n.sunday,
                         ];
                         final dayIndex =
                             (now.weekday - 1 + value.toInt() - 6) % 7;

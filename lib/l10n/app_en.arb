@@ -1,0 +1,289 @@
+{
+  "@@locale": "en",
+  "appTitle": "Eco Habit Tracker",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "makingTheWorldGreener": "Making the world greener",
+  "@makingTheWorldGreener": {
+    "description": "Profile subtitle text"
+  },
+  "ecoExplorer": "ECO EXPLORER",
+  "@ecoExplorer": {
+    "description": "Badge title"
+  },
+  "greenScore": "Green Score",
+  "@greenScore": {
+    "description": "Green score card title"
+  },
+  "avgActionsPerDay": "Avg Actions/Day",
+  "@avgActionsPerDay": {
+    "description": "Average actions per day label"
+  },
+  "dayStreak": "Day Streak",
+  "@dayStreak": {
+    "description": "Day streak label"
+  },
+  "badges": "Badges",
+  "@badges": {
+    "description": "Badges section title"
+  },
+  "firstStep": "First Step",
+  "@firstStep": {
+    "description": "First step badge name"
+  },
+  "cyclist": "Cyclist",
+  "@cyclist": {
+    "description": "Cyclist badge name"
+  },
+  "waterSaver": "Water Saver",
+  "@waterSaver": {
+    "description": "Water saver badge name"
+  },
+  "energyPr": "Energy Pr",
+  "@energyPr": {
+    "description": "Energy Pr badge name"
+  },
+  "history": "History",
+  "@history": {
+    "description": "History section title"
+  },
+  "viewHistory": "View History",
+  "@viewHistory": {
+    "description": "View history button text"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account settings option"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language name"
+  },
+  "shareApp": "Share App",
+  "@shareApp": {
+    "description": "Share app option"
+  },
+  "rateUs": "Rate Us",
+  "@rateUs": {
+    "description": "Rate us option"
+  },
+  "support": "Support",
+  "@support": {
+    "description": "Support option"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy option"
+  },
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service option"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout option"
+  },
+  "chooseALanguage": "Choose a Language",
+  "@chooseALanguage": {
+    "description": "Language selection screen title"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "areYouSureYouWantToLogout": "Are you sure you want to logout?",
+  "@areYouSureYouWantToLogout": {
+    "description": "Logout confirmation message"
+  },
+  "accountSettingsComingSoon": "Account settings coming soon",
+  "@accountSettingsComingSoon": {
+    "description": "Account settings placeholder message"
+  },
+  "languageChangedTo": "Language changed to {language}",
+  "@languageChangedTo": {
+    "description": "Language change confirmation message",
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFunctionalityComingSoon": "Share functionality coming soon",
+  "@shareFunctionalityComingSoon": {
+    "description": "Share functionality placeholder message"
+  },
+  "logoutFunctionalityComingSoon": "Logout functionality coming soon",
+  "@logoutFunctionalityComingSoon": {
+    "description": "Logout functionality placeholder message"
+  },
+  "couldNotOpenLink": "Could not open link",
+  "@couldNotOpenLink": {
+    "description": "Error message when link cannot be opened"
+  },
+  "habitLibrary": "Habit Library",
+  "@habitLibrary": {
+    "description": "Habit library screen title"
+  },
+  "pickOneHabitToBeginYourEcoJourney": "Pick one habit to begin your eco journey.",
+  "@pickOneHabitToBeginYourEcoJourney": {
+    "description": "Habit library subtitle"
+  },
+  "pickAHabitToAdd": "Pick a Habit to Add",
+  "@pickAHabitToAdd": {
+    "description": "Habit list section title"
+  },
+  "all": "All",
+  "@all": {
+    "description": "All categories filter"
+  },
+  "transport": "Transport",
+  "@transport": {
+    "description": "Transport category"
+  },
+  "food": "Food",
+  "@food": {
+    "description": "Food category"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home category"
+  },
+  "water": "Water",
+  "@water": {
+    "description": "Water category"
+  },
+  "shopping": "Shopping",
+  "@shopping": {
+    "description": "Shopping category"
+  },
+  "waste": "Waste",
+  "@waste": {
+    "description": "Waste category"
+  },
+  "digital": "Digital",
+  "@digital": {
+    "description": "Digital category"
+  },
+  "fitness": "Fitness",
+  "@fitness": {
+    "description": "Fitness category"
+  },
+  "mindfulness": "Mindfulness",
+  "@mindfulness": {
+    "description": "Mindfulness category"
+  },
+  "savings": "Savings",
+  "@savings": {
+    "description": "Savings category"
+  },
+  "easy": "Easy",
+  "@easy": {
+    "description": "Easy difficulty level"
+  },
+  "medium": "Medium",
+  "@medium": {
+    "description": "Medium difficulty level"
+  },
+  "highImpact": "High Impact",
+  "@highImpact": {
+    "description": "High impact label"
+  },
+  "mediumImpact": "Medium Impact",
+  "@mediumImpact": {
+    "description": "Medium impact label"
+  },
+  "lowImpact": "Low Impact",
+  "@lowImpact": {
+    "description": "Low impact label"
+  },
+  "monday": "Mon",
+  "@monday": {
+    "description": "Monday abbreviation"
+  },
+  "tuesday": "Tue",
+  "@tuesday": {
+    "description": "Tuesday abbreviation"
+  },
+  "wednesday": "Wed",
+  "@wednesday": {
+    "description": "Wednesday abbreviation"
+  },
+  "thursday": "Thu",
+  "@thursday": {
+    "description": "Thursday abbreviation"
+  },
+  "friday": "Fri",
+  "@friday": {
+    "description": "Friday abbreviation"
+  },
+  "saturday": "Sat",
+  "@saturday": {
+    "description": "Saturday abbreviation"
+  },
+  "sunday": "Sun",
+  "@sunday": {
+    "description": "Sunday abbreviation"
+  },
+  "setUpYourProfile": "Set up your profile",
+  "@setUpYourProfile": {
+    "description": "Profile setup screen title"
+  },
+  "letsPersonalizeYourEcoJourney": "Let's personalize your eco journey",
+  "@letsPersonalizeYourEcoJourney": {
+    "description": "Profile setup subtitle"
+  },
+  "tapToUploadPhoto": "Tap to upload photo",
+  "@tapToUploadPhoto": {
+    "description": "Profile picture upload instruction"
+  },
+  "yourName": "Your Name",
+  "@yourName": {
+    "description": "Name input field label"
+  },
+  "nameHint": "e.g. Liza",
+  "@nameHint": {
+    "description": "Name input field hint text"
+  },
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "pleaseEnterYourName": "Please enter your name",
+  "@pleaseEnterYourName": {
+    "description": "Validation message when name is empty"
+  },
+  "errorPickingImage": "Error picking image: {error}",
+  "@errorPickingImage": {
+    "description": "Error message when image picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseFromGallery": "Choose from Gallery",
+  "@chooseFromGallery": {
+    "description": "Image source option - gallery"
+  },
+  "takeAPhoto": "Take a Photo",
+  "@takeAPhoto": {
+    "description": "Image source option - camera"
+  },
+  "useDefaultImage": "Use Default Image",
+  "@useDefaultImage": {
+    "description": "Image source option - default"
+  }
+}
