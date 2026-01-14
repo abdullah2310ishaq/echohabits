@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
 import '../home/home_shell.dart';
+import '../profile_first.dart';
 
 class FirstTimeLanguageSelectionScreen extends StatefulWidget {
   const FirstTimeLanguageSelectionScreen({super.key});
@@ -176,10 +178,12 @@ class _FirstTimeLanguageSelectionScreenState
   void _navigateToNextScreen() {
     if (!mounted) return;
 
+    final isProfileSetup = ProfileService.isProfileSetupComplete();
+    final Widget nextScreen =
+        isProfileSetup ? const HomeShell() : const ProfileFirst();
+
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const HomeShell(),
-      ),
+      MaterialPageRoute(builder: (context) => nextScreen),
     );
   }
 

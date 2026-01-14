@@ -61,20 +61,7 @@ class SettingsScreen extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => const LanguageSelectionScreen(),
             ),
-          ).then((selectedLanguage) {
-            if (selectedLanguage != null && context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    AppLocalizations.of(
-                      context,
-                    )!.languageChangedTo(selectedLanguage),
-                  ),
-                  duration: const Duration(seconds: 2),
-                ),
-              );
-            }
-          });
+          );
         },
       ),
       _SettingsOption(

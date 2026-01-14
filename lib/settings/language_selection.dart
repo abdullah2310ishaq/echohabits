@@ -127,7 +127,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       );
                       await localeService.setLocaleByCode(_selectedLanguage!);
                       if (context.mounted) {
-                        Navigator.of(context).pop(_selectedLanguage);
+                        // Go back to HomeShell (root) after changing language
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                       }
                     }
                   : null,
