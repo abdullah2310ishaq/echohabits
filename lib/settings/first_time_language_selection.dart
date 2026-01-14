@@ -3,16 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/services/locale_service.dart';
+import '../home/home_shell.dart';
 
-class LanguageSelectionScreen extends StatefulWidget {
-  const LanguageSelectionScreen({super.key});
+class FirstTimeLanguageSelectionScreen extends StatefulWidget {
+  const FirstTimeLanguageSelectionScreen({super.key});
 
   @override
-  State<LanguageSelectionScreen> createState() =>
-      _LanguageSelectionScreenState();
+  State<FirstTimeLanguageSelectionScreen> createState() =>
+      _FirstTimeLanguageSelectionScreenState();
 }
 
-class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
+class _FirstTimeLanguageSelectionScreenState
+    extends State<FirstTimeLanguageSelectionScreen> {
   String? _selectedLanguage;
 
   final List<Map<String, dynamic>> _languages = [
@@ -103,12 +105,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.close, color: Color(0xFF2E7D32), size: 28),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        leading: const SizedBox.shrink(), // No close button for first time
         title: Text(
-          AppLocalizations.of(context)!.chooseALanguage,
+          AppLocalizations.of(context)?.chooseALanguage ?? 'Choose a Language',
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -127,7 +126,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       );
                       await localeService.setLocaleByCode(_selectedLanguage!);
                       if (context.mounted) {
-                        Navigator.of(context).pop(_selectedLanguage);
+                        _navigateToNextScreen();
                       }
                     }
                   : null,
@@ -144,7 +143,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 elevation: 0,
               ),
               child: Text(
-                AppLocalizations.of(context)!.next,
+                AppLocalizations.of(context)?.next ?? 'Next',
                 style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
             ),
@@ -170,6 +169,16 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  void _navigateToNextScreen() {
+    if (!mounted) return;
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const HomeShell(),
       ),
     );
   }

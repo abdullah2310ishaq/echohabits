@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class LocaleService extends ChangeNotifier {
   static const String _boxName = 'localeBox';
   static const String _localeKey = 'locale';
+  static const String _languageSelectedKey = 'languageSelected';
 
   static Box? _box;
 
@@ -46,5 +47,15 @@ class LocaleService extends ChangeNotifier {
   /// Set locale by language code (e.g., 'en', 'es', 'fr')
   Future<void> setLocaleByCode(String languageCode) async {
     await setLocale(Locale(languageCode));
+    // Mark that language has been selected
+    if (_box != null) {
+      await _box!.put(_languageSelectedKey, true);
+    }
+  }
+
+  /// Check if language has been selected (for first-time setup)
+  bool isLanguageSelected() {
+    if (_box == null) return false;
+    return _box!.get(_languageSelectedKey, defaultValue: false) as bool;
   }
 }

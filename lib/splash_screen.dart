@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../core/services/profile_service.dart';
+import '../core/services/locale_service.dart';
 import '../profile_first.dart';
 import '../home/home_shell.dart';
+import '../settings/first_time_language_selection.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -43,14 +46,25 @@ class _SplashScreenState extends State<SplashScreen>
   void _navigateToNextScreen() {
     if (!mounted) return;
 
+    final localeService = Provider.of<LocaleService>(context, listen: false);
+    final isLanguageSelected = localeService.isLanguageSelected();
     final isProfileSetup = ProfileService.isProfileSetupComplete();
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) =>
-            isProfileSetup ? const HomeShell() : const ProfileFirst(),
-      ),
-    );
+    Widget nextScreen;
+    if (!isLanguageSelected) {
+      // First time - show language selection
+      nextScreen = const FirstTimeLanguageSelectionScreen();
+    } else if (isProfileSetup) {
+      // Language selected and profile setup - go to home
+      nextScreen = const HomeShell();
+    } else {
+      // Language selected but profile not setup - go to profile setup
+      nextScreen = const ProfileFirst();
+    }
+
+    Navigator.of(
+      context,
+    ).pushReplacement(MaterialPageRoute(builder: (context) => nextScreen));
   }
 
   @override

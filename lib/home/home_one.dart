@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
@@ -17,15 +18,15 @@ class HomeOne extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 25),
+            SizedBox(height: 40.h),
             // Header Section with User Info
             Container(
-              padding: const EdgeInsets.all(20.0),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(24.r),
+                  bottomRight: Radius.circular(24.r),
                 ),
               ),
               child: Column(
@@ -35,32 +36,37 @@ class HomeOne extends StatelessWidget {
                     children: [
                       // Avatar
                       CircleAvatar(
-                        radius: 30,
+                        radius: 24.r,
                         backgroundColor: const Color(0xFF2E7D32),
                         child: CircleAvatar(
-                          radius: 28,
+                          radius: 22.r,
                           backgroundColor: Colors.white,
                           child: ClipOval(child: _buildProfileImage()),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      // Greeting Text
+                      SizedBox(width: 10.w),
+                      // Greeting + Hi/Name on 2 lines (more readable)
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               '${ProfileService.getGreetingWithContext(context)},',
-                              style: const TextStyle(
-                                fontSize: 16,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 13.sp,
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
+                            SizedBox(height: 2.h),
                             Text(
                               '${AppLocalizations.of(context)!.hi} ${ProfileService.getUserName()} 👋',
-                              style: const TextStyle(
-                                fontSize: 22,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 19.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
@@ -70,13 +76,13 @@ class HomeOne extends StatelessWidget {
                       ),
                       // ECO EXPLORER Badge
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE8F5E9),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(
                             color: const Color(0xFF2E7D32),
                             width: 1,
@@ -87,20 +93,20 @@ class HomeOne extends StatelessWidget {
                           children: [
                             SvgPicture.asset(
                               'assets/eco.svg',
-                              width: 16,
-                              height: 16,
+                              width: 14.w,
+                              height: 14.h,
                               colorFilter: const ColorFilter.mode(
                                 Color(0xFF2E7D32),
                                 BlendMode.srcIn,
                               ),
                             ),
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4.w),
                             Text(
                               AppLocalizations.of(context)!.ecoExplorer,
-                              style: const TextStyle(
-                                fontSize: 12,
+                              style: TextStyle(
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF2E7D32),
+                                color: const Color(0xFF2E7D32),
                               ),
                             ),
                           ],
@@ -108,7 +114,7 @@ class HomeOne extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 16.h),
 
                   // Daily Eco Score Card
                   Consumer<HabitService>(
@@ -134,10 +140,10 @@ class HomeOne extends StatelessWidget {
                       }
 
                       return Container(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: EdgeInsets.all(16.w),
                         decoration: BoxDecoration(
                           color: const Color(0xFFF1F8F5),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(16.r),
                         ),
                         child: Column(
                           children: [
@@ -147,8 +153,8 @@ class HomeOne extends StatelessWidget {
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.dailyEcoScore,
-                                  style: const TextStyle(
-                                    fontSize: 16,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black87,
                                   ),
@@ -158,16 +164,16 @@ class HomeOne extends StatelessWidget {
                                     children: [
                                       TextSpan(
                                         text: dailyScore.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 24,
+                                        style: TextStyle(
+                                          fontSize: 18.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: Color(0xFF2E7D32),
+                                          color: const Color(0xFF2E7D32),
                                         ),
                                       ),
                                       TextSpan(
                                         text: ' / $maxDailyScore',
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: 13.sp,
                                           color: Colors.black54,
                                         ),
                                       ),
@@ -176,20 +182,20 @@ class HomeOne extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 12.h),
                             // Progress Bar
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(8.r),
                               child: LinearProgressIndicator(
                                 value: progress,
-                                minHeight: 10,
+                                minHeight: 8.h,
                                 backgroundColor: Colors.grey[300],
                                 valueColor: const AlwaysStoppedAnimation<Color>(
                                   Color(0xFF2E7D32),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 6.h),
                             // Next Level Text
                             Align(
                               alignment: Alignment.centerRight,
@@ -197,8 +203,8 @@ class HomeOne extends StatelessWidget {
                                 AppLocalizations.of(
                                   context,
                                 )!.nextLevel(nextLevel),
-                                style: const TextStyle(
-                                  fontSize: 14,
+                                style: TextStyle(
+                                  fontSize: 11.sp,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -214,19 +220,19 @@ class HomeOne extends StatelessWidget {
 
             // Today's Eco Tasks Section
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     AppLocalizations.of(context)!.todaysEcoTasks,
-                    style: const TextStyle(
-                      fontSize: 22,
+                    style: TextStyle(
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 12.h),
 
                   // All tasks (habit-based + default)
                   Consumer<HabitService>(
@@ -252,7 +258,7 @@ class HomeOne extends StatelessWidget {
                             final String title = habit['title'] as String;
 
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
+                              padding: EdgeInsets.only(bottom: 10.h),
                               child: _buildTaskCard(
                                 context: context,
                                 title: title,
@@ -307,7 +313,7 @@ class HomeOne extends StatelessWidget {
                                 task['taskName'] as String? ?? title;
 
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
+                              padding: EdgeInsets.only(bottom: 10.h),
                               child: _buildTaskCard(
                                 context: context,
                                 icon: icon,
@@ -369,15 +375,15 @@ class HomeOne extends StatelessWidget {
     VoidCallback? onDone,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
+            blurRadius: 8,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -389,34 +395,34 @@ class HomeOne extends StatelessWidget {
               // Icon Box (only show if showIcon is true)
               if (showIcon) ...[
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 40.w,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     color: const Color(0xFFE8F5E9),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: useSvg && svgAsset != null
                       ? Center(
                           child: SvgPicture.asset(
                             svgAsset,
-                            width: 24,
-                            height: 24,
+                            width: 20.w,
+                            height: 20.h,
                             colorFilter: const ColorFilter.mode(
                               Color(0xFF2E7D32),
                               BlendMode.srcIn,
                             ),
                           ),
                         )
-                      : Icon(icon, color: const Color(0xFF2E7D32), size: 24),
+                      : Icon(icon, color: const Color(0xFF2E7D32), size: 20.sp),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 10.w),
               ],
               // Task Description
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: TextStyle(
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
@@ -424,32 +430,32 @@ class HomeOne extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 10.h),
           // Tags Row
           Center(
             child: Wrap(
-              spacing: 8,
-              runSpacing: 8,
+              spacing: 6.w,
+              runSpacing: 6.h,
               alignment: WrapAlignment.center,
               children: tags.map((tag) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 6.h,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Text(
                     tag,
-                    style: const TextStyle(fontSize: 16, color: Colors.black54),
+                    style: TextStyle(fontSize: 12.sp, color: Colors.black54),
                   ),
                 );
               }).toList(),
             ),
           ),
-          const SizedBox(height: 22),
+          SizedBox(height: 16.h),
           // Action Buttons
           Row(
             children: [
@@ -460,20 +466,20 @@ class HomeOne extends StatelessWidget {
                     foregroundColor: Colors.black54,
                     side: BorderSide(color: Colors.grey[300]!),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.skip,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 19,
+                      fontSize: 15.sp,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 10.w),
               Expanded(
                 child: ElevatedButton(
                   onPressed: onDone,
@@ -481,16 +487,16 @@ class HomeOne extends StatelessWidget {
                     backgroundColor: const Color(0xFF2E7D32),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
                     elevation: 0,
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.done,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 19,
+                      fontSize: 15.sp,
                     ),
                   ),
                 ),
@@ -505,11 +511,11 @@ class HomeOne extends StatelessWidget {
   Widget _buildEmptyState(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32.0),
+        padding: EdgeInsets.symmetric(vertical: 24.h),
         child: Text(
           AppLocalizations.of(context)!.noMoreTasksForTheDay,
-          style: const TextStyle(
-            fontSize: 18,
+          style: TextStyle(
+            fontSize: 15.sp,
             fontWeight: FontWeight.w500,
             color: Colors.black54,
           ),
@@ -525,15 +531,15 @@ class HomeOne extends StatelessWidget {
       return Image.file(
         File(imagePath),
         fit: BoxFit.cover,
-        width: 56,
-        height: 56,
+        width: 44.w,
+        height: 44.h,
       );
     }
     return Image.asset(
       'assets/profile.png',
       fit: BoxFit.cover,
-      width: 56,
-      height: 56,
+      width: 44.w,
+      height: 44.h,
     );
   }
 }
