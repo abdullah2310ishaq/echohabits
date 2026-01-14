@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EcoToast {
   static OverlayEntry? _currentOverlayEntry;
@@ -56,7 +57,7 @@ class _EcoToastWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          bottom: 100, // Higher position above navbar with more spacing
+          bottom: 90.h, // higher position above navbar
           left: 0,
           right: 0,
           child: SafeArea(
@@ -65,22 +66,22 @@ class _EcoToastWidget extends StatelessWidget {
                 color: Colors.transparent,
                 child: Container(
                   constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 40,
+                    maxWidth: 1.sw - 32.w,
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 12,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14.w,
+                    vertical: 10.h,
                   ),
                   decoration: BoxDecoration(
                     color: isSuccess
                         ? const Color(0xFF2E7D32)
                         : Colors.orange[700],
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18.r),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.2),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
+                        blurRadius: 8,
+                        offset: Offset(0, 2.h),
                       ),
                     ],
                   ),
@@ -91,19 +92,19 @@ class _EcoToastWidget extends StatelessWidget {
                       Flexible(
                         child: Text(
                           message,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
-                          maxLines: 1,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       if (isSuccess) ...[
-                        const SizedBox(width: 6),
-                        const Text('🔥', style: TextStyle(fontSize: 18)),
+                        SizedBox(width: 6.w),
+                        Text('🔥', style: TextStyle(fontSize: 16.sp)),
                       ],
                     ],
                   ),

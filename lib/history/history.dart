@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import '../core/services/habit_service.dart';
+import '../l10n/app_localizations.dart';
 
 class History extends StatefulWidget {
   const History({super.key});
@@ -32,10 +35,10 @@ class _HistoryState extends State<History> {
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          'History',
+        title: Text(
+          AppLocalizations.of(context)!.history,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),
@@ -46,40 +49,37 @@ class _HistoryState extends State<History> {
         children: [
           // Filter Bar
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.w),
             child: Row(
               children: [
-                _buildFilterButton('Weekly'),
-                const SizedBox(width: 12),
-                _buildFilterButton('Monthly'),
-                const SizedBox(width: 12),
-                _buildFilterButton('All Time'),
+                _buildFilterButton(context, 'Weekly'),
+                SizedBox(width: 10.w),
+                _buildFilterButton(context, 'Monthly'),
+                SizedBox(width: 10.w),
+                _buildFilterButton(context, 'All Time'),
               ],
             ),
           ),
           // History List
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               itemCount: history.length,
               itemBuilder: (context, index) {
                 final item = history[index];
                 final String title = item['title'] as String;
-                final String status = item['status'] as String;
-                final bool isDefault = item['isDefault'] as bool? ?? false;
                 final DateTime timestamp = item['timestamp'] as DateTime;
 
-                final String dateLabel =
-                    '${timestamp.year}-${timestamp.month.toString().padLeft(2, '0')}-${timestamp.day.toString().padLeft(2, '0')}';
-                final String subtitle =
-                    '${isDefault ? 'Default task' : 'Habit'} • ${status == 'done' ? 'Completed' : 'Skipped'} • $dateLabel';
+                // Format date as "January 14" (month name + day)
+                final dateFormatter = DateFormat('MMMM d');
+                final String dateLabel = dateFormatter.format(timestamp);
 
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
+                  padding: EdgeInsets.only(bottom: 10.h),
                   child: _buildHistoryCard(
                     habit: title,
-                    date: subtitle,
-                    isDone: status == 'done',
+                    date: dateLabel,
+                    isDone: true, // Only showing completed items
                   ),
                 );
               },
@@ -90,8 +90,11 @@ class _HistoryState extends State<History> {
     );
   }
 
-  Widget _buildFilterButton(String label) {
+  Widget _buildFilterButton(BuildContext context, String label) {
     final isSelected = _selectedFilter == label;
+    // TODO: Add weekly, monthly, allTime to localization files
+    // For now using English strings - intl will format dates based on locale
+    
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -100,18 +103,18 @@ class _HistoryState extends State<History> {
           });
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: EdgeInsets.symmetric(vertical: 10.h),
           decoration: BoxDecoration(
             color: isSelected
                 ? const Color(0xFF2E7D32)
                 : Colors.grey[200],
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           child: Text(
             label,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12.sp,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
               color: isSelected ? Colors.white : Colors.black87,
             ),
@@ -127,15 +130,15 @@ class _HistoryState extends State<History> {
     required bool isDone,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 8,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -143,21 +146,19 @@ class _HistoryState extends State<History> {
         children: [
           // Checkmark Icon
           Container(
-            width: 40,
-            height: 40,
+            width: 36.w,
+            height: 36.h,
             decoration: BoxDecoration(
-              color: isDone
-                  ? const Color(0xFFE8F5E9)
-                  : const Color(0xFFFFEBEE),
+              color: const Color(0xFFE8F5E9),
               shape: BoxShape.circle,
             ),
             child: Icon(
-              isDone ? Icons.check : Icons.close,
-              color: isDone ? const Color(0xFF2E7D32) : Colors.redAccent,
-              size: 24,
+              Icons.check,
+              color: const Color(0xFF2E7D32),
+              size: 20.sp,
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 12.w),
           // Habit Description and Date
           Expanded(
             child: Column(
@@ -165,17 +166,17 @@ class _HistoryState extends State<History> {
               children: [
                 Text(
                   habit,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 3.h),
                 Text(
                   date,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: 12.sp,
                     color: Colors.black54,
                   ),
                 ),

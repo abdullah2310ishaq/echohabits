@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +24,15 @@ class Profile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 25),
+                SizedBox(height: 40.h),
                 // Header Section
                 Container(
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: const BoxDecoration(
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
+                      bottomLeft: Radius.circular(24.r),
+                      bottomRight: Radius.circular(24.r),
                     ),
                   ),
                   child: Column(
@@ -41,15 +42,15 @@ class Profile extends StatelessWidget {
                         children: [
                           // Avatar with green border
                           CircleAvatar(
-                            radius: 35,
+                            radius: 28.r,
                             backgroundColor: const Color(0xFF2E7D32),
                             child: CircleAvatar(
-                              radius: 33,
+                              radius: 26.r,
                               backgroundColor: Colors.white,
                               child: ClipOval(child: _buildProfileImage()),
                             ),
                           ),
-                          const SizedBox(width: 16),
+                          SizedBox(width: 12.w),
                           // Name and Subtitle
                           Expanded(
                             child: Column(
@@ -57,19 +58,19 @@ class Profile extends StatelessWidget {
                               children: [
                                 Text(
                                   ProfileService.getUserName(),
-                                  style: const TextStyle(
-                                    fontSize: 24,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF2E7D32),
+                                    color: const Color(0xFF2E7D32),
                                   ),
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(height: 3.h),
                                 Text(
                                   AppLocalizations.of(
                                     context,
                                   )!.makingTheWorldGreener,
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -78,10 +79,10 @@ class Profile extends StatelessWidget {
                           ),
                           // Settings Icon
                           IconButton(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.settings,
                               color: Colors.black87,
-                              size: 24,
+                              size: 20.sp,
                             ),
                             onPressed: () {
                               Navigator.of(context).push(
@@ -93,16 +94,16 @@ class Profile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 12.h),
                       // ECO EXPLORER Badge
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
                         ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE8F5E9),
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(18.r),
                           border: Border.all(
                             color: const Color(0xFF2E7D32),
                             width: 1,
@@ -111,18 +112,18 @@ class Profile extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.emoji_events,
                               color: Colors.amber,
-                              size: 20,
+                              size: 16.sp,
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 6.w),
                             Text(
                               AppLocalizations.of(context)!.ecoExplorer,
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF2E7D32),
+                                color: const Color(0xFF2E7D32),
                                 letterSpacing: 0.5,
                               ),
                             ),
@@ -135,13 +136,13 @@ class Profile extends StatelessWidget {
 
                 // Main Content
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(16.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Green Score Chart Card
                       _buildGreenScoreCard(context, habitService),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 12.h),
 
                       // Quick Stats Cards
                       Row(
@@ -157,7 +158,7 @@ class Profile extends StatelessWidget {
                               )!.avgActionsPerDay,
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 10.w),
                           Expanded(
                             child: _buildStatCard(
                               svgAsset: 'assets/flame.svg',
@@ -168,20 +169,20 @@ class Profile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 16.h),
 
                       // Badges Section
                       Text(
                         AppLocalizations.of(context)!.badges,
-                        style: const TextStyle(
-                          fontSize: 20,
+                        style: TextStyle(
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 12.h),
                       SizedBox(
-                        height: 100,
+                        height: 90.h,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -189,19 +190,19 @@ class Profile extends StatelessWidget {
                               imageAsset: 'assets/firststep.png',
                               label: AppLocalizations.of(context)!.firstStep,
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 10.w),
                             _buildBadgeCard(
                               icon: Icons.directions_bike,
                               iconColor: Colors.blue,
                               label: AppLocalizations.of(context)!.cyclist,
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 10.w),
                             _buildBadgeCard(
                               icon: Icons.water_drop,
                               iconColor: Colors.blue,
                               label: AppLocalizations.of(context)!.waterSaver,
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 10.w),
                             _buildBadgeCard(
                               icon: Icons.bolt,
                               iconColor: Colors.amber,
@@ -210,18 +211,18 @@ class Profile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 16.h),
 
                       // History Section
                       Text(
                         AppLocalizations.of(context)!.history,
-                        style: const TextStyle(
-                          fontSize: 20,
+                        style: TextStyle(
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 12.h),
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton(
@@ -239,20 +240,20 @@ class Profile extends StatelessWidget {
                               width: 1.5,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.viewHistory,
-                            style: const TextStyle(
-                              fontSize: 16,
+                            style: TextStyle(
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 16.h),
                     ],
                   ),
                 ),
@@ -282,15 +283,15 @@ class Profile extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 8,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -303,26 +304,26 @@ class Profile extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.greenScore,
-                style: const TextStyle(
-                  fontSize: 18,
+                style: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
               Text(
                 habitService.totalScore.toString(),
-                style: const TextStyle(
-                  fontSize: 28,
+                style: TextStyle(
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF2E7D32),
+                  color: const Color(0xFF2E7D32),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 16.h),
           // Chart
           SizedBox(
-            height: 150,
+            height: 140.h,
             child: LineChart(
               LineChartData(
                 gridData: const FlGridData(show: false),
@@ -356,11 +357,11 @@ class Profile extends StatelessWidget {
                             (now.weekday - 1 + value.toInt() - 6) % 7;
                         if (value.toInt() >= 0 && value.toInt() < 7) {
                           return Padding(
-                            padding: const EdgeInsets.only(top: 8),
+                            padding: EdgeInsets.only(top: 6.h),
                             child: Text(
                               dayNames[dayIndex],
-                              style: const TextStyle(
-                                fontSize: 12,
+                              style: TextStyle(
+                                fontSize: 10.sp,
                                 color: Colors.black54,
                               ),
                             ),
@@ -368,7 +369,7 @@ class Profile extends StatelessWidget {
                         }
                         return const Text('');
                       },
-                      reservedSize: 30,
+                      reservedSize: 26.h,
                     ),
                   ),
                 ),
@@ -384,21 +385,21 @@ class Profile extends StatelessWidget {
                     spots: spots,
                     isCurved: true,
                     color: const Color(0xFF2E7D32),
-                    barWidth: 3,
+                    barWidth: 2.5,
                     dotData: FlDotData(
                       show: true,
                       getDotPainter: (spot, percent, barData, index) {
                         // Highlight today (last day)
                         if (index == spots.length - 1) {
                           return FlDotCirclePainter(
-                            radius: 5,
+                            radius: 4.r,
                             color: Colors.white,
-                            strokeWidth: 3,
+                            strokeWidth: 2.r,
                             strokeColor: const Color(0xFF2E7D32),
                           );
                         }
                         return FlDotCirclePainter(
-                          radius: 3,
+                          radius: 2.5.r,
                           color: const Color(0xFF2E7D32),
                         );
                       },
@@ -426,16 +427,16 @@ class Profile extends StatelessWidget {
     required String label,
   }) {
     return Container(
-      height: 90, // Fixed height for both cards
-      padding: const EdgeInsets.all(12),
+      height: 82.h, // Fixed height for both cards
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 8,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -443,8 +444,8 @@ class Profile extends StatelessWidget {
         children: [
           // Icon on the left
           Container(
-            width: 48,
-            height: 48,
+            width: 40.w,
+            height: 40.h,
             decoration: BoxDecoration(
               color: const Color(0xFFE8F5E9),
               shape: BoxShape.circle,
@@ -452,13 +453,13 @@ class Profile extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 svgAsset,
-                width: 24,
-                height: 24,
+                width: 20.w,
+                height: 20.h,
                 colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 10.w),
           // Value and label on the right
           Expanded(
             child: Column(
@@ -467,16 +468,19 @@ class Profile extends StatelessWidget {
               children: [
                 Text(
                   value,
-                  style: const TextStyle(
-                    fontSize: 24,
+                  style: TextStyle(
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.h),
                 Text(
                   label,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    color: Colors.black54,
+                  ),
                 ),
               ],
             ),
@@ -494,17 +498,17 @@ class Profile extends StatelessWidget {
     required String label,
   }) {
     return Container(
-      width: 80,
-      height: 60,
-      padding: const EdgeInsets.all(12),
+      width: 74.w,
+      height: 60.h,
+      padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 8,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -513,23 +517,28 @@ class Profile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (imageAsset != null)
-            Image.asset(imageAsset, width: 32, height: 32, fit: BoxFit.contain)
+            Image.asset(
+              imageAsset,
+              width: 28.w,
+              height: 28.h,
+              fit: BoxFit.contain,
+            )
           else if (svgAsset != null)
             SvgPicture.asset(
               svgAsset,
-              width: 32,
-              height: 32,
+              width: 28.w,
+              height: 28.h,
               colorFilter: iconColor != null
                   ? ColorFilter.mode(iconColor, BlendMode.srcIn)
                   : null,
             )
           else if (icon != null && iconColor != null)
-            Icon(icon, color: iconColor, size: 32),
-          const SizedBox(height: 6),
+            Icon(icon, color: iconColor, size: 28.sp),
+          SizedBox(height: 6.h),
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 11,
+            style: TextStyle(
+              fontSize: 10.sp,
               fontWeight: FontWeight.w600,
               color: Colors.black87,
             ),
@@ -548,15 +557,15 @@ class Profile extends StatelessWidget {
       return Image.file(
         File(imagePath),
         fit: BoxFit.cover,
-        width: 66,
-        height: 66,
+        width: 52.w,
+        height: 52.h,
       );
     }
     return Image.asset(
       'assets/profile.png',
       fit: BoxFit.cover,
-      width: 66,
-      height: 66,
+      width: 52.w,
+      height: 52.h,
     );
   }
 }

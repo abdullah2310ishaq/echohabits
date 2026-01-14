@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddHabitDialog extends StatelessWidget {
   final String habitTitle;
@@ -44,41 +45,41 @@ class AddHabitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 20),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.r)),
       child: Container(
         decoration: BoxDecoration(
           color: const Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(16.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               // Main Title
-              const Text(
+              Text(
                 'Add this habit to your routine?',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 12.h),
 
               // Habit Name (in green)
               Text(
                 habitTitle,
-                style: const TextStyle(
-                  fontSize: 20,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF2E7D32),
+                  color: const Color(0xFF2E7D32),
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 10.h),
 
               // Metadata Row (Difficulty & Impact)
               Row(
@@ -86,40 +87,43 @@ class AddHabitDialog extends StatelessWidget {
                 children: [
                   // Difficulty Dot
                   Container(
-                    width: 8,
-                    height: 8,
+                    width: 6.w,
+                    height: 6.h,
                     decoration: BoxDecoration(
                       color: difficultyColor,
                       shape: BoxShape.circle,
                     ),
                   ),
-                  const SizedBox(width: 6),
+                  SizedBox(width: 6.w),
                   // Difficulty Text
                   Text(
                     difficulty,
-                    style: const TextStyle(fontSize: 14, color: Colors.black54),
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: Colors.black54,
+                    ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 12.w),
                   // Impact Label
                   Text(
                     impact,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                       color: impactColor,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 12.h),
 
               // Description Text
-              const Text(
+              Text(
                 'You can track it daily on your home screen',
-                style: TextStyle(fontSize: 16, color: Colors.black54),
+                style: TextStyle(fontSize: 13.sp, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 14.h),
 
               // Action Buttons
               Row(
@@ -131,20 +135,20 @@ class AddHabitDialog extends StatelessWidget {
                         foregroundColor: Colors.black54,
                         side: BorderSide(color: Colors.grey[300]!),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Cancel',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 10.w),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -157,16 +161,16 @@ class AddHabitDialog extends StatelessWidget {
                         backgroundColor: const Color(0xFF2E7D32),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
                         elevation: 0,
                       ),
-                      child: const Text(
+                      child: Text(
                         'Add',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),

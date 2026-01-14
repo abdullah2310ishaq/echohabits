@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
@@ -47,9 +48,9 @@ class SettingsScreen extends StatelessWidget {
           final currentLocale = localeService.getCurrentLocale();
           return Text(
             SettingsScreen._getLanguageName(currentLocale.languageCode),
-            style: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF2E7D32),
+            style: TextStyle(
+              fontSize: 12.sp,
+              color: const Color(0xFF2E7D32),
               fontWeight: FontWeight.w600,
             ),
           );
@@ -129,32 +130,32 @@ class SettingsScreen extends StatelessWidget {
             context: context,
             builder: (context) => Dialog(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(16.r),
               ),
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                padding: const EdgeInsets.all(24),
+                width: 0.85.sw,
+                padding: EdgeInsets.all(16.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       AppLocalizations.of(context)!.logout,
-                      style: const TextStyle(
-                        fontSize: 22,
+                      style: TextStyle(
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 12.h),
                     Text(
                       AppLocalizations.of(context)!.areYouSureYouWantToLogout,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: 13.sp,
                         color: Colors.black54,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 16.h),
                     Row(
                       children: [
                         Expanded(
@@ -164,20 +165,20 @@ class SettingsScreen extends StatelessWidget {
                               foregroundColor: Colors.black87,
                               side: BorderSide(color: Colors.grey[300]!),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
                             ),
                             child: Text(
                               AppLocalizations.of(context)!.cancel,
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 10.w),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
@@ -197,15 +198,15 @@ class SettingsScreen extends StatelessWidget {
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
                               elevation: 0,
                             ),
                             child: Text(
                               AppLocalizations.of(context)!.logout,
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -228,13 +229,13 @@ class SettingsScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: Icon(Icons.arrow_back, color: Colors.black87, size: 20.sp),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           AppLocalizations.of(context)!.settings,
-          style: const TextStyle(
-            fontSize: 20,
+          style: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),
@@ -244,19 +245,19 @@ class SettingsScreen extends StatelessWidget {
       body: Container(
         color: const Color(0xFFF5F5F5),
         child: ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           itemBuilder: (context, index) {
             final option = options[index];
             return _SettingsTile(option: option);
           },
           separatorBuilder: (_, __) => Divider(
-            height: 1,
-            thickness: 1,
+            height: 1.h,
+            thickness: 1.h,
             color: Colors.grey[300],
             indent:
-                20, // Start after SVG icon (20 list padding + 16 tile padding + 34 icon width)
+                16.w, // align with list padding
             endIndent:
-                20, // End at chevron icon (20 list padding + 25 icon size)
+                16.w, // align with list padding
           ),
           itemCount: options.length,
         ),
@@ -302,8 +303,8 @@ class _SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = const TextStyle(
-      fontSize: 16,
+    final textStyle = TextStyle(
+      fontSize: 14.sp,
       fontWeight: FontWeight.w500,
       color: Color(0xFF2E7D32),
     );
@@ -312,18 +313,18 @@ class _SettingsTile extends StatelessWidget {
       child: InkWell(
         onTap: option.onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
           child: Row(
             children: [
               Container(
-                width: 34,
-                height: 34,
+                width: 32.w,
+                height: 32.h,
                 decoration: const BoxDecoration(),
                 child: Center(
                   child: SvgPicture.asset(
                     option.iconPath,
-                    width: 26,
-                    height: 26,
+                    width: 22.w,
+                    height: 22.h,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFF2E7D32),
                       BlendMode.srcIn,
@@ -331,17 +332,17 @@ class _SettingsTile extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 14),
+              SizedBox(width: 10.w),
               Expanded(child: Text(option.title, style: textStyle)),
               if (option.trailingBuilder != null)
                 Padding(
-                  padding: const EdgeInsets.only(right: 8),
+                  padding: EdgeInsets.only(right: 6.w),
                   child: option.trailingBuilder!(context),
                 ),
-              const Icon(
+              Icon(
                 Icons.chevron_right,
                 color: Color(0xFF2E7D32),
-                size: 25,
+                size: 22.sp,
               ),
             ],
           ),
