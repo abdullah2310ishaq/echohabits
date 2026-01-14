@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/profile_service.dart';
 
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
-  String _getRankTitle(int score) {
+  String _getRankTitle(BuildContext context, int score) {
+    final l10n = AppLocalizations.of(context)!;
     if (score < 2000) {
-      return 'Green Starter';
+      return l10n.greenStarter;
     } else if (score < 3000) {
-      return 'Eco Explorer';
+      return l10n.ecoExplorerRank;
     } else if (score < 5000) {
-      return 'Eco Warrior';
+      return l10n.ecoWarrior;
     } else if (score < 10000) {
-      return 'Nature Guardian';
+      return l10n.natureGuardian;
     } else {
-      return 'Eco Master';
+      return l10n.ecoMaster;
     }
   }
 
@@ -25,20 +27,20 @@ class Leaderboard extends StatelessWidget {
     return Consumer<HabitService>(
       builder: (context, service, child) {
         final currentUserScore = service.totalScore;
-        final currentUserRankTitle = _getRankTitle(currentUserScore);
-        
+        final currentUserRankTitle = _getRankTitle(context, currentUserScore);
+
         // Sample leaderboard data (dummy users)
         final List<Map<String, dynamic>> rankings = [
           {
             'name': 'Sarah Chen',
-            'rankTitle': 'Eco Warrior',
+            'rankTitle': _getRankTitle(context, 2450),
             'score': 2450,
             'isCurrentUser': false,
             'avatar': 'assets/profile.png',
           },
           {
             'name': 'Mikes Ross',
-            'rankTitle': 'Nature Guardian',
+            'rankTitle': _getRankTitle(context, 2320),
             'score': 2320,
             'isCurrentUser': false,
             'avatar': 'assets/profile.png',
@@ -52,142 +54,151 @@ class Leaderboard extends StatelessWidget {
           },
           {
             'name': 'Alex T',
-            'rankTitle': 'Green Starter',
+            'rankTitle': _getRankTitle(context, 1950),
             'score': 1950,
             'isCurrentUser': false,
             'avatar': 'assets/profile.png',
           },
           {
             'name': 'Emma Wilson',
-            'rankTitle': 'Green Starter',
+            'rankTitle': _getRankTitle(context, 1800),
             'score': 1800,
             'isCurrentUser': false,
             'avatar': 'assets/profile.png',
           },
         ];
-        
+
         // Sort by score (descending)
-        rankings.sort((a, b) => (b['score'] as int).compareTo(a['score'] as int));
+        rankings.sort(
+          (a, b) => (b['score'] as int).compareTo(a['score'] as int),
+        );
 
         return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 25),
-            // Header Section
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title
-                  const Text(
-                    'Leaderboard',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2E7D32),
+          backgroundColor: const Color(0xFFF5F5F5),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 25),
+                // Header Section
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  // Subtitle
-                  const Text(
-                    'Your eco habits, your rank',
-                    style: TextStyle(fontSize: 16, color: Colors.black54),
-                  ),
-                  const SizedBox(height: 20),
-                  // Motivational Banner
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE8F5E9),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Row(
-                      children: [
-                        // Leaderboard Icon
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(shape: BoxShape.circle),
-                          child: Center(
-                            child: Image.asset(
-                              'assets/leader.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Title
+                      Text(
+                        AppLocalizations.of(context)!.leaderboard,
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF2E7D32),
                         ),
-                        const SizedBox(width: 12),
-                        // Motivational Text
-                        const Expanded(
-                          child: Text(
-                            'Better habits lead to better badges and greater progress.',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Rankings Section
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Section Title
-                  const Text(
-                    'Current eco habit rankings',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  // Rankings List
-                  ...rankings.map(
-                    (user) => Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: _buildRankingCard(
-                        name: user['name'] as String,
-                        rankTitle: user['rankTitle'] as String,
-                        score: user['score'] as int,
-                        isCurrentUser: user['isCurrentUser'] as bool,
-                        avatar: user['avatar'] as String,
                       ),
-                    ),
+                      const SizedBox(height: 8),
+                      // Subtitle
+                      Text(
+                        AppLocalizations.of(context)!.yourEcoHabitsYourRank,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // Motivational Banner
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE8F5E9),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          children: [
+                            // Leaderboard Icon
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(shape: BoxShape.circle),
+                              child: Center(
+                                child: Image.asset(
+                                  'assets/leader.png',
+                                  width: 40,
+                                  height: 40,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            // Motivational Text
+                            Expanded(
+                              child: Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.betterHabitsLeadToBetterBadges,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                // Rankings Section
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Section Title
+                      Text(
+                        AppLocalizations.of(context)!.currentEcoHabitRankings,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      // Rankings List
+                      ...rankings.map(
+                        (user) => Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: _buildRankingCard(
+                            context: context,
+                            name: user['name'] as String,
+                            rankTitle: user['rankTitle'] as String,
+                            score: user['score'] as int,
+                            isCurrentUser: user['isCurrentUser'] as bool,
+                            avatar: user['avatar'] as String,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
       },
     );
   }
 
   Widget _buildRankingCard({
+    required BuildContext context,
     required String name,
     required String rankTitle,
     required int score,
@@ -232,7 +243,9 @@ class Leaderboard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isCurrentUser ? '$name (You)' : name,
+                  isCurrentUser
+                      ? '${name} (${AppLocalizations.of(context)!.you})'
+                      : name,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -285,5 +285,112 @@
   "useDefaultImage": "Use Default Image",
   "@useDefaultImage": {
     "description": "Image source option - default"
+  },
+  "leaderboard": "Leaderboard",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "yourEcoHabitsYourRank": "Your eco habits, your rank",
+  "@yourEcoHabitsYourRank": {
+    "description": "Leaderboard subtitle"
+  },
+  "betterHabitsLeadToBetterBadges": "Better habits lead to better badges and greater progress.",
+  "@betterHabitsLeadToBetterBadges": {
+    "description": "Leaderboard motivational message"
+  },
+  "currentEcoHabitRankings": "Current eco habit rankings",
+  "@currentEcoHabitRankings": {
+    "description": "Rankings section title"
+  },
+  "you": "You",
+  "@you": {
+    "description": "Current user indicator"
+  },
+  "greenStarter": "Green Starter",
+  "@greenStarter": {
+    "description": "Rank title for score < 2000"
+  },
+  "ecoExplorerRank": "Eco Explorer",
+  "@ecoExplorerRank": {
+    "description": "Rank title for score 2000-2999"
+  },
+  "ecoWarrior": "Eco Warrior",
+  "@ecoWarrior": {
+    "description": "Rank title for score 3000-4999"
+  },
+  "natureGuardian": "Nature Guardian",
+  "@natureGuardian": {
+    "description": "Rank title for score 5000-9999"
+  },
+  "ecoMaster": "Eco Master",
+  "@ecoMaster": {
+    "description": "Rank title for score >= 10000"
+  },
+  "hi": "Hi",
+  "@hi": {
+    "description": "Greeting prefix"
+  },
+  "dailyEcoScore": "Daily Eco Score",
+  "@dailyEcoScore": {
+    "description": "Daily eco score card title"
+  },
+  "nextLevel": "Next Level: {level}",
+  "@nextLevel": {
+    "description": "Next level indicator with level name",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "todaysEcoTasks": "Today's Eco Tasks",
+  "@todaysEcoTasks": {
+    "description": "Today's tasks section title"
+  },
+  "skippedYourStreakNeedsConsistency": "Skipped! Your streak needs consistency",
+  "@skippedYourStreakNeedsConsistency": {
+    "description": "Message when task is skipped"
+  },
+  "taskDoneStreakStrong": "{task} Done! Streak Strong",
+  "@taskDoneStreakStrong": {
+    "description": "Message when habit task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDone": "{task} Done",
+  "@taskDone": {
+    "description": "Message when default task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Done button text"
+  },
+  "noMoreTasksForTheDay": "No more tasks for the day",
+  "@noMoreTasksForTheDay": {
+    "description": "Empty state message when no tasks"
+  },
+  "goodMorning": "Good Morning",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "Good Afternoon",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "Good Evening",
+  "@goodEvening": {
+    "description": "Evening greeting"
   }
 }

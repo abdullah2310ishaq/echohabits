@@ -507,6 +507,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use Default Image'**
   String get useDefaultImage;
+
+  /// Leaderboard screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get leaderboard;
+
+  /// Leaderboard subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Your eco habits, your rank'**
+  String get yourEcoHabitsYourRank;
+
+  /// Leaderboard motivational message
+  ///
+  /// In en, this message translates to:
+  /// **'Better habits lead to better badges and greater progress.'**
+  String get betterHabitsLeadToBetterBadges;
+
+  /// Rankings section title
+  ///
+  /// In en, this message translates to:
+  /// **'Current eco habit rankings'**
+  String get currentEcoHabitRankings;
+
+  /// Current user indicator
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get you;
+
+  /// Rank title for score < 2000
+  ///
+  /// In en, this message translates to:
+  /// **'Green Starter'**
+  String get greenStarter;
+
+  /// Rank title for score 2000-2999
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Explorer'**
+  String get ecoExplorerRank;
+
+  /// Rank title for score 3000-4999
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Warrior'**
+  String get ecoWarrior;
+
+  /// Rank title for score 5000-9999
+  ///
+  /// In en, this message translates to:
+  /// **'Nature Guardian'**
+  String get natureGuardian;
+
+  /// Rank title for score >= 10000
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Master'**
+  String get ecoMaster;
+
+  /// Greeting prefix
+  ///
+  /// In en, this message translates to:
+  /// **'Hi'**
+  String get hi;
+
+  /// Daily eco score card title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Eco Score'**
+  String get dailyEcoScore;
+
+  /// Next level indicator with level name
+  ///
+  /// In en, this message translates to:
+  /// **'Next Level: {level}'**
+  String nextLevel(String level);
+
+  /// Today's tasks section title
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Eco Tasks'**
+  String get todaysEcoTasks;
+
+  /// Message when task is skipped
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped! Your streak needs consistency'**
+  String get skippedYourStreakNeedsConsistency;
+
+  /// Message when habit task is completed
+  ///
+  /// In en, this message translates to:
+  /// **'{task} Done! Streak Strong'**
+  String taskDoneStreakStrong(String task);
+
+  /// Message when default task is completed
+  ///
+  /// In en, this message translates to:
+  /// **'{task} Done'**
+  String taskDone(String task);
+
+  /// Skip button text
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// Done button text
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// Empty state message when no tasks
+  ///
+  /// In en, this message translates to:
+  /// **'No more tasks for the day'**
+  String get noMoreTasksForTheDay;
+
+  /// Morning greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good Morning'**
+  String get goodMorning;
+
+  /// Afternoon greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good Afternoon'**
+  String get goodAfternoon;
+
+  /// Evening greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good Evening'**
+  String get goodEvening;
 }
 
 class _AppLocalizationsDelegate

@@ -1,4 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 
 class ProfileService {
   static const String _boxName = 'profileBox';
@@ -44,6 +46,7 @@ class ProfileService {
   }
 
   /// Get greeting based on time
+  /// Note: Requires BuildContext for localization. Use getGreetingWithContext instead.
   static String getGreeting() {
     final hour = DateTime.now().hour;
     if (hour < 12) {
@@ -52,6 +55,19 @@ class ProfileService {
       return 'Good Afternoon';
     } else {
       return 'Good Evening';
+    }
+  }
+
+  /// Get localized greeting based on time
+  static String getGreetingWithContext(BuildContext context) {
+    final hour = DateTime.now().hour;
+    final l10n = AppLocalizations.of(context)!;
+    if (hour < 12) {
+      return l10n.goodMorning;
+    } else if (hour < 17) {
+      return l10n.goodAfternoon;
+    } else {
+      return l10n.goodEvening;
     }
   }
 }

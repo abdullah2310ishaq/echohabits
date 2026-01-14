@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'dart:io';
 import '../core/widgets/eco_toast.dart';
 import '../core/services/habit_service.dart';
@@ -49,7 +50,7 @@ class HomeOne extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${ProfileService.getGreeting()},',
+                              '${ProfileService.getGreetingWithContext(context)},',
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black54,
@@ -57,7 +58,7 @@ class HomeOne extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'Hi ${ProfileService.getUserName()} 👋',
+                              '${AppLocalizations.of(context)!.hi} ${ProfileService.getUserName()} 👋',
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -94,9 +95,9 @@ class HomeOne extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 4),
-                            const Text(
-                              'ECO EXPLORER',
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(context)!.ecoExplorer,
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF2E7D32),
@@ -120,15 +121,16 @@ class HomeOne extends StatelessWidget {
                       );
 
                       // Determine next level based on total score
-                      String nextLevel = 'Eco Warrior';
+                      String nextLevel;
+                      final l10n = AppLocalizations.of(context)!;
                       if (service.totalScore < 2000) {
-                        nextLevel = 'Eco Explorer';
+                        nextLevel = l10n.ecoExplorerRank;
                       } else if (service.totalScore < 3000) {
-                        nextLevel = 'Eco Warrior';
+                        nextLevel = l10n.ecoWarrior;
                       } else if (service.totalScore < 5000) {
-                        nextLevel = 'Nature Guardian';
+                        nextLevel = l10n.natureGuardian;
                       } else {
-                        nextLevel = 'Eco Master';
+                        nextLevel = l10n.ecoMaster;
                       }
 
                       return Container(
@@ -143,9 +145,9 @@ class HomeOne extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  'Daily Eco Score',
-                                  style: TextStyle(
+                                Text(
+                                  AppLocalizations.of(context)!.dailyEcoScore,
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black87,
@@ -192,7 +194,9 @@ class HomeOne extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'Next Level: $nextLevel',
+                                AppLocalizations.of(
+                                  context,
+                                )!.nextLevel(nextLevel),
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.black54,
@@ -214,9 +218,9 @@ class HomeOne extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Today's Eco Tasks",
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.todaysEcoTasks,
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
@@ -262,8 +266,9 @@ class HomeOne extends StatelessWidget {
                                   );
                                   EcoToast.show(
                                     context,
-                                    message:
-                                        'Skipped! Your streak needs consistency',
+                                    message: AppLocalizations.of(
+                                      context,
+                                    )!.skippedYourStreakNeedsConsistency,
                                     isSuccess: false,
                                   );
                                 },
@@ -274,7 +279,9 @@ class HomeOne extends StatelessWidget {
                                   );
                                   EcoToast.show(
                                     context,
-                                    message: '$title Done! Streak Strong',
+                                    message: AppLocalizations.of(
+                                      context,
+                                    )!.taskDoneStreakStrong(title),
                                     isSuccess: true,
                                   );
                                 },
@@ -317,8 +324,9 @@ class HomeOne extends StatelessWidget {
                                   );
                                   EcoToast.show(
                                     context,
-                                    message:
-                                        'Skipped! Your streak needs consistency',
+                                    message: AppLocalizations.of(
+                                      context,
+                                    )!.skippedYourStreakNeedsConsistency,
                                     isSuccess: false,
                                   );
                                 },
@@ -326,7 +334,9 @@ class HomeOne extends StatelessWidget {
                                   service.completeDefaultTask(id, isDone: true);
                                   EcoToast.show(
                                     context,
-                                    message: '$taskName Done',
+                                    message: AppLocalizations.of(
+                                      context,
+                                    )!.taskDone(taskName),
                                     isSuccess: true,
                                   );
                                 },
@@ -454,9 +464,12 @@ class HomeOne extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 19),
+                  child: Text(
+                    AppLocalizations.of(context)!.skip,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 19,
+                    ),
                   ),
                 ),
               ),
@@ -473,9 +486,12 @@ class HomeOne extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     elevation: 0,
                   ),
-                  child: const Text(
-                    'Done',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 19),
+                  child: Text(
+                    AppLocalizations.of(context)!.done,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 19,
+                    ),
                   ),
                 ),
               ),
@@ -490,9 +506,9 @@ class HomeOne extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32.0),
-        child: const Text(
-          'No more tasks for the day',
-          style: TextStyle(
+        child: Text(
+          AppLocalizations.of(context)!.noMoreTasksForTheDay,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
             color: Colors.black54,

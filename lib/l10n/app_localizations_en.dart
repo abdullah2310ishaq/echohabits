@@ -221,4 +221,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get useDefaultImage => 'Use Default Image';
+
+  @override
+  String get leaderboard => 'Leaderboard';
+
+  @override
+  String get yourEcoHabitsYourRank => 'Your eco habits, your rank';
+
+  @override
+  String get betterHabitsLeadToBetterBadges =>
+      'Better habits lead to better badges and greater progress.';
+
+  @override
+  String get currentEcoHabitRankings => 'Current eco habit rankings';
+
+  @override
+  String get you => 'You';
+
+  @override
+  String get greenStarter => 'Green Starter';
+
+  @override
+  String get ecoExplorerRank => 'Eco Explorer';
+
+  @override
+  String get ecoWarrior => 'Eco Warrior';
+
+  @override
+  String get natureGuardian => 'Nature Guardian';
+
+  @override
+  String get ecoMaster => 'Eco Master';
+
+  @override
+  String get hi => 'Hi';
+
+  @override
+  String get dailyEcoScore => 'Daily Eco Score';
+
+  @override
+  String nextLevel(String level) {
+    return 'Next Level: $level';
+  }
+
+  @override
+  String get todaysEcoTasks => 'Today\'s Eco Tasks';
+
+  @override
+  String get skippedYourStreakNeedsConsistency =>
+      'Skipped! Your streak needs consistency';
+
+  @override
+  String taskDoneStreakStrong(String task) {
+    return '$task Done! Streak Strong';
+  }
+
+  @override
+  String taskDone(String task) {
+    return '$task Done';
+  }
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get noMoreTasksForTheDay => 'No more tasks for the day';
+
+  @override
+  String get goodMorning => 'Good Morning';
+
+  @override
+  String get goodAfternoon => 'Good Afternoon';
+
+  @override
+  String get goodEvening => 'Good Evening';
 }
