@@ -594,5 +594,29 @@
   "useCashBackResponsibly": "负责任地使用返现",
   "@useCashBackResponsibly": {
     "description": "Savings habit title"
+  },
+  "defaultWalkBikeTitle": "步行/骑行替代开车",
+  "@defaultWalkBikeTitle": {
+    "description": "Default task title: walked/biked instead of driving"
+  },
+  "defaultCoffeeCupTitle": "使用了可重复使用的咖啡杯",
+  "@defaultCoffeeCupTitle": {
+    "description": "Default task title: used a reusable coffee cup"
+  },
+  "defaultAfforestationTitle": "造林 / 为更好的环境种下一棵树",
+  "@defaultAfforestationTitle": {
+    "description": "Default task title: afforestation / plant a tree"
+  },
+  "dailyTag": "每日",
+  "@dailyTag": {
+    "description": "Tag label for daily tasks"
+  },
+  "afforestationTag": "造林",
+  "@afforestationTag": {
+    "description": "Tag label for afforestation"
+  },
+  "plantingTag": "植树",
+  "@plantingTag": {
+    "description": "Tag label for planting"
   }
 }

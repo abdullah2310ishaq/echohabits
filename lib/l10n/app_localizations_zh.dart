@@ -441,4 +441,23 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get useCashBackResponsibly => '负责任地使用返现';
+
+  @override
+  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+
+  @override
+  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+
+  @override
+  String get defaultAfforestationTitle =>
+      'Afforestation / Plant a tree for better environment';
+
+  @override
+  String get dailyTag => 'Daily';
+
+  @override
+  String get afforestationTag => 'Afforestation';
+
+  @override
+  String get plantingTag => 'Planting';
 }

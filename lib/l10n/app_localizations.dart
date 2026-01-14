@@ -953,6 +953,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use cash-back responsibly'**
   String get useCashBackResponsibly;
+
+  /// Default task title: walked/biked instead of driving
+  ///
+  /// In en, this message translates to:
+  /// **'Walked/ biked instead of driving'**
+  String get defaultWalkBikeTitle;
+
+  /// Default task title: used a reusable coffee cup
+  ///
+  /// In en, this message translates to:
+  /// **'Used a reusable coffee cup'**
+  String get defaultCoffeeCupTitle;
+
+  /// Default task title: afforestation / plant a tree
+  ///
+  /// In en, this message translates to:
+  /// **'Afforestation / Plant a tree for better environment'**
+  String get defaultAfforestationTitle;
+
+  /// Tag label for daily tasks
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get dailyTag;
+
+  /// Tag label for afforestation
+  ///
+  /// In en, this message translates to:
+  /// **'Afforestation'**
+  String get afforestationTag;
+
+  /// Tag label for planting
+  ///
+  /// In en, this message translates to:
+  /// **'Planting'**
+  String get plantingTag;
 }
 
 class _AppLocalizationsDelegate

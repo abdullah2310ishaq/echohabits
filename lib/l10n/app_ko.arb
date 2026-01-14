@@ -594,5 +594,29 @@
   "useCashBackResponsibly": "캐시백 책임감 있게 사용",
   "@useCashBackResponsibly": {
     "description": "Savings habit title"
+  },
+  "defaultWalkBikeTitle": "운전 대신 걷거나 자전거를 이용함",
+  "@defaultWalkBikeTitle": {
+    "description": "Default task title: walked/biked instead of driving"
+  },
+  "defaultCoffeeCupTitle": "재사용 가능한 커피컵을 사용함",
+  "@defaultCoffeeCupTitle": {
+    "description": "Default task title: used a reusable coffee cup"
+  },
+  "defaultAfforestationTitle": "조림 / 더 나은 환경을 위해 나무를 심음",
+  "@defaultAfforestationTitle": {
+    "description": "Default task title: afforestation / plant a tree"
+  },
+  "dailyTag": "매일",
+  "@dailyTag": {
+    "description": "Tag label for daily tasks"
+  },
+  "afforestationTag": "조림",
+  "@afforestationTag": {
+    "description": "Tag label for afforestation"
+  },
+  "plantingTag": "식재",
+  "@plantingTag": {
+    "description": "Tag label for planting"
   }
 }

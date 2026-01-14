@@ -447,4 +447,23 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get useCashBackResponsibly => 'Cash-Back verantwortungsvoll nutzen';
+
+  @override
+  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+
+  @override
+  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+
+  @override
+  String get defaultAfforestationTitle =>
+      'Afforestation / Plant a tree for better environment';
+
+  @override
+  String get dailyTag => 'Daily';
+
+  @override
+  String get afforestationTag => 'Afforestation';
+
+  @override
+  String get plantingTag => 'Planting';
 }

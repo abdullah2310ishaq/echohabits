@@ -11,6 +11,30 @@ import '../core/services/profile_service.dart';
 class HomeOne extends StatelessWidget {
   const HomeOne({super.key});
 
+  String _localizeTag(AppLocalizations l10n, String tag) {
+    switch (tag) {
+      case 'Transport':
+        return l10n.transport;
+      case 'Waste':
+        return l10n.waste;
+      case 'High Impact':
+        return l10n.highImpact;
+      case 'Medium Impact':
+        return l10n.mediumImpact;
+      case 'Low Impact':
+        return l10n.lowImpact;
+      case 'Daily':
+        return l10n.dailyTag;
+      case 'Afforestation':
+        return l10n.afforestationTag;
+      case 'Planting':
+        return l10n.plantingTag;
+      default:
+        // Fallback: keep the original tag if we don't have a localization key yet
+        return tag;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,6 +264,7 @@ class HomeOne extends StatelessWidget {
                   // All tasks (habit-based + default)
                   Consumer<HabitService>(
                     builder: (context, service, child) {
+                      final l10n = AppLocalizations.of(context)!;
                       final habitTasks = service.userHabits;
                       final defaultTasks = service.todayDefaultTasks;
                       final hasAnyTasks =
@@ -302,10 +327,11 @@ class HomeOne extends StatelessWidget {
                           ...defaultTasks.map((task) {
                             final String id = task['id'] as String;
                             final String title = task['title'] as String;
-                            final List<String> tags =
-                                (task['tags'] as List<dynamic>)
-                                    .cast<String>()
-                                    .toList();
+                            final List<String> tags = (task['tags']
+                                    as List<dynamic>)
+                                .cast<String>()
+                                .map((t) => _localizeTag(l10n, t))
+                                .toList();
                             final IconData icon =
                                 task['icon'] as IconData? ?? Icons.check;
                             final bool useSvg =
@@ -315,12 +341,29 @@ class HomeOne extends StatelessWidget {
                             final String taskName =
                                 task['taskName'] as String? ?? title;
 
+                            // Localize default task titles based on id
+                            String localizedTitle;
+                            switch (id) {
+                              case 'default_walk_bike_1':
+                                localizedTitle = l10n.defaultWalkBikeTitle;
+                                break;
+                              case 'default_coffee_cup':
+                                localizedTitle = l10n.defaultCoffeeCupTitle;
+                                break;
+                              case 'default_afforestation':
+                                localizedTitle =
+                                    l10n.defaultAfforestationTitle;
+                                break;
+                              default:
+                                localizedTitle = title;
+                            }
+
                             return Padding(
                               padding: EdgeInsets.only(bottom: 10.h),
                               child: _buildTaskCard(
                                 context: context,
                                 icon: icon,
-                                title: title,
+                                title: localizedTitle,
                                 tags: tags,
                                 useSvg: useSvg,
                                 svgAsset: svgAsset,

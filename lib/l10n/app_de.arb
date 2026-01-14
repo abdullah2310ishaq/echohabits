@@ -594,5 +594,29 @@
   "useCashBackResponsibly": "Cash-Back verantwortungsvoll nutzen",
   "@useCashBackResponsibly": {
     "description": "Savings habit title"
+  },
+  "defaultWalkBikeTitle": "Zu Fuß gegangen/mit dem Fahrrad gefahren statt Auto zu fahren",
+  "@defaultWalkBikeTitle": {
+    "description": "Default task title: walked/biked instead of driving"
+  },
+  "defaultCoffeeCupTitle": "Einen wiederverwendbaren Kaffeebecher benutzt",
+  "@defaultCoffeeCupTitle": {
+    "description": "Default task title: used a reusable coffee cup"
+  },
+  "defaultAfforestationTitle": "Aufforstung / Einen Baum für eine bessere Umwelt gepflanzt",
+  "@defaultAfforestationTitle": {
+    "description": "Default task title: afforestation / plant a tree"
+  },
+  "dailyTag": "Täglich",
+  "@dailyTag": {
+    "description": "Tag label for daily tasks"
+  },
+  "afforestationTag": "Aufforstung",
+  "@afforestationTag": {
+    "description": "Tag label for afforestation"
+  },
+  "plantingTag": "Pflanzen",
+  "@plantingTag": {
+    "description": "Tag label for planting"
   }
 }

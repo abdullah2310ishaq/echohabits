@@ -594,5 +594,29 @@
   "useCashBackResponsibly": "Использовать кэшбэк ответственно",
   "@useCashBackResponsibly": {
     "description": "Savings habit title"
+  },
+  "defaultWalkBikeTitle": "Ходил пешком/ездил на велосипеде вместо того, чтобы ехать на машине",
+  "@defaultWalkBikeTitle": {
+    "description": "Default task title: walked/biked instead of driving"
+  },
+  "defaultCoffeeCupTitle": "Использовал многоразовый кофейный стакан",
+  "@defaultCoffeeCupTitle": {
+    "description": "Default task title: used a reusable coffee cup"
+  },
+  "defaultAfforestationTitle": "Лесовосстановление / Посадил дерево ради лучшей экологии",
+  "@defaultAfforestationTitle": {
+    "description": "Default task title: afforestation / plant a tree"
+  },
+  "dailyTag": "Ежедневно",
+  "@dailyTag": {
+    "description": "Tag label for daily tasks"
+  },
+  "afforestationTag": "Лесовосстановление",
+  "@afforestationTag": {
+    "description": "Tag label for afforestation"
+  },
+  "plantingTag": "Посадка",
+  "@plantingTag": {
+    "description": "Tag label for planting"
   }
 }
