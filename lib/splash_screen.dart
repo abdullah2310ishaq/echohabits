@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
@@ -87,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen>
               children: [
                 // Logo that fades in first
                 Opacity(opacity: _logoOpacity.value, child: _buildLogo()),
-                const SizedBox(height: 20),
+                SizedBox(height: 16.h),
                 // Text appears slightly after logo
                 Opacity(opacity: _textOpacity.value, child: _buildTitle()),
               ],
@@ -101,8 +102,8 @@ class _SplashScreenState extends State<SplashScreen>
   Widget _buildLogo() {
     return Image.asset(
       'assets/logo.png',
-      width: 96,
-      height: 96,
+      width: 96.w,
+      height: 96.h,
       fit: BoxFit.contain,
     );
   }
@@ -111,10 +112,10 @@ class _SplashScreenState extends State<SplashScreen>
     return Text(
       'ECO HABIT TRACKER',
       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-        color: Color(0xFF327032),
+        color: const Color(0xFF327032),
         fontWeight: FontWeight.w700,
-        letterSpacing: 1.3,
-        fontSize: 33,
+        letterSpacing: 1.sp,
+        fontSize: 26.sp,
       ),
     );
   }
