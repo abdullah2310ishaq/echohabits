@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/widgets/add_habit_dialog.dart';
@@ -457,15 +458,15 @@ class _HabitsOneState extends State<HabitsOne> {
       backgroundColor: const Color(0xFFF5F5F5),
       body: Column(
         children: [
-          const SizedBox(height: 25),
+          SizedBox(height: 40.h),
           // Header & Filter Section
           Container(
-            padding: const EdgeInsets.all(20.0),
-            decoration: const BoxDecoration(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(24.r),
+                bottomRight: Radius.circular(24.r),
               ),
             ),
             child: Column(
@@ -474,24 +475,27 @@ class _HabitsOneState extends State<HabitsOne> {
                 // Title
                 Text(
                   AppLocalizations.of(context)!.habitLibrary,
-                  style: const TextStyle(
-                    fontSize: 32,
+                  style: TextStyle(
+                    fontSize: 26.sp,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2E7D32),
+                    color: const Color(0xFF2E7D32),
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 6.h),
                 // Subtitle
                 Text(
                   AppLocalizations.of(
                     context,
                   )!.pickOneHabitToBeginYourEcoJourney,
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    color: Colors.black54,
+                  ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 16.h),
                 // Filter Bar
                 SizedBox(
-                  height: 40,
+                  height: 36.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: _categories.length,
@@ -499,7 +503,7 @@ class _HabitsOneState extends State<HabitsOne> {
                       final category = _categories[index];
                       final isSelected = _selectedCategory == category;
                       return Padding(
-                        padding: const EdgeInsets.only(right: 12),
+                        padding: EdgeInsets.only(right: 10.w),
                         child: FilterChip(
                           label: Text(_getLocalizedCategory(context, category)),
                           selected: isSelected,
@@ -512,13 +516,14 @@ class _HabitsOneState extends State<HabitsOne> {
                           selectedColor: const Color(0xFF2E7D32),
                           showCheckmark: false,
                           labelStyle: TextStyle(
+                            fontSize: 12.sp,
                             color: isSelected ? Colors.white : Colors.black87,
                             fontWeight: isSelected
                                 ? FontWeight.w600
                                 : FontWeight.normal,
                           ),
                           shape: const StadiumBorder(),
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
                         ),
                       );
                     },
@@ -531,20 +536,20 @@ class _HabitsOneState extends State<HabitsOne> {
           // Main List View
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
               children: [
                 Text(
                   AppLocalizations.of(context)!.pickAHabitToAdd,
-                  style: const TextStyle(
-                    fontSize: 21,
+                  style: TextStyle(
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 12.h),
                 ..._filteredHabits.map(
                   (habit) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
+                    padding: EdgeInsets.only(bottom: 10.h),
                     child: _buildHabitCard(
                       context: context,
                       titleKey: habit['titleKey'] as String,
@@ -575,15 +580,15 @@ class _HabitsOneState extends State<HabitsOne> {
     final localizedDifficulty = _getLocalizedDifficulty(context, difficulty);
     final localizedImpact = _getLocalizedImpact(context, impact);
     return Container(
-      padding: const EdgeInsets.all(22),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 8,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -597,40 +602,40 @@ class _HabitsOneState extends State<HabitsOne> {
                 // Title
                 Text(
                   localizedTitle,
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: TextStyle(
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 14),
+                SizedBox(height: 10.h),
                 // Metadata Row
                 Row(
                   children: [
                     // Difficulty Dot
                     Container(
-                      width: 8,
-                      height: 8,
+                      width: 6.w,
+                      height: 6.h,
                       decoration: BoxDecoration(
                         color: difficultyColor,
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6.w),
                     // Difficulty Text
                     Text(
                       localizedDifficulty,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 12.sp,
                         color: Colors.black54,
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 12.w),
                     // Impact Label
                     Text(
                       localizedImpact,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         color: impactColor,
                       ),
@@ -642,14 +647,18 @@ class _HabitsOneState extends State<HabitsOne> {
           ),
           // Add Button
           Container(
-            width: 40,
-            height: 40,
+            width: 36.w,
+            height: 36.h,
             decoration: BoxDecoration(
               color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10.r),
             ),
             child: IconButton(
-              icon: const Icon(Icons.add, color: Colors.black87, size: 24),
+              icon: Icon(
+                Icons.add,
+                color: Colors.black87,
+                size: 20.sp,
+              ),
               onPressed: () {
                 final localizedTitle = _getLocalizedTitle(context, titleKey);
                 AddHabitDialog.show(
