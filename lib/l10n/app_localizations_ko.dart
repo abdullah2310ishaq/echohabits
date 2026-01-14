@@ -444,21 +444,20 @@ class AppLocalizationsKo extends AppLocalizations {
   String get useCashBackResponsibly => '캐시백 책임감 있게 사용';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle => '운전 대신 걷거나 자전거를 이용함';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle => '재사용 가능한 커피컵을 사용함';
 
   @override
-  String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+  String get defaultAfforestationTitle => '조림 / 더 나은 환경을 위해 나무를 심음';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => '매일';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => '조림';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => '식재';
 }

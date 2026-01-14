@@ -133,7 +133,7 @@
   "@couldNotOpenLink": {
     "description": "Error message when link cannot be opened"
   },
-  "habitLibrary": "Biblioteca Abitudini",
+  "habitLibrary": "Abitudine",
   "@habitLibrary": {
     "description": "Habit library screen title"
   },
@@ -237,7 +237,7 @@
   "@sunday": {
     "description": "Sunday abbreviation"
   },
-  "setUpYourProfile": "Configura il tuo profilo",
+  "setUpYourProfile": "Profilo",
   "@setUpYourProfile": {
     "description": "Profile setup screen title"
   },

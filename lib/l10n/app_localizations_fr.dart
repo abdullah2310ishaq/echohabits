@@ -455,21 +455,23 @@ class AppLocalizationsFr extends AppLocalizations {
       'Utiliser le cash-back de manière responsable';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle =>
+      'Vous avez marché ou pris le vélo au lieu de conduire';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle =>
+      'Vous avez utilisé une tasse à café réutilisable';
 
   @override
   String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+      'Reboisement / Planté un arbre pour un meilleur environnement';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => 'Quotidien';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => 'Reboisement';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => 'Plantation';
 }

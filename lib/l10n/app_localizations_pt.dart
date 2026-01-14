@@ -453,21 +453,22 @@ class AppLocalizationsPt extends AppLocalizations {
   String get useCashBackResponsibly => 'Usar cash-back de forma responsável';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle =>
+      'Caminhou/foi de bicicleta em vez de dirigir';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle => 'Usou um copo de café reutilizável';
 
   @override
   String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+      'Aflorestamento / Plantou uma árvore por um ambiente melhor';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => 'Diário';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => 'Aflorestamento';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => 'Plantio';
 }

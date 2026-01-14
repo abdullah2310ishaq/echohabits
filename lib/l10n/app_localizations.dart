@@ -309,7 +309,7 @@ abstract class AppLocalizations {
   /// Habit library screen title
   ///
   /// In en, this message translates to:
-  /// **'Habit Library'**
+  /// **'Habit'**
   String get habitLibrary;
 
   /// Habit library subtitle
@@ -465,7 +465,7 @@ abstract class AppLocalizations {
   /// Profile setup screen title
   ///
   /// In en, this message translates to:
-  /// **'Set up your profile'**
+  /// **'Profile'**
   String get setUpYourProfile;
 
   /// Profile setup subtitle

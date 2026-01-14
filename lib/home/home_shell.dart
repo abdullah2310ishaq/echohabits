@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'dart:io';
 import 'home_one.dart';
 import '../habits/habits_one.dart';
@@ -29,41 +31,38 @@ class _HomeShellState extends State<HomeShell> {
       barrierColor: Colors.black54,
       builder: (BuildContext context) {
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+          insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(28.r),
           ),
           child: Container(
             decoration: BoxDecoration(
               color: const Color(0xFFFFFFFF),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.w),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // Title
-                  const Text(
-                    'Exit App',
+                  Text(
+                    AppLocalizations.of(context)!.logout,
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   // Message
-                  const Text(
-                    'Are you sure you want to exit the app?',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black54,
-                    ),
+                  Text(
+                    AppLocalizations.of(context)!.areYouSureYouWantToLogout,
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black54),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   // Action Buttons
                   Row(
                     children: [
@@ -74,15 +73,15 @@ class _HomeShellState extends State<HomeShell> {
                             foregroundColor: Colors.black54,
                             side: BorderSide(color: Colors.grey[300]!),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
                           ),
-                          child: const Text(
-                            'Cancel',
+                          child: Text(
+                            AppLocalizations.of(context)!.cancel,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontSize: 18,
+                              fontSize: 18.sp,
                             ),
                           ),
                         ),
@@ -98,16 +97,16 @@ class _HomeShellState extends State<HomeShell> {
                             backgroundColor: const Color(0xFF2E7D32),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
                             elevation: 0,
                           ),
-                          child: const Text(
-                            'Exit',
+                          child: Text(
+                            AppLocalizations.of(context)!.logout,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontSize: 18,
+                              fontSize: 18.sp,
                             ),
                           ),
                         ),
@@ -135,45 +134,49 @@ class _HomeShellState extends State<HomeShell> {
         }
       },
       child: Scaffold(
-      body: _screens[_currentIndex],
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFF2E7D32),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 12.0, bottom: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildNavItem(
-                  label: 'Home',
-                  index: 0,
-                  svgAsset: 'assets/home.svg',
-                ),
-                _buildNavItem(icon: Icons.list, label: 'Habits', index: 1),
-                _buildNavItem(
-                  label: 'Leaderboard',
-                  index: 2,
-                  svgAsset: 'assets/leader.svg',
-                ),
-                _buildNavItem(
-                  label: 'Profile',
-                  index: 3,
-                  svgAsset: 'assets/profile.svg',
-                ),
-              ],
+        body: _screens[_currentIndex],
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF2E7D32),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10.r,
+                offset: Offset(0, -2.h),
+              ),
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildNavItem(
+                    label: AppLocalizations.of(context)!.home,
+                    index: 0,
+                    svgAsset: 'assets/home.svg',
+                  ),
+                  _buildNavItem(
+                    icon: Icons.list,
+                    label: AppLocalizations.of(context)!.habitLibrary,
+                    index: 1,
+                  ),
+                  _buildNavItem(
+                    label: AppLocalizations.of(context)!.leaderboard,
+                    index: 2,
+                    svgAsset: 'assets/leader.svg',
+                  ),
+                  _buildNavItem(
+                    label: AppLocalizations.of(context)!.setUpYourProfile,
+                    index: 3,
+                    svgAsset: 'assets/profile.svg',
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
       ),
     );
   }
@@ -185,7 +188,7 @@ class _HomeShellState extends State<HomeShell> {
     required int index,
   }) {
     final isActive = _currentIndex == index;
-    final iconSize = index == 0 ? 24.0 : 20.0;
+    final iconSize = index == 0 ? 24.w : 20.w;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -207,23 +210,23 @@ class _HomeShellState extends State<HomeShell> {
             )
           else if (icon != null)
             Icon(icon, color: Colors.white, size: iconSize),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.h),
           Text(
             label,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: TextStyle(color: Colors.white, fontSize: 12.sp),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.h),
           if (isActive)
             Container(
-              width: 20,
-              height: 2,
+              width: 20.w,
+              height: 2.h,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(1),
+                borderRadius: BorderRadius.circular(1.r),
               ),
             )
           else
-            const SizedBox(height: 2),
+            SizedBox(height: 2.h),
         ],
       ),
     );

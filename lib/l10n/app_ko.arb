@@ -133,7 +133,7 @@
   "@couldNotOpenLink": {
     "description": "Error message when link cannot be opened"
   },
-  "habitLibrary": "습관 라이브러리",
+  "habitLibrary": "습관",
   "@habitLibrary": {
     "description": "Habit library screen title"
   },
@@ -237,7 +237,7 @@
   "@sunday": {
     "description": "Sunday abbreviation"
   },
-  "setUpYourProfile": "프로필 설정",
+  "setUpYourProfile": "프로필",
   "@setUpYourProfile": {
     "description": "Profile setup screen title"
   },

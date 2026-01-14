@@ -133,7 +133,7 @@
   "@couldNotOpenLink": {
     "description": "Error message when link cannot be opened"
   },
-  "habitLibrary": "习惯库",
+  "habitLibrary": "习惯",
   "@habitLibrary": {
     "description": "Habit library screen title"
   },
@@ -237,7 +237,7 @@
   "@sunday": {
     "description": "Sunday abbreviation"
   },
-  "setUpYourProfile": "设置您的个人资料",
+  "setUpYourProfile": "个人资料",
   "@setUpYourProfile": {
     "description": "Profile setup screen title"
   },

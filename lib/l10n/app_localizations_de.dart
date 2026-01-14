@@ -108,7 +108,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get couldNotOpenLink => 'Link konnte nicht geöffnet werden';
 
   @override
-  String get habitLibrary => 'Gewohnheits-Bibliothek';
+  String get habitLibrary => 'Gewohnheit';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney =>
@@ -187,7 +187,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sunday => 'So';
 
   @override
-  String get setUpYourProfile => 'Profil einrichten';
+  String get setUpYourProfile => 'Profil';
 
   @override
   String get letsPersonalizeYourEcoJourney =>
@@ -449,21 +449,23 @@ class AppLocalizationsDe extends AppLocalizations {
   String get useCashBackResponsibly => 'Cash-Back verantwortungsvoll nutzen';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle =>
+      'Zu Fuß gegangen/mit dem Fahrrad gefahren statt Auto zu fahren';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle =>
+      'Einen wiederverwendbaren Kaffeebecher benutzt';
 
   @override
   String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+      'Aufforstung / Einen Baum für eine bessere Umwelt gepflanzt';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => 'Täglich';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => 'Aufforstung';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => 'Pflanzen';
 }

@@ -108,7 +108,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotOpenLink => 'Could not open link';
 
   @override
-  String get habitLibrary => 'Habit Library';
+  String get habitLibrary => 'Habit';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney =>
@@ -187,7 +187,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sunday => 'Sun';
 
   @override
-  String get setUpYourProfile => 'Set up your profile';
+  String get setUpYourProfile => 'Profile';
 
   @override
   String get letsPersonalizeYourEcoJourney =>

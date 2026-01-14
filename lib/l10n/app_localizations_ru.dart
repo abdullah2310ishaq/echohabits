@@ -449,21 +449,23 @@ class AppLocalizationsRu extends AppLocalizations {
   String get useCashBackResponsibly => 'Использовать кэшбэк ответственно';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle =>
+      'Ходил пешком/ездил на велосипеде вместо того, чтобы ехать на машине';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle =>
+      'Использовал многоразовый кофейный стакан';
 
   @override
   String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+      'Лесовосстановление / Посадил дерево ради лучшей экологии';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => 'Ежедневно';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => 'Лесовосстановление';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => 'Посадка';
 }

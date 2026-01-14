@@ -443,21 +443,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get useCashBackResponsibly => '负责任地使用返现';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle => '步行/骑行替代开车';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle => '使用了可重复使用的咖啡杯';
 
   @override
-  String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+  String get defaultAfforestationTitle => '造林 / 为更好的环境种下一棵树';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => '每日';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => '造林';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => '植树';
 }

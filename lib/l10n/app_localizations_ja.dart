@@ -443,21 +443,20 @@ class AppLocalizationsJa extends AppLocalizations {
   String get useCashBackResponsibly => 'キャッシュバックを責任を持って使用';
 
   @override
-  String get defaultWalkBikeTitle => 'Walked/ biked instead of driving';
+  String get defaultWalkBikeTitle => '車ではなく歩く／自転車を利用した';
 
   @override
-  String get defaultCoffeeCupTitle => 'Used a reusable coffee cup';
+  String get defaultCoffeeCupTitle => '再利用できるコーヒーカップを使った';
 
   @override
-  String get defaultAfforestationTitle =>
-      'Afforestation / Plant a tree for better environment';
+  String get defaultAfforestationTitle => '植林／より良い環境のために木を植えた';
 
   @override
-  String get dailyTag => 'Daily';
+  String get dailyTag => '毎日';
 
   @override
-  String get afforestationTag => 'Afforestation';
+  String get afforestationTag => '植林';
 
   @override
-  String get plantingTag => 'Planting';
+  String get plantingTag => '植樹';
 }
