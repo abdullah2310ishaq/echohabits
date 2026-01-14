@@ -645,6 +645,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Good Evening'**
   String get goodEvening;
+
+  /// Error message when trying to add duplicate habit
+  ///
+  /// In en, this message translates to:
+  /// **'This habit is already added to your list'**
+  String get thisHabitIsAlreadyAdded;
+
+  /// Error message when habit is on cooldown
+  ///
+  /// In en, this message translates to:
+  /// **'This habit was added recently. Please wait {hours} hours before adding again (resets at midnight)'**
+  String thisHabitWasAddedRecently(int hours);
+
+  /// Success message when habit is added
+  ///
+  /// In en, this message translates to:
+  /// **'{habit} Added! Keep Going'**
+  String habitAddedKeepGoing(String habit);
+
+  /// Transport habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle to work'**
+  String get cycleToWork;
+
+  /// Transport habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Use public transport'**
+  String get usePublicTransport;
+
+  /// Transport habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Carpool with colleagues'**
+  String get carpoolWithColleagues;
+
+  /// Transport habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Walk short distances'**
+  String get walkShortDistances;
+
+  /// Transport habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain bike regularly'**
+  String get maintainBikeRegularly;
+
+  /// Food habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Buy bulk food'**
+  String get buyBulkFood;
+
+  /// Food habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Compost kitchen waste'**
+  String get compostKitchenWaste;
+
+  /// Food habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Plant a mini garden'**
+  String get plantAMiniGarden;
+
+  /// Food habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Reduce packaged food'**
+  String get reducePackagedFood;
+
+  /// Food habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose seasonal fruits'**
+  String get chooseSeasonalFruits;
+
+  /// Home habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Cold water wash'**
+  String get coldWaterWash;
+
+  /// Home habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Switch off unused lights'**
+  String get switchOffUnusedLights;
+
+  /// Home habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Use energy-efficient bulbs'**
+  String get useEnergyEfficientBulbs;
+
+  /// Home habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Air dry clothes'**
+  String get airDryClothes;
+
+  /// Home habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Use natural ventilation'**
+  String get useNaturalVentilation;
+
+  /// Water habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Shorter showers'**
+  String get shorterShowers;
+
+  /// Water habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Fix water leaks'**
+  String get fixWaterLeaks;
+
+  /// Water habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Collect rainwater for plants'**
+  String get collectRainwaterForPlants;
+
+  /// Water habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Reuse RO water'**
+  String get reuseROWater;
+
+  /// Water habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off tap while brushing'**
+  String get turnOffTapWhileBrushing;
+
+  /// Shopping/Waste habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Carry reusable bags'**
+  String get carryReusableBags;
+
+  /// Shopping/Waste habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Buy recycled products'**
+  String get buyRecycledProducts;
+
+  /// Shopping/Waste habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid fast fashion'**
+  String get avoidFastFashion;
+
+  /// Shopping/Waste habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose eco-friendly brands'**
+  String get chooseEcoFriendlyBrands;
+
+  /// Shopping/Waste habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Support local business'**
+  String get supportLocalBusiness;
+
+  /// Digital habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Reduce screen time'**
+  String get reduceScreenTime;
+
+  /// Digital habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Unsubscribe unwanted mails'**
+  String get unsubscribeUnwantedMails;
+
+  /// Digital habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Cloud backup cleanup'**
+  String get cloudBackupCleanup;
+
+  /// Digital habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off auto-play'**
+  String get turnOffAutoPlay;
+
+  /// Digital habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Digital mindful breaks'**
+  String get digitalMindfulBreaks;
+
+  /// Fitness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Morning walk'**
+  String get morningWalk;
+
+  /// Fitness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Practice yoga'**
+  String get practiceYoga;
+
+  /// Fitness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy sleep routine'**
+  String get healthySleepRoutine;
+
+  /// Fitness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Drink 2L water'**
+  String get drink2LWater;
+
+  /// Fitness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid junk snacks'**
+  String get avoidJunkSnacks;
+
+  /// Mindfulness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Meditation 5 min/day'**
+  String get meditation5MinDay;
+
+  /// Mindfulness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Practice gratitude journaling'**
+  String get practiceGratitudeJournaling;
+
+  /// Mindfulness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing exercise'**
+  String get breathingExercise;
+
+  /// Mindfulness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Spend time in nature'**
+  String get spendTimeInNature;
+
+  /// Mindfulness habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Limit negative news'**
+  String get limitNegativeNews;
+
+  /// Savings habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Track expenses'**
+  String get trackExpenses;
+
+  /// Savings habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly savings goal'**
+  String get monthlySavingsGoal;
+
+  /// Savings habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid impulse buying'**
+  String get avoidImpulseBuying;
+
+  /// Savings habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Invest in SIP'**
+  String get investInSIP;
+
+  /// Savings habit title
+  ///
+  /// In en, this message translates to:
+  /// **'Use cash-back responsibly'**
+  String get useCashBackResponsibly;
 }
 
 class _AppLocalizationsDelegate

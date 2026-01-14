@@ -298,4 +298,153 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goodEvening => 'Good Evening';
+
+  @override
+  String get thisHabitIsAlreadyAdded =>
+      'This habit is already added to your list';
+
+  @override
+  String thisHabitWasAddedRecently(int hours) {
+    return 'This habit was added recently. Please wait $hours hours before adding again (resets at midnight)';
+  }
+
+  @override
+  String habitAddedKeepGoing(String habit) {
+    return '$habit Added! Keep Going';
+  }
+
+  @override
+  String get cycleToWork => 'Cycle to work';
+
+  @override
+  String get usePublicTransport => 'Use public transport';
+
+  @override
+  String get carpoolWithColleagues => 'Carpool with colleagues';
+
+  @override
+  String get walkShortDistances => 'Walk short distances';
+
+  @override
+  String get maintainBikeRegularly => 'Maintain bike regularly';
+
+  @override
+  String get buyBulkFood => 'Buy bulk food';
+
+  @override
+  String get compostKitchenWaste => 'Compost kitchen waste';
+
+  @override
+  String get plantAMiniGarden => 'Plant a mini garden';
+
+  @override
+  String get reducePackagedFood => 'Reduce packaged food';
+
+  @override
+  String get chooseSeasonalFruits => 'Choose seasonal fruits';
+
+  @override
+  String get coldWaterWash => 'Cold water wash';
+
+  @override
+  String get switchOffUnusedLights => 'Switch off unused lights';
+
+  @override
+  String get useEnergyEfficientBulbs => 'Use energy-efficient bulbs';
+
+  @override
+  String get airDryClothes => 'Air dry clothes';
+
+  @override
+  String get useNaturalVentilation => 'Use natural ventilation';
+
+  @override
+  String get shorterShowers => 'Shorter showers';
+
+  @override
+  String get fixWaterLeaks => 'Fix water leaks';
+
+  @override
+  String get collectRainwaterForPlants => 'Collect rainwater for plants';
+
+  @override
+  String get reuseROWater => 'Reuse RO water';
+
+  @override
+  String get turnOffTapWhileBrushing => 'Turn off tap while brushing';
+
+  @override
+  String get carryReusableBags => 'Carry reusable bags';
+
+  @override
+  String get buyRecycledProducts => 'Buy recycled products';
+
+  @override
+  String get avoidFastFashion => 'Avoid fast fashion';
+
+  @override
+  String get chooseEcoFriendlyBrands => 'Choose eco-friendly brands';
+
+  @override
+  String get supportLocalBusiness => 'Support local business';
+
+  @override
+  String get reduceScreenTime => 'Reduce screen time';
+
+  @override
+  String get unsubscribeUnwantedMails => 'Unsubscribe unwanted mails';
+
+  @override
+  String get cloudBackupCleanup => 'Cloud backup cleanup';
+
+  @override
+  String get turnOffAutoPlay => 'Turn off auto-play';
+
+  @override
+  String get digitalMindfulBreaks => 'Digital mindful breaks';
+
+  @override
+  String get morningWalk => 'Morning walk';
+
+  @override
+  String get practiceYoga => 'Practice yoga';
+
+  @override
+  String get healthySleepRoutine => 'Healthy sleep routine';
+
+  @override
+  String get drink2LWater => 'Drink 2L water';
+
+  @override
+  String get avoidJunkSnacks => 'Avoid junk snacks';
+
+  @override
+  String get meditation5MinDay => 'Meditation 5 min/day';
+
+  @override
+  String get practiceGratitudeJournaling => 'Practice gratitude journaling';
+
+  @override
+  String get breathingExercise => 'Breathing exercise';
+
+  @override
+  String get spendTimeInNature => 'Spend time in nature';
+
+  @override
+  String get limitNegativeNews => 'Limit negative news';
+
+  @override
+  String get trackExpenses => 'Track expenses';
+
+  @override
+  String get monthlySavingsGoal => 'Monthly savings goal';
+
+  @override
+  String get avoidImpulseBuying => 'Avoid impulse buying';
+
+  @override
+  String get investInSIP => 'Invest in SIP';
+
+  @override
+  String get useCashBackResponsibly => 'Use cash-back responsibly';
 }

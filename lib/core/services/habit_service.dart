@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 
 /// Central app state for habits, today's tasks, and history.
 ///
@@ -264,12 +265,15 @@ class HabitService extends ChangeNotifier {
     required Color difficultyColor,
     required String impact,
     required Color impactColor,
+    required BuildContext context,
   }) {
+    final l10n = AppLocalizations.of(context)!;
+
     // Prevent duplicates by title (currently in list)
     if (_userHabits.any((habit) => habit['title'] == title)) {
       return {
         'success': false,
-        'message': 'This habit is already added to your list',
+        'message': l10n.thisHabitIsAlreadyAdded,
       };
     }
 
@@ -284,8 +288,7 @@ class HabitService extends ChangeNotifier {
         final hoursRemaining = 24 - hoursSinceAdded;
         return {
           'success': false,
-          'message':
-              'This habit was added recently. Please wait $hoursRemaining hours before adding again (resets at midnight)',
+          'message': l10n.thisHabitWasAddedRecently(hoursRemaining),
         };
       }
     }
@@ -306,7 +309,7 @@ class HabitService extends ChangeNotifier {
     _saveData();
     notifyListeners();
 
-    return {'success': true, 'message': '$title Added! Keep Going'};
+    return {'success': true, 'message': l10n.habitAddedKeepGoing(title)};
   }
 
   /// Mark a default Echo task as done or skipped.

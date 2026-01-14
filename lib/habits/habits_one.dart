@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/widgets/add_habit_dialog.dart';
 import '../core/widgets/eco_toast.dart';
 import '../core/services/habit_service.dart';
@@ -31,7 +32,7 @@ class _HabitsOneState extends State<HabitsOne> {
   final List<Map<String, dynamic>> _allHabits = [
     // Transport habits
     {
-      'title': 'Cycle to work',
+      'titleKey': 'cycleToWork',
       'category': 'Transport',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -39,7 +40,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Use public transport',
+      'titleKey': 'usePublicTransport',
       'category': 'Transport',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -47,7 +48,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Carpool with colleagues',
+      'titleKey': 'carpoolWithColleagues',
       'category': 'Transport',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -55,7 +56,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Walk short distances',
+      'titleKey': 'walkShortDistances',
       'category': 'Transport',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -63,7 +64,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Maintain bike regularly',
+      'titleKey': 'maintainBikeRegularly',
       'category': 'Transport',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -72,7 +73,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Food habits
     {
-      'title': 'Buy bulk food',
+      'titleKey': 'buyBulkFood',
       'category': 'Food',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -80,7 +81,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Compost kitchen waste',
+      'titleKey': 'compostKitchenWaste',
       'category': 'Food',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -88,7 +89,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Plant a mini garden',
+      'titleKey': 'plantAMiniGarden',
       'category': 'Food',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -96,7 +97,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Reduce packaged food',
+      'titleKey': 'reducePackagedFood',
       'category': 'Food',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -104,7 +105,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Choose seasonal fruits',
+      'titleKey': 'chooseSeasonalFruits',
       'category': 'Food',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -113,7 +114,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Home habits
     {
-      'title': 'Cold water wash',
+      'titleKey': 'coldWaterWash',
       'category': 'Home',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -121,7 +122,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Switch off unused lights',
+      'titleKey': 'switchOffUnusedLights',
       'category': 'Home',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -129,7 +130,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Use energy-efficient bulbs',
+      'titleKey': 'useEnergyEfficientBulbs',
       'category': 'Home',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -137,7 +138,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Air dry clothes',
+      'titleKey': 'airDryClothes',
       'category': 'Home',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -145,7 +146,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Use natural ventilation',
+      'titleKey': 'useNaturalVentilation',
       'category': 'Home',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -154,7 +155,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Water habits
     {
-      'title': 'Shorter showers',
+      'titleKey': 'shorterShowers',
       'category': 'Water',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -162,7 +163,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Fix water leaks',
+      'titleKey': 'fixWaterLeaks',
       'category': 'Water',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -170,7 +171,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Collect rainwater for plants',
+      'titleKey': 'collectRainwaterForPlants',
       'category': 'Water',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -178,7 +179,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Reuse RO water',
+      'titleKey': 'reuseROWater',
       'category': 'Water',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -186,7 +187,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Turn off tap while brushing',
+      'titleKey': 'turnOffTapWhileBrushing',
       'category': 'Water',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -195,7 +196,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Shopping habits
     {
-      'title': 'Carry reusable bags',
+      'titleKey': 'carryReusableBags',
       'category': 'Shopping',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -203,7 +204,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Buy recycled products',
+      'titleKey': 'buyRecycledProducts',
       'category': 'Shopping',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -211,7 +212,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Avoid fast fashion',
+      'titleKey': 'avoidFastFashion',
       'category': 'Shopping',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -219,7 +220,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Choose eco-friendly brands',
+      'titleKey': 'chooseEcoFriendlyBrands',
       'category': 'Shopping',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -227,7 +228,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Support local business',
+      'titleKey': 'supportLocalBusiness',
       'category': 'Shopping',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -236,7 +237,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Waste habits
     {
-      'title': 'Carry reusable bags',
+      'titleKey': 'carryReusableBags',
       'category': 'Waste',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -244,7 +245,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Buy recycled products',
+      'titleKey': 'buyRecycledProducts',
       'category': 'Waste',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -252,7 +253,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Avoid fast fashion',
+      'titleKey': 'avoidFastFashion',
       'category': 'Waste',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -260,7 +261,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Choose eco-friendly brands',
+      'titleKey': 'chooseEcoFriendlyBrands',
       'category': 'Waste',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -268,7 +269,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Support local business',
+      'titleKey': 'supportLocalBusiness',
       'category': 'Waste',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -277,7 +278,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Digital habits
     {
-      'title': 'Reduce screen time',
+      'titleKey': 'reduceScreenTime',
       'category': 'Digital',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -285,7 +286,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Unsubscribe unwanted mails',
+      'titleKey': 'unsubscribeUnwantedMails',
       'category': 'Digital',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -293,7 +294,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Cloud backup cleanup',
+      'titleKey': 'cloudBackupCleanup',
       'category': 'Digital',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -301,7 +302,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Turn off auto-play',
+      'titleKey': 'turnOffAutoPlay',
       'category': 'Digital',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -309,7 +310,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Digital mindful breaks',
+      'titleKey': 'digitalMindfulBreaks',
       'category': 'Digital',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -318,7 +319,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Fitness habits
     {
-      'title': 'Morning walk',
+      'titleKey': 'morningWalk',
       'category': 'Fitness',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -326,7 +327,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Practice yoga',
+      'titleKey': 'practiceYoga',
       'category': 'Fitness',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -334,7 +335,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Healthy sleep routine',
+      'titleKey': 'healthySleepRoutine',
       'category': 'Fitness',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -342,7 +343,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Drink 2L water',
+      'titleKey': 'drink2LWater',
       'category': 'Fitness',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -350,7 +351,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Avoid junk snacks',
+      'titleKey': 'avoidJunkSnacks',
       'category': 'Fitness',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -359,7 +360,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Mindfulness habits
     {
-      'title': 'Meditation 5 min/day',
+      'titleKey': 'meditation5MinDay',
       'category': 'Mindfulness',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -367,7 +368,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Practice gratitude journaling',
+      'titleKey': 'practiceGratitudeJournaling',
       'category': 'Mindfulness',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -375,7 +376,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Breathing exercise',
+      'titleKey': 'breathingExercise',
       'category': 'Mindfulness',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -383,7 +384,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Spend time in nature',
+      'titleKey': 'spendTimeInNature',
       'category': 'Mindfulness',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -391,7 +392,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Limit negative news',
+      'titleKey': 'limitNegativeNews',
       'category': 'Mindfulness',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -400,7 +401,7 @@ class _HabitsOneState extends State<HabitsOne> {
     },
     // Savings habits
     {
-      'title': 'Track expenses',
+      'titleKey': 'trackExpenses',
       'category': 'Savings',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -408,7 +409,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Monthly savings goal',
+      'titleKey': 'monthlySavingsGoal',
       'category': 'Savings',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -416,7 +417,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.green,
     },
     {
-      'title': 'Avoid impulse buying',
+      'titleKey': 'avoidImpulseBuying',
       'category': 'Savings',
       'difficulty': 'Easy',
       'difficultyColor': Colors.green,
@@ -424,7 +425,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.orange,
     },
     {
-      'title': 'Invest in SIP',
+      'titleKey': 'investInSIP',
       'category': 'Savings',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -432,7 +433,7 @@ class _HabitsOneState extends State<HabitsOne> {
       'impactColor': Colors.black54,
     },
     {
-      'title': 'Use cash-back responsibly',
+      'titleKey': 'useCashBackResponsibly',
       'category': 'Savings',
       'difficulty': 'Medium',
       'difficultyColor': Colors.orange,
@@ -471,9 +472,9 @@ class _HabitsOneState extends State<HabitsOne> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Title
-                const Text(
-                  'Habit Library',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.habitLibrary,
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF2E7D32),
@@ -481,9 +482,11 @@ class _HabitsOneState extends State<HabitsOne> {
                 ),
                 const SizedBox(height: 8),
                 // Subtitle
-                const Text(
-                  'Pick one habit to begin your eco journey.',
-                  style: TextStyle(fontSize: 16, color: Colors.black54),
+                Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.pickOneHabitToBeginYourEcoJourney,
+                  style: const TextStyle(fontSize: 16, color: Colors.black54),
                 ),
                 const SizedBox(height: 20),
                 // Filter Bar
@@ -498,7 +501,7 @@ class _HabitsOneState extends State<HabitsOne> {
                       return Padding(
                         padding: const EdgeInsets.only(right: 12),
                         child: FilterChip(
-                          label: Text(category),
+                          label: Text(_getLocalizedCategory(context, category)),
                           selected: isSelected,
                           onSelected: (selected) {
                             setState(() {
@@ -530,9 +533,9 @@ class _HabitsOneState extends State<HabitsOne> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               children: [
-                const Text(
-                  'Pick a Habit to Add',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.pickAHabitToAdd,
+                  style: const TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
@@ -543,7 +546,8 @@ class _HabitsOneState extends State<HabitsOne> {
                   (habit) => Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: _buildHabitCard(
-                      title: habit['title'] as String,
+                      context: context,
+                      titleKey: habit['titleKey'] as String,
                       difficulty: habit['difficulty'] as String,
                       difficultyColor: habit['difficultyColor'] as Color,
                       impact: habit['impact'] as String,
@@ -560,12 +564,16 @@ class _HabitsOneState extends State<HabitsOne> {
   }
 
   Widget _buildHabitCard({
-    required String title,
+    required BuildContext context,
+    required String titleKey,
     required String difficulty,
     required Color difficultyColor,
     required String impact,
     required Color impactColor,
   }) {
+    final localizedTitle = _getLocalizedTitle(context, titleKey);
+    final localizedDifficulty = _getLocalizedDifficulty(context, difficulty);
+    final localizedImpact = _getLocalizedImpact(context, impact);
     return Container(
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
@@ -588,7 +596,7 @@ class _HabitsOneState extends State<HabitsOne> {
               children: [
                 // Title
                 Text(
-                  title,
+                  localizedTitle,
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -611,7 +619,7 @@ class _HabitsOneState extends State<HabitsOne> {
                     const SizedBox(width: 6),
                     // Difficulty Text
                     Text(
-                      difficulty,
+                      localizedDifficulty,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black54,
@@ -620,7 +628,7 @@ class _HabitsOneState extends State<HabitsOne> {
                     const SizedBox(width: 16),
                     // Impact Label
                     Text(
-                      impact,
+                      localizedImpact,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -643,9 +651,10 @@ class _HabitsOneState extends State<HabitsOne> {
             child: IconButton(
               icon: const Icon(Icons.add, color: Colors.black87, size: 24),
               onPressed: () {
+                final localizedTitle = _getLocalizedTitle(context, titleKey);
                 AddHabitDialog.show(
                   context,
-                  habitTitle: title,
+                  habitTitle: localizedTitle,
                   difficulty: difficulty,
                   difficultyColor: difficultyColor,
                   impact: impact,
@@ -653,7 +662,7 @@ class _HabitsOneState extends State<HabitsOne> {
                   onAdd: () {
                     // Find the habit category from the full habit data
                     final habitData = _allHabits.firstWhere(
-                      (h) => h['title'] == title,
+                      (h) => h['titleKey'] == titleKey,
                       orElse: () => {'category': 'All'},
                     );
 
@@ -662,12 +671,13 @@ class _HabitsOneState extends State<HabitsOne> {
                       listen: false,
                     );
                     final result = habitService.addHabit(
-                      title: title,
+                      title: localizedTitle,
                       category: habitData['category'] as String,
                       difficulty: difficulty,
                       difficultyColor: difficultyColor,
                       impact: impact,
                       impactColor: impactColor,
+                      context: context,
                     );
 
                     EcoToast.show(
@@ -683,5 +693,159 @@ class _HabitsOneState extends State<HabitsOne> {
         ],
       ),
     );
+  }
+
+  String _getLocalizedCategory(BuildContext context, String category) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (category) {
+      case 'All':
+        return l10n.all;
+      case 'Transport':
+        return l10n.transport;
+      case 'Food':
+        return l10n.food;
+      case 'Home':
+        return l10n.home;
+      case 'Water':
+        return l10n.water;
+      case 'Shopping':
+        return l10n.shopping;
+      case 'Waste':
+        return l10n.waste;
+      case 'Digital':
+        return l10n.digital;
+      case 'Fitness':
+        return l10n.fitness;
+      case 'Mindfulness':
+        return l10n.mindfulness;
+      case 'Savings':
+        return l10n.savings;
+      default:
+        return category;
+    }
+  }
+
+  String _getLocalizedDifficulty(BuildContext context, String difficulty) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (difficulty) {
+      case 'Easy':
+        return l10n.easy;
+      case 'Medium':
+        return l10n.medium;
+      default:
+        return difficulty;
+    }
+  }
+
+  String _getLocalizedImpact(BuildContext context, String impact) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (impact) {
+      case 'High Impact':
+        return l10n.highImpact;
+      case 'Medium Impact':
+        return l10n.mediumImpact;
+      case 'Low Impact':
+        return l10n.lowImpact;
+      default:
+        return impact;
+    }
+  }
+
+  String _getLocalizedTitle(BuildContext context, String titleKey) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (titleKey) {
+      case 'cycleToWork':
+        return l10n.cycleToWork;
+      case 'usePublicTransport':
+        return l10n.usePublicTransport;
+      case 'carpoolWithColleagues':
+        return l10n.carpoolWithColleagues;
+      case 'walkShortDistances':
+        return l10n.walkShortDistances;
+      case 'maintainBikeRegularly':
+        return l10n.maintainBikeRegularly;
+      case 'buyBulkFood':
+        return l10n.buyBulkFood;
+      case 'compostKitchenWaste':
+        return l10n.compostKitchenWaste;
+      case 'plantAMiniGarden':
+        return l10n.plantAMiniGarden;
+      case 'reducePackagedFood':
+        return l10n.reducePackagedFood;
+      case 'chooseSeasonalFruits':
+        return l10n.chooseSeasonalFruits;
+      case 'coldWaterWash':
+        return l10n.coldWaterWash;
+      case 'switchOffUnusedLights':
+        return l10n.switchOffUnusedLights;
+      case 'useEnergyEfficientBulbs':
+        return l10n.useEnergyEfficientBulbs;
+      case 'airDryClothes':
+        return l10n.airDryClothes;
+      case 'useNaturalVentilation':
+        return l10n.useNaturalVentilation;
+      case 'shorterShowers':
+        return l10n.shorterShowers;
+      case 'fixWaterLeaks':
+        return l10n.fixWaterLeaks;
+      case 'collectRainwaterForPlants':
+        return l10n.collectRainwaterForPlants;
+      case 'reuseROWater':
+        return l10n.reuseROWater;
+      case 'turnOffTapWhileBrushing':
+        return l10n.turnOffTapWhileBrushing;
+      case 'carryReusableBags':
+        return l10n.carryReusableBags;
+      case 'buyRecycledProducts':
+        return l10n.buyRecycledProducts;
+      case 'avoidFastFashion':
+        return l10n.avoidFastFashion;
+      case 'chooseEcoFriendlyBrands':
+        return l10n.chooseEcoFriendlyBrands;
+      case 'supportLocalBusiness':
+        return l10n.supportLocalBusiness;
+      case 'reduceScreenTime':
+        return l10n.reduceScreenTime;
+      case 'unsubscribeUnwantedMails':
+        return l10n.unsubscribeUnwantedMails;
+      case 'cloudBackupCleanup':
+        return l10n.cloudBackupCleanup;
+      case 'turnOffAutoPlay':
+        return l10n.turnOffAutoPlay;
+      case 'digitalMindfulBreaks':
+        return l10n.digitalMindfulBreaks;
+      case 'morningWalk':
+        return l10n.morningWalk;
+      case 'practiceYoga':
+        return l10n.practiceYoga;
+      case 'healthySleepRoutine':
+        return l10n.healthySleepRoutine;
+      case 'drink2LWater':
+        return l10n.drink2LWater;
+      case 'avoidJunkSnacks':
+        return l10n.avoidJunkSnacks;
+      case 'meditation5MinDay':
+        return l10n.meditation5MinDay;
+      case 'practiceGratitudeJournaling':
+        return l10n.practiceGratitudeJournaling;
+      case 'breathingExercise':
+        return l10n.breathingExercise;
+      case 'spendTimeInNature':
+        return l10n.spendTimeInNature;
+      case 'limitNegativeNews':
+        return l10n.limitNegativeNews;
+      case 'trackExpenses':
+        return l10n.trackExpenses;
+      case 'monthlySavingsGoal':
+        return l10n.monthlySavingsGoal;
+      case 'avoidImpulseBuying':
+        return l10n.avoidImpulseBuying;
+      case 'investInSIP':
+        return l10n.investInSIP;
+      case 'useCashBackResponsibly':
+        return l10n.useCashBackResponsibly;
+      default:
+        return titleKey;
+    }
   }
 }

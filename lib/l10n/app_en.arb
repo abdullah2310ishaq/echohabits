@@ -392,5 +392,207 @@
   "goodEvening": "Good Evening",
   "@goodEvening": {
     "description": "Evening greeting"
+  },
+  "thisHabitIsAlreadyAdded": "This habit is already added to your list",
+  "@thisHabitIsAlreadyAdded": {
+    "description": "Error message when trying to add duplicate habit"
+  },
+  "thisHabitWasAddedRecently": "This habit was added recently. Please wait {hours} hours before adding again (resets at midnight)",
+  "@thisHabitWasAddedRecently": {
+    "description": "Error message when habit is on cooldown",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "habitAddedKeepGoing": "{habit} Added! Keep Going",
+  "@habitAddedKeepGoing": {
+    "description": "Success message when habit is added",
+    "placeholders": {
+      "habit": {
+        "type": "String"
+      }
+    }
+  },
+  "cycleToWork": "Cycle to work",
+  "@cycleToWork": {
+    "description": "Transport habit title"
+  },
+  "usePublicTransport": "Use public transport",
+  "@usePublicTransport": {
+    "description": "Transport habit title"
+  },
+  "carpoolWithColleagues": "Carpool with colleagues",
+  "@carpoolWithColleagues": {
+    "description": "Transport habit title"
+  },
+  "walkShortDistances": "Walk short distances",
+  "@walkShortDistances": {
+    "description": "Transport habit title"
+  },
+  "maintainBikeRegularly": "Maintain bike regularly",
+  "@maintainBikeRegularly": {
+    "description": "Transport habit title"
+  },
+  "buyBulkFood": "Buy bulk food",
+  "@buyBulkFood": {
+    "description": "Food habit title"
+  },
+  "compostKitchenWaste": "Compost kitchen waste",
+  "@compostKitchenWaste": {
+    "description": "Food habit title"
+  },
+  "plantAMiniGarden": "Plant a mini garden",
+  "@plantAMiniGarden": {
+    "description": "Food habit title"
+  },
+  "reducePackagedFood": "Reduce packaged food",
+  "@reducePackagedFood": {
+    "description": "Food habit title"
+  },
+  "chooseSeasonalFruits": "Choose seasonal fruits",
+  "@chooseSeasonalFruits": {
+    "description": "Food habit title"
+  },
+  "coldWaterWash": "Cold water wash",
+  "@coldWaterWash": {
+    "description": "Home habit title"
+  },
+  "switchOffUnusedLights": "Switch off unused lights",
+  "@switchOffUnusedLights": {
+    "description": "Home habit title"
+  },
+  "useEnergyEfficientBulbs": "Use energy-efficient bulbs",
+  "@useEnergyEfficientBulbs": {
+    "description": "Home habit title"
+  },
+  "airDryClothes": "Air dry clothes",
+  "@airDryClothes": {
+    "description": "Home habit title"
+  },
+  "useNaturalVentilation": "Use natural ventilation",
+  "@useNaturalVentilation": {
+    "description": "Home habit title"
+  },
+  "shorterShowers": "Shorter showers",
+  "@shorterShowers": {
+    "description": "Water habit title"
+  },
+  "fixWaterLeaks": "Fix water leaks",
+  "@fixWaterLeaks": {
+    "description": "Water habit title"
+  },
+  "collectRainwaterForPlants": "Collect rainwater for plants",
+  "@collectRainwaterForPlants": {
+    "description": "Water habit title"
+  },
+  "reuseROWater": "Reuse RO water",
+  "@reuseROWater": {
+    "description": "Water habit title"
+  },
+  "turnOffTapWhileBrushing": "Turn off tap while brushing",
+  "@turnOffTapWhileBrushing": {
+    "description": "Water habit title"
+  },
+  "carryReusableBags": "Carry reusable bags",
+  "@carryReusableBags": {
+    "description": "Shopping/Waste habit title"
+  },
+  "buyRecycledProducts": "Buy recycled products",
+  "@buyRecycledProducts": {
+    "description": "Shopping/Waste habit title"
+  },
+  "avoidFastFashion": "Avoid fast fashion",
+  "@avoidFastFashion": {
+    "description": "Shopping/Waste habit title"
+  },
+  "chooseEcoFriendlyBrands": "Choose eco-friendly brands",
+  "@chooseEcoFriendlyBrands": {
+    "description": "Shopping/Waste habit title"
+  },
+  "supportLocalBusiness": "Support local business",
+  "@supportLocalBusiness": {
+    "description": "Shopping/Waste habit title"
+  },
+  "reduceScreenTime": "Reduce screen time",
+  "@reduceScreenTime": {
+    "description": "Digital habit title"
+  },
+  "unsubscribeUnwantedMails": "Unsubscribe unwanted mails",
+  "@unsubscribeUnwantedMails": {
+    "description": "Digital habit title"
+  },
+  "cloudBackupCleanup": "Cloud backup cleanup",
+  "@cloudBackupCleanup": {
+    "description": "Digital habit title"
+  },
+  "turnOffAutoPlay": "Turn off auto-play",
+  "@turnOffAutoPlay": {
+    "description": "Digital habit title"
+  },
+  "digitalMindfulBreaks": "Digital mindful breaks",
+  "@digitalMindfulBreaks": {
+    "description": "Digital habit title"
+  },
+  "morningWalk": "Morning walk",
+  "@morningWalk": {
+    "description": "Fitness habit title"
+  },
+  "practiceYoga": "Practice yoga",
+  "@practiceYoga": {
+    "description": "Fitness habit title"
+  },
+  "healthySleepRoutine": "Healthy sleep routine",
+  "@healthySleepRoutine": {
+    "description": "Fitness habit title"
+  },
+  "drink2LWater": "Drink 2L water",
+  "@drink2LWater": {
+    "description": "Fitness habit title"
+  },
+  "avoidJunkSnacks": "Avoid junk snacks",
+  "@avoidJunkSnacks": {
+    "description": "Fitness habit title"
+  },
+  "meditation5MinDay": "Meditation 5 min/day",
+  "@meditation5MinDay": {
+    "description": "Mindfulness habit title"
+  },
+  "practiceGratitudeJournaling": "Practice gratitude journaling",
+  "@practiceGratitudeJournaling": {
+    "description": "Mindfulness habit title"
+  },
+  "breathingExercise": "Breathing exercise",
+  "@breathingExercise": {
+    "description": "Mindfulness habit title"
+  },
+  "spendTimeInNature": "Spend time in nature",
+  "@spendTimeInNature": {
+    "description": "Mindfulness habit title"
+  },
+  "limitNegativeNews": "Limit negative news",
+  "@limitNegativeNews": {
+    "description": "Mindfulness habit title"
+  },
+  "trackExpenses": "Track expenses",
+  "@trackExpenses": {
+    "description": "Savings habit title"
+  },
+  "monthlySavingsGoal": "Monthly savings goal",
+  "@monthlySavingsGoal": {
+    "description": "Savings habit title"
+  },
+  "avoidImpulseBuying": "Avoid impulse buying",
+  "@avoidImpulseBuying": {
+    "description": "Savings habit title"
+  },
+  "investInSIP": "Invest in SIP",
+  "@investInSIP": {
+    "description": "Savings habit title"
+  },
+  "useCashBackResponsibly": "Use cash-back responsibly",
+  "@useCashBackResponsibly": {
+    "description": "Savings habit title"
   }
 }
