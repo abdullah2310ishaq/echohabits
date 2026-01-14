@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              supportedLocales: LocaleService.supportedLocales,
+              supportedLocales: AppLocalizations.supportedLocales,
               locale: localeService.getCurrentLocale(),
               home: const SplashScreen(),
             ),

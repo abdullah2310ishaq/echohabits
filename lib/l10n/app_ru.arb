@@ -1,0 +1,598 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Трекер Экологических Привычек",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "makingTheWorldGreener": "Делаем мир зеленее",
+  "@makingTheWorldGreener": {
+    "description": "Profile subtitle text"
+  },
+  "ecoExplorer": "ЭКО-ИССЛЕДОВАТЕЛЬ",
+  "@ecoExplorer": {
+    "description": "Badge title"
+  },
+  "greenScore": "Зеленый Счет",
+  "@greenScore": {
+    "description": "Green score card title"
+  },
+  "avgActionsPerDay": "Сред. Действий/День",
+  "@avgActionsPerDay": {
+    "description": "Average actions per day label"
+  },
+  "dayStreak": "Серия Дней",
+  "@dayStreak": {
+    "description": "Day streak label"
+  },
+  "badges": "Значки",
+  "@badges": {
+    "description": "Badges section title"
+  },
+  "firstStep": "Первый Шаг",
+  "@firstStep": {
+    "description": "First step badge name"
+  },
+  "cyclist": "Велосипедист",
+  "@cyclist": {
+    "description": "Cyclist badge name"
+  },
+  "waterSaver": "Экономитель Воды",
+  "@waterSaver": {
+    "description": "Water saver badge name"
+  },
+  "energyPr": "Энергия Пр",
+  "@energyPr": {
+    "description": "Energy Pr badge name"
+  },
+  "history": "История",
+  "@history": {
+    "description": "History section title"
+  },
+  "viewHistory": "Просмотр Истории",
+  "@viewHistory": {
+    "description": "View history button text"
+  },
+  "settings": "Настройки",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "account": "Аккаунт",
+  "@account": {
+    "description": "Account settings option"
+  },
+  "language": "Язык",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "english": "Английский",
+  "@english": {
+    "description": "English language name"
+  },
+  "shareApp": "Поделиться Приложением",
+  "@shareApp": {
+    "description": "Share app option"
+  },
+  "rateUs": "Оцените нас",
+  "@rateUs": {
+    "description": "Rate us option"
+  },
+  "support": "Поддержка",
+  "@support": {
+    "description": "Support option"
+  },
+  "privacyPolicy": "Политика Конфиденциальности",
+  "@privacyPolicy": {
+    "description": "Privacy policy option"
+  },
+  "termsOfService": "Условия Использования",
+  "@termsOfService": {
+    "description": "Terms of service option"
+  },
+  "logout": "Выйти",
+  "@logout": {
+    "description": "Logout option"
+  },
+  "chooseALanguage": "Выберите Язык",
+  "@chooseALanguage": {
+    "description": "Language selection screen title"
+  },
+  "next": "Далее",
+  "@next": {
+    "description": "Next button text"
+  },
+  "cancel": "Отмена",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "areYouSureYouWantToLogout": "Вы уверены, что хотите выйти?",
+  "@areYouSureYouWantToLogout": {
+    "description": "Logout confirmation message"
+  },
+  "accountSettingsComingSoon": "Настройки аккаунта скоро",
+  "@accountSettingsComingSoon": {
+    "description": "Account settings placeholder message"
+  },
+  "languageChangedTo": "Язык изменен на {language}",
+  "@languageChangedTo": {
+    "description": "Language change confirmation message",
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFunctionalityComingSoon": "Функция обмена скоро",
+  "@shareFunctionalityComingSoon": {
+    "description": "Share functionality placeholder message"
+  },
+  "logoutFunctionalityComingSoon": "Функция выхода скоро",
+  "@logoutFunctionalityComingSoon": {
+    "description": "Logout functionality placeholder message"
+  },
+  "couldNotOpenLink": "Не удалось открыть ссылку",
+  "@couldNotOpenLink": {
+    "description": "Error message when link cannot be opened"
+  },
+  "habitLibrary": "Библиотека Привычек",
+  "@habitLibrary": {
+    "description": "Habit library screen title"
+  },
+  "pickOneHabitToBeginYourEcoJourney": "Выберите одну привычку, чтобы начать ваше экологическое путешествие.",
+  "@pickOneHabitToBeginYourEcoJourney": {
+    "description": "Habit library subtitle"
+  },
+  "pickAHabitToAdd": "Выберите Привычку для Добавления",
+  "@pickAHabitToAdd": {
+    "description": "Habit list section title"
+  },
+  "all": "Все",
+  "@all": {
+    "description": "All categories filter"
+  },
+  "transport": "Транспорт",
+  "@transport": {
+    "description": "Transport category"
+  },
+  "food": "Еда",
+  "@food": {
+    "description": "Food category"
+  },
+  "home": "Дом",
+  "@home": {
+    "description": "Home category"
+  },
+  "water": "Вода",
+  "@water": {
+    "description": "Water category"
+  },
+  "shopping": "Покупки",
+  "@shopping": {
+    "description": "Shopping category"
+  },
+  "waste": "Отходы",
+  "@waste": {
+    "description": "Waste category"
+  },
+  "digital": "Цифровое",
+  "@digital": {
+    "description": "Digital category"
+  },
+  "fitness": "Фитнес",
+  "@fitness": {
+    "description": "Fitness category"
+  },
+  "mindfulness": "Осознанность",
+  "@mindfulness": {
+    "description": "Mindfulness category"
+  },
+  "savings": "Сбережения",
+  "@savings": {
+    "description": "Savings category"
+  },
+  "easy": "Легко",
+  "@easy": {
+    "description": "Easy difficulty level"
+  },
+  "medium": "Средне",
+  "@medium": {
+    "description": "Medium difficulty level"
+  },
+  "highImpact": "Высокое Воздействие",
+  "@highImpact": {
+    "description": "High impact label"
+  },
+  "mediumImpact": "Среднее Воздействие",
+  "@mediumImpact": {
+    "description": "Medium impact label"
+  },
+  "lowImpact": "Низкое Воздействие",
+  "@lowImpact": {
+    "description": "Low impact label"
+  },
+  "monday": "Пн",
+  "@monday": {
+    "description": "Monday abbreviation"
+  },
+  "tuesday": "Вт",
+  "@tuesday": {
+    "description": "Tuesday abbreviation"
+  },
+  "wednesday": "Ср",
+  "@wednesday": {
+    "description": "Wednesday abbreviation"
+  },
+  "thursday": "Чт",
+  "@thursday": {
+    "description": "Thursday abbreviation"
+  },
+  "friday": "Пт",
+  "@friday": {
+    "description": "Friday abbreviation"
+  },
+  "saturday": "Сб",
+  "@saturday": {
+    "description": "Saturday abbreviation"
+  },
+  "sunday": "Вс",
+  "@sunday": {
+    "description": "Sunday abbreviation"
+  },
+  "setUpYourProfile": "Настройте свой профиль",
+  "@setUpYourProfile": {
+    "description": "Profile setup screen title"
+  },
+  "letsPersonalizeYourEcoJourney": "Давайте персонализируем ваше экологическое путешествие",
+  "@letsPersonalizeYourEcoJourney": {
+    "description": "Profile setup subtitle"
+  },
+  "tapToUploadPhoto": "Нажмите, чтобы загрузить фото",
+  "@tapToUploadPhoto": {
+    "description": "Profile picture upload instruction"
+  },
+  "yourName": "Ваше Имя",
+  "@yourName": {
+    "description": "Name input field label"
+  },
+  "nameHint": "напр. Лиза",
+  "@nameHint": {
+    "description": "Name input field hint text"
+  },
+  "continueButton": "Продолжить",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "pleaseEnterYourName": "Пожалуйста, введите ваше имя",
+  "@pleaseEnterYourName": {
+    "description": "Validation message when name is empty"
+  },
+  "errorPickingImage": "Ошибка при выборе изображения: {error}",
+  "@errorPickingImage": {
+    "description": "Error message when image picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseFromGallery": "Выбрать из Галереи",
+  "@chooseFromGallery": {
+    "description": "Image source option - gallery"
+  },
+  "takeAPhoto": "Сделать Фото",
+  "@takeAPhoto": {
+    "description": "Image source option - camera"
+  },
+  "useDefaultImage": "Использовать Изображение по Умолчанию",
+  "@useDefaultImage": {
+    "description": "Image source option - default"
+  },
+  "leaderboard": "Таблица Лидеров",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "yourEcoHabitsYourRank": "Ваши экологические привычки, ваш ранг",
+  "@yourEcoHabitsYourRank": {
+    "description": "Leaderboard subtitle"
+  },
+  "betterHabitsLeadToBetterBadges": "Лучшие привычки ведут к лучшим значкам и большему прогрессу.",
+  "@betterHabitsLeadToBetterBadges": {
+    "description": "Leaderboard motivational message"
+  },
+  "currentEcoHabitRankings": "Текущие рейтинги экологических привычек",
+  "@currentEcoHabitRankings": {
+    "description": "Rankings section title"
+  },
+  "you": "Вы",
+  "@you": {
+    "description": "Current user indicator"
+  },
+  "greenStarter": "Зеленый Новичок",
+  "@greenStarter": {
+    "description": "Rank title for score < 2000"
+  },
+  "ecoExplorerRank": "Эко-Исследователь",
+  "@ecoExplorerRank": {
+    "description": "Rank title for score 2000-2999"
+  },
+  "ecoWarrior": "Эко-Воин",
+  "@ecoWarrior": {
+    "description": "Rank title for score 3000-4999"
+  },
+  "natureGuardian": "Хранитель Природы",
+  "@natureGuardian": {
+    "description": "Rank title for score 5000-9999"
+  },
+  "ecoMaster": "Эко-Мастер",
+  "@ecoMaster": {
+    "description": "Rank title for score >= 10000"
+  },
+  "hi": "Привет",
+  "@hi": {
+    "description": "Greeting prefix"
+  },
+  "dailyEcoScore": "Ежедневный Экологический Счет",
+  "@dailyEcoScore": {
+    "description": "Daily eco score card title"
+  },
+  "nextLevel": "Следующий Уровень: {level}",
+  "@nextLevel": {
+    "description": "Next level indicator with level name",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "todaysEcoTasks": "Экологические Задачи Сегодня",
+  "@todaysEcoTasks": {
+    "description": "Today's tasks section title"
+  },
+  "skippedYourStreakNeedsConsistency": "Пропущено! Вашей серии нужна последовательность",
+  "@skippedYourStreakNeedsConsistency": {
+    "description": "Message when task is skipped"
+  },
+  "taskDoneStreakStrong": "{task} Сделано! Серия Сильна",
+  "@taskDoneStreakStrong": {
+    "description": "Message when habit task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDone": "{task} Сделано",
+  "@taskDone": {
+    "description": "Message when default task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "skip": "Пропустить",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "done": "Готово",
+  "@done": {
+    "description": "Done button text"
+  },
+  "noMoreTasksForTheDay": "Больше нет задач на сегодня",
+  "@noMoreTasksForTheDay": {
+    "description": "Empty state message when no tasks"
+  },
+  "goodMorning": "Доброе Утро",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "Добрый День",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "Добрый Вечер",
+  "@goodEvening": {
+    "description": "Evening greeting"
+  },
+  "thisHabitIsAlreadyAdded": "Эта привычка уже добавлена в ваш список",
+  "@thisHabitIsAlreadyAdded": {
+    "description": "Error message when trying to add duplicate habit"
+  },
+  "thisHabitWasAddedRecently": "Эта привычка была добавлена недавно. Пожалуйста, подождите {hours} часов перед повторным добавлением (сбрасывается в полночь)",
+  "@thisHabitWasAddedRecently": {
+    "description": "Error message when habit is on cooldown",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "habitAddedKeepGoing": "{habit} Добавлено! Продолжайте",
+  "@habitAddedKeepGoing": {
+    "description": "Success message when habit is added",
+    "placeholders": {
+      "habit": {
+        "type": "String"
+      }
+    }
+  },
+  "cycleToWork": "Ездить на работу на велосипеде",
+  "@cycleToWork": {
+    "description": "Transport habit title"
+  },
+  "usePublicTransport": "Использовать общественный транспорт",
+  "@usePublicTransport": {
+    "description": "Transport habit title"
+  },
+  "carpoolWithColleagues": "Ездить на работу с коллегами",
+  "@carpoolWithColleagues": {
+    "description": "Transport habit title"
+  },
+  "walkShortDistances": "Ходить пешком на короткие расстояния",
+  "@walkShortDistances": {
+    "description": "Transport habit title"
+  },
+  "maintainBikeRegularly": "Регулярно обслуживать велосипед",
+  "@maintainBikeRegularly": {
+    "description": "Transport habit title"
+  },
+  "buyBulkFood": "Покупать еду оптом",
+  "@buyBulkFood": {
+    "description": "Food habit title"
+  },
+  "compostKitchenWaste": "Компостировать кухонные отходы",
+  "@compostKitchenWaste": {
+    "description": "Food habit title"
+  },
+  "plantAMiniGarden": "Посадить мини-сад",
+  "@plantAMiniGarden": {
+    "description": "Food habit title"
+  },
+  "reducePackagedFood": "Уменьшить упакованную еду",
+  "@reducePackagedFood": {
+    "description": "Food habit title"
+  },
+  "chooseSeasonalFruits": "Выбирать сезонные фрукты",
+  "@chooseSeasonalFruits": {
+    "description": "Food habit title"
+  },
+  "coldWaterWash": "Стирка холодной водой",
+  "@coldWaterWash": {
+    "description": "Home habit title"
+  },
+  "switchOffUnusedLights": "Выключать неиспользуемый свет",
+  "@switchOffUnusedLights": {
+    "description": "Home habit title"
+  },
+  "useEnergyEfficientBulbs": "Использовать энергосберегающие лампы",
+  "@useEnergyEfficientBulbs": {
+    "description": "Home habit title"
+  },
+  "airDryClothes": "Сушить одежду на воздухе",
+  "@airDryClothes": {
+    "description": "Home habit title"
+  },
+  "useNaturalVentilation": "Использовать естественную вентиляцию",
+  "@useNaturalVentilation": {
+    "description": "Home habit title"
+  },
+  "shorterShowers": "Более короткий душ",
+  "@shorterShowers": {
+    "description": "Water habit title"
+  },
+  "fixWaterLeaks": "Исправить утечки воды",
+  "@fixWaterLeaks": {
+    "description": "Water habit title"
+  },
+  "collectRainwaterForPlants": "Собирать дождевую воду для растений",
+  "@collectRainwaterForPlants": {
+    "description": "Water habit title"
+  },
+  "reuseROWater": "Повторно использовать воду обратного осмоса",
+  "@reuseROWater": {
+    "description": "Water habit title"
+  },
+  "turnOffTapWhileBrushing": "Выключать кран во время чистки зубов",
+  "@turnOffTapWhileBrushing": {
+    "description": "Water habit title"
+  },
+  "carryReusableBags": "Носить многоразовые сумки",
+  "@carryReusableBags": {
+    "description": "Shopping/Waste habit title"
+  },
+  "buyRecycledProducts": "Покупать переработанные продукты",
+  "@buyRecycledProducts": {
+    "description": "Shopping/Waste habit title"
+  },
+  "avoidFastFashion": "Избегать быстрой моды",
+  "@avoidFastFashion": {
+    "description": "Shopping/Waste habit title"
+  },
+  "chooseEcoFriendlyBrands": "Выбирать экологически чистые бренды",
+  "@chooseEcoFriendlyBrands": {
+    "description": "Shopping/Waste habit title"
+  },
+  "supportLocalBusiness": "Поддерживать местный бизнес",
+  "@supportLocalBusiness": {
+    "description": "Shopping/Waste habit title"
+  },
+  "reduceScreenTime": "Уменьшить время перед экраном",
+  "@reduceScreenTime": {
+    "description": "Digital habit title"
+  },
+  "unsubscribeUnwantedMails": "Отписаться от нежелательных писем",
+  "@unsubscribeUnwantedMails": {
+    "description": "Digital habit title"
+  },
+  "cloudBackupCleanup": "Очистка облачного резервного копирования",
+  "@cloudBackupCleanup": {
+    "description": "Digital habit title"
+  },
+  "turnOffAutoPlay": "Выключить автовоспроизведение",
+  "@turnOffAutoPlay": {
+    "description": "Digital habit title"
+  },
+  "digitalMindfulBreaks": "Цифровые осознанные перерывы",
+  "@digitalMindfulBreaks": {
+    "description": "Digital habit title"
+  },
+  "morningWalk": "Утренняя прогулка",
+  "@morningWalk": {
+    "description": "Fitness habit title"
+  },
+  "practiceYoga": "Заниматься йогой",
+  "@practiceYoga": {
+    "description": "Fitness habit title"
+  },
+  "healthySleepRoutine": "Здоровый режим сна",
+  "@healthySleepRoutine": {
+    "description": "Fitness habit title"
+  },
+  "drink2LWater": "Пить 2л воды",
+  "@drink2LWater": {
+    "description": "Fitness habit title"
+  },
+  "avoidJunkSnacks": "Избегать вредных закусок",
+  "@avoidJunkSnacks": {
+    "description": "Fitness habit title"
+  },
+  "meditation5MinDay": "Медитация 5 мин/день",
+  "@meditation5MinDay": {
+    "description": "Mindfulness habit title"
+  },
+  "practiceGratitudeJournaling": "Вести дневник благодарности",
+  "@practiceGratitudeJournaling": {
+    "description": "Mindfulness habit title"
+  },
+  "breathingExercise": "Дыхательное упражнение",
+  "@breathingExercise": {
+    "description": "Mindfulness habit title"
+  },
+  "spendTimeInNature": "Проводить время на природе",
+  "@spendTimeInNature": {
+    "description": "Mindfulness habit title"
+  },
+  "limitNegativeNews": "Ограничить негативные новости",
+  "@limitNegativeNews": {
+    "description": "Mindfulness habit title"
+  },
+  "trackExpenses": "Отслеживать расходы",
+  "@trackExpenses": {
+    "description": "Savings habit title"
+  },
+  "monthlySavingsGoal": "Ежемесячная цель сбережений",
+  "@monthlySavingsGoal": {
+    "description": "Savings habit title"
+  },
+  "avoidImpulseBuying": "Избегать импульсивных покупок",
+  "@avoidImpulseBuying": {
+    "description": "Savings habit title"
+  },
+  "investInSIP": "Инвестировать в SIP",
+  "@investInSIP": {
+    "description": "Savings habit title"
+  },
+  "useCashBackResponsibly": "Использовать кэшбэк ответственно",
+  "@useCashBackResponsibly": {
+    "description": "Savings habit title"
+  }
+}

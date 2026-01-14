@@ -271,10 +271,7 @@ class HabitService extends ChangeNotifier {
 
     // Prevent duplicates by title (currently in list)
     if (_userHabits.any((habit) => habit['title'] == title)) {
-      return {
-        'success': false,
-        'message': l10n.thisHabitIsAlreadyAdded,
-      };
+      return {'success': false, 'message': l10n.thisHabitIsAlreadyAdded};
     }
 
     // Check 24-hour cooldown - prevent adding same habit within 24 hours

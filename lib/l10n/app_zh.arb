@@ -1,0 +1,598 @@
+{
+  "@@locale": "zh",
+  "appTitle": "生态习惯追踪器",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "makingTheWorldGreener": "让世界更绿色",
+  "@makingTheWorldGreener": {
+    "description": "Profile subtitle text"
+  },
+  "ecoExplorer": "生态探索者",
+  "@ecoExplorer": {
+    "description": "Badge title"
+  },
+  "greenScore": "绿色分数",
+  "@greenScore": {
+    "description": "Green score card title"
+  },
+  "avgActionsPerDay": "平均行动/天",
+  "@avgActionsPerDay": {
+    "description": "Average actions per day label"
+  },
+  "dayStreak": "连续天数",
+  "@dayStreak": {
+    "description": "Day streak label"
+  },
+  "badges": "徽章",
+  "@badges": {
+    "description": "Badges section title"
+  },
+  "firstStep": "第一步",
+  "@firstStep": {
+    "description": "First step badge name"
+  },
+  "cyclist": "骑行者",
+  "@cyclist": {
+    "description": "Cyclist badge name"
+  },
+  "waterSaver": "节水者",
+  "@waterSaver": {
+    "description": "Water saver badge name"
+  },
+  "energyPr": "能源专家",
+  "@energyPr": {
+    "description": "Energy Pr badge name"
+  },
+  "history": "历史",
+  "@history": {
+    "description": "History section title"
+  },
+  "viewHistory": "查看历史",
+  "@viewHistory": {
+    "description": "View history button text"
+  },
+  "settings": "设置",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "account": "账户",
+  "@account": {
+    "description": "Account settings option"
+  },
+  "language": "语言",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "english": "英语",
+  "@english": {
+    "description": "English language name"
+  },
+  "shareApp": "分享应用",
+  "@shareApp": {
+    "description": "Share app option"
+  },
+  "rateUs": "评价我们",
+  "@rateUs": {
+    "description": "Rate us option"
+  },
+  "support": "支持",
+  "@support": {
+    "description": "Support option"
+  },
+  "privacyPolicy": "隐私政策",
+  "@privacyPolicy": {
+    "description": "Privacy policy option"
+  },
+  "termsOfService": "服务条款",
+  "@termsOfService": {
+    "description": "Terms of service option"
+  },
+  "logout": "退出",
+  "@logout": {
+    "description": "Logout option"
+  },
+  "chooseALanguage": "选择语言",
+  "@chooseALanguage": {
+    "description": "Language selection screen title"
+  },
+  "next": "下一步",
+  "@next": {
+    "description": "Next button text"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "areYouSureYouWantToLogout": "您确定要退出吗？",
+  "@areYouSureYouWantToLogout": {
+    "description": "Logout confirmation message"
+  },
+  "accountSettingsComingSoon": "账户设置即将推出",
+  "@accountSettingsComingSoon": {
+    "description": "Account settings placeholder message"
+  },
+  "languageChangedTo": "语言已更改为 {language}",
+  "@languageChangedTo": {
+    "description": "Language change confirmation message",
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFunctionalityComingSoon": "分享功能即将推出",
+  "@shareFunctionalityComingSoon": {
+    "description": "Share functionality placeholder message"
+  },
+  "logoutFunctionalityComingSoon": "退出功能即将推出",
+  "@logoutFunctionalityComingSoon": {
+    "description": "Logout functionality placeholder message"
+  },
+  "couldNotOpenLink": "无法打开链接",
+  "@couldNotOpenLink": {
+    "description": "Error message when link cannot be opened"
+  },
+  "habitLibrary": "习惯库",
+  "@habitLibrary": {
+    "description": "Habit library screen title"
+  },
+  "pickOneHabitToBeginYourEcoJourney": "选择一个习惯开始您的生态之旅。",
+  "@pickOneHabitToBeginYourEcoJourney": {
+    "description": "Habit library subtitle"
+  },
+  "pickAHabitToAdd": "选择要添加的习惯",
+  "@pickAHabitToAdd": {
+    "description": "Habit list section title"
+  },
+  "all": "全部",
+  "@all": {
+    "description": "All categories filter"
+  },
+  "transport": "交通",
+  "@transport": {
+    "description": "Transport category"
+  },
+  "food": "食物",
+  "@food": {
+    "description": "Food category"
+  },
+  "home": "家庭",
+  "@home": {
+    "description": "Home category"
+  },
+  "water": "水",
+  "@water": {
+    "description": "Water category"
+  },
+  "shopping": "购物",
+  "@shopping": {
+    "description": "Shopping category"
+  },
+  "waste": "废物",
+  "@waste": {
+    "description": "Waste category"
+  },
+  "digital": "数字",
+  "@digital": {
+    "description": "Digital category"
+  },
+  "fitness": "健身",
+  "@fitness": {
+    "description": "Fitness category"
+  },
+  "mindfulness": "正念",
+  "@mindfulness": {
+    "description": "Mindfulness category"
+  },
+  "savings": "储蓄",
+  "@savings": {
+    "description": "Savings category"
+  },
+  "easy": "简单",
+  "@easy": {
+    "description": "Easy difficulty level"
+  },
+  "medium": "中等",
+  "@medium": {
+    "description": "Medium difficulty level"
+  },
+  "highImpact": "高影响",
+  "@highImpact": {
+    "description": "High impact label"
+  },
+  "mediumImpact": "中等影响",
+  "@mediumImpact": {
+    "description": "Medium impact label"
+  },
+  "lowImpact": "低影响",
+  "@lowImpact": {
+    "description": "Low impact label"
+  },
+  "monday": "周一",
+  "@monday": {
+    "description": "Monday abbreviation"
+  },
+  "tuesday": "周二",
+  "@tuesday": {
+    "description": "Tuesday abbreviation"
+  },
+  "wednesday": "周三",
+  "@wednesday": {
+    "description": "Wednesday abbreviation"
+  },
+  "thursday": "周四",
+  "@thursday": {
+    "description": "Thursday abbreviation"
+  },
+  "friday": "周五",
+  "@friday": {
+    "description": "Friday abbreviation"
+  },
+  "saturday": "周六",
+  "@saturday": {
+    "description": "Saturday abbreviation"
+  },
+  "sunday": "周日",
+  "@sunday": {
+    "description": "Sunday abbreviation"
+  },
+  "setUpYourProfile": "设置您的个人资料",
+  "@setUpYourProfile": {
+    "description": "Profile setup screen title"
+  },
+  "letsPersonalizeYourEcoJourney": "让我们个性化您的生态之旅",
+  "@letsPersonalizeYourEcoJourney": {
+    "description": "Profile setup subtitle"
+  },
+  "tapToUploadPhoto": "点击上传照片",
+  "@tapToUploadPhoto": {
+    "description": "Profile picture upload instruction"
+  },
+  "yourName": "您的姓名",
+  "@yourName": {
+    "description": "Name input field label"
+  },
+  "nameHint": "例如：Liza",
+  "@nameHint": {
+    "description": "Name input field hint text"
+  },
+  "continueButton": "继续",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "pleaseEnterYourName": "请输入您的姓名",
+  "@pleaseEnterYourName": {
+    "description": "Validation message when name is empty"
+  },
+  "errorPickingImage": "选择图片时出错：{error}",
+  "@errorPickingImage": {
+    "description": "Error message when image picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseFromGallery": "从图库选择",
+  "@chooseFromGallery": {
+    "description": "Image source option - gallery"
+  },
+  "takeAPhoto": "拍照",
+  "@takeAPhoto": {
+    "description": "Image source option - camera"
+  },
+  "useDefaultImage": "使用默认图片",
+  "@useDefaultImage": {
+    "description": "Image source option - default"
+  },
+  "leaderboard": "排行榜",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "yourEcoHabitsYourRank": "您的生态习惯，您的排名",
+  "@yourEcoHabitsYourRank": {
+    "description": "Leaderboard subtitle"
+  },
+  "betterHabitsLeadToBetterBadges": "更好的习惯带来更好的徽章和更大的进步。",
+  "@betterHabitsLeadToBetterBadges": {
+    "description": "Leaderboard motivational message"
+  },
+  "currentEcoHabitRankings": "当前生态习惯排名",
+  "@currentEcoHabitRankings": {
+    "description": "Rankings section title"
+  },
+  "you": "您",
+  "@you": {
+    "description": "Current user indicator"
+  },
+  "greenStarter": "绿色新手",
+  "@greenStarter": {
+    "description": "Rank title for score < 2000"
+  },
+  "ecoExplorerRank": "生态探索者",
+  "@ecoExplorerRank": {
+    "description": "Rank title for score 2000-2999"
+  },
+  "ecoWarrior": "生态战士",
+  "@ecoWarrior": {
+    "description": "Rank title for score 3000-4999"
+  },
+  "natureGuardian": "自然守护者",
+  "@natureGuardian": {
+    "description": "Rank title for score 5000-9999"
+  },
+  "ecoMaster": "生态大师",
+  "@ecoMaster": {
+    "description": "Rank title for score >= 10000"
+  },
+  "hi": "你好",
+  "@hi": {
+    "description": "Greeting prefix"
+  },
+  "dailyEcoScore": "每日生态分数",
+  "@dailyEcoScore": {
+    "description": "Daily eco score card title"
+  },
+  "nextLevel": "下一级：{level}",
+  "@nextLevel": {
+    "description": "Next level indicator with level name",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "todaysEcoTasks": "今日生态任务",
+  "@todaysEcoTasks": {
+    "description": "Today's tasks section title"
+  },
+  "skippedYourStreakNeedsConsistency": "已跳过！您的连续记录需要一致性",
+  "@skippedYourStreakNeedsConsistency": {
+    "description": "Message when task is skipped"
+  },
+  "taskDoneStreakStrong": "{task} 完成！连续记录强劲",
+  "@taskDoneStreakStrong": {
+    "description": "Message when habit task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDone": "{task} 完成",
+  "@taskDone": {
+    "description": "Message when default task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "skip": "跳过",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "done": "完成",
+  "@done": {
+    "description": "Done button text"
+  },
+  "noMoreTasksForTheDay": "今天没有更多任务了",
+  "@noMoreTasksForTheDay": {
+    "description": "Empty state message when no tasks"
+  },
+  "goodMorning": "早上好",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "下午好",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "晚上好",
+  "@goodEvening": {
+    "description": "Evening greeting"
+  },
+  "thisHabitIsAlreadyAdded": "此习惯已添加到您的列表中",
+  "@thisHabitIsAlreadyAdded": {
+    "description": "Error message when trying to add duplicate habit"
+  },
+  "thisHabitWasAddedRecently": "此习惯最近已添加。请等待 {hours} 小时后再添加（午夜重置）",
+  "@thisHabitWasAddedRecently": {
+    "description": "Error message when habit is on cooldown",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "habitAddedKeepGoing": "{habit} 已添加！继续努力",
+  "@habitAddedKeepGoing": {
+    "description": "Success message when habit is added",
+    "placeholders": {
+      "habit": {
+        "type": "String"
+      }
+    }
+  },
+  "cycleToWork": "骑自行车上班",
+  "@cycleToWork": {
+    "description": "Transport habit title"
+  },
+  "usePublicTransport": "使用公共交通工具",
+  "@usePublicTransport": {
+    "description": "Transport habit title"
+  },
+  "carpoolWithColleagues": "与同事拼车",
+  "@carpoolWithColleagues": {
+    "description": "Transport habit title"
+  },
+  "walkShortDistances": "短距离步行",
+  "@walkShortDistances": {
+    "description": "Transport habit title"
+  },
+  "maintainBikeRegularly": "定期维护自行车",
+  "@maintainBikeRegularly": {
+    "description": "Transport habit title"
+  },
+  "buyBulkFood": "批量购买食物",
+  "@buyBulkFood": {
+    "description": "Food habit title"
+  },
+  "compostKitchenWaste": "堆肥厨房垃圾",
+  "@compostKitchenWaste": {
+    "description": "Food habit title"
+  },
+  "plantAMiniGarden": "种植迷你花园",
+  "@plantAMiniGarden": {
+    "description": "Food habit title"
+  },
+  "reducePackagedFood": "减少包装食品",
+  "@reducePackagedFood": {
+    "description": "Food habit title"
+  },
+  "chooseSeasonalFruits": "选择时令水果",
+  "@chooseSeasonalFruits": {
+    "description": "Food habit title"
+  },
+  "coldWaterWash": "冷水洗涤",
+  "@coldWaterWash": {
+    "description": "Home habit title"
+  },
+  "switchOffUnusedLights": "关闭未使用的灯光",
+  "@switchOffUnusedLights": {
+    "description": "Home habit title"
+  },
+  "useEnergyEfficientBulbs": "使用节能灯泡",
+  "@useEnergyEfficientBulbs": {
+    "description": "Home habit title"
+  },
+  "airDryClothes": "风干衣服",
+  "@airDryClothes": {
+    "description": "Home habit title"
+  },
+  "useNaturalVentilation": "使用自然通风",
+  "@useNaturalVentilation": {
+    "description": "Home habit title"
+  },
+  "shorterShowers": "缩短淋浴时间",
+  "@shorterShowers": {
+    "description": "Water habit title"
+  },
+  "fixWaterLeaks": "修复漏水",
+  "@fixWaterLeaks": {
+    "description": "Water habit title"
+  },
+  "collectRainwaterForPlants": "收集雨水用于植物",
+  "@collectRainwaterForPlants": {
+    "description": "Water habit title"
+  },
+  "reuseROWater": "重复使用反渗透水",
+  "@reuseROWater": {
+    "description": "Water habit title"
+  },
+  "turnOffTapWhileBrushing": "刷牙时关闭水龙头",
+  "@turnOffTapWhileBrushing": {
+    "description": "Water habit title"
+  },
+  "carryReusableBags": "携带可重复使用的袋子",
+  "@carryReusableBags": {
+    "description": "Shopping/Waste habit title"
+  },
+  "buyRecycledProducts": "购买回收产品",
+  "@buyRecycledProducts": {
+    "description": "Shopping/Waste habit title"
+  },
+  "avoidFastFashion": "避免快时尚",
+  "@avoidFastFashion": {
+    "description": "Shopping/Waste habit title"
+  },
+  "chooseEcoFriendlyBrands": "选择环保品牌",
+  "@chooseEcoFriendlyBrands": {
+    "description": "Shopping/Waste habit title"
+  },
+  "supportLocalBusiness": "支持本地企业",
+  "@supportLocalBusiness": {
+    "description": "Shopping/Waste habit title"
+  },
+  "reduceScreenTime": "减少屏幕时间",
+  "@reduceScreenTime": {
+    "description": "Digital habit title"
+  },
+  "unsubscribeUnwantedMails": "取消订阅不需要的邮件",
+  "@unsubscribeUnwantedMails": {
+    "description": "Digital habit title"
+  },
+  "cloudBackupCleanup": "清理云备份",
+  "@cloudBackupCleanup": {
+    "description": "Digital habit title"
+  },
+  "turnOffAutoPlay": "关闭自动播放",
+  "@turnOffAutoPlay": {
+    "description": "Digital habit title"
+  },
+  "digitalMindfulBreaks": "数字正念休息",
+  "@digitalMindfulBreaks": {
+    "description": "Digital habit title"
+  },
+  "morningWalk": "晨间散步",
+  "@morningWalk": {
+    "description": "Fitness habit title"
+  },
+  "practiceYoga": "练习瑜伽",
+  "@practiceYoga": {
+    "description": "Fitness habit title"
+  },
+  "healthySleepRoutine": "健康的睡眠习惯",
+  "@healthySleepRoutine": {
+    "description": "Fitness habit title"
+  },
+  "drink2LWater": "喝2升水",
+  "@drink2LWater": {
+    "description": "Fitness habit title"
+  },
+  "avoidJunkSnacks": "避免垃圾零食",
+  "@avoidJunkSnacks": {
+    "description": "Fitness habit title"
+  },
+  "meditation5MinDay": "冥想5分钟/天",
+  "@meditation5MinDay": {
+    "description": "Mindfulness habit title"
+  },
+  "practiceGratitudeJournaling": "练习感恩日记",
+  "@practiceGratitudeJournaling": {
+    "description": "Mindfulness habit title"
+  },
+  "breathingExercise": "呼吸练习",
+  "@breathingExercise": {
+    "description": "Mindfulness habit title"
+  },
+  "spendTimeInNature": "在大自然中度过时光",
+  "@spendTimeInNature": {
+    "description": "Mindfulness habit title"
+  },
+  "limitNegativeNews": "限制负面新闻",
+  "@limitNegativeNews": {
+    "description": "Mindfulness habit title"
+  },
+  "trackExpenses": "追踪支出",
+  "@trackExpenses": {
+    "description": "Savings habit title"
+  },
+  "monthlySavingsGoal": "月度储蓄目标",
+  "@monthlySavingsGoal": {
+    "description": "Savings habit title"
+  },
+  "avoidImpulseBuying": "避免冲动购买",
+  "@avoidImpulseBuying": {
+    "description": "Savings habit title"
+  },
+  "investInSIP": "投资SIP",
+  "@investInSIP": {
+    "description": "Savings habit title"
+  },
+  "useCashBackResponsibly": "负责任地使用返现",
+  "@useCashBackResponsibly": {
+    "description": "Savings habit title"
+  }
+}

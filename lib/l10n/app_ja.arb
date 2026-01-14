@@ -1,0 +1,598 @@
+{
+  "@@locale": "ja",
+  "appTitle": "エコ習慣トラッカー",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "makingTheWorldGreener": "世界をより緑に",
+  "@makingTheWorldGreener": {
+    "description": "Profile subtitle text"
+  },
+  "ecoExplorer": "エコ探検家",
+  "@ecoExplorer": {
+    "description": "Badge title"
+  },
+  "greenScore": "グリーンスコア",
+  "@greenScore": {
+    "description": "Green score card title"
+  },
+  "avgActionsPerDay": "1日の平均アクション",
+  "@avgActionsPerDay": {
+    "description": "Average actions per day label"
+  },
+  "dayStreak": "連続日数",
+  "@dayStreak": {
+    "description": "Day streak label"
+  },
+  "badges": "バッジ",
+  "@badges": {
+    "description": "Badges section title"
+  },
+  "firstStep": "最初の一歩",
+  "@firstStep": {
+    "description": "First step badge name"
+  },
+  "cyclist": "サイクリスト",
+  "@cyclist": {
+    "description": "Cyclist badge name"
+  },
+  "waterSaver": "節水家",
+  "@waterSaver": {
+    "description": "Water saver badge name"
+  },
+  "energyPr": "エネルギー専門家",
+  "@energyPr": {
+    "description": "Energy Pr badge name"
+  },
+  "history": "履歴",
+  "@history": {
+    "description": "History section title"
+  },
+  "viewHistory": "履歴を表示",
+  "@viewHistory": {
+    "description": "View history button text"
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "account": "アカウント",
+  "@account": {
+    "description": "Account settings option"
+  },
+  "language": "言語",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "english": "英語",
+  "@english": {
+    "description": "English language name"
+  },
+  "shareApp": "アプリを共有",
+  "@shareApp": {
+    "description": "Share app option"
+  },
+  "rateUs": "評価する",
+  "@rateUs": {
+    "description": "Rate us option"
+  },
+  "support": "サポート",
+  "@support": {
+    "description": "Support option"
+  },
+  "privacyPolicy": "プライバシーポリシー",
+  "@privacyPolicy": {
+    "description": "Privacy policy option"
+  },
+  "termsOfService": "利用規約",
+  "@termsOfService": {
+    "description": "Terms of service option"
+  },
+  "logout": "ログアウト",
+  "@logout": {
+    "description": "Logout option"
+  },
+  "chooseALanguage": "言語を選択",
+  "@chooseALanguage": {
+    "description": "Language selection screen title"
+  },
+  "next": "次へ",
+  "@next": {
+    "description": "Next button text"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "areYouSureYouWantToLogout": "ログアウトしてもよろしいですか？",
+  "@areYouSureYouWantToLogout": {
+    "description": "Logout confirmation message"
+  },
+  "accountSettingsComingSoon": "アカウント設定は近日公開",
+  "@accountSettingsComingSoon": {
+    "description": "Account settings placeholder message"
+  },
+  "languageChangedTo": "言語が {language} に変更されました",
+  "@languageChangedTo": {
+    "description": "Language change confirmation message",
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFunctionalityComingSoon": "共有機能は近日公開",
+  "@shareFunctionalityComingSoon": {
+    "description": "Share functionality placeholder message"
+  },
+  "logoutFunctionalityComingSoon": "ログアウト機能は近日公開",
+  "@logoutFunctionalityComingSoon": {
+    "description": "Logout functionality placeholder message"
+  },
+  "couldNotOpenLink": "リンクを開けませんでした",
+  "@couldNotOpenLink": {
+    "description": "Error message when link cannot be opened"
+  },
+  "habitLibrary": "習慣ライブラリ",
+  "@habitLibrary": {
+    "description": "Habit library screen title"
+  },
+  "pickOneHabitToBeginYourEcoJourney": "エコの旅を始めるために1つの習慣を選んでください。",
+  "@pickOneHabitToBeginYourEcoJourney": {
+    "description": "Habit library subtitle"
+  },
+  "pickAHabitToAdd": "追加する習慣を選択",
+  "@pickAHabitToAdd": {
+    "description": "Habit list section title"
+  },
+  "all": "すべて",
+  "@all": {
+    "description": "All categories filter"
+  },
+  "transport": "交通",
+  "@transport": {
+    "description": "Transport category"
+  },
+  "food": "食べ物",
+  "@food": {
+    "description": "Food category"
+  },
+  "home": "家庭",
+  "@home": {
+    "description": "Home category"
+  },
+  "water": "水",
+  "@water": {
+    "description": "Water category"
+  },
+  "shopping": "ショッピング",
+  "@shopping": {
+    "description": "Shopping category"
+  },
+  "waste": "廃棄物",
+  "@waste": {
+    "description": "Waste category"
+  },
+  "digital": "デジタル",
+  "@digital": {
+    "description": "Digital category"
+  },
+  "fitness": "フィットネス",
+  "@fitness": {
+    "description": "Fitness category"
+  },
+  "mindfulness": "マインドフルネス",
+  "@mindfulness": {
+    "description": "Mindfulness category"
+  },
+  "savings": "貯蓄",
+  "@savings": {
+    "description": "Savings category"
+  },
+  "easy": "簡単",
+  "@easy": {
+    "description": "Easy difficulty level"
+  },
+  "medium": "中程度",
+  "@medium": {
+    "description": "Medium difficulty level"
+  },
+  "highImpact": "高い影響",
+  "@highImpact": {
+    "description": "High impact label"
+  },
+  "mediumImpact": "中程度の影響",
+  "@mediumImpact": {
+    "description": "Medium impact label"
+  },
+  "lowImpact": "低い影響",
+  "@lowImpact": {
+    "description": "Low impact label"
+  },
+  "monday": "月",
+  "@monday": {
+    "description": "Monday abbreviation"
+  },
+  "tuesday": "火",
+  "@tuesday": {
+    "description": "Tuesday abbreviation"
+  },
+  "wednesday": "水",
+  "@wednesday": {
+    "description": "Wednesday abbreviation"
+  },
+  "thursday": "木",
+  "@thursday": {
+    "description": "Thursday abbreviation"
+  },
+  "friday": "金",
+  "@friday": {
+    "description": "Friday abbreviation"
+  },
+  "saturday": "土",
+  "@saturday": {
+    "description": "Saturday abbreviation"
+  },
+  "sunday": "日",
+  "@sunday": {
+    "description": "Sunday abbreviation"
+  },
+  "setUpYourProfile": "プロフィールを設定",
+  "@setUpYourProfile": {
+    "description": "Profile setup screen title"
+  },
+  "letsPersonalizeYourEcoJourney": "エコの旅をパーソナライズしましょう",
+  "@letsPersonalizeYourEcoJourney": {
+    "description": "Profile setup subtitle"
+  },
+  "tapToUploadPhoto": "タップして写真をアップロード",
+  "@tapToUploadPhoto": {
+    "description": "Profile picture upload instruction"
+  },
+  "yourName": "お名前",
+  "@yourName": {
+    "description": "Name input field label"
+  },
+  "nameHint": "例：Liza",
+  "@nameHint": {
+    "description": "Name input field hint text"
+  },
+  "continueButton": "続ける",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "pleaseEnterYourName": "お名前を入力してください",
+  "@pleaseEnterYourName": {
+    "description": "Validation message when name is empty"
+  },
+  "errorPickingImage": "画像の選択エラー：{error}",
+  "@errorPickingImage": {
+    "description": "Error message when image picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseFromGallery": "ギャラリーから選択",
+  "@chooseFromGallery": {
+    "description": "Image source option - gallery"
+  },
+  "takeAPhoto": "写真を撮る",
+  "@takeAPhoto": {
+    "description": "Image source option - camera"
+  },
+  "useDefaultImage": "デフォルト画像を使用",
+  "@useDefaultImage": {
+    "description": "Image source option - default"
+  },
+  "leaderboard": "リーダーボード",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "yourEcoHabitsYourRank": "あなたのエコ習慣、あなたのランク",
+  "@yourEcoHabitsYourRank": {
+    "description": "Leaderboard subtitle"
+  },
+  "betterHabitsLeadToBetterBadges": "より良い習慣がより良いバッジとより大きな進歩につながります。",
+  "@betterHabitsLeadToBetterBadges": {
+    "description": "Leaderboard motivational message"
+  },
+  "currentEcoHabitRankings": "現在のエコ習慣ランキング",
+  "@currentEcoHabitRankings": {
+    "description": "Rankings section title"
+  },
+  "you": "あなた",
+  "@you": {
+    "description": "Current user indicator"
+  },
+  "greenStarter": "グリーンスターター",
+  "@greenStarter": {
+    "description": "Rank title for score < 2000"
+  },
+  "ecoExplorerRank": "エコ探検家",
+  "@ecoExplorerRank": {
+    "description": "Rank title for score 2000-2999"
+  },
+  "ecoWarrior": "エコ戦士",
+  "@ecoWarrior": {
+    "description": "Rank title for score 3000-4999"
+  },
+  "natureGuardian": "自然の守護者",
+  "@natureGuardian": {
+    "description": "Rank title for score 5000-9999"
+  },
+  "ecoMaster": "エコマスター",
+  "@ecoMaster": {
+    "description": "Rank title for score >= 10000"
+  },
+  "hi": "こんにちは",
+  "@hi": {
+    "description": "Greeting prefix"
+  },
+  "dailyEcoScore": "毎日のエコスコア",
+  "@dailyEcoScore": {
+    "description": "Daily eco score card title"
+  },
+  "nextLevel": "次のレベル：{level}",
+  "@nextLevel": {
+    "description": "Next level indicator with level name",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "todaysEcoTasks": "今日のエコタスク",
+  "@todaysEcoTasks": {
+    "description": "Today's tasks section title"
+  },
+  "skippedYourStreakNeedsConsistency": "スキップ！連続記録には一貫性が必要です",
+  "@skippedYourStreakNeedsConsistency": {
+    "description": "Message when task is skipped"
+  },
+  "taskDoneStreakStrong": "{task} 完了！連続記録が強い",
+  "@taskDoneStreakStrong": {
+    "description": "Message when habit task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDone": "{task} 完了",
+  "@taskDone": {
+    "description": "Message when default task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "skip": "スキップ",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "done": "完了",
+  "@done": {
+    "description": "Done button text"
+  },
+  "noMoreTasksForTheDay": "今日のタスクはこれ以上ありません",
+  "@noMoreTasksForTheDay": {
+    "description": "Empty state message when no tasks"
+  },
+  "goodMorning": "おはようございます",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "こんにちは",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "こんばんは",
+  "@goodEvening": {
+    "description": "Evening greeting"
+  },
+  "thisHabitIsAlreadyAdded": "この習慣は既にリストに追加されています",
+  "@thisHabitIsAlreadyAdded": {
+    "description": "Error message when trying to add duplicate habit"
+  },
+  "thisHabitWasAddedRecently": "この習慣は最近追加されました。再度追加する前に {hours} 時間お待ちください（深夜にリセット）",
+  "@thisHabitWasAddedRecently": {
+    "description": "Error message when habit is on cooldown",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "habitAddedKeepGoing": "{habit} 追加されました！続けましょう",
+  "@habitAddedKeepGoing": {
+    "description": "Success message when habit is added",
+    "placeholders": {
+      "habit": {
+        "type": "String"
+      }
+    }
+  },
+  "cycleToWork": "自転車で通勤",
+  "@cycleToWork": {
+    "description": "Transport habit title"
+  },
+  "usePublicTransport": "公共交通機関を利用",
+  "@usePublicTransport": {
+    "description": "Transport habit title"
+  },
+  "carpoolWithColleagues": "同僚と相乗り",
+  "@carpoolWithColleagues": {
+    "description": "Transport habit title"
+  },
+  "walkShortDistances": "短距離を歩く",
+  "@walkShortDistances": {
+    "description": "Transport habit title"
+  },
+  "maintainBikeRegularly": "自転車を定期的にメンテナンス",
+  "@maintainBikeRegularly": {
+    "description": "Transport habit title"
+  },
+  "buyBulkFood": "まとめ買いする",
+  "@buyBulkFood": {
+    "description": "Food habit title"
+  },
+  "compostKitchenWaste": "キッチンの生ごみを堆肥化",
+  "@compostKitchenWaste": {
+    "description": "Food habit title"
+  },
+  "plantAMiniGarden": "ミニガーデンを植える",
+  "@plantAMiniGarden": {
+    "description": "Food habit title"
+  },
+  "reducePackagedFood": "包装食品を減らす",
+  "@reducePackagedFood": {
+    "description": "Food habit title"
+  },
+  "chooseSeasonalFruits": "季節の果物を選ぶ",
+  "@chooseSeasonalFruits": {
+    "description": "Food habit title"
+  },
+  "coldWaterWash": "冷水洗濯",
+  "@coldWaterWash": {
+    "description": "Home habit title"
+  },
+  "switchOffUnusedLights": "使用していない照明を消す",
+  "@switchOffUnusedLights": {
+    "description": "Home habit title"
+  },
+  "useEnergyEfficientBulbs": "省エネ電球を使用",
+  "@useEnergyEfficientBulbs": {
+    "description": "Home habit title"
+  },
+  "airDryClothes": "洗濯物を自然乾燥",
+  "@airDryClothes": {
+    "description": "Home habit title"
+  },
+  "useNaturalVentilation": "自然換気を使用",
+  "@useNaturalVentilation": {
+    "description": "Home habit title"
+  },
+  "shorterShowers": "短いシャワー",
+  "@shorterShowers": {
+    "description": "Water habit title"
+  },
+  "fixWaterLeaks": "水漏れを修理",
+  "@fixWaterLeaks": {
+    "description": "Water habit title"
+  },
+  "collectRainwaterForPlants": "植物用に雨水を集める",
+  "@collectRainwaterForPlants": {
+    "description": "Water habit title"
+  },
+  "reuseROWater": "RO水を再利用",
+  "@reuseROWater": {
+    "description": "Water habit title"
+  },
+  "turnOffTapWhileBrushing": "歯磨き中に蛇口を閉める",
+  "@turnOffTapWhileBrushing": {
+    "description": "Water habit title"
+  },
+  "carryReusableBags": "再利用可能なバッグを持参",
+  "@carryReusableBags": {
+    "description": "Shopping/Waste habit title"
+  },
+  "buyRecycledProducts": "リサイクル製品を購入",
+  "@buyRecycledProducts": {
+    "description": "Shopping/Waste habit title"
+  },
+  "avoidFastFashion": "ファストファッションを避ける",
+  "@avoidFastFashion": {
+    "description": "Shopping/Waste habit title"
+  },
+  "chooseEcoFriendlyBrands": "エコフレンドリーなブランドを選ぶ",
+  "@chooseEcoFriendlyBrands": {
+    "description": "Shopping/Waste habit title"
+  },
+  "supportLocalBusiness": "地元のビジネスを支援",
+  "@supportLocalBusiness": {
+    "description": "Shopping/Waste habit title"
+  },
+  "reduceScreenTime": "画面時間を減らす",
+  "@reduceScreenTime": {
+    "description": "Digital habit title"
+  },
+  "unsubscribeUnwantedMails": "不要なメールの配信を停止",
+  "@unsubscribeUnwantedMails": {
+    "description": "Digital habit title"
+  },
+  "cloudBackupCleanup": "クラウドバックアップのクリーンアップ",
+  "@cloudBackupCleanup": {
+    "description": "Digital habit title"
+  },
+  "turnOffAutoPlay": "自動再生をオフにする",
+  "@turnOffAutoPlay": {
+    "description": "Digital habit title"
+  },
+  "digitalMindfulBreaks": "デジタルマインドフルブレーク",
+  "@digitalMindfulBreaks": {
+    "description": "Digital habit title"
+  },
+  "morningWalk": "朝の散歩",
+  "@morningWalk": {
+    "description": "Fitness habit title"
+  },
+  "practiceYoga": "ヨガを練習",
+  "@practiceYoga": {
+    "description": "Fitness habit title"
+  },
+  "healthySleepRoutine": "健康的な睡眠習慣",
+  "@healthySleepRoutine": {
+    "description": "Fitness habit title"
+  },
+  "drink2LWater": "2リットルの水を飲む",
+  "@drink2LWater": {
+    "description": "Fitness habit title"
+  },
+  "avoidJunkSnacks": "ジャンクスナックを避ける",
+  "@avoidJunkSnacks": {
+    "description": "Fitness habit title"
+  },
+  "meditation5MinDay": "瞑想5分/日",
+  "@meditation5MinDay": {
+    "description": "Mindfulness habit title"
+  },
+  "practiceGratitudeJournaling": "感謝の日記を書く",
+  "@practiceGratitudeJournaling": {
+    "description": "Mindfulness habit title"
+  },
+  "breathingExercise": "呼吸法",
+  "@breathingExercise": {
+    "description": "Mindfulness habit title"
+  },
+  "spendTimeInNature": "自然の中で過ごす",
+  "@spendTimeInNature": {
+    "description": "Mindfulness habit title"
+  },
+  "limitNegativeNews": "ネガティブなニュースを制限",
+  "@limitNegativeNews": {
+    "description": "Mindfulness habit title"
+  },
+  "trackExpenses": "支出を追跡",
+  "@trackExpenses": {
+    "description": "Savings habit title"
+  },
+  "monthlySavingsGoal": "月間貯蓄目標",
+  "@monthlySavingsGoal": {
+    "description": "Savings habit title"
+  },
+  "avoidImpulseBuying": "衝動買いを避ける",
+  "@avoidImpulseBuying": {
+    "description": "Savings habit title"
+  },
+  "investInSIP": "SIPに投資",
+  "@investInSIP": {
+    "description": "Savings habit title"
+  },
+  "useCashBackResponsibly": "キャッシュバックを責任を持って使用",
+  "@useCashBackResponsibly": {
+    "description": "Savings habit title"
+  }
+}

@@ -10,12 +10,16 @@ class LocaleService extends ChangeNotifier {
 
   /// Supported locales
   static const List<Locale> supportedLocales = [
-    Locale('en'), // English - default
-    // Add more locales here as you add language files
-    // Locale('es'), // Spanish
-    // Locale('fr'), // French
-    // Locale('de'), // German
-    // etc.
+    Locale('en'), // English
+    Locale('es'), // Spanish
+    Locale('fr'), // French
+    Locale('de'), // German
+    Locale('it'), // Italian
+    Locale('pt'), // Portuguese
+    Locale('ru'), // Russian
+    Locale('zh'), // Chinese
+    Locale('ja'), // Japanese
+    Locale('ko'), // Korean
   ];
 
   /// Initialize Hive box for locale storage
@@ -26,7 +30,7 @@ class LocaleService extends ChangeNotifier {
   /// Get current locale from storage or return default (English)
   Locale getCurrentLocale() {
     if (_box == null) return const Locale('en');
-    
+
     final localeCode = _box!.get(_localeKey, defaultValue: 'en') as String;
     return Locale(localeCode);
   }
@@ -34,7 +38,7 @@ class LocaleService extends ChangeNotifier {
   /// Set locale and save to storage
   Future<void> setLocale(Locale locale) async {
     if (_box == null) return;
-    
+
     await _box!.put(_localeKey, locale.languageCode);
     notifyListeners();
   }

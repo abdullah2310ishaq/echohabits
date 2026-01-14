@@ -225,7 +225,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF5F5F5),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black87),
@@ -253,8 +253,8 @@ class SettingsScreen extends StatelessWidget {
             height: 1,
             thickness: 1,
             color: Colors.grey[300],
-            indent: 50,
-            endIndent: 0,
+            indent: 50, // Start after icon (16 padding + 34 icon width)
+            endIndent: 50, // End before chevron icon
           ),
           itemCount: options.length,
         ),

@@ -20,61 +20,71 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
       'code': 'en',
       'name': 'English',
       'nativeName': 'English',
-      'svgAsset': 'assets/language/usa.svg',
+      'imageAsset': 'assets/language/usa.svg',
+      'isPng': false,
     },
     {
       'code': 'es',
       'name': 'Spanish',
       'nativeName': 'Español',
-      'svgAsset': 'assets/language/espanol.svg',
+      'imageAsset': 'assets/language/espanol.svg',
+      'isPng': false,
     },
     {
       'code': 'fr',
       'name': 'French',
       'nativeName': 'Français',
-      'svgAsset': 'assets/language/french.svg',
+      'imageAsset': 'assets/language/french.svg',
+      'isPng': false,
     },
     {
       'code': 'de',
       'name': 'German',
       'nativeName': 'Deutsch',
-      'svgAsset': 'assets/language/german.svg',
+      'imageAsset': 'assets/language/german.svg',
+      'isPng': false,
     },
     {
       'code': 'it',
       'name': 'Italian',
       'nativeName': 'Italiano',
-      'svgAsset': 'assets/language/italian.svg',
+      'imageAsset': 'assets/language/italian.svg',
+      'isPng': false,
     },
     {
       'code': 'pt',
       'name': 'Portuguese',
       'nativeName': 'Português',
-      'svgAsset': 'assets/language/portugese.svg',
+      'imageAsset': 'assets/portugal.png',
+      'isPng': true,
     },
     {
       'code': 'ru',
       'name': 'Russian',
       'nativeName': 'Русский',
-      'svgAsset': 'assets/language/russia.svg',
+      'imageAsset': 'assets/language/russia.svg',
+      'isPng': false,
     },
     {
       'code': 'zh',
       'name': 'Chinese',
       'nativeName': '中文',
-      'svgAsset': 'assets/language/china.svg',
+      'imageAsset': 'assets/language/china.svg',
+      'isPng': false,
     },
     {
       'code': 'ja',
       'name': 'Japanese',
       'nativeName': '日本語',
-      'svgAsset': 'assets/language/japan.svg',
+      'imageAsset': 'assets/language/japan.svg',
+      'isPng': false,
     },
     {
       'code': 'ko',
       'name': 'Korean',
       'nativeName': '한국어',
-      'svgAsset': 'assets/language/korea.svg',
+      'imageAsset': 'assets/language/korea.svg',
+      'isPng': false,
     },
   ];
 
@@ -202,22 +212,37 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               SizedBox( 
                 width: 32,
                 height: 32,
-                child: SvgPicture.asset(
-                  language['svgAsset'] as String,
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.contain,
-                  // Graceful fallback if an asset fails to load
-                  placeholderBuilder: (context) => const SizedBox.shrink(),
-                  errorBuilder: (context, _, __) => Text(
-                    language['name'] as String,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                child: (language['isPng'] as bool? ?? false)
+                    ? Image.asset(
+                        language['imageAsset'] as String,
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, _, __) => Text(
+                          language['name'] as String,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    : SvgPicture.asset(
+                        language['imageAsset'] as String,
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.contain,
+                        // Graceful fallback if an asset fails to load
+                        placeholderBuilder: (context) => const SizedBox.shrink(),
+                        errorBuilder: (context, _, __) => Text(
+                          language['name'] as String,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
               ),
               const SizedBox(width: 12),
               // Language Name

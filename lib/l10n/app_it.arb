@@ -1,0 +1,598 @@
+{
+  "@@locale": "it",
+  "appTitle": "Tracciatore Abitudini Ecologiche",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "makingTheWorldGreener": "Rendere il mondo più verde",
+  "@makingTheWorldGreener": {
+    "description": "Profile subtitle text"
+  },
+  "ecoExplorer": "ESPLORATORE ECOLOGICO",
+  "@ecoExplorer": {
+    "description": "Badge title"
+  },
+  "greenScore": "Punteggio Verde",
+  "@greenScore": {
+    "description": "Green score card title"
+  },
+  "avgActionsPerDay": "Azioni Medie/Giorno",
+  "@avgActionsPerDay": {
+    "description": "Average actions per day label"
+  },
+  "dayStreak": "Serie Giornaliera",
+  "@dayStreak": {
+    "description": "Day streak label"
+  },
+  "badges": "Badge",
+  "@badges": {
+    "description": "Badges section title"
+  },
+  "firstStep": "Primo Passo",
+  "@firstStep": {
+    "description": "First step badge name"
+  },
+  "cyclist": "Ciclista",
+  "@cyclist": {
+    "description": "Cyclist badge name"
+  },
+  "waterSaver": "Risparmiatore d'Acqua",
+  "@waterSaver": {
+    "description": "Water saver badge name"
+  },
+  "energyPr": "Energia Pr",
+  "@energyPr": {
+    "description": "Energy Pr badge name"
+  },
+  "history": "Cronologia",
+  "@history": {
+    "description": "History section title"
+  },
+  "viewHistory": "Visualizza Cronologia",
+  "@viewHistory": {
+    "description": "View history button text"
+  },
+  "settings": "Impostazioni",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account settings option"
+  },
+  "language": "Lingua",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "english": "Inglese",
+  "@english": {
+    "description": "English language name"
+  },
+  "shareApp": "Condividi App",
+  "@shareApp": {
+    "description": "Share app option"
+  },
+  "rateUs": "Valutaci",
+  "@rateUs": {
+    "description": "Rate us option"
+  },
+  "support": "Supporto",
+  "@support": {
+    "description": "Support option"
+  },
+  "privacyPolicy": "Politica sulla Privacy",
+  "@privacyPolicy": {
+    "description": "Privacy policy option"
+  },
+  "termsOfService": "Termini di Servizio",
+  "@termsOfService": {
+    "description": "Terms of service option"
+  },
+  "logout": "Esci",
+  "@logout": {
+    "description": "Logout option"
+  },
+  "chooseALanguage": "Scegli una Lingua",
+  "@chooseALanguage": {
+    "description": "Language selection screen title"
+  },
+  "next": "Avanti",
+  "@next": {
+    "description": "Next button text"
+  },
+  "cancel": "Annulla",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "areYouSureYouWantToLogout": "Sei sicuro di voler uscire?",
+  "@areYouSureYouWantToLogout": {
+    "description": "Logout confirmation message"
+  },
+  "accountSettingsComingSoon": "Impostazioni account in arrivo",
+  "@accountSettingsComingSoon": {
+    "description": "Account settings placeholder message"
+  },
+  "languageChangedTo": "Lingua cambiata in {language}",
+  "@languageChangedTo": {
+    "description": "Language change confirmation message",
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFunctionalityComingSoon": "Funzionalità di condivisione in arrivo",
+  "@shareFunctionalityComingSoon": {
+    "description": "Share functionality placeholder message"
+  },
+  "logoutFunctionalityComingSoon": "Funzionalità di logout in arrivo",
+  "@logoutFunctionalityComingSoon": {
+    "description": "Logout functionality placeholder message"
+  },
+  "couldNotOpenLink": "Impossibile aprire il link",
+  "@couldNotOpenLink": {
+    "description": "Error message when link cannot be opened"
+  },
+  "habitLibrary": "Biblioteca Abitudini",
+  "@habitLibrary": {
+    "description": "Habit library screen title"
+  },
+  "pickOneHabitToBeginYourEcoJourney": "Scegli un'abitudine per iniziare il tuo viaggio ecologico.",
+  "@pickOneHabitToBeginYourEcoJourney": {
+    "description": "Habit library subtitle"
+  },
+  "pickAHabitToAdd": "Scegli un'Abitudine da Aggiungere",
+  "@pickAHabitToAdd": {
+    "description": "Habit list section title"
+  },
+  "all": "Tutti",
+  "@all": {
+    "description": "All categories filter"
+  },
+  "transport": "Trasporto",
+  "@transport": {
+    "description": "Transport category"
+  },
+  "food": "Cibo",
+  "@food": {
+    "description": "Food category"
+  },
+  "home": "Casa",
+  "@home": {
+    "description": "Home category"
+  },
+  "water": "Acqua",
+  "@water": {
+    "description": "Water category"
+  },
+  "shopping": "Shopping",
+  "@shopping": {
+    "description": "Shopping category"
+  },
+  "waste": "Rifiuti",
+  "@waste": {
+    "description": "Waste category"
+  },
+  "digital": "Digitale",
+  "@digital": {
+    "description": "Digital category"
+  },
+  "fitness": "Fitness",
+  "@fitness": {
+    "description": "Fitness category"
+  },
+  "mindfulness": "Consapevolezza",
+  "@mindfulness": {
+    "description": "Mindfulness category"
+  },
+  "savings": "Risparmi",
+  "@savings": {
+    "description": "Savings category"
+  },
+  "easy": "Facile",
+  "@easy": {
+    "description": "Easy difficulty level"
+  },
+  "medium": "Medio",
+  "@medium": {
+    "description": "Medium difficulty level"
+  },
+  "highImpact": "Alto Impatto",
+  "@highImpact": {
+    "description": "High impact label"
+  },
+  "mediumImpact": "Impatto Medio",
+  "@mediumImpact": {
+    "description": "Medium impact label"
+  },
+  "lowImpact": "Basso Impatto",
+  "@lowImpact": {
+    "description": "Low impact label"
+  },
+  "monday": "Lun",
+  "@monday": {
+    "description": "Monday abbreviation"
+  },
+  "tuesday": "Mar",
+  "@tuesday": {
+    "description": "Tuesday abbreviation"
+  },
+  "wednesday": "Mer",
+  "@wednesday": {
+    "description": "Wednesday abbreviation"
+  },
+  "thursday": "Gio",
+  "@thursday": {
+    "description": "Thursday abbreviation"
+  },
+  "friday": "Ven",
+  "@friday": {
+    "description": "Friday abbreviation"
+  },
+  "saturday": "Sab",
+  "@saturday": {
+    "description": "Saturday abbreviation"
+  },
+  "sunday": "Dom",
+  "@sunday": {
+    "description": "Sunday abbreviation"
+  },
+  "setUpYourProfile": "Configura il tuo profilo",
+  "@setUpYourProfile": {
+    "description": "Profile setup screen title"
+  },
+  "letsPersonalizeYourEcoJourney": "Personalizziamo il tuo viaggio ecologico",
+  "@letsPersonalizeYourEcoJourney": {
+    "description": "Profile setup subtitle"
+  },
+  "tapToUploadPhoto": "Tocca per caricare una foto",
+  "@tapToUploadPhoto": {
+    "description": "Profile picture upload instruction"
+  },
+  "yourName": "Il Tuo Nome",
+  "@yourName": {
+    "description": "Name input field label"
+  },
+  "nameHint": "es. Liza",
+  "@nameHint": {
+    "description": "Name input field hint text"
+  },
+  "continueButton": "Continua",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "pleaseEnterYourName": "Inserisci il tuo nome",
+  "@pleaseEnterYourName": {
+    "description": "Validation message when name is empty"
+  },
+  "errorPickingImage": "Errore nella selezione dell'immagine: {error}",
+  "@errorPickingImage": {
+    "description": "Error message when image picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseFromGallery": "Scegli dalla Galleria",
+  "@chooseFromGallery": {
+    "description": "Image source option - gallery"
+  },
+  "takeAPhoto": "Scatta una Foto",
+  "@takeAPhoto": {
+    "description": "Image source option - camera"
+  },
+  "useDefaultImage": "Usa Immagine Predefinita",
+  "@useDefaultImage": {
+    "description": "Image source option - default"
+  },
+  "leaderboard": "Classifica",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "yourEcoHabitsYourRank": "Le tue abitudini ecologiche, il tuo rango",
+  "@yourEcoHabitsYourRank": {
+    "description": "Leaderboard subtitle"
+  },
+  "betterHabitsLeadToBetterBadges": "Abitudini migliori portano a badge migliori e maggiori progressi.",
+  "@betterHabitsLeadToBetterBadges": {
+    "description": "Leaderboard motivational message"
+  },
+  "currentEcoHabitRankings": "Classifiche attuali delle abitudini ecologiche",
+  "@currentEcoHabitRankings": {
+    "description": "Rankings section title"
+  },
+  "you": "Tu",
+  "@you": {
+    "description": "Current user indicator"
+  },
+  "greenStarter": "Principiante Verde",
+  "@greenStarter": {
+    "description": "Rank title for score < 2000"
+  },
+  "ecoExplorerRank": "Esploratore Ecologico",
+  "@ecoExplorerRank": {
+    "description": "Rank title for score 2000-2999"
+  },
+  "ecoWarrior": "Guerriero Ecologico",
+  "@ecoWarrior": {
+    "description": "Rank title for score 3000-4999"
+  },
+  "natureGuardian": "Guardiano della Natura",
+  "@natureGuardian": {
+    "description": "Rank title for score 5000-9999"
+  },
+  "ecoMaster": "Maestro Ecologico",
+  "@ecoMaster": {
+    "description": "Rank title for score >= 10000"
+  },
+  "hi": "Ciao",
+  "@hi": {
+    "description": "Greeting prefix"
+  },
+  "dailyEcoScore": "Punteggio Ecologico Giornaliero",
+  "@dailyEcoScore": {
+    "description": "Daily eco score card title"
+  },
+  "nextLevel": "Prossimo Livello: {level}",
+  "@nextLevel": {
+    "description": "Next level indicator with level name",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "todaysEcoTasks": "Compiti Ecologici di Oggi",
+  "@todaysEcoTasks": {
+    "description": "Today's tasks section title"
+  },
+  "skippedYourStreakNeedsConsistency": "Saltato! La tua serie ha bisogno di coerenza",
+  "@skippedYourStreakNeedsConsistency": {
+    "description": "Message when task is skipped"
+  },
+  "taskDoneStreakStrong": "{task} Fatto! Serie Forte",
+  "@taskDoneStreakStrong": {
+    "description": "Message when habit task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "taskDone": "{task} Fatto",
+  "@taskDone": {
+    "description": "Message when default task is completed",
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "skip": "Salta",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "done": "Fatto",
+  "@done": {
+    "description": "Done button text"
+  },
+  "noMoreTasksForTheDay": "Nessun altro compito per oggi",
+  "@noMoreTasksForTheDay": {
+    "description": "Empty state message when no tasks"
+  },
+  "goodMorning": "Buongiorno",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "Buon Pomeriggio",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "Buonasera",
+  "@goodEvening": {
+    "description": "Evening greeting"
+  },
+  "thisHabitIsAlreadyAdded": "Questa abitudine è già stata aggiunta alla tua lista",
+  "@thisHabitIsAlreadyAdded": {
+    "description": "Error message when trying to add duplicate habit"
+  },
+  "thisHabitWasAddedRecently": "Questa abitudine è stata aggiunta di recente. Attendi {hours} ore prima di aggiungerla di nuovo (si resetta a mezzanotte)",
+  "@thisHabitWasAddedRecently": {
+    "description": "Error message when habit is on cooldown",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "habitAddedKeepGoing": "{habit} Aggiunto! Continua",
+  "@habitAddedKeepGoing": {
+    "description": "Success message when habit is added",
+    "placeholders": {
+      "habit": {
+        "type": "String"
+      }
+    }
+  },
+  "cycleToWork": "Andare al lavoro in bicicletta",
+  "@cycleToWork": {
+    "description": "Transport habit title"
+  },
+  "usePublicTransport": "Usare i trasporti pubblici",
+  "@usePublicTransport": {
+    "description": "Transport habit title"
+  },
+  "carpoolWithColleagues": "Condividere l'auto con i colleghi",
+  "@carpoolWithColleagues": {
+    "description": "Transport habit title"
+  },
+  "walkShortDistances": "Camminare per brevi distanze",
+  "@walkShortDistances": {
+    "description": "Transport habit title"
+  },
+  "maintainBikeRegularly": "Manutenere regolarmente la bicicletta",
+  "@maintainBikeRegularly": {
+    "description": "Transport habit title"
+  },
+  "buyBulkFood": "Comprare cibo sfuso",
+  "@buyBulkFood": {
+    "description": "Food habit title"
+  },
+  "compostKitchenWaste": "Compostare i rifiuti della cucina",
+  "@compostKitchenWaste": {
+    "description": "Food habit title"
+  },
+  "plantAMiniGarden": "Piantare un mini giardino",
+  "@plantAMiniGarden": {
+    "description": "Food habit title"
+  },
+  "reducePackagedFood": "Ridurre il cibo confezionato",
+  "@reducePackagedFood": {
+    "description": "Food habit title"
+  },
+  "chooseSeasonalFruits": "Scegliere frutta di stagione",
+  "@chooseSeasonalFruits": {
+    "description": "Food habit title"
+  },
+  "coldWaterWash": "Lavaggio a acqua fredda",
+  "@coldWaterWash": {
+    "description": "Home habit title"
+  },
+  "switchOffUnusedLights": "Spegnere le luci non utilizzate",
+  "@switchOffUnusedLights": {
+    "description": "Home habit title"
+  },
+  "useEnergyEfficientBulbs": "Usare lampadine a risparmio energetico",
+  "@useEnergyEfficientBulbs": {
+    "description": "Home habit title"
+  },
+  "airDryClothes": "Asciugare i vestiti all'aria",
+  "@airDryClothes": {
+    "description": "Home habit title"
+  },
+  "useNaturalVentilation": "Usare la ventilazione naturale",
+  "@useNaturalVentilation": {
+    "description": "Home habit title"
+  },
+  "shorterShowers": "Docce più brevi",
+  "@shorterShowers": {
+    "description": "Water habit title"
+  },
+  "fixWaterLeaks": "Riparare le perdite d'acqua",
+  "@fixWaterLeaks": {
+    "description": "Water habit title"
+  },
+  "collectRainwaterForPlants": "Raccogliere acqua piovana per le piante",
+  "@collectRainwaterForPlants": {
+    "description": "Water habit title"
+  },
+  "reuseROWater": "Riutilizzare l'acqua ad osmosi inversa",
+  "@reuseROWater": {
+    "description": "Water habit title"
+  },
+  "turnOffTapWhileBrushing": "Chiudere il rubinetto durante la spazzolatura",
+  "@turnOffTapWhileBrushing": {
+    "description": "Water habit title"
+  },
+  "carryReusableBags": "Portare borse riutilizzabili",
+  "@carryReusableBags": {
+    "description": "Shopping/Waste habit title"
+  },
+  "buyRecycledProducts": "Comprare prodotti riciclati",
+  "@buyRecycledProducts": {
+    "description": "Shopping/Waste habit title"
+  },
+  "avoidFastFashion": "Evitare la moda veloce",
+  "@avoidFastFashion": {
+    "description": "Shopping/Waste habit title"
+  },
+  "chooseEcoFriendlyBrands": "Scegliere marchi ecologici",
+  "@chooseEcoFriendlyBrands": {
+    "description": "Shopping/Waste habit title"
+  },
+  "supportLocalBusiness": "Supportare le attività locali",
+  "@supportLocalBusiness": {
+    "description": "Shopping/Waste habit title"
+  },
+  "reduceScreenTime": "Ridurre il tempo davanti allo schermo",
+  "@reduceScreenTime": {
+    "description": "Digital habit title"
+  },
+  "unsubscribeUnwantedMails": "Disiscriversi dalle email indesiderate",
+  "@unsubscribeUnwantedMails": {
+    "description": "Digital habit title"
+  },
+  "cloudBackupCleanup": "Pulizia backup cloud",
+  "@cloudBackupCleanup": {
+    "description": "Digital habit title"
+  },
+  "turnOffAutoPlay": "Disattivare la riproduzione automatica",
+  "@turnOffAutoPlay": {
+    "description": "Digital habit title"
+  },
+  "digitalMindfulBreaks": "Pause digitali consapevoli",
+  "@digitalMindfulBreaks": {
+    "description": "Digital habit title"
+  },
+  "morningWalk": "Passeggiata mattutina",
+  "@morningWalk": {
+    "description": "Fitness habit title"
+  },
+  "practiceYoga": "Praticare yoga",
+  "@practiceYoga": {
+    "description": "Fitness habit title"
+  },
+  "healthySleepRoutine": "Routine di sonno sana",
+  "@healthySleepRoutine": {
+    "description": "Fitness habit title"
+  },
+  "drink2LWater": "Bere 2L di acqua",
+  "@drink2LWater": {
+    "description": "Fitness habit title"
+  },
+  "avoidJunkSnacks": "Evitare snack spazzatura",
+  "@avoidJunkSnacks": {
+    "description": "Fitness habit title"
+  },
+  "meditation5MinDay": "Meditazione 5 min/giorno",
+  "@meditation5MinDay": {
+    "description": "Mindfulness habit title"
+  },
+  "practiceGratitudeJournaling": "Praticare il diario della gratitudine",
+  "@practiceGratitudeJournaling": {
+    "description": "Mindfulness habit title"
+  },
+  "breathingExercise": "Esercizio di respirazione",
+  "@breathingExercise": {
+    "description": "Mindfulness habit title"
+  },
+  "spendTimeInNature": "Passare del tempo nella natura",
+  "@spendTimeInNature": {
+    "description": "Mindfulness habit title"
+  },
+  "limitNegativeNews": "Limitare le notizie negative",
+  "@limitNegativeNews": {
+    "description": "Mindfulness habit title"
+  },
+  "trackExpenses": "Tracciare le spese",
+  "@trackExpenses": {
+    "description": "Savings habit title"
+  },
+  "monthlySavingsGoal": "Obiettivo di risparmio mensile",
+  "@monthlySavingsGoal": {
+    "description": "Savings habit title"
+  },
+  "avoidImpulseBuying": "Evitare acquisti impulsivi",
+  "@avoidImpulseBuying": {
+    "description": "Savings habit title"
+  },
+  "investInSIP": "Investire in SIP",
+  "@investInSIP": {
+    "description": "Savings habit title"
+  },
+  "useCashBackResponsibly": "Usare il cash-back responsabilmente",
+  "@useCashBackResponsibly": {
+    "description": "Savings habit title"
+  }
+}
