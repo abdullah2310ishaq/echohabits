@@ -119,7 +119,10 @@ class HomeOne extends StatelessWidget {
                   // Daily Eco Score Card
                   Consumer<HabitService>(
                     builder: (context, service, child) {
-                      final dailyScore = service.dailyScore;
+                      final dailyScore = service.dailyScore.clamp(
+                        0,
+                        100,
+                      ); // Cap at 100
                       final maxDailyScore = 100; // Max score per day
                       final progress = (dailyScore / maxDailyScore).clamp(
                         0.0,

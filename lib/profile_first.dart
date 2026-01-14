@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'home/home_shell.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,6 +30,12 @@ class _ProfileFirstState extends State<ProfileFirst> {
 
   @override
   Widget build(BuildContext context) {
+    final leafHeight = 120.h;
+    // Safe area bottom inset (Android 3-button nav / iPhone home indicator)
+    final bottomSafeInset = ScreenUtil().bottomBarHeight;
+    // Extra space so the last button/content can scroll fully above the leaf images + system bar
+    final scrollBottomPadding = leafHeight + bottomSafeInset + 16.h;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF1F8F5),
       body: Stack(
@@ -38,70 +45,80 @@ class _ProfileFirstState extends State<ProfileFirst> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Image.asset(
-                      'assets/left.png',
-                      fit: BoxFit.fitHeight,
-                      height: 150,
+            child: SafeArea(
+              bottom: true,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Image.asset(
+                        'assets/left.png',
+                        fit: BoxFit.fitHeight,
+                        height: leafHeight,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Image.asset(
-                      'assets/right.png',
-                      fit: BoxFit.fitHeight,
-                      height: 150,
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        'assets/right.png',
+                        fit: BoxFit.fitHeight,
+                        height: leafHeight,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 
           // Main content - On top of background
           SafeArea(
-            bottom: false,
+            bottom: true,
             child: Column(
               children: [
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    // Add bottom padding so content can scroll above the leaf images
+                    padding: EdgeInsets.fromLTRB(
+                      20.w,
+                      0,
+                      20.w,
+                      scrollBottomPadding,
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.h),
                         // Back button
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.arrow_back,
                               color: Colors.black,
+                              size: 22.sp,
                             ),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 6.h),
 
                         // Header Section
                         Text(
                           AppLocalizations.of(context)!.setUpYourProfile,
-                          style: const TextStyle(
-                            fontSize: 28,
+                          style: TextStyle(
+                            fontSize: 24.sp,
                             fontWeight: FontWeight.w500,
                             color: Colors.black87,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 6.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -109,30 +126,28 @@ class _ProfileFirstState extends State<ProfileFirst> {
                               AppLocalizations.of(
                                 context,
                               )!.letsPersonalizeYourEcoJourney,
-                              style: const TextStyle(
-                                fontSize: 20,
+                              style: TextStyle(
+                                fontSize: 16.sp,
                                 color: Colors.black54,
                               ),
                             ),
-                            const SizedBox(width: 4),
-                            const Text('🌿', style: TextStyle(fontSize: 16)),
+                            SizedBox(width: 4.w),
+                            Text('🌿', style: TextStyle(fontSize: 14.sp)),
                           ],
                         ),
-                        const SizedBox(height: 40),
+                        SizedBox(height: 32.h),
 
                         // Profile Picture Picker
                         _buildProfilePicturePicker(),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 20.h),
 
                         // Input Card
                         _buildInputCard(),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 16.h),
                       ],
                     ),
                   ),
                 ),
-                // Spacer to push content up, leaving space for leaf images
-                const SizedBox(height: 150),
               ],
             ),
           ),
@@ -177,24 +192,33 @@ class _ProfileFirstState extends State<ProfileFirst> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: Text(AppLocalizations.of(context)!.chooseFromGallery),
+              leading: Icon(Icons.photo_library, size: 22.sp),
+              title: Text(
+                AppLocalizations.of(context)!.chooseFromGallery,
+                style: TextStyle(fontSize: 14.sp),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 _pickImage(ImageSource.gallery);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: Text(AppLocalizations.of(context)!.takeAPhoto),
+              leading: Icon(Icons.camera_alt, size: 22.sp),
+              title: Text(
+                AppLocalizations.of(context)!.takeAPhoto,
+                style: TextStyle(fontSize: 14.sp),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 _pickImage(ImageSource.camera);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.image),
-              title: Text(AppLocalizations.of(context)!.useDefaultImage),
+              leading: Icon(Icons.image, size: 22.sp),
+              title: Text(
+                AppLocalizations.of(context)!.useDefaultImage,
+                style: TextStyle(fontSize: 14.sp),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -222,15 +246,15 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 opacity: 0.85,
                 child: Image.asset(
                   'assets/ellipse.png',
-                  width: 190,
-                  height: 190,
+                  width: 160.w,
+                  height: 160.h,
                   fit: BoxFit.contain,
                 ),
               ),
               // Inner profile image inside a circular mask
               Container(
-                width: 120,
-                height: 120,
+                width: 100.w,
+                height: 100.h,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.transparent,
@@ -238,36 +262,43 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 clipBehavior: Clip.antiAlias,
                 child: ClipOval(
                   child: _isUsingDefaultImage || _selectedImagePath == null
-                      ? Image.asset('assets/profile.png', fit: BoxFit.cover)
+                      ? Image.asset(
+                          'assets/profile.png',
+                          fit: BoxFit.cover,
+                          width: 100.w,
+                          height: 100.h,
+                        )
                       : Image.file(
                           File(_selectedImagePath!),
                           fit: BoxFit.cover,
+                          width: 100.w,
+                          height: 100.h,
                         ),
                 ),
               ),
               // Camera badge - positioned slightly more right and up
               Positioned(
-                bottom: 10,
-                right: 14,
+                bottom: 8.h,
+                right: 12.w,
                 child: Container(
-                  width: 36,
-                  height: 36,
+                  width: 32.w,
+                  height: 32.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
+                        blurRadius: 6,
+                        offset: Offset(0, 2.h),
                       ),
                     ],
                   ),
                   child: Center(
                     child: SvgPicture.asset(
                       'assets/camera.svg',
-                      width: 20,
-                      height: 20,
+                      width: 18.w,
+                      height: 18.h,
                     ),
                   ),
                 ),
@@ -275,11 +306,11 @@ class _ProfileFirstState extends State<ProfileFirst> {
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 10.h),
         Text(
           AppLocalizations.of(context)!.tapToUploadPhoto,
-          style: const TextStyle(
-            fontSize: 20,
+          style: TextStyle(
+            fontSize: 16.sp,
             color: Colors.black54,
             fontWeight: FontWeight.w300,
           ),
@@ -290,15 +321,15 @@ class _ProfileFirstState extends State<ProfileFirst> {
 
   Widget _buildInputCard() {
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 8,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
@@ -307,46 +338,47 @@ class _ProfileFirstState extends State<ProfileFirst> {
         children: [
           Text(
             AppLocalizations.of(context)!.yourName,
-            style: const TextStyle(
-              fontSize: 24,
+            style: TextStyle(
+              fontSize: 18.sp,
               fontWeight: FontWeight.w600,
               color: Colors.black87,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 12.h),
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color(0xFFF5F5F5),
               hintText: AppLocalizations.of(context)!.nameHint,
-              hintStyle: const TextStyle(color: Colors.black38),
+              hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
               prefixIcon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: CircleAvatar(
-                  radius: 16,
+                  radius: 14.r,
                   backgroundColor: Colors.transparent,
                   child: ClipOval(
                     child: Image.asset(
                       'assets/profile.png',
                       fit: BoxFit.cover,
-                      width: 28,
-                      height: 28,
+                      width: 24.w,
+                      height: 24.h,
                     ),
                   ),
                 ),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10.r),
                 borderSide: BorderSide.none,
               ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 14.w,
+                vertical: 14.h,
               ),
             ),
+            style: TextStyle(fontSize: 14.sp),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 20.h),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -378,18 +410,15 @@ class _ProfileFirstState extends State<ProfileFirst> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF2E7D32),
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.symmetric(vertical: 14.h),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 elevation: 0,
               ),
               child: Text(
                 AppLocalizations.of(context)!.continueButton,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
               ),
             ),
           ),

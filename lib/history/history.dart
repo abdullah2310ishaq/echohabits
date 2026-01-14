@@ -29,10 +29,7 @@ class _HistoryState extends State<History> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black87,
-          ),
+          icon: Icon(Icons.arrow_back, color: Colors.black87, size: 22.sp),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
@@ -45,47 +42,57 @@ class _HistoryState extends State<History> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          // Filter Bar
-          Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Row(
-              children: [
-                _buildFilterButton(context, 'Weekly'),
-                SizedBox(width: 10.w),
-                _buildFilterButton(context, 'Monthly'),
-                SizedBox(width: 10.w),
-                _buildFilterButton(context, 'All Time'),
-              ],
+      body: SafeArea(
+        bottom: true,
+        child: Column(
+          children: [
+            // Filter Bar
+            Padding(
+              padding: EdgeInsets.all(16.w),
+              child: Row(
+                children: [
+                  _buildFilterButton(context, 'Weekly'),
+                  SizedBox(width: 10.w),
+                  _buildFilterButton(context, 'Monthly'),
+                  SizedBox(width: 10.w),
+                  _buildFilterButton(context, 'All Time'),
+                ],
+              ),
             ),
-          ),
-          // History List
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemCount: history.length,
-              itemBuilder: (context, index) {
-                final item = history[index];
-                final String title = item['title'] as String;
-                final DateTime timestamp = item['timestamp'] as DateTime;
+            // History List
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.only(
+                  left: 16.w,
+                  right: 16.w,
+                  top: 0,
+                  bottom: 24
+                      .h, // Extra bottom padding to prevent cards from being hidden
+                ),
+                physics: const BouncingScrollPhysics(),
+                itemCount: history.length,
+                itemBuilder: (context, index) {
+                  final item = history[index];
+                  final String title = item['title'] as String;
+                  final DateTime timestamp = item['timestamp'] as DateTime;
 
-                // Format date as "January 14" (month name + day)
-                final dateFormatter = DateFormat('MMMM d');
-                final String dateLabel = dateFormatter.format(timestamp);
+                  // Format date as "Wednesday, January 14" (day name + month name + day)
+                  final dateFormatter = DateFormat('EEEE, MMMM d');
+                  final String dateLabel = dateFormatter.format(timestamp);
 
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 10.h),
-                  child: _buildHistoryCard(
-                    habit: title,
-                    date: dateLabel,
-                    isDone: true, // Only showing completed items
-                  ),
-                );
-              },
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 10.h),
+                    child: _buildHistoryCard(
+                      habit: title,
+                      date: dateLabel,
+                      isDone: true, // Only showing completed items
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -94,7 +101,7 @@ class _HistoryState extends State<History> {
     final isSelected = _selectedFilter == label;
     // TODO: Add weekly, monthly, allTime to localization files
     // For now using English strings - intl will format dates based on locale
-    
+
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -105,9 +112,7 @@ class _HistoryState extends State<History> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 10.h),
           decoration: BoxDecoration(
-            color: isSelected
-                ? const Color(0xFF2E7D32)
-                : Colors.grey[200],
+            color: isSelected ? const Color(0xFF2E7D32) : Colors.grey[200],
             borderRadius: BorderRadius.circular(20.r),
           ),
           child: Text(
@@ -175,10 +180,7 @@ class _HistoryState extends State<History> {
                 SizedBox(height: 3.h),
                 Text(
                   date,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.black54,
-                  ),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.black54),
                 ),
               ],
             ),

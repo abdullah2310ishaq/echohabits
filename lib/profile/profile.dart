@@ -54,10 +54,11 @@ class Profile extends StatelessWidget {
                           // Name and Subtitle
                           Expanded(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   ProfileService.getUserName(),
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
@@ -69,6 +70,7 @@ class Profile extends StatelessWidget {
                                   AppLocalizations.of(
                                     context,
                                   )!.makingTheWorldGreener,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12.sp,
                                     color: Colors.black54,
@@ -498,8 +500,8 @@ class Profile extends StatelessWidget {
     required String label,
   }) {
     return Container(
-      width: 74.w,
-      height: 60.h,
+      width: 88.w,
+      height: 52.h,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: Colors.white,

@@ -239,10 +239,10 @@ class HabitService extends ChangeNotifier {
 
   List<Map<String, dynamic>> get history => List.unmodifiable(_history);
 
-  /// Get daily eco score (resets at midnight)
+  /// Get daily eco score (resets at midnight, capped at 100)
   int get dailyScore {
     _ensureScoreFresh();
-    return _dailyScore;
+    return _dailyScore.clamp(0, 100);
   }
 
   /// Get total cumulative score
@@ -274,19 +274,21 @@ class HabitService extends ChangeNotifier {
       return {'success': false, 'message': l10n.thisHabitIsAlreadyAdded};
     }
 
-    // Check 24-hour cooldown - prevent adding same habit within 24 hours
+    // Check midnight cooldown - prevent adding same habit twice in the same day
     final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
     if (_habitAddTimestamps.containsKey(title)) {
       final lastAdded = _habitAddTimestamps[title]!;
-      final hoursSinceAdded = now.difference(lastAdded).inHours;
+      final lastAddedDate = DateTime(
+        lastAdded.year,
+        lastAdded.month,
+        lastAdded.day,
+      );
 
-      // If added within last 24 hours, don't allow
-      if (hoursSinceAdded < 24) {
-        final hoursRemaining = 24 - hoursSinceAdded;
-        return {
-          'success': false,
-          'message': l10n.thisHabitWasAddedRecently(hoursRemaining),
-        };
+      // If added today (same day), don't allow (resets at midnight)
+      if (lastAddedDate == today) {
+        return {'success': false, 'message': l10n.thisHabitIsAlreadyAdded};
       }
     }
 
@@ -339,8 +341,10 @@ class HabitService extends ChangeNotifier {
     if (isDone) {
       _ensureScoreFresh();
       final points = _calculateTaskScore(task);
-      _dailyScore += points;
-      _totalScore += points;
+      // Cap daily score at 100, but still add to total
+      final newDailyScore = _dailyScore + points;
+      _dailyScore = newDailyScore.clamp(0, 100);
+      _totalScore += points; // Total score continues to accumulate
     }
 
     _saveData();
@@ -373,8 +377,10 @@ class HabitService extends ChangeNotifier {
     if (isDone) {
       _ensureScoreFresh();
       final points = _calculateTaskScore(habit);
-      _dailyScore += points;
-      _totalScore += points;
+      // Cap daily score at 100, but still add to total
+      final newDailyScore = _dailyScore + points;
+      _dailyScore = newDailyScore.clamp(0, 100);
+      _totalScore += points; // Total score continues to accumulate
     }
 
     _saveData();
@@ -388,13 +394,27 @@ class HabitService extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Internal: ensure default tasks reset approximately every 24 hours.
+  /// Internal: ensure default tasks reset at midnight (00:00)
   void _ensureDefaultTasksFresh() {
     final now = DateTime.now();
-    if (_lastDefaultReset == null ||
-        now.difference(_lastDefaultReset!).inHours >= 24) {
-      _hiddenDefaultTaskIds.clear();
+    final today = DateTime(now.year, now.month, now.day);
+
+    if (_lastDefaultReset == null) {
+      // First time - set to today
       _lastDefaultReset = now;
+      _saveData();
+    } else {
+      final lastResetDate = DateTime(
+        _lastDefaultReset!.year,
+        _lastDefaultReset!.month,
+        _lastDefaultReset!.day,
+      );
+      // Reset if it's a new day (midnight passed)
+      if (lastResetDate != today) {
+        _hiddenDefaultTaskIds.clear();
+        _lastDefaultReset = now;
+        _saveData();
+      }
     }
   }
 
@@ -408,9 +428,10 @@ class HabitService extends ChangeNotifier {
       _dailyScore = 0;
       _lastScoreResetDate = today;
 
-      // Clean up old habit timestamps (older than 24 hours)
+      // Clean up habit timestamps from previous days (reset at midnight)
       _habitAddTimestamps.removeWhere((key, value) {
-        return now.difference(value).inHours >= 24;
+        final valueDate = DateTime(value.year, value.month, value.day);
+        return valueDate != today; // Remove if not from today
       });
 
       _saveData();
@@ -418,21 +439,13 @@ class HabitService extends ChangeNotifier {
   }
 
   /// Calculate score points for a completed task
+  /// Each task gives equal points: 100 total points / 53 total tasks (50 habits + 3 defaults) ≈ 1.89
+  /// We give 2 points per task, capped at 100 daily score
   int _calculateTaskScore(Map<String, dynamic> task) {
-    // Base score: 10 points per completed task
-    int baseScore = 10;
-
-    // Bonus based on impact (if available)
-    final impact = task['impact'] as String?;
-    if (impact != null) {
-      if (impact.contains('High Impact')) {
-        baseScore += 5; // 15 total
-      } else if (impact.contains('Medium Impact')) {
-        baseScore += 2; // 12 total
-      }
-    }
-
-    return baseScore;
+    // Equal points for all tasks: 2 points per task
+    // Total: 50 habits + 3 defaults = 53 tasks
+    // If all completed: 53 * 2 = 106 points, but capped at 100
+    return 2;
   }
 
   void _addHistoryEntry({
