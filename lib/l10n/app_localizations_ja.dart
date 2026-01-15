@@ -107,7 +107,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get couldNotOpenLink => 'リンクを開けませんでした';
 
   @override
-  String get habitLibrary => '習慣ライブラリ';
+  String get habitLibrary => '習慣';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney => 'エコの旅を始めるために1つの習慣を選んでください。';
@@ -185,7 +185,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sunday => '日';
 
   @override
-  String get setUpYourProfile => 'プロフィールを設定';
+  String get setUpYourProfile => 'プロフィール';
 
   @override
   String get letsPersonalizeYourEcoJourney => 'エコの旅をパーソナライズしましょう';
@@ -459,4 +459,23 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get plantingTag => '植樹';
+
+  @override
+  String get onboardingTitle1 => '毎日のエコアクションを追跡';
+
+  @override
+  String get onboardingDescription1 => '毎日のアクションを完了し、連続記録を維持し、エコスコアを上げましょう。';
+
+  @override
+  String get onboardingTitle2 => '定着する習慣を構築';
+
+  @override
+  String get onboardingDescription2 =>
+      'ルーティンに習慣を追加し、連続記録を維持し、一貫性を保つことで報酬を獲得しましょう。';
+
+  @override
+  String get onboardingTitle3 => '競争。獲得。レベルアップ。';
+
+  @override
+  String get onboardingDescription3 => 'リーダーボードを登り、バッジを解除し、他の人との進捗を追跡しましょう。';
 }

@@ -618,5 +618,29 @@
   "plantingTag": "Посадка",
   "@plantingTag": {
     "description": "Tag label for planting"
+  },
+  "onboardingTitle1": "Отслеживайте свои ежедневные экологические действия",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "Выполняйте ежедневные действия, поддерживайте свою серию и увеличивайте свой экологический счет.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Создавайте привычки, которые остаются",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Добавляйте привычки в свой распорядок, поддерживайте серии и зарабатывайте награды, оставаясь последовательными.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Соревнуйтесь. Зарабатывайте. Повышайте уровень.",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Поднимайтесь в таблице лидеров, разблокируйте значки и отслеживайте свой прогресс по сравнению с другими.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
   }
 }

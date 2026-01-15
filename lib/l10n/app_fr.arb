@@ -618,5 +618,29 @@
   "plantingTag": "Plantation",
   "@plantingTag": {
     "description": "Tag label for planting"
+  },
+  "onboardingTitle1": "Suivez vos Actions Écologiques Quotidiennes",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "Complétez des actions quotidiennes, maintenez votre série et augmentez votre score écologique.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Construisez des Habitudes qui Restent",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Ajoutez des habitudes à votre routine, maintenez des séries et gagnez des récompenses en restant constant.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Rivalisez. Gagnez. Montez de Niveau.",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Grimpez dans le classement, débloquez des badges et suivez votre progression par rapport aux autres.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
   }
 }

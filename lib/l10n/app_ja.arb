@@ -618,5 +618,29 @@
   "plantingTag": "植樹",
   "@plantingTag": {
     "description": "Tag label for planting"
+  },
+  "onboardingTitle1": "毎日のエコアクションを追跡",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "毎日のアクションを完了し、連続記録を維持し、エコスコアを上げましょう。",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "定着する習慣を構築",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "ルーティンに習慣を追加し、連続記録を維持し、一貫性を保つことで報酬を獲得しましょう。",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "競争。獲得。レベルアップ。",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "リーダーボードを登り、バッジを解除し、他の人との進捗を追跡しましょう。",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
   }
 }

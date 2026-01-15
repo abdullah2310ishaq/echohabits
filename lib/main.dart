@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               return MediaQuery(
                 // Lock text scale factor to 1.0 to prevent system text size changes
                 data: (mediaQueryData ?? const MediaQueryData()).copyWith(
-                  textScaleFactor: 1.0,
+                  textScaler: TextScaler.linear(1.0),
                 ),
                 child: MaterialApp(
                   title: 'Eco Habit Tracker',

@@ -618,5 +618,29 @@
   "plantingTag": "Plantación",
   "@plantingTag": {
     "description": "Tag label for planting"
+  },
+  "onboardingTitle1": "Rastrea tus Acciones Ecológicas Diarias",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "Completa acciones diarias, mantén tu racha y aumenta tu puntuación ecológica.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Construye Hábitos que Perduren",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Añade hábitos a tu rutina, mantén rachas y gana recompensas mientras te mantienes constante.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Compite. Gana. Sube de Nivel.",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Sube en la clasificación, desbloquea insignias y rastrea tu progreso contra otros.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
   }
 }

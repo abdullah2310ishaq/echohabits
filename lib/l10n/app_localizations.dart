@@ -989,6 +989,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Planting'**
   String get plantingTag;
+
+  /// First onboarding screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Track Your Daily Eco Actions'**
+  String get onboardingTitle1;
+
+  /// First onboarding screen description
+  ///
+  /// In en, this message translates to:
+  /// **'Complete daily actions, maintain your streak, and increase your eco score.'**
+  String get onboardingDescription1;
+
+  /// Second onboarding screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Build Habits That Stick'**
+  String get onboardingTitle2;
+
+  /// Second onboarding screen description
+  ///
+  /// In en, this message translates to:
+  /// **'Add habits to your routine, maintain streaks, and earn rewards as you stay consistent.'**
+  String get onboardingDescription2;
+
+  /// Third onboarding screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Compete. Earn. Level Up.'**
+  String get onboardingTitle3;
+
+  /// Third onboarding screen description
+  ///
+  /// In en, this message translates to:
+  /// **'Climb the leaderboard, unlock badges, and track your progress against others.'**
+  String get onboardingDescription3;
 }
 
 class _AppLocalizationsDelegate

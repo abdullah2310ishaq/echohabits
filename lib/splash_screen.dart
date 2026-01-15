@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
+import '../onboarding/onboarding.dart';
 import '../profile_first.dart';
 import '../home/home_shell.dart';
 import '../settings/first_time_language_selection.dart';
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 7),
+      duration: const Duration(seconds: 3),
     );
 
     _logoOpacity = CurvedAnimation(
@@ -50,16 +51,20 @@ class _SplashScreenState extends State<SplashScreen>
     final localeService = Provider.of<LocaleService>(context, listen: false);
     final isLanguageSelected = localeService.isLanguageSelected();
     final isProfileSetup = ProfileService.isProfileSetupComplete();
+    final isOnboardingComplete = ProfileService.isOnboardingComplete();
 
     Widget nextScreen;
     if (!isLanguageSelected) {
       // First time - show language selection
       nextScreen = const FirstTimeLanguageSelectionScreen();
+    } else if (!isOnboardingComplete) {
+      // Language selected but onboarding not completed
+      nextScreen = const OnboardingScreen();
     } else if (isProfileSetup) {
-      // Language selected and profile setup - go to home
+      // Language selected + onboarding complete + profile setup - go to home
       nextScreen = const HomeShell();
     } else {
-      // Language selected but profile not setup - go to profile setup
+      // Language selected + onboarding complete but profile not setup - go to profile setup
       nextScreen = const ProfileFirst();
     }
 

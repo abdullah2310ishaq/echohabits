@@ -618,5 +618,29 @@
   "plantingTag": "Pflanzen",
   "@plantingTag": {
     "description": "Tag label for planting"
+  },
+  "onboardingTitle1": "Verfolgen Sie Ihre täglichen Öko-Aktionen",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "Vervollständigen Sie tägliche Aktionen, halten Sie Ihre Serie aufrecht und erhöhen Sie Ihren Öko-Score.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Gewohnheiten aufbauen, die bleiben",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Fügen Sie Gewohnheiten zu Ihrer Routine hinzu, halten Sie Serien aufrecht und verdienen Sie Belohnungen, während Sie konsequent bleiben.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Wettbewerb. Verdienen. Aufsteigen.",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Steigen Sie in der Bestenliste auf, schalten Sie Abzeichen frei und verfolgen Sie Ihren Fortschritt im Vergleich zu anderen.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
   }
 }

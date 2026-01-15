@@ -107,7 +107,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get couldNotOpenLink => 'Не удалось открыть ссылку';
 
   @override
-  String get habitLibrary => 'Библиотека Привычек';
+  String get habitLibrary => 'Привычка';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney =>
@@ -186,7 +186,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sunday => 'Вс';
 
   @override
-  String get setUpYourProfile => 'Настройте свой профиль';
+  String get setUpYourProfile => 'Профиль';
 
   @override
   String get letsPersonalizeYourEcoJourney =>
@@ -468,4 +468,27 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get plantingTag => 'Посадка';
+
+  @override
+  String get onboardingTitle1 =>
+      'Отслеживайте свои ежедневные экологические действия';
+
+  @override
+  String get onboardingDescription1 =>
+      'Выполняйте ежедневные действия, поддерживайте свою серию и увеличивайте свой экологический счет.';
+
+  @override
+  String get onboardingTitle2 => 'Создавайте привычки, которые остаются';
+
+  @override
+  String get onboardingDescription2 =>
+      'Добавляйте привычки в свой распорядок, поддерживайте серии и зарабатывайте награды, оставаясь последовательными.';
+
+  @override
+  String get onboardingTitle3 =>
+      'Соревнуйтесь. Зарабатывайте. Повышайте уровень.';
+
+  @override
+  String get onboardingDescription3 =>
+      'Поднимайтесь в таблице лидеров, разблокируйте значки и отслеживайте свой прогресс по сравнению с другими.';
 }

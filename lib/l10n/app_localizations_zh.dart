@@ -107,7 +107,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get couldNotOpenLink => '无法打开链接';
 
   @override
-  String get habitLibrary => '习惯库';
+  String get habitLibrary => '习惯';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney => '选择一个习惯开始您的生态之旅。';
@@ -185,7 +185,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sunday => '周日';
 
   @override
-  String get setUpYourProfile => '设置您的个人资料';
+  String get setUpYourProfile => '个人资料';
 
   @override
   String get letsPersonalizeYourEcoJourney => '让我们个性化您的生态之旅';
@@ -459,4 +459,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get plantingTag => '植树';
+
+  @override
+  String get onboardingTitle1 => '追踪您的每日生态行动';
+
+  @override
+  String get onboardingDescription1 => '完成每日行动，保持您的连续记录，并提高您的生态分数。';
+
+  @override
+  String get onboardingTitle2 => '建立持久的习惯';
+
+  @override
+  String get onboardingDescription2 => '将习惯添加到您的日常中，保持连续记录，并在保持一致性的同时获得奖励。';
+
+  @override
+  String get onboardingTitle3 => '竞争。获得。升级。';
+
+  @override
+  String get onboardingDescription3 => '攀登排行榜，解锁徽章，并追踪您与他人的进度。';
 }

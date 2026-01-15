@@ -618,5 +618,29 @@
   "plantingTag": "植树",
   "@plantingTag": {
     "description": "Tag label for planting"
+  },
+  "onboardingTitle1": "追踪您的每日生态行动",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "完成每日行动，保持您的连续记录，并提高您的生态分数。",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "建立持久的习惯",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "将习惯添加到您的日常中，保持连续记录，并在保持一致性的同时获得奖励。",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "竞争。获得。升级。",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "攀登排行榜，解锁徽章，并追踪您与他人的进度。",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
   }
 }

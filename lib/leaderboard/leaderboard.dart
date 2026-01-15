@@ -267,7 +267,7 @@ class Leaderboard extends StatelessWidget {
               children: [
                 Text(
                   isCurrentUser
-                      ? '${name} (${AppLocalizations.of(context)!.you})'
+                      ? '$name (${AppLocalizations.of(context)!.you})'
                       : name,
                   style: TextStyle(
                     fontSize: 14.sp,

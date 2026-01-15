@@ -110,7 +110,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get couldNotOpenLink => 'Impossible d\'ouvrir le lien';
 
   @override
-  String get habitLibrary => 'Bibliothèque d\'Habitudes';
+  String get habitLibrary => 'Habitude';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney =>
@@ -189,7 +189,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sunday => 'Dim';
 
   @override
-  String get setUpYourProfile => 'Configurer votre profil';
+  String get setUpYourProfile => 'Profil';
 
   @override
   String get letsPersonalizeYourEcoJourney =>
@@ -474,4 +474,25 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get plantingTag => 'Plantation';
+
+  @override
+  String get onboardingTitle1 => 'Suivez vos Actions Écologiques Quotidiennes';
+
+  @override
+  String get onboardingDescription1 =>
+      'Complétez des actions quotidiennes, maintenez votre série et augmentez votre score écologique.';
+
+  @override
+  String get onboardingTitle2 => 'Construisez des Habitudes qui Restent';
+
+  @override
+  String get onboardingDescription2 =>
+      'Ajoutez des habitudes à votre routine, maintenez des séries et gagnez des récompenses en restant constant.';
+
+  @override
+  String get onboardingTitle3 => 'Rivalisez. Gagnez. Montez de Niveau.';
+
+  @override
+  String get onboardingDescription3 =>
+      'Grimpez dans le classement, débloquez des badges et suivez votre progression par rapport aux autres.';
 }

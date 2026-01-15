@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
+import '../onboarding/onboarding.dart';
 import '../home/home_shell.dart';
 import '../profile_first.dart';
 
@@ -179,8 +180,11 @@ class _FirstTimeLanguageSelectionScreenState
     if (!mounted) return;
 
     final isProfileSetup = ProfileService.isProfileSetupComplete();
-    final Widget nextScreen =
-        isProfileSetup ? const HomeShell() : const ProfileFirst();
+    final isOnboardingComplete = ProfileService.isOnboardingComplete();
+
+    final Widget nextScreen = !isOnboardingComplete
+        ? const OnboardingScreen()
+        : (isProfileSetup ? const HomeShell() : const ProfileFirst());
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => nextScreen),

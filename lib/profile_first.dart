@@ -95,18 +95,21 @@ class _ProfileFirstState extends State<ProfileFirst> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: 20.h),
-                        // Back button
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
-                              size: 22.sp,
+                        // Back button (only if there is a previous route)
+                        if (Navigator.of(context).canPop())
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: Colors.black,
+                                size: 22.sp,
+                              ),
+                              onPressed: () => Navigator.of(context).pop(),
                             ),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                        ),
+                          )
+                        else
+                          SizedBox(height: 22.h),
                         SizedBox(height: 6.h),
 
                         // Header Section

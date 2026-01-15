@@ -7,6 +7,7 @@ class ProfileService {
   static const String _nameKey = 'userName';
   static const String _imagePathKey = 'profileImagePath';
   static const String _isSetupCompleteKey = 'isSetupComplete';
+  static const String _isOnboardingCompleteKey = 'isOnboardingComplete';
 
   static Box? _box;
 
@@ -19,6 +20,16 @@ class ProfileService {
   /// Check if profile setup is complete
   static bool isProfileSetupComplete() {
     return _box?.get(_isSetupCompleteKey, defaultValue: false) ?? false;
+  }
+
+  /// Check if onboarding has been completed
+  static bool isOnboardingComplete() {
+    return _box?.get(_isOnboardingCompleteKey, defaultValue: false) ?? false;
+  }
+
+  /// Mark onboarding as completed
+  static Future<void> setOnboardingComplete(bool isComplete) async {
+    await _box?.put(_isOnboardingCompleteKey, isComplete);
   }
 
   /// Get user name

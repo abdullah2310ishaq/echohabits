@@ -466,4 +466,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get plantingTag => 'Planting';
+
+  @override
+  String get onboardingTitle1 => 'Track Your Daily Eco Actions';
+
+  @override
+  String get onboardingDescription1 =>
+      'Complete daily actions, maintain your streak, and increase your eco score.';
+
+  @override
+  String get onboardingTitle2 => 'Build Habits That Stick';
+
+  @override
+  String get onboardingDescription2 =>
+      'Add habits to your routine, maintain streaks, and earn rewards as you stay consistent.';
+
+  @override
+  String get onboardingTitle3 => 'Compete. Earn. Level Up.';
+
+  @override
+  String get onboardingDescription3 =>
+      'Climb the leaderboard, unlock badges, and track your progress against others.';
 }

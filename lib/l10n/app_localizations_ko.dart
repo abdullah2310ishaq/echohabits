@@ -107,7 +107,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get couldNotOpenLink => '링크를 열 수 없습니다';
 
   @override
-  String get habitLibrary => '습관 라이브러리';
+  String get habitLibrary => '습관';
 
   @override
   String get pickOneHabitToBeginYourEcoJourney => '에코 여정을 시작하려면 하나의 습관을 선택하세요.';
@@ -185,7 +185,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sunday => '일';
 
   @override
-  String get setUpYourProfile => '프로필 설정';
+  String get setUpYourProfile => '프로필';
 
   @override
   String get letsPersonalizeYourEcoJourney => '에코 여정을 개인화해보세요';
@@ -460,4 +460,24 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get plantingTag => '식재';
+
+  @override
+  String get onboardingTitle1 => '일일 에코 액션 추적';
+
+  @override
+  String get onboardingDescription1 => '일일 액션을 완료하고, 연속 기록을 유지하며, 에코 점수를 높이세요.';
+
+  @override
+  String get onboardingTitle2 => '지속되는 습관 구축';
+
+  @override
+  String get onboardingDescription2 =>
+      '루틴에 습관을 추가하고, 연속 기록을 유지하며, 일관성을 유지하면서 보상을 받으세요.';
+
+  @override
+  String get onboardingTitle3 => '경쟁. 획득. 레벨업.';
+
+  @override
+  String get onboardingDescription3 =>
+      '리더보드를 오르고, 배지를 잠금 해제하고, 다른 사람들과의 진행 상황을 추적하세요.';
 }

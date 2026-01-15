@@ -468,4 +468,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get plantingTag => 'Pflanzen';
+
+  @override
+  String get onboardingTitle1 => 'Verfolgen Sie Ihre täglichen Öko-Aktionen';
+
+  @override
+  String get onboardingDescription1 =>
+      'Vervollständigen Sie tägliche Aktionen, halten Sie Ihre Serie aufrecht und erhöhen Sie Ihren Öko-Score.';
+
+  @override
+  String get onboardingTitle2 => 'Gewohnheiten aufbauen, die bleiben';
+
+  @override
+  String get onboardingDescription2 =>
+      'Fügen Sie Gewohnheiten zu Ihrer Routine hinzu, halten Sie Serien aufrecht und verdienen Sie Belohnungen, während Sie konsequent bleiben.';
+
+  @override
+  String get onboardingTitle3 => 'Wettbewerb. Verdienen. Aufsteigen.';
+
+  @override
+  String get onboardingDescription3 =>
+      'Steigen Sie in der Bestenliste auf, schalten Sie Abzeichen frei und verfolgen Sie Ihren Fortschritt im Vergleich zu anderen.';
 }
