@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "Mais Aplicativos",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "Suporte",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "Política de Privacidade",
   "@privacyPolicy": {
@@ -305,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "Editar Perfil",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "Salvar Alterações",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "Perfil atualizado com sucesso",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "Por favor, insira seu nome",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -317,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "Nenhum rosto humano detectado. Por favor, faça upload de uma foto com um rosto claro.",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "Escolher da Galeria",
   "@chooseFromGallery": {

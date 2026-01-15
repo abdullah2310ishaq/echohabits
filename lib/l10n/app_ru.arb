@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "Больше Приложений",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "Поддержка",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "Обратная связь",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "Политика Конфиденциальности",
   "@privacyPolicy": {
@@ -305,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "Редактировать Профиль",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "Сохранить Изменения",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "Профиль успешно обновлен",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "Пожалуйста, введите ваше имя",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -317,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "Человеческое лицо не обнаружено. Пожалуйста, загрузите фотографию с четким лицом.",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "Выбрать из Галереи",
   "@chooseFromGallery": {

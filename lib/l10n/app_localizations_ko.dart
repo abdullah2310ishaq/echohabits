@@ -75,13 +75,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get rateUs => '평가하기';
 
   @override
-  String get moreApps => 'More Apps';
+  String get moreApps => '더 많은 앱';
 
   @override
   String get support => '지원';
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => '피드백';
 
   @override
   String get privacyPolicy => '개인정보 보호정책';
@@ -243,13 +243,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get continueButton => '계속';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => '프로필 편집';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => '변경사항 저장';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => '프로필이 성공적으로 업데이트되었습니다';
 
   @override
   String get pleaseEnterYourName => '이름을 입력해주세요';
@@ -260,8 +260,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get noFaceDetected =>
-      'No human face detected. Please upload a photo with a clear face.';
+  String get noFaceDetected => '인간의 얼굴이 감지되지 않았습니다. 얼굴이 명확한 사진을 업로드해주세요.';
 
   @override
   String get chooseFromGallery => '갤러리에서 선택';

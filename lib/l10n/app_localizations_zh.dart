@@ -75,13 +75,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rateUs => '评价我们';
 
   @override
-  String get moreApps => 'More Apps';
+  String get moreApps => '更多应用';
 
   @override
   String get support => '支持';
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => '反馈';
 
   @override
   String get privacyPolicy => '隐私政策';
@@ -243,13 +243,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get continueButton => '继续';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => '编辑个人资料';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => '保存更改';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => '个人资料已成功更新';
 
   @override
   String get pleaseEnterYourName => '请输入您的姓名';
@@ -260,8 +260,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get noFaceDetected =>
-      'No human face detected. Please upload a photo with a clear face.';
+  String get noFaceDetected => '未检测到人脸。请上传一张人脸清晰的照片。';
 
   @override
   String get chooseFromGallery => '从图库选择';

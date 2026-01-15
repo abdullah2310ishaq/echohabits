@@ -75,7 +75,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get rateUs => 'Valutaci';
 
   @override
-  String get moreApps => 'More Apps';
+  String get moreApps => 'Altre App';
 
   @override
   String get support => 'Supporto';
@@ -250,13 +250,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get continueButton => 'Continua';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'Modifica Profilo';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => 'Salva Modifiche';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => 'Profilo aggiornato con successo';
 
   @override
   String get pleaseEnterYourName => 'Inserisci il tuo nome';
@@ -268,7 +268,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noFaceDetected =>
-      'No human face detected. Please upload a photo with a clear face.';
+      'Nessun volto umano rilevato. Carica una foto con un volto chiaro.';
 
   @override
   String get chooseFromGallery => 'Scegli dalla Galleria';

@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "더 많은 앱",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "지원",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "피드백",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "개인정보 보호정책",
   "@privacyPolicy": {
@@ -305,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "프로필 편집",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "변경사항 저장",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "프로필이 성공적으로 업데이트되었습니다",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "이름을 입력해주세요",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -317,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "인간의 얼굴이 감지되지 않았습니다. 얼굴이 명확한 사진을 업로드해주세요.",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "갤러리에서 선택",
   "@chooseFromGallery": {

@@ -75,13 +75,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rateUs => 'قيمنا';
 
   @override
-  String get moreApps => 'More Apps';
+  String get moreApps => 'المزيد من التطبيقات';
 
   @override
   String get support => 'الدعم';
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => 'التعليقات';
 
   @override
   String get privacyPolicy => 'سياسة الخصوصية';
@@ -245,13 +245,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continueButton => 'متابعة';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'تعديل الملف الشخصي';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => 'حفظ التغييرات';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => 'تم تحديث الملف الشخصي بنجاح';
 
   @override
   String get pleaseEnterYourName => 'الرجاء إدخال اسمك';
@@ -263,7 +263,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noFaceDetected =>
-      'No human face detected. Please upload a photo with a clear face.';
+      'لم يتم اكتشاف وجه بشري. يرجى رفع صورة بوجه واضح.';
 
   @override
   String get chooseFromGallery => 'اختر من المعرض';

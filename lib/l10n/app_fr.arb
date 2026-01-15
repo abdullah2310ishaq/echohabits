@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "Plus d'Applications",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "Support",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "Commentaires",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "Politique de Confidentialité",
   "@privacyPolicy": {
@@ -305,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "Modifier le Profil",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "Enregistrer les Modifications",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "Profil mis à jour avec succès",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "Veuillez entrer votre nom",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -317,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "Aucun visage humain détecté. Veuillez télécharger une photo avec un visage clair.",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "Choisir dans la Galerie",
   "@chooseFromGallery": {

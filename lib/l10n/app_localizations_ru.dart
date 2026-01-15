@@ -75,13 +75,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get rateUs => 'Оцените нас';
 
   @override
-  String get moreApps => 'More Apps';
+  String get moreApps => 'Больше Приложений';
 
   @override
   String get support => 'Поддержка';
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => 'Обратная связь';
 
   @override
   String get privacyPolicy => 'Политика Конфиденциальности';
@@ -248,13 +248,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get continueButton => 'Продолжить';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'Редактировать Профиль';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => 'Сохранить Изменения';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => 'Профиль успешно обновлен';
 
   @override
   String get pleaseEnterYourName => 'Пожалуйста, введите ваше имя';
@@ -266,7 +266,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noFaceDetected =>
-      'No human face detected. Please upload a photo with a clear face.';
+      'Человеческое лицо не обнаружено. Пожалуйста, загрузите фотографию с четким лицом.';
 
   @override
   String get chooseFromGallery => 'Выбрать из Галереи';

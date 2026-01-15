@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "المزيد من التطبيقات",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "الدعم",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "التعليقات",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "سياسة الخصوصية",
   "@privacyPolicy": {
@@ -305,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "تعديل الملف الشخصي",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "حفظ التغييرات",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "الرجاء إدخال اسمك",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -317,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "لم يتم اكتشاف وجه بشري. يرجى رفع صورة بوجه واضح.",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "اختر من المعرض",
   "@chooseFromGallery": {

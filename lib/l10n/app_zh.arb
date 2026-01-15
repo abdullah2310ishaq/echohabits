@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "更多应用",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "支持",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "反馈",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "隐私政策",
   "@privacyPolicy": {
@@ -305,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "编辑个人资料",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "保存更改",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "个人资料已成功更新",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "请输入您的姓名",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -317,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "未检测到人脸。请上传一张人脸清晰的照片。",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "从图库选择",
   "@chooseFromGallery": {
