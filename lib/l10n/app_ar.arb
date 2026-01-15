@@ -1,150 +1,150 @@
 {
-  "@@locale": "ko",
-  "appTitle": "에코 습관 추적기",
+  "@@locale": "ar",
+  "appTitle": "متتبع العادات البيئية",
   "@appTitle": {
     "description": "The title of the application"
   },
-  "makingTheWorldGreener": "세상을 더 녹색으로 만들기",
+  "makingTheWorldGreener": "جعل العالم أكثر خضرة",
   "@makingTheWorldGreener": {
     "description": "Profile subtitle text"
   },
-  "ecoExplorer": "에코 탐험가",
+  "ecoExplorer": "مستكشف بيئي",
   "@ecoExplorer": {
     "description": "Badge title"
   },
-  "greenScore": "녹색 점수",
+  "greenScore": "النقاط الخضراء",
   "@greenScore": {
     "description": "Green score card title"
   },
-  "avgActionsPerDay": "일평균 활동",
+  "avgActionsPerDay": "متوسط الإجراءات/اليوم",
   "@avgActionsPerDay": {
     "description": "Average actions per day label"
   },
-  "dayStreak": "연속 일수",
+  "dayStreak": "سلسلة الأيام",
   "@dayStreak": {
     "description": "Day streak label"
   },
-  "badges": "배지",
+  "badges": "شارات",
   "@badges": {
     "description": "Badges section title"
   },
-  "firstStep": "첫 걸음",
+  "firstStep": "الخطوة الأولى",
   "@firstStep": {
     "description": "First step badge name"
   },
-  "cyclist": "자전거 이용자",
+  "cyclist": "راكب دراجة",
   "@cyclist": {
     "description": "Cyclist badge name"
   },
-  "waterSaver": "절수자",
+  "waterSaver": "موفر المياه",
   "@waterSaver": {
     "description": "Water saver badge name"
   },
-  "energyPr": "에너지 전문가",
+  "energyPr": "موفر الطاقة",
   "@energyPr": {
     "description": "Energy Pr badge name"
   },
-  "history": "기록",
+  "history": "السجل",
   "@history": {
     "description": "History section title"
   },
-  "weekly": "주간",
+  "weekly": "أسبوعي",
   "@weekly": {
     "description": "Weekly filter option"
   },
-  "monthly": "월간",
+  "monthly": "شهري",
   "@monthly": {
     "description": "Monthly filter option"
   },
-  "allTime": "전체 기간",
+  "allTime": "كل الوقت",
   "@allTime": {
     "description": "All time filter option"
   },
-  "viewHistory": "기록 보기",
+  "viewHistory": "عرض السجل",
   "@viewHistory": {
     "description": "View history button text"
   },
-  "settings": "설정",
+  "settings": "الإعدادات",
   "@settings": {
     "description": "Settings screen title"
   },
-  "account": "계정",
+  "account": "الحساب",
   "@account": {
     "description": "Account settings option"
   },
-  "language": "언어",
+  "language": "اللغة",
   "@language": {
     "description": "Language settings option"
   },
-  "english": "영어",
+  "english": "الإنجليزية",
   "@english": {
     "description": "English language name"
   },
-  "shareApp": "앱 공유",
+  "shareApp": "مشاركة التطبيق",
   "@shareApp": {
     "description": "Share app option"
   },
-  "rateUs": "평가하기",
+  "rateUs": "قيمنا",
   "@rateUs": {
     "description": "Rate us option"
   },
-  "support": "지원",
+  "support": "الدعم",
   "@support": {
     "description": "Support option"
   },
-  "privacyPolicy": "개인정보 보호정책",
+  "privacyPolicy": "سياسة الخصوصية",
   "@privacyPolicy": {
     "description": "Privacy policy option"
   },
-  "termsOfService": "서비스 약관",
+  "termsOfService": "شروط الخدمة",
   "@termsOfService": {
     "description": "Terms of service option"
   },
-  "logout": "로그아웃",
+  "logout": "تسجيل الخروج",
   "@logout": {
     "description": "Logout option"
   },
-  "chooseALanguage": "언어 선택",
+  "chooseALanguage": "اختر لغة",
   "@chooseALanguage": {
     "description": "Language selection screen title"
   },
-  "next": "다음",
+  "next": "التالي",
   "@next": {
     "description": "Next button text"
   },
-  "cancel": "취소",
+  "cancel": "إلغاء",
   "@cancel": {
     "description": "Cancel button text"
   },
-  "add": "추가",
+  "add": "إضافة",
   "@add": {
     "description": "Add button text"
   },
-  "addThisHabitToYourRoutine": "이 습관을 루틴에 추가하시겠습니까?",
+  "addThisHabitToYourRoutine": "إضافة هذه العادة إلى روتينك؟",
   "@addThisHabitToYourRoutine": {
     "description": "Dialog title when adding a habit"
   },
-  "youCanTrackItDailyOnYourHomeScreen": "홈 화면에서 매일 추적할 수 있습니다",
+  "youCanTrackItDailyOnYourHomeScreen": "يمكنك تتبعها يوميًا على الشاشة الرئيسية",
   "@youCanTrackItDailyOnYourHomeScreen": {
     "description": "Description text in add habit dialog"
   },
-  "exit": "종료",
+  "exit": "خروج",
   "@exit": {
     "description": "Exit button text"
   },
-  "areYouSureYouWantToExit": "앱을 종료하시겠습니까?",
+  "areYouSureYouWantToExit": "هل أنت متأكد أنك تريد الخروج؟",
   "@areYouSureYouWantToExit": {
     "description": "Exit confirmation message"
   },
-  "areYouSureYouWantToLogout": "로그아웃하시겠습니까?",
+  "areYouSureYouWantToLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
   },
-  "accountSettingsComingSoon": "계정 설정 곧 출시",
+  "accountSettingsComingSoon": "إعدادات الحساب قريباً",
   "@accountSettingsComingSoon": {
     "description": "Account settings placeholder message"
   },
-  "languageChangedTo": "언어가 {language}(으)로 변경되었습니다",
+  "languageChangedTo": "تم تغيير اللغة إلى {language}",
   "@languageChangedTo": {
     "description": "Language change confirmation message",
     "placeholders": {
@@ -153,163 +153,163 @@
       }
     }
   },
-  "shareFunctionalityComingSoon": "공유 기능 곧 출시",
+  "shareFunctionalityComingSoon": "ميزة المشاركة قريباً",
   "@shareFunctionalityComingSoon": {
     "description": "Share functionality placeholder message"
   },
-  "logoutFunctionalityComingSoon": "로그아웃 기능 곧 출시",
+  "logoutFunctionalityComingSoon": "ميزة تسجيل الخروج قريباً",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
   },
-  "resetAllProgress": "모든 진행 상황 재설정",
+  "resetAllProgress": "إعادة تعيين كل التقدم",
   "@resetAllProgress": {
     "description": "Reset all progress option"
   },
-  "areYouSureYouWantToResetAllProgress": "모든 진행 상황을 재설정하시겠습니까? 모든 점수, 습관 및 기록이 삭제됩니다.",
+  "areYouSureYouWantToResetAllProgress": "هل أنت متأكد أنك تريد إعادة تعيين كل التقدم؟ سيتم حذف جميع النقاط والعادات والسجل.",
   "@areYouSureYouWantToResetAllProgress": {
     "description": "Reset all progress confirmation message"
   },
-  "progressResetSuccessfully": "모든 진행 상황이 성공적으로 재설정되었습니다",
+  "progressResetSuccessfully": "تم إعادة تعيين كل التقدم بنجاح",
   "@progressResetSuccessfully": {
     "description": "Success message when progress is reset"
   },
-  "couldNotOpenLink": "링크를 열 수 없습니다",
+  "couldNotOpenLink": "تعذر فتح الرابط",
   "@couldNotOpenLink": {
     "description": "Error message when link cannot be opened"
   },
-  "habitLibrary": "습관",
+  "habitLibrary": "العادات",
   "@habitLibrary": {
     "description": "Habit library screen title"
   },
-  "pickOneHabitToBeginYourEcoJourney": "에코 여정을 시작하려면 하나의 습관을 선택하세요.",
+  "pickOneHabitToBeginYourEcoJourney": "اختر عادة واحدة لبدء رحلتك البيئية.",
   "@pickOneHabitToBeginYourEcoJourney": {
     "description": "Habit library subtitle"
   },
-  "pickAHabitToAdd": "추가할 습관 선택",
+  "pickAHabitToAdd": "اختر عادة للإضافة",
   "@pickAHabitToAdd": {
     "description": "Habit list section title"
   },
-  "all": "전체",
+  "all": "الكل",
   "@all": {
     "description": "All categories filter"
   },
-  "transport": "교통",
+  "transport": "المواصلات",
   "@transport": {
     "description": "Transport category"
   },
-  "food": "음식",
+  "food": "الطعام",
   "@food": {
     "description": "Food category"
   },
-  "home": "가정",
+  "home": "المنزل",
   "@home": {
     "description": "Home category"
   },
-  "water": "물",
+  "water": "المياه",
   "@water": {
     "description": "Water category"
   },
-  "shopping": "쇼핑",
+  "shopping": "التسوق",
   "@shopping": {
     "description": "Shopping category"
   },
-  "waste": "폐기물",
+  "waste": "النفايات",
   "@waste": {
     "description": "Waste category"
   },
-  "digital": "디지털",
+  "digital": "الرقمي",
   "@digital": {
     "description": "Digital category"
   },
-  "fitness": "피트니스",
+  "fitness": "اللياقة البدنية",
   "@fitness": {
     "description": "Fitness category"
   },
-  "mindfulness": "마음챙김",
+  "mindfulness": "اليقظة",
   "@mindfulness": {
     "description": "Mindfulness category"
   },
-  "savings": "저축",
+  "savings": "التوفير",
   "@savings": {
     "description": "Savings category"
   },
-  "easy": "쉬움",
+  "easy": "سهل",
   "@easy": {
     "description": "Easy difficulty level"
   },
-  "medium": "보통",
+  "medium": "متوسط",
   "@medium": {
     "description": "Medium difficulty level"
   },
-  "highImpact": "높은 영향",
+  "highImpact": "تأثير عالي",
   "@highImpact": {
     "description": "High impact label"
   },
-  "mediumImpact": "중간 영향",
+  "mediumImpact": "تأثير متوسط",
   "@mediumImpact": {
     "description": "Medium impact label"
   },
-  "lowImpact": "낮은 영향",
+  "lowImpact": "تأثير منخفض",
   "@lowImpact": {
     "description": "Low impact label"
   },
-  "monday": "월",
+  "monday": "الاثنين",
   "@monday": {
     "description": "Monday abbreviation"
   },
-  "tuesday": "화",
+  "tuesday": "الثلاثاء",
   "@tuesday": {
     "description": "Tuesday abbreviation"
   },
-  "wednesday": "수",
+  "wednesday": "الأربعاء",
   "@wednesday": {
     "description": "Wednesday abbreviation"
   },
-  "thursday": "목",
+  "thursday": "الخميس",
   "@thursday": {
     "description": "Thursday abbreviation"
   },
-  "friday": "금",
+  "friday": "الجمعة",
   "@friday": {
     "description": "Friday abbreviation"
   },
-  "saturday": "토",
+  "saturday": "السبت",
   "@saturday": {
     "description": "Saturday abbreviation"
   },
-  "sunday": "일",
+  "sunday": "الأحد",
   "@sunday": {
     "description": "Sunday abbreviation"
   },
-  "setUpYourProfile": "프로필",
+  "setUpYourProfile": "الملف الشخصي",
   "@setUpYourProfile": {
     "description": "Profile setup screen title"
   },
-  "letsPersonalizeYourEcoJourney": "에코 여정을 개인화해보세요",
+  "letsPersonalizeYourEcoJourney": "دعنا نخصص رحلتك البيئية",
   "@letsPersonalizeYourEcoJourney": {
     "description": "Profile setup subtitle"
   },
-  "tapToUploadPhoto": "탭하여 사진 업로드",
+  "tapToUploadPhoto": "اضغط لرفع الصورة",
   "@tapToUploadPhoto": {
     "description": "Profile picture upload instruction"
   },
-  "yourName": "이름",
+  "yourName": "اسمك",
   "@yourName": {
     "description": "Name input field label"
   },
-  "nameHint": "예: Liza",
+  "nameHint": "مثال: ليلى",
   "@nameHint": {
     "description": "Name input field hint text"
   },
-  "continueButton": "계속",
+  "continueButton": "متابعة",
   "@continueButton": {
     "description": "Continue button text"
   },
-  "pleaseEnterYourName": "이름을 입력해주세요",
+  "pleaseEnterYourName": "الرجاء إدخال اسمك",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
   },
-  "errorPickingImage": "이미지 선택 오류: {error}",
+  "errorPickingImage": "خطأ في اختيار الصورة: {error}",
   "@errorPickingImage": {
     "description": "Error message when image picker fails",
     "placeholders": {
@@ -318,67 +318,67 @@
       }
     }
   },
-  "chooseFromGallery": "갤러리에서 선택",
+  "chooseFromGallery": "اختر من المعرض",
   "@chooseFromGallery": {
     "description": "Image source option - gallery"
   },
-  "takeAPhoto": "사진 촬영",
+  "takeAPhoto": "التقط صورة",
   "@takeAPhoto": {
     "description": "Image source option - camera"
   },
-  "useDefaultImage": "기본 이미지 사용",
+  "useDefaultImage": "استخدم الصورة الافتراضية",
   "@useDefaultImage": {
     "description": "Image source option - default"
   },
-  "leaderboard": "리더보드",
+  "leaderboard": "لوحة المتصدرين",
   "@leaderboard": {
     "description": "Leaderboard screen title"
   },
-  "yourEcoHabitsYourRank": "당신의 에코 습관, 당신의 순위",
+  "yourEcoHabitsYourRank": "عاداتك البيئية، مرتبتك",
   "@yourEcoHabitsYourRank": {
     "description": "Leaderboard subtitle"
   },
-  "betterHabitsLeadToBetterBadges": "더 나은 습관이 더 나은 배지와 더 큰 진전으로 이어집니다.",
+  "betterHabitsLeadToBetterBadges": "العادات الأفضل تؤدي إلى شارات أفضل وتقدم أكبر.",
   "@betterHabitsLeadToBetterBadges": {
     "description": "Leaderboard motivational message"
   },
-  "currentEcoHabitRankings": "현재 에코 습관 순위",
+  "currentEcoHabitRankings": "تصنيفات العادات البيئية الحالية",
   "@currentEcoHabitRankings": {
     "description": "Rankings section title"
   },
-  "you": "당신",
+  "you": "أنت",
   "@you": {
     "description": "Current user indicator"
   },
-  "greenStarter": "녹색 초보자",
+  "greenStarter": "مبتدئ أخضر",
   "@greenStarter": {
     "description": "Rank title for score < 2000"
   },
-  "ecoExplorerRank": "에코 탐험가",
+  "ecoExplorerRank": "مستكشف بيئي",
   "@ecoExplorerRank": {
     "description": "Rank title for score 2000-2999"
   },
-  "ecoWarrior": "에코 전사",
+  "ecoWarrior": "محارب بيئي",
   "@ecoWarrior": {
     "description": "Rank title for score 3000-4999"
   },
-  "natureGuardian": "자연 수호자",
+  "natureGuardian": "حارس الطبيعة",
   "@natureGuardian": {
     "description": "Rank title for score 5000-9999"
   },
-  "ecoMaster": "에코 마스터",
+  "ecoMaster": "سيد بيئي",
   "@ecoMaster": {
     "description": "Rank title for score >= 10000"
   },
-  "hi": "안녕하세요",
+  "hi": "مرحباً",
   "@hi": {
     "description": "Greeting prefix"
   },
-  "dailyEcoScore": "일일 에코 점수",
+  "dailyEcoScore": "النقاط البيئية اليومية",
   "@dailyEcoScore": {
     "description": "Daily eco score card title"
   },
-  "nextLevel": "다음 레벨: {level}",
+  "nextLevel": "المستوى التالي: {level}",
   "@nextLevel": {
     "description": "Next level indicator with level name",
     "placeholders": {
@@ -387,15 +387,15 @@
       }
     }
   },
-  "todaysEcoTasks": "오늘의 에코 작업",
+  "todaysEcoTasks": "مهام اليوم البيئية",
   "@todaysEcoTasks": {
     "description": "Today's tasks section title"
   },
-  "skippedYourStreakNeedsConsistency": "건너뜀! 연속 기록에는 일관성이 필요합니다",
+  "skippedYourStreakNeedsConsistency": "تم التخطي! سلسلتك تحتاج إلى الاتساق",
   "@skippedYourStreakNeedsConsistency": {
     "description": "Message when task is skipped"
   },
-  "taskDoneStreakStrong": "{task} 완료! 연속 기록 강함",
+  "taskDoneStreakStrong": "{task} تم! السلسلة قوية",
   "@taskDoneStreakStrong": {
     "description": "Message when habit task is completed",
     "placeholders": {
@@ -404,7 +404,7 @@
       }
     }
   },
-  "taskDone": "{task} 완료",
+  "taskDone": "{task} تم",
   "@taskDone": {
     "description": "Message when default task is completed",
     "placeholders": {
@@ -413,35 +413,35 @@
       }
     }
   },
-  "skip": "건너뛰기",
+  "skip": "تخطي",
   "@skip": {
     "description": "Skip button text"
   },
-  "done": "완료",
+  "done": "تم",
   "@done": {
     "description": "Done button text"
   },
-  "noMoreTasksForTheDay": "오늘 더 이상 작업이 없습니다",
+  "noMoreTasksForTheDay": "لا مزيد من المهام لهذا اليوم",
   "@noMoreTasksForTheDay": {
     "description": "Empty state message when no tasks"
   },
-  "goodMorning": "좋은 아침",
+  "goodMorning": "صباح الخير",
   "@goodMorning": {
     "description": "Morning greeting"
   },
-  "goodAfternoon": "좋은 오후",
+  "goodAfternoon": "مساء الخير",
   "@goodAfternoon": {
     "description": "Afternoon greeting"
   },
-  "goodEvening": "좋은 저녁",
+  "goodEvening": "مساء الخير",
   "@goodEvening": {
     "description": "Evening greeting"
   },
-  "thisHabitIsAlreadyAdded": "이 습관은 이미 목록에 추가되었습니다",
+  "thisHabitIsAlreadyAdded": "هذه العادة مضافة بالفعل إلى قائمتك",
   "@thisHabitIsAlreadyAdded": {
     "description": "Error message when trying to add duplicate habit"
   },
-  "thisHabitWasAddedRecently": "이 습관은 최근에 추가되었습니다. 다시 추가하기 전에 {hours}시간 기다려주세요 (자정에 재설정)",
+  "thisHabitWasAddedRecently": "تمت إضافة هذه العادة مؤخراً. يرجى الانتظار {hours} ساعة قبل الإضافة مرة أخرى (يعيد التعيين عند منتصف الليل)",
   "@thisHabitWasAddedRecently": {
     "description": "Error message when habit is on cooldown",
     "placeholders": {
@@ -450,7 +450,7 @@
       }
     }
   },
-  "habitAddedKeepGoing": "{habit} 추가됨! 계속하세요",
+  "habitAddedKeepGoing": "{habit} تمت الإضافة! استمر",
   "@habitAddedKeepGoing": {
     "description": "Success message when habit is added",
     "placeholders": {
@@ -459,231 +459,231 @@
       }
     }
   },
-  "cycleToWork": "자전거로 출퇴근",
+  "cycleToWork": "الدراجة إلى العمل",
   "@cycleToWork": {
     "description": "Transport habit title"
   },
-  "usePublicTransport": "대중교통 이용",
+  "usePublicTransport": "استخدم وسائل النقل العامة",
   "@usePublicTransport": {
     "description": "Transport habit title"
   },
-  "carpoolWithColleagues": "동료와 카풀",
+  "carpoolWithColleagues": "شارك السيارات مع الزملاء",
   "@carpoolWithColleagues": {
     "description": "Transport habit title"
   },
-  "walkShortDistances": "짧은 거리 걷기",
+  "walkShortDistances": "امشِ للمسافات القصيرة",
   "@walkShortDistances": {
     "description": "Transport habit title"
   },
-  "maintainBikeRegularly": "자전거 정기 점검",
+  "maintainBikeRegularly": "صيانة الدراجة بانتظام",
   "@maintainBikeRegularly": {
     "description": "Transport habit title"
   },
-  "buyBulkFood": "대량 구매",
+  "buyBulkFood": "شراء الطعام بالجملة",
   "@buyBulkFood": {
     "description": "Food habit title"
   },
-  "compostKitchenWaste": "주방 쓰레기 퇴비화",
+  "compostKitchenWaste": "تحويل نفايات المطبخ إلى سماد",
   "@compostKitchenWaste": {
     "description": "Food habit title"
   },
-  "plantAMiniGarden": "미니 정원 만들기",
+  "plantAMiniGarden": "ازرع حديقة صغيرة",
   "@plantAMiniGarden": {
     "description": "Food habit title"
   },
-  "reducePackagedFood": "포장 식품 줄이기",
+  "reducePackagedFood": "قلل من الطعام المعبأ",
   "@reducePackagedFood": {
     "description": "Food habit title"
   },
-  "chooseSeasonalFruits": "제철 과일 선택",
+  "chooseSeasonalFruits": "اختر الفواكه الموسمية",
   "@chooseSeasonalFruits": {
     "description": "Food habit title"
   },
-  "coldWaterWash": "냉수 세탁",
+  "coldWaterWash": "غسيل بالماء البارد",
   "@coldWaterWash": {
     "description": "Home habit title"
   },
-  "switchOffUnusedLights": "사용하지 않는 조명 끄기",
+  "switchOffUnusedLights": "أطفئ الأضواء غير المستخدمة",
   "@switchOffUnusedLights": {
     "description": "Home habit title"
   },
-  "useEnergyEfficientBulbs": "절전 전구 사용",
+  "useEnergyEfficientBulbs": "استخدم المصابيح الموفرة للطاقة",
   "@useEnergyEfficientBulbs": {
     "description": "Home habit title"
   },
-  "airDryClothes": "공기 건조",
+  "airDryClothes": "جفف الملابس بالهواء",
   "@airDryClothes": {
     "description": "Home habit title"
   },
-  "useNaturalVentilation": "자연 환기 사용",
+  "useNaturalVentilation": "استخدم التهوية الطبيعية",
   "@useNaturalVentilation": {
     "description": "Home habit title"
   },
-  "shorterShowers": "짧은 샤워",
+  "shorterShowers": "استحمام أقصر",
   "@shorterShowers": {
     "description": "Water habit title"
   },
-  "fixWaterLeaks": "수도 누수 수리",
+  "fixWaterLeaks": "أصلح تسريبات المياه",
   "@fixWaterLeaks": {
     "description": "Water habit title"
   },
-  "collectRainwaterForPlants": "식물용 빗물 수집",
+  "collectRainwaterForPlants": "اجمع مياه الأمطار للنباتات",
   "@collectRainwaterForPlants": {
     "description": "Water habit title"
   },
-  "reuseROWater": "RO 물 재사용",
+  "reuseROWater": "أعد استخدام مياه التنقية",
   "@reuseROWater": {
     "description": "Water habit title"
   },
-  "turnOffTapWhileBrushing": "양치질 중 수도꼭지 끄기",
+  "turnOffTapWhileBrushing": "أغلق الصنبور أثناء تنظيف الأسنان",
   "@turnOffTapWhileBrushing": {
     "description": "Water habit title"
   },
-  "carryReusableBags": "재사용 가능한 가방 휴대",
+  "carryReusableBags": "احمل أكياس قابلة لإعادة الاستخدام",
   "@carryReusableBags": {
     "description": "Shopping/Waste habit title"
   },
-  "buyRecycledProducts": "재활용 제품 구매",
+  "buyRecycledProducts": "اشتري المنتجات المعاد تدويرها",
   "@buyRecycledProducts": {
     "description": "Shopping/Waste habit title"
   },
-  "avoidFastFashion": "패스트 패션 피하기",
+  "avoidFastFashion": "تجنب الموضة السريعة",
   "@avoidFastFashion": {
     "description": "Shopping/Waste habit title"
   },
-  "chooseEcoFriendlyBrands": "친환경 브랜드 선택",
+  "chooseEcoFriendlyBrands": "اختر العلامات التجارية الصديقة للبيئة",
   "@chooseEcoFriendlyBrands": {
     "description": "Shopping/Waste habit title"
   },
-  "supportLocalBusiness": "지역 비즈니스 지원",
+  "supportLocalBusiness": "ادعم الأعمال المحلية",
   "@supportLocalBusiness": {
     "description": "Shopping/Waste habit title"
   },
-  "reduceScreenTime": "화면 시간 줄이기",
+  "reduceScreenTime": "قلل وقت الشاشة",
   "@reduceScreenTime": {
     "description": "Digital habit title"
   },
-  "unsubscribeUnwantedMails": "원하지 않는 메일 구독 취소",
+  "unsubscribeUnwantedMails": "ألغ الاشتراك في الرسائل غير المرغوب فيها",
   "@unsubscribeUnwantedMails": {
     "description": "Digital habit title"
   },
-  "cloudBackupCleanup": "클라우드 백업 정리",
+  "cloudBackupCleanup": "تنظيف النسخ الاحتياطي السحابي",
   "@cloudBackupCleanup": {
     "description": "Digital habit title"
   },
-  "turnOffAutoPlay": "자동 재생 끄기",
+  "turnOffAutoPlay": "أطفئ التشغيل التلقائي",
   "@turnOffAutoPlay": {
     "description": "Digital habit title"
   },
-  "digitalMindfulBreaks": "디지털 마음챙김 휴식",
+  "digitalMindfulBreaks": "استراحات رقمية واعية",
   "@digitalMindfulBreaks": {
     "description": "Digital habit title"
   },
-  "morningWalk": "아침 산책",
+  "morningWalk": "نزهة صباحية",
   "@morningWalk": {
     "description": "Fitness habit title"
   },
-  "practiceYoga": "요가 연습",
+  "practiceYoga": "مارس اليوغا",
   "@practiceYoga": {
     "description": "Fitness habit title"
   },
-  "healthySleepRoutine": "건강한 수면 습관",
+  "healthySleepRoutine": "روتين نوم صحي",
   "@healthySleepRoutine": {
     "description": "Fitness habit title"
   },
-  "drink2LWater": "물 2L 마시기",
+  "drink2LWater": "اشرب 2 لتر من الماء",
   "@drink2LWater": {
     "description": "Fitness habit title"
   },
-  "avoidJunkSnacks": "불량 스낵 피하기",
+  "avoidJunkSnacks": "تجنب الوجبات الخفيفة غير الصحية",
   "@avoidJunkSnacks": {
     "description": "Fitness habit title"
   },
-  "meditation5MinDay": "명상 5분/일",
+  "meditation5MinDay": "تأمل 5 دقائق/يوم",
   "@meditation5MinDay": {
     "description": "Mindfulness habit title"
   },
-  "practiceGratitudeJournaling": "감사 일기 쓰기",
+  "practiceGratitudeJournaling": "مارس تدوين الامتنان",
   "@practiceGratitudeJournaling": {
     "description": "Mindfulness habit title"
   },
-  "breathingExercise": "호흡 운동",
+  "breathingExercise": "تمرين التنفس",
   "@breathingExercise": {
     "description": "Mindfulness habit title"
   },
-  "spendTimeInNature": "자연 속에서 시간 보내기",
+  "spendTimeInNature": "اقضِ وقتاً في الطبيعة",
   "@spendTimeInNature": {
     "description": "Mindfulness habit title"
   },
-  "limitNegativeNews": "부정적인 뉴스 제한",
+  "limitNegativeNews": "قلل الأخبار السلبية",
   "@limitNegativeNews": {
     "description": "Mindfulness habit title"
   },
-  "trackExpenses": "지출 추적",
+  "trackExpenses": "تتبع المصروفات",
   "@trackExpenses": {
     "description": "Savings habit title"
   },
-  "monthlySavingsGoal": "월간 저축 목표",
+  "monthlySavingsGoal": "هدف التوفير الشهري",
   "@monthlySavingsGoal": {
     "description": "Savings habit title"
   },
-  "avoidImpulseBuying": "충동 구매 피하기",
+  "avoidImpulseBuying": "تجنب الشراء الاندفاعي",
   "@avoidImpulseBuying": {
     "description": "Savings habit title"
   },
-  "investInSIP": "SIP 투자",
+  "investInSIP": "استثمر في SIP",
   "@investInSIP": {
     "description": "Savings habit title"
   },
-  "useCashBackResponsibly": "캐시백 책임감 있게 사용",
+  "useCashBackResponsibly": "استخدم استرداد النقود بمسؤولية",
   "@useCashBackResponsibly": {
     "description": "Savings habit title"
   },
-  "defaultWalkBikeTitle": "운전 대신 걷거나 자전거를 이용함",
+  "defaultWalkBikeTitle": "المشي/الدراجة بدلاً من القيادة",
   "@defaultWalkBikeTitle": {
     "description": "Default task title: walked/biked instead of driving"
   },
-  "defaultCoffeeCupTitle": "재사용 가능한 커피컵을 사용함",
+  "defaultCoffeeCupTitle": "استخدم كوب قهوة قابل لإعادة الاستخدام",
   "@defaultCoffeeCupTitle": {
     "description": "Default task title: used a reusable coffee cup"
   },
-  "defaultAfforestationTitle": "조림 / 더 나은 환경을 위해 나무를 심음",
+  "defaultAfforestationTitle": "إعادة التحريج / ازرع شجرة لبيئة أفضل",
   "@defaultAfforestationTitle": {
     "description": "Default task title: afforestation / plant a tree"
   },
-  "dailyTag": "매일",
+  "dailyTag": "يومي",
   "@dailyTag": {
     "description": "Tag label for daily tasks"
   },
-  "afforestationTag": "조림",
+  "afforestationTag": "إعادة التحريج",
   "@afforestationTag": {
     "description": "Tag label for afforestation"
   },
-  "plantingTag": "식재",
+  "plantingTag": "الزراعة",
   "@plantingTag": {
     "description": "Tag label for planting"
   },
-  "onboardingTitle1": "일일 에코 액션 추적",
+  "onboardingTitle1": "تتبع إجراءاتك البيئية اليومية",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "일일 액션을 완료하고, 연속 기록을 유지하며, 에코 점수를 높이세요.",
+  "onboardingDescription1": "أكمل الإجراءات اليومية، حافظ على سلسلتك وزد نقاطك البيئية.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "지속되는 습관 구축",
+  "onboardingTitle2": "بناء عادات تبقى",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "루틴에 습관을 추가하고, 연속 기록을 유지하며, 일관성을 유지하면서 보상을 받으세요.",
+  "onboardingDescription2": "أضف عادات إلى روتينك، حافظ على السلاسل واكسب المكافآت مع الحفاظ على الاتساق.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "경쟁. 획득. 레벨업.",
+  "onboardingTitle3": "تنافس. اكسب. تقدم.",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "리더보드를 오르고, 배지를 잠금 해제하고, 다른 사람들과의 진행 상황을 추적하세요.",
+  "onboardingDescription3": "تسلق لوحة المتصدرين، افتح الشارات وتتبع تقدمك مقارنة بالآخرين.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   }

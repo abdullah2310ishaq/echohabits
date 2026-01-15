@@ -45,6 +45,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get history => 'Cronologia';
 
   @override
+  String get weekly => 'Settimanale';
+
+  @override
+  String get monthly => 'Mensile';
+
+  @override
+  String get allTime => 'Sempre';
+
+  @override
   String get viewHistory => 'Visualizza Cronologia';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get rateUs => 'Valutaci';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => 'Supporto';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => 'Politica sulla Privacy';
@@ -87,6 +102,23 @@ class AppLocalizationsIt extends AppLocalizations {
   String get cancel => 'Annulla';
 
   @override
+  String get add => 'Aggiungi';
+
+  @override
+  String get addThisHabitToYourRoutine =>
+      'Aggiungere questa abitudine alla tua routine?';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen =>
+      'Puoi monitorarlo quotidianamente sulla schermata principale';
+
+  @override
+  String get exit => 'Esci';
+
+  @override
+  String get areYouSureYouWantToExit => 'Sei sicuro di voler uscire dall\'app?';
+
+  @override
   String get areYouSureYouWantToLogout => 'Sei sicuro di voler uscire?';
 
   @override
@@ -104,6 +136,17 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get logoutFunctionalityComingSoon =>
       'Funzionalità di logout in arrivo';
+
+  @override
+  String get resetAllProgress => 'Reimposta Tutti i Progressi';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      'Sei sicuro di voler reimpostare tutti i progressi? Questo eliminerà tutti i tuoi punteggi, abitudini e cronologia.';
+
+  @override
+  String get progressResetSuccessfully =>
+      'Tutti i progressi sono stati reimpostati con successo';
 
   @override
   String get couldNotOpenLink => 'Impossibile aprire il link';
@@ -207,12 +250,25 @@ class AppLocalizationsIt extends AppLocalizations {
   String get continueButton => 'Continua';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => 'Inserisci il tuo nome';
 
   @override
   String errorPickingImage(String error) {
     return 'Errore nella selezione dell\'immagine: $error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => 'Scegli dalla Galleria';

@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "Semanal",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "Mensal",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "Todo o tempo",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "Ver Histórico",
   "@viewHistory": {
     "description": "View history button text"
@@ -104,6 +116,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "Adicionar",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "Adicionar este hábito à sua rotina?",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "Você pode rastreá-lo diariamente na tela inicial",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "Sair",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "Tem certeza de que deseja sair do aplicativo?",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "Tem certeza de que deseja sair?",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +160,18 @@
   "logoutFunctionalityComingSoon": "Funcionalidade de saída em breve",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "Redefinir Todo o Progresso",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "Tem certeza de que deseja redefinir todo o progresso? Isso excluirá todas as suas pontuações, hábitos e histórico.",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "Todo o progresso foi redefinido com sucesso",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "Não foi possível abrir o link",
   "@couldNotOpenLink": {

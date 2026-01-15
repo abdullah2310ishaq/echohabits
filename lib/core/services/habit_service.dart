@@ -394,6 +394,43 @@ class HabitService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Reset all progress: scores, history, habits, and related data
+  Future<void> resetAllProgress() async {
+    // Reset scores
+    _dailyScore = 0;
+    _totalScore = 0;
+    
+    // Clear history
+    _history.clear();
+    
+    // Clear user habits
+    _userHabits.clear();
+    
+    // Clear habit add timestamps
+    _habitAddTimestamps.clear();
+    
+    // Clear hidden default task IDs
+    _hiddenDefaultTaskIds.clear();
+    
+    // Reset dates
+    _lastScoreResetDate = null;
+    _lastDefaultReset = null;
+    
+    // Save all changes to Hive
+    if (_box != null) {
+      await _box!.put(_dailyScoreKey, 0);
+      await _box!.put(_totalScoreKey, 0);
+      await _box!.put(_historyKey, []);
+      await _box!.put(_userHabitsKey, []);
+      await _box!.put(_habitAddTimestampsKey, {});
+      await _box!.put(_hiddenDefaultTaskIdsKey, []);
+      await _box!.delete(_lastScoreResetDateKey);
+      await _box!.delete(_lastDefaultResetKey);
+    }
+    
+    notifyListeners();
+  }
+
   /// Internal: ensure default tasks reset at midnight (00:00)
   void _ensureDefaultTasksFresh() {
     final now = DateTime.now();
@@ -439,13 +476,28 @@ class HabitService extends ChangeNotifier {
   }
 
   /// Calculate score points for a completed task
-  /// Each task gives equal points: 100 total points / 53 total tasks (50 habits + 3 defaults) ≈ 1.89
-  /// We give 2 points per task, capped at 100 daily score
+  /// Total unique tasks: 45 unique habits + 3 defaults = 48 tasks
+  /// To reach 100 points: 100 / 48 ≈ 2.083 points per task
+  /// Strategy: Give 2 points to 44 tasks and 3 points to 4 tasks = 44*2 + 4*3 = 88 + 12 = 100
   int _calculateTaskScore(Map<String, dynamic> task) {
-    // Equal points for all tasks: 2 points per task
-    // Total: 50 habits + 3 defaults = 53 tasks
-    // If all completed: 53 * 2 = 106 points, but capped at 100
-    return 2;
+    // Count how many tasks have been completed today (before this one)
+    final today = DateTime.now();
+    final todayStart = DateTime(today.year, today.month, today.day);
+    final completedToday = _history.where((entry) {
+      if (entry['status'] != 'done') return false;
+      final timestamp = entry['timestamp'] as DateTime;
+      return timestamp.isAfter(todayStart) || timestamp.isAtSameMomentAs(todayStart);
+    }).length;
+    
+    // Give 3 points to the first 4 completed tasks, 2 points to the rest
+    // This ensures we reach exactly 100 when all 48 tasks are completed:
+    // 4 tasks * 3 points + 44 tasks * 2 points = 12 + 88 = 100
+    // Note: completedToday includes the current task since history is added before score calculation
+    if (completedToday <= 4) {
+      return 3;
+    } else {
+      return 2;
+    }
   }
 
   void _addHistoryEntry({

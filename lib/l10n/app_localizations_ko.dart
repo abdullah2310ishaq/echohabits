@@ -45,6 +45,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get history => '기록';
 
   @override
+  String get weekly => '주간';
+
+  @override
+  String get monthly => '월간';
+
+  @override
+  String get allTime => '전체 기간';
+
+  @override
   String get viewHistory => '기록 보기';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get rateUs => '평가하기';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => '지원';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => '개인정보 보호정책';
@@ -87,6 +102,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cancel => '취소';
 
   @override
+  String get add => '추가';
+
+  @override
+  String get addThisHabitToYourRoutine => '이 습관을 루틴에 추가하시겠습니까?';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen => '홈 화면에서 매일 추적할 수 있습니다';
+
+  @override
+  String get exit => '종료';
+
+  @override
+  String get areYouSureYouWantToExit => '앱을 종료하시겠습니까?';
+
+  @override
   String get areYouSureYouWantToLogout => '로그아웃하시겠습니까?';
 
   @override
@@ -102,6 +132,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get logoutFunctionalityComingSoon => '로그아웃 기능 곧 출시';
+
+  @override
+  String get resetAllProgress => '모든 진행 상황 재설정';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      '모든 진행 상황을 재설정하시겠습니까? 모든 점수, 습관 및 기록이 삭제됩니다.';
+
+  @override
+  String get progressResetSuccessfully => '모든 진행 상황이 성공적으로 재설정되었습니다';
 
   @override
   String get couldNotOpenLink => '링크를 열 수 없습니다';
@@ -203,12 +243,25 @@ class AppLocalizationsKo extends AppLocalizations {
   String get continueButton => '계속';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => '이름을 입력해주세요';
 
   @override
   String errorPickingImage(String error) {
     return '이미지 선택 오류: $error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => '갤러리에서 선택';

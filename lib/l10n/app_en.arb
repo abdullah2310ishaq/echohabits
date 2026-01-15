@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "Weekly",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "Monthly",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "All Time",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "View History",
   "@viewHistory": {
     "description": "View history button text"
@@ -76,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "More Apps",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "Support",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "Privacy Policy",
   "@privacyPolicy": {
@@ -104,6 +124,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "Add",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "Add this habit to your routine?",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "You can track it daily on your home screen",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "Are you sure you want to exit?",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "Are you sure you want to logout?",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +168,18 @@
   "logoutFunctionalityComingSoon": "Logout functionality coming soon",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "Reset All Progress",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "Are you sure you want to reset all progress? This will delete all your scores, habits, and history.",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "All progress has been reset successfully",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "Could not open link",
   "@couldNotOpenLink": {
@@ -261,6 +313,18 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "Save Changes",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "Please enter your name",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
@@ -273,6 +337,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "No human face detected. Please upload a photo with a clear face.",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "Choose from Gallery",
   "@chooseFromGallery": {

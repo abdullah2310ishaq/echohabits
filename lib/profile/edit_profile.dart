@@ -1,32 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'home/home_shell.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import '../core/services/profile_service.dart';
 import '../core/widgets/eco_toast.dart';
 
-class ProfileFirst extends StatefulWidget {
-  const ProfileFirst({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
   @override
-  State<ProfileFirst> createState() => _ProfileFirstState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _ProfileFirstState extends State<ProfileFirst> {
-  final TextEditingController _nameController = TextEditingController();
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  late TextEditingController _nameController;
   final ImagePicker _imagePicker = ImagePicker();
   String? _selectedImagePath;
   bool _isUsingDefaultImage = true;
+  bool _hasChanges = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load current profile data
+    final profileService = Provider.of<ProfileService>(context, listen: false);
+    final currentName = profileService.getUserName();
+    final currentImagePath = profileService.getProfileImagePath();
+
+    _nameController = TextEditingController(text: currentName);
+    _selectedImagePath = currentImagePath;
+    _isUsingDefaultImage = currentImagePath == null;
+
+    // Listen for text changes
+    _nameController.addListener(_checkForChanges);
+  }
+
+  void _checkForChanges() {
+    final profileService = Provider.of<ProfileService>(context, listen: false);
+    final currentName = profileService.getUserName();
+    final currentImagePath = profileService.getProfileImagePath();
+
+    final nameChanged = _nameController.text.trim() != currentName;
+
+    // Check if image changed:
+    // - If user is using default image now but had custom image before
+    // - If user is using custom image now but had default image before
+    // - If both are custom images but paths are different
+    final currentIsDefault = currentImagePath == null;
+    final newIsDefault = _isUsingDefaultImage || _selectedImagePath == null;
+
+    final imageChanged =
+        (currentIsDefault != newIsDefault) ||
+        (!newIsDefault && currentImagePath != _selectedImagePath);
+
+    setState(() {
+      _hasChanges = nameChanged || imageChanged;
+    });
+  }
 
   @override
   void dispose() {
+    _nameController.removeListener(_checkForChanges);
     _nameController.dispose();
     super.dispose();
   }
@@ -34,16 +74,31 @@ class _ProfileFirstState extends State<ProfileFirst> {
   @override
   Widget build(BuildContext context) {
     final leafHeight = 120.h;
-    // Safe area bottom inset (Android 3-button nav / iPhone home indicator)
     final bottomSafeInset = ScreenUtil().bottomBarHeight;
-    // Extra space so the last button/content can scroll fully above the leaf images + system bar
     final scrollBottomPadding = leafHeight + bottomSafeInset + 16.h;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF1F8F5),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black87, size: 22.sp),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          AppLocalizations.of(context)!.editProfile,
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
-          // Bottom leaf decorations - Exact bottom background
+          // Bottom leaf decorations
           Positioned(
             bottom: 0,
             left: 0,
@@ -79,14 +134,13 @@ class _ProfileFirstState extends State<ProfileFirst> {
             ),
           ),
 
-          // Main content - On top of background
+          // Main content
           SafeArea(
             bottom: true,
             child: Column(
               children: [
                 Expanded(
                   child: SingleChildScrollView(
-                    // Add bottom padding so content can scroll above the leaf images
                     padding: EdgeInsets.fromLTRB(
                       20.w,
                       0,
@@ -97,50 +151,6 @@ class _ProfileFirstState extends State<ProfileFirst> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 20.h),
-                        // Back button (only if there is a previous route)
-                        if (Navigator.of(context).canPop())
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_back,
-                                color: Colors.black,
-                                size: 22.sp,
-                              ),
-                              onPressed: () => Navigator.of(context).pop(),
-                            ),
-                          )
-                        else
-                          SizedBox(height: 22.h),
-                        SizedBox(height: 6.h),
-
-                        // Header Section
-                        Text(
-                          AppLocalizations.of(context)!.setUpYourProfile,
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 6.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              AppLocalizations.of(
-                                context,
-                              )!.letsPersonalizeYourEcoJourney,
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            SizedBox(width: 4.w),
-                            Text('🌿', style: TextStyle(fontSize: 14.sp)),
-                          ],
-                        ),
                         SizedBox(height: 32.h),
 
                         // Profile Picture Picker
@@ -180,7 +190,6 @@ class _ProfileFirstState extends State<ProfileFirst> {
           return;
         }
 
-        // Copy image to app directory for persistence
         final appDir = await getApplicationDocumentsDirectory();
         final fileName = path.basename(image.path);
         final savedImage = File(path.join(appDir.path, fileName));
@@ -190,6 +199,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
           _selectedImagePath = savedImage.path;
           _isUsingDefaultImage = false;
         });
+        _checkForChanges();
       }
     } catch (e) {
       if (mounted) {
@@ -271,6 +281,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
                   _selectedImagePath = null;
                   _isUsingDefaultImage = true;
                 });
+                _checkForChanges();
               },
             ),
           ],
@@ -287,7 +298,6 @@ class _ProfileFirstState extends State<ProfileFirst> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // Outer ellipse image (lighter and slightly inset)
               Opacity(
                 opacity: 0.85,
                 child: Image.asset(
@@ -297,7 +307,6 @@ class _ProfileFirstState extends State<ProfileFirst> {
                   fit: BoxFit.contain,
                 ),
               ),
-              // Inner profile image inside a circular mask
               Container(
                 width: 100.w,
                 height: 100.h,
@@ -322,7 +331,6 @@ class _ProfileFirstState extends State<ProfileFirst> {
                         ),
                 ),
               ),
-              // Camera badge - positioned slightly more right and up
               Positioned(
                 bottom: 8.h,
                 right: 12.w,
@@ -428,33 +436,41 @@ class _ProfileFirstState extends State<ProfileFirst> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () async {
-                if (_nameController.text.trim().isNotEmpty) {
-                  // Save profile data to Hive
-                  final profileService = Provider.of<ProfileService>(
-                    context,
-                    listen: false,
-                  );
-                  await profileService.saveProfile(
-                    name: _nameController.text.trim(),
-                    imagePath: _isUsingDefaultImage ? null : _selectedImagePath,
-                  );
+              onPressed: _hasChanges
+                  ? () async {
+                      if (_nameController.text.trim().isNotEmpty) {
+                        final profileService = Provider.of<ProfileService>(
+                          context,
+                          listen: false,
+                        );
+                        await profileService.saveProfile(
+                          name: _nameController.text.trim(),
+                          imagePath: _isUsingDefaultImage
+                              ? null
+                              : _selectedImagePath,
+                        );
 
-                  if (mounted) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomeShell(),
-                      ),
-                    );
-                  }
-                } else {
-                  EcoToast.show(
-                    context,
-                    message: AppLocalizations.of(context)!.pleaseEnterYourName,
-                    isSuccess: false,
-                  );
-                }
-              },
+                        if (mounted) {
+                          EcoToast.show(
+                            context,
+                            message: AppLocalizations.of(
+                              context,
+                            )!.profileUpdatedSuccessfully,
+                            isSuccess: true,
+                          );
+                          Navigator.of(context).pop();
+                        }
+                      } else {
+                        EcoToast.show(
+                          context,
+                          message: AppLocalizations.of(
+                            context,
+                          )!.pleaseEnterYourName,
+                          isSuccess: false,
+                        );
+                      }
+                    }
+                  : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF2E7D32),
                 foregroundColor: Colors.white,
@@ -465,7 +481,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 elevation: 0,
               ),
               child: Text(
-                AppLocalizations.of(context)!.continueButton,
+                AppLocalizations.of(context)!.saveChanges,
                 style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
               ),
             ),

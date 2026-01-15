@@ -5,18 +5,39 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/services/locale_service.dart';
+import '../core/services/habit_service.dart';
+import '../core/widgets/eco_toast.dart';
+import '../profile/edit_profile.dart';
 import 'language_selection.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   Future<void> _openExternal(BuildContext context, String url) async {
-    final uri = Uri.parse(url);
-    final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
-    if (!launched && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.couldNotOpenLink)),
+    if (!context.mounted) return;
+    
+    try {
+      final uri = Uri.parse(url);
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
       );
+      if (!launched && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.couldNotOpenLink),
+          ),
+        );
+      }
+    } catch (e) {
+      // Handle any errors silently to prevent navigation issues
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.couldNotOpenLink),
+          ),
+        );
+      }
     }
   }
 
@@ -25,15 +46,11 @@ class SettingsScreen extends StatelessWidget {
     final options = [
       _SettingsOption(
         iconPath: 'assets/settings/accounts.svg',
-        title: AppLocalizations.of(context)!.account,
+        title: AppLocalizations.of(context)!.editProfile,
         onTap: () {
-          // TODO: Navigate to account settings
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                AppLocalizations.of(context)!.accountSettingsComingSoon,
-              ),
-            ),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const EditProfileScreen()),
           );
         },
       ),
@@ -81,16 +98,39 @@ class SettingsScreen extends StatelessWidget {
       _SettingsOption(
         iconPath: 'assets/settings/rate.svg',
         title: AppLocalizations.of(context)!.rateUs,
-        onTap: () => _openExternal(
-          context,
-          'https://play.google.com/store/apps/details?id=com.ecohabittracker.app',
-        ),
+        onTap: () {
+          // Ensure context is still valid before opening external URL
+          if (!context.mounted) return;
+          _openExternal(
+            context,
+            'https://play.google.com/store/apps/details?id=com.ecohabittracker.app',
+          );
+        },
+      ),
+      _SettingsOption(
+        iconPath: 'assets/settings/share.svg',
+        title: AppLocalizations.of(context)!.moreApps,
+        onTap: () {
+          // Ensure context is still valid before opening external URL
+          if (!context.mounted) return;
+          // Link to Play Store developer page showing all apps
+          _openExternal(
+            context,
+            'https://play.google.com/store/apps/developer?id=Funloft+Production',
+          );
+        },
       ),
       _SettingsOption(
         iconPath: 'assets/settings/support.svg',
         title: AppLocalizations.of(context)!.support,
         onTap: () =>
             _openExternal(context, 'mailto:support@ecohabittracker.com'),
+      ),
+      _SettingsOption(
+        iconPath: 'assets/settings/support.svg',
+        title: AppLocalizations.of(context)!.feedback,
+        onTap: () =>
+            _openExternal(context, 'mailto:feedback@ecohabittracker.com'),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/privacypolicy.svg',
@@ -110,9 +150,8 @@ class SettingsScreen extends StatelessWidget {
       ),
       _SettingsOption(
         iconPath: 'assets/settings/logout.svg',
-        title: AppLocalizations.of(context)!.logout,
+        title: AppLocalizations.of(context)!.resetAllProgress,
         onTap: () {
-          // TODO: Implement logout functionality
           showDialog(
             context: context,
             builder: (context) => Dialog(
@@ -126,7 +165,7 @@ class SettingsScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.logout,
+                      AppLocalizations.of(context)!.resetAllProgress,
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
@@ -135,11 +174,10 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12.h),
                     Text(
-                      AppLocalizations.of(context)!.areYouSureYouWantToLogout,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        color: Colors.black54,
-                      ),
+                      AppLocalizations.of(
+                        context,
+                      )!.areYouSureYouWantToResetAllProgress,
+                      style: TextStyle(fontSize: 13.sp, color: Colors.black54),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 16.h),
@@ -168,18 +206,22 @@ class SettingsScreen extends StatelessWidget {
                         SizedBox(width: 10.w),
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.of(context).pop();
-                              // TODO: Handle logout
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.logoutFunctionalityComingSoon,
-                                  ),
-                                ),
+                              final habitService = Provider.of<HabitService>(
+                                context,
+                                listen: false,
                               );
+                              await habitService.resetAllProgress();
+                              if (context.mounted) {
+                                EcoToast.show(
+                                  context,
+                                  message: AppLocalizations.of(
+                                    context,
+                                  )!.progressResetSuccessfully,
+                                  isSuccess: true,
+                                );
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
@@ -191,7 +233,7 @@ class SettingsScreen extends StatelessWidget {
                               elevation: 0,
                             ),
                             child: Text(
-                              AppLocalizations.of(context)!.logout,
+                              AppLocalizations.of(context)!.resetAllProgress,
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.bold,
@@ -208,6 +250,104 @@ class SettingsScreen extends StatelessWidget {
           );
         },
       ),
+
+      // _SettingsOption(
+      //   iconPath: 'assets/settings/logout.svg',
+      //   title: AppLocalizations.of(context)!.logout,
+      //   onTap: () {
+      //     // TODO: Implement logout functionality
+      //     showDialog(
+      //       context: context,
+      //       builder: (context) => Dialog(
+      //         shape: RoundedRectangleBorder(
+      //           borderRadius: BorderRadius.circular(16.r),
+      //         ),
+      //         child: Container(
+      //           width: 0.85.sw,
+      //           padding: EdgeInsets.all(16.w),
+      //           child: Column(
+      //             mainAxisSize: MainAxisSize.min,
+      //             children: [
+      //               Text(
+      //                 AppLocalizations.of(context)!.logout,
+      //                 style: TextStyle(
+      //                   fontSize: 18.sp,
+      //                   fontWeight: FontWeight.bold,
+      //                   color: Colors.black87,
+      //                 ),
+      //               ),
+      //               SizedBox(height: 12.h),
+      //               Text(
+      //                 AppLocalizations.of(context)!.areYouSureYouWantToLogout,
+      //                 style: TextStyle(fontSize: 13.sp, color: Colors.black54),
+      //                 textAlign: TextAlign.center,
+      //               ),
+      //               SizedBox(height: 16.h),
+      //               Row(
+      //                 children: [
+      //                   Expanded(
+      //                     child: OutlinedButton(
+      //                       onPressed: () => Navigator.of(context).pop(),
+      //                       style: OutlinedButton.styleFrom(
+      //                         foregroundColor: Colors.black87,
+      //                         side: BorderSide(color: Colors.grey[300]!),
+      //                         shape: RoundedRectangleBorder(
+      //                           borderRadius: BorderRadius.circular(10.r),
+      //                         ),
+      //                         padding: EdgeInsets.symmetric(vertical: 12.h),
+      //                       ),
+      //                       child: Text(
+      //                         AppLocalizations.of(context)!.cancel,
+      //                         style: TextStyle(
+      //                           fontSize: 14.sp,
+      //                           fontWeight: FontWeight.w600,
+      //                         ),
+      //                       ),
+      //                     ),
+      //                   ),
+      //                   SizedBox(width: 10.w),
+      //                   Expanded(
+      //                     child: ElevatedButton(
+      //                       onPressed: () {
+      //                         Navigator.of(context).pop();
+      //                         // TODO: Handle logout
+      //                         ScaffoldMessenger.of(context).showSnackBar(
+      //                           SnackBar(
+      //                             content: Text(
+      //                               AppLocalizations.of(
+      //                                 context,
+      //                               )!.logoutFunctionalityComingSoon,
+      //                             ),
+      //                           ),
+      //                         );
+      //                       },
+      //                       style: ElevatedButton.styleFrom(
+      //                         backgroundColor: Colors.red,
+      //                         foregroundColor: Colors.white,
+      //                         shape: RoundedRectangleBorder(
+      //                           borderRadius: BorderRadius.circular(10.r),
+      //                         ),
+      //                         padding: EdgeInsets.symmetric(vertical: 12.h),
+      //                         elevation: 0,
+      //                       ),
+      //                       child: Text(
+      //                         AppLocalizations.of(context)!.logout,
+      //                         style: TextStyle(
+      //                           fontSize: 14.sp,
+      //                           fontWeight: FontWeight.bold,
+      //                         ),
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     );
+      //   },
+      // ),
     ];
 
     return Scaffold(
@@ -241,10 +381,8 @@ class SettingsScreen extends StatelessWidget {
             height: 1.h,
             thickness: 1.h,
             color: Colors.grey[300],
-            indent:
-                16.w, // align with list padding
-            endIndent:
-                16.w, // align with list padding
+            indent: 16.w, // align with list padding
+            endIndent: 16.w, // align with list padding
           ),
           itemCount: options.length,
         ),
@@ -264,6 +402,7 @@ class SettingsScreen extends StatelessWidget {
       'zh': '中文',
       'ja': '日本語',
       'ko': '한국어',
+      'ar': 'العربية',
     };
     return languageNames[code] ?? 'English';
   }
@@ -299,6 +438,8 @@ class _SettingsTile extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.transparent),
       child: InkWell(
         onTap: option.onTap,
+        splashColor: Colors.grey.withOpacity(0.1),
+        highlightColor: Colors.grey.withOpacity(0.05),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
           child: Row(
@@ -326,11 +467,7 @@ class _SettingsTile extends StatelessWidget {
                   padding: EdgeInsets.only(right: 6.w),
                   child: option.trailingBuilder!(context),
                 ),
-              Icon(
-                Icons.chevron_right,
-                color: Color(0xFF2E7D32),
-                size: 22.sp,
-              ),
+              Icon(Icons.chevron_right, color: Color(0xFF2E7D32), size: 22.sp),
             ],
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
@@ -102,6 +103,7 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
     Locale('de'),
     Locale('en'),
     Locale('es'),
@@ -186,6 +188,24 @@ abstract class AppLocalizations {
   /// **'History'**
   String get history;
 
+  /// Weekly filter option
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get weekly;
+
+  /// Monthly filter option
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// All time filter option
+  ///
+  /// In en, this message translates to:
+  /// **'All Time'**
+  String get allTime;
+
   /// View history button text
   ///
   /// In en, this message translates to:
@@ -228,11 +248,23 @@ abstract class AppLocalizations {
   /// **'Rate Us'**
   String get rateUs;
 
+  /// More apps option
+  ///
+  /// In en, this message translates to:
+  /// **'More Apps'**
+  String get moreApps;
+
   /// Support option
   ///
   /// In en, this message translates to:
   /// **'Support'**
   String get support;
+
+  /// Feedback option
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedback;
 
   /// Privacy policy option
   ///
@@ -270,6 +302,36 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// Add button text
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// Dialog title when adding a habit
+  ///
+  /// In en, this message translates to:
+  /// **'Add this habit to your routine?'**
+  String get addThisHabitToYourRoutine;
+
+  /// Description text in add habit dialog
+  ///
+  /// In en, this message translates to:
+  /// **'You can track it daily on your home screen'**
+  String get youCanTrackItDailyOnYourHomeScreen;
+
+  /// Exit button text
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
+
+  /// Exit confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit?'**
+  String get areYouSureYouWantToExit;
+
   /// Logout confirmation message
   ///
   /// In en, this message translates to:
@@ -299,6 +361,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout functionality coming soon'**
   String get logoutFunctionalityComingSoon;
+
+  /// Reset all progress option
+  ///
+  /// In en, this message translates to:
+  /// **'Reset All Progress'**
+  String get resetAllProgress;
+
+  /// Reset all progress confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to reset all progress? This will delete all your scores, habits, and history.'**
+  String get areYouSureYouWantToResetAllProgress;
+
+  /// Success message when progress is reset
+  ///
+  /// In en, this message translates to:
+  /// **'All progress has been reset successfully'**
+  String get progressResetSuccessfully;
 
   /// Error message when link cannot be opened
   ///
@@ -498,6 +578,24 @@ abstract class AppLocalizations {
   /// **'Continue'**
   String get continueButton;
 
+  /// Edit profile screen title and menu option
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// Save changes button text
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// Success message when profile is updated
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profileUpdatedSuccessfully;
+
   /// Validation message when name is empty
   ///
   /// In en, this message translates to:
@@ -509,6 +607,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error picking image: {error}'**
   String errorPickingImage(String error);
+
+  /// Error message when no face is detected in profile image
+  ///
+  /// In en, this message translates to:
+  /// **'No human face detected. Please upload a photo with a clear face.'**
+  String get noFaceDetected;
 
   /// Image source option - gallery
   ///
@@ -1038,6 +1142,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) => <String>[
+    'ar',
     'de',
     'en',
     'es',
@@ -1057,6 +1162,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
     case 'de':
       return AppLocalizationsDe();
     case 'en':

@@ -45,6 +45,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get history => 'Verlauf';
 
   @override
+  String get weekly => 'Wöchentlich';
+
+  @override
+  String get monthly => 'Monatlich';
+
+  @override
+  String get allTime => 'Gesamte Zeit';
+
+  @override
   String get viewHistory => 'Verlauf anzeigen';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get rateUs => 'Bewerten Sie uns';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => 'Support';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => 'Datenschutzrichtlinie';
@@ -87,6 +102,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cancel => 'Abbrechen';
 
   @override
+  String get add => 'Hinzufügen';
+
+  @override
+  String get addThisHabitToYourRoutine =>
+      'Diese Gewohnheit zu Ihrer Routine hinzufügen?';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen =>
+      'Sie können es täglich auf Ihrem Startbildschirm verfolgen';
+
+  @override
+  String get exit => 'Beenden';
+
+  @override
+  String get areYouSureYouWantToExit =>
+      'Sind Sie sicher, dass Sie die App beenden möchten?';
+
+  @override
   String get areYouSureYouWantToLogout =>
       'Sind Sie sicher, dass Sie sich abmelden möchten?';
 
@@ -103,6 +136,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get logoutFunctionalityComingSoon => 'Abmelde-Funktion kommt bald';
+
+  @override
+  String get resetAllProgress => 'Alle Fortschritte zurücksetzen';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      'Sind Sie sicher, dass Sie alle Fortschritte zurücksetzen möchten? Dies löscht alle Ihre Punkte, Gewohnheiten und den Verlauf.';
+
+  @override
+  String get progressResetSuccessfully =>
+      'Alle Fortschritte wurden erfolgreich zurückgesetzt';
 
   @override
   String get couldNotOpenLink => 'Link konnte nicht geöffnet werden';
@@ -206,12 +250,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String get continueButton => 'Weiter';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => 'Bitte geben Sie Ihren Namen ein';
 
   @override
   String errorPickingImage(String error) {
     return 'Fehler beim Auswählen des Bildes: $error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => 'Aus Galerie wählen';

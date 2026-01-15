@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
           },
         ),
         ChangeNotifierProvider(create: (_) => LocaleService()),
+        ChangeNotifierProvider(create: (_) => ProfileService()),
       ],
       child: Consumer<LocaleService>(
         builder: (context, localeService, child) {
@@ -45,27 +46,33 @@ class MyApp extends StatelessWidget {
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (context, child) {
-              return MediaQuery(
-                // Lock text scale factor to 1.0 to prevent system text size changes
-                data: (mediaQueryData ?? const MediaQueryData()).copyWith(
-                  textScaler: TextScaler.linear(1.0),
-                ),
-                child: MaterialApp(
-                  title: 'Eco Habit Tracker',
-                  debugShowCheckedModeBanner: false,
-                  theme: ThemeData(
-                    colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+              final currentLocale = localeService.getCurrentLocale();
+              final isRTL = currentLocale.languageCode == 'ar';
+              
+              return Directionality(
+                textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+                child: MediaQuery(
+                  // Lock text scale factor to 1.0 to prevent system text size changes
+                  data: (mediaQueryData ?? const MediaQueryData()).copyWith(
+                    textScaler: TextScaler.linear(1.0),
                   ),
-                  // Localization configuration
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  locale: localeService.getCurrentLocale(),
-                  home: const SplashScreen(),
+                  child: MaterialApp(
+                    title: 'Eco Habit Tracker',
+                    debugShowCheckedModeBanner: false,
+                    theme: ThemeData(
+                      colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                    ),
+                    // Localization configuration
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    locale: currentLocale,
+                    home: const SplashScreen(),
+                  ),
                 ),
               );
             },

@@ -45,6 +45,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get history => '历史';
 
   @override
+  String get weekly => '每周';
+
+  @override
+  String get monthly => '每月';
+
+  @override
+  String get allTime => '全部时间';
+
+  @override
   String get viewHistory => '查看历史';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rateUs => '评价我们';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => '支持';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => '隐私政策';
@@ -87,6 +102,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cancel => '取消';
 
   @override
+  String get add => '添加';
+
+  @override
+  String get addThisHabitToYourRoutine => '将此习惯添加到您的日常活动中？';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen => '您可以在主屏幕上每天跟踪它';
+
+  @override
+  String get exit => '退出';
+
+  @override
+  String get areYouSureYouWantToExit => '您确定要退出应用程序吗？';
+
+  @override
   String get areYouSureYouWantToLogout => '您确定要退出吗？';
 
   @override
@@ -102,6 +132,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get logoutFunctionalityComingSoon => '退出功能即将推出';
+
+  @override
+  String get resetAllProgress => '重置所有进度';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      '您确定要重置所有进度吗？这将删除您的所有分数、习惯和历史记录。';
+
+  @override
+  String get progressResetSuccessfully => '所有进度已成功重置';
 
   @override
   String get couldNotOpenLink => '无法打开链接';
@@ -203,12 +243,25 @@ class AppLocalizationsZh extends AppLocalizations {
   String get continueButton => '继续';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => '请输入您的姓名';
 
   @override
   String errorPickingImage(String error) {
     return '选择图片时出错：$error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => '从图库选择';

@@ -21,6 +21,7 @@ class LocaleService extends ChangeNotifier {
     Locale('zh'), // Chinese
     Locale('ja'), // Japanese
     Locale('ko'), // Korean
+    Locale('ar'), // Arabic
   ];
 
   /// Initialize Hive box for locale storage

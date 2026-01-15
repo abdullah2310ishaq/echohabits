@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "每周",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "每月",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "全部时间",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "查看历史",
   "@viewHistory": {
     "description": "View history button text"
@@ -104,6 +116,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "添加",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "将此习惯添加到您的日常活动中？",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "您可以在主屏幕上每天跟踪它",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "退出",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "您确定要退出应用程序吗？",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "您确定要退出吗？",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +160,18 @@
   "logoutFunctionalityComingSoon": "退出功能即将推出",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "重置所有进度",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "您确定要重置所有进度吗？这将删除您的所有分数、习惯和历史记录。",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "所有进度已成功重置",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "无法打开链接",
   "@couldNotOpenLink": {

@@ -45,6 +45,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get history => 'История';
 
   @override
+  String get weekly => 'Еженедельно';
+
+  @override
+  String get monthly => 'Ежемесячно';
+
+  @override
+  String get allTime => 'Все время';
+
+  @override
   String get viewHistory => 'Просмотр Истории';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get rateUs => 'Оцените нас';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => 'Поддержка';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => 'Политика Конфиденциальности';
@@ -87,6 +102,24 @@ class AppLocalizationsRu extends AppLocalizations {
   String get cancel => 'Отмена';
 
   @override
+  String get add => 'Добавить';
+
+  @override
+  String get addThisHabitToYourRoutine =>
+      'Добавить эту привычку в вашу рутину?';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen =>
+      'Вы можете отслеживать это ежедневно на главном экране';
+
+  @override
+  String get exit => 'Выход';
+
+  @override
+  String get areYouSureYouWantToExit =>
+      'Вы уверены, что хотите выйти из приложения?';
+
+  @override
   String get areYouSureYouWantToLogout => 'Вы уверены, что хотите выйти?';
 
   @override
@@ -102,6 +135,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get logoutFunctionalityComingSoon => 'Функция выхода скоро';
+
+  @override
+  String get resetAllProgress => 'Сбросить Весь Прогресс';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      'Вы уверены, что хотите сбросить весь прогресс? Это удалит все ваши очки, привычки и историю.';
+
+  @override
+  String get progressResetSuccessfully => 'Весь прогресс успешно сброшен';
 
   @override
   String get couldNotOpenLink => 'Не удалось открыть ссылку';
@@ -205,12 +248,25 @@ class AppLocalizationsRu extends AppLocalizations {
   String get continueButton => 'Продолжить';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => 'Пожалуйста, введите ваше имя';
 
   @override
   String errorPickingImage(String error) {
     return 'Ошибка при выборе изображения: $error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => 'Выбрать из Галереи';

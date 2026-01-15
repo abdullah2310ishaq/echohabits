@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 
 class AddHabitDialog extends StatelessWidget {
   final String habitTitle;
@@ -59,7 +60,7 @@ class AddHabitDialog extends StatelessWidget {
             children: [
               // Main Title
               Text(
-                'Add this habit to your routine?',
+                AppLocalizations.of(context)!.addThisHabitToYourRoutine,
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
@@ -98,10 +99,7 @@ class AddHabitDialog extends StatelessWidget {
                   // Difficulty Text
                   Text(
                     difficulty,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.black54,
-                    ),
+                    style: TextStyle(fontSize: 12.sp, color: Colors.black54),
                   ),
                   SizedBox(width: 12.w),
                   // Impact Label
@@ -119,7 +117,9 @@ class AddHabitDialog extends StatelessWidget {
 
               // Description Text
               Text(
-                'You can track it daily on your home screen',
+                AppLocalizations.of(
+                  context,
+                )!.youCanTrackItDailyOnYourHomeScreen,
                 style: TextStyle(fontSize: 13.sp, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
@@ -140,7 +140,7 @@ class AddHabitDialog extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 12.h),
                       ),
                       child: Text(
-                        'Cancel',
+                        AppLocalizations.of(context)!.cancel,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14.sp,
@@ -167,7 +167,7 @@ class AddHabitDialog extends StatelessWidget {
                         elevation: 0,
                       ),
                       child: Text(
-                        'Add',
+                        AppLocalizations.of(context)!.add,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14.sp,

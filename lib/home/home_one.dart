@@ -37,374 +37,387 @@ class HomeOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 40.h),
-            // Header Section with User Info
-            Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(24.r),
-                  bottomRight: Radius.circular(24.r),
-                ),
-              ),
-              child: Column(
-                children: [
-                  // User Info Row
-                  Row(
-                    children: [
-                      // Avatar
-                      CircleAvatar(
-                        radius: 24.r,
-                        backgroundColor: const Color(0xFF2E7D32),
-                        child: CircleAvatar(
-                          radius: 22.r,
-                          backgroundColor: Colors.white,
-                          child: ClipOval(child: _buildProfileImage()),
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      // Greeting + Hi/Name on 2 lines (more readable)
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${ProfileService.getGreetingWithContext(context)},',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 13.sp,
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(height: 2.h),
-                            Text(
-                              '${AppLocalizations.of(context)!.hi} ${ProfileService.getUserName()} 👋',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 19.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // ECO EXPLORER Badge
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                          vertical: 6.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE8F5E9),
-                          borderRadius: BorderRadius.circular(16.r),
-                          border: Border.all(
-                            color: const Color(0xFF2E7D32),
-                            width: 1,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/eco.svg',
-                              width: 14.w,
-                              height: 14.h,
-                              colorFilter: const ColorFilter.mode(
-                                Color(0xFF2E7D32),
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            SizedBox(width: 4.w),
-                            Text(
-                              AppLocalizations.of(context)!.ecoExplorer,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFF2E7D32),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+    return Consumer<ProfileService>(
+      builder: (context, profileService, child) {
+        return Scaffold(
+          backgroundColor: const Color(0xFFF5F5F5),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 40.h),
+                // Header Section with User Info
+                Container(
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(24.r),
+                      bottomRight: Radius.circular(24.r),
+                    ),
                   ),
-                  SizedBox(height: 16.h),
-
-                  // Daily Eco Score Card
-                  Consumer<HabitService>(
-                    builder: (context, service, child) {
-                      final dailyScore = service.dailyScore.clamp(
-                        0,
-                        100,
-                      ); // Cap at 100
-                      final maxDailyScore = 100; // Max score per day
-                      final progress = (dailyScore / maxDailyScore).clamp(
-                        0.0,
-                        1.0,
-                      );
-
-                      // Determine next level based on total score
-                      String nextLevel;
-                      final l10n = AppLocalizations.of(context)!;
-                      if (service.totalScore < 2000) {
-                        nextLevel = l10n.ecoExplorerRank;
-                      } else if (service.totalScore < 3000) {
-                        nextLevel = l10n.ecoWarrior;
-                      } else if (service.totalScore < 5000) {
-                        nextLevel = l10n.natureGuardian;
-                      } else {
-                        nextLevel = l10n.ecoMaster;
-                      }
-
-                      return Container(
-                        padding: EdgeInsets.all(16.w),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF1F8F5),
-                          borderRadius: BorderRadius.circular(16.r),
-                        ),
-                        child: Column(
-                          children: [
-                            // Title Row
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
+                    children: [
+                      // User Info Row
+                      Row(
+                        children: [
+                          // Avatar
+                          CircleAvatar(
+                            radius: 24.r,
+                            backgroundColor: const Color(0xFF2E7D32),
+                            child: CircleAvatar(
+                              radius: 22.r,
+                              backgroundColor: Colors.white,
+                              child: ClipOval(
+                                child: _buildProfileImage(profileService),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          // Greeting + Hi/Name on 2 lines (more readable)
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!.dailyEcoScore,
+                                  '${ProfileService.getGreetingWithContext(context)},',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 13.sp,
+                                    color: Colors.black54,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.black87,
                                   ),
                                 ),
-                                RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: dailyScore.toString(),
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color(0xFF2E7D32),
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: ' / $maxDailyScore',
-                                        style: TextStyle(
-                                          fontSize: 13.sp,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                    ],
+                                SizedBox(height: 2.h),
+                                Text(
+                                  '${AppLocalizations.of(context)!.hi} ${profileService.getUserName()} 👋',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 19.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 12.h),
-                            // Progress Bar
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.r),
-                              child: LinearProgressIndicator(
-                                value: progress,
-                                minHeight: 8.h,
-                                backgroundColor: Colors.grey[300],
-                                valueColor: const AlwaysStoppedAnimation<Color>(
-                                  Color(0xFF2E7D32),
-                                ),
+                          ),
+                          // ECO EXPLORER Badge
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10.w,
+                              vertical: 6.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFE8F5E9),
+                              borderRadius: BorderRadius.circular(16.r),
+                              border: Border.all(
+                                color: const Color(0xFF2E7D32),
+                                width: 1,
                               ),
                             ),
-                            SizedBox(height: 6.h),
-                            // Next Level Text
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.nextLevel(nextLevel),
-                                style: TextStyle(
-                                  fontSize: 11.sp,
-                                  color: Colors.black54,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/eco.svg',
+                                  width: 14.w,
+                                  height: 14.h,
+                                  colorFilter: const ColorFilter.mode(
+                                    Color(0xFF2E7D32),
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
-                              ),
+                                SizedBox(width: 4.w),
+                                Text(
+                                  AppLocalizations.of(context)!.ecoExplorer,
+                                  style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xFF2E7D32),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-
-            // Today's Eco Tasks Section
-            Padding(
-              padding: EdgeInsets.all(16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.todaysEcoTasks,
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-
-                  // All tasks (habit-based + default)
-                  Consumer<HabitService>(
-                    builder: (context, service, child) {
-                      final l10n = AppLocalizations.of(context)!;
-                      final habitTasks = service.userHabits;
-                      final defaultTasks = service.todayDefaultTasks;
-                      final hasAnyTasks =
-                          habitTasks.isNotEmpty || defaultTasks.isNotEmpty;
-
-                      if (!hasAnyTasks) {
-                        // Empty state
-                        return _buildEmptyState(context);
-                      }
-
-                      return Column(
-                        children: [
-                          // Habit-based tasks from Habits page (no icons)
-                          ...habitTasks.map((habit) {
-                            final tags = [
-                              habit['category'] as String,
-                              habit['impact'] as String,
-                            ];
-                            final String title = habit['title'] as String;
-
-                            return Padding(
-                              padding: EdgeInsets.only(bottom: 10.h),
-                              child: _buildTaskCard(
-                                context: context,
-                                title: title,
-                                tags: tags,
-                                taskName: title,
-                                showIcon: false,
-                                onSkip: () {
-                                  service.completeHabitTask(
-                                    title,
-                                    isDone: false,
-                                  );
-                                  EcoToast.show(
-                                    context,
-                                    message: AppLocalizations.of(
-                                      context,
-                                    )!.skippedYourStreakNeedsConsistency,
-                                    isSuccess: false,
-                                  );
-                                },
-                                onDone: () {
-                                  service.completeHabitTask(
-                                    title,
-                                    isDone: true,
-                                  );
-                                  EcoToast.show(
-                                    context,
-                                    message: AppLocalizations.of(
-                                      context,
-                                    )!.taskDoneStreakStrong(title),
-                                    isSuccess: true,
-                                  );
-                                },
-                              ),
-                            );
-                          }),
-
-                          // Default Echo tasks (with icons)
-                          ...defaultTasks.map((task) {
-                            final String id = task['id'] as String;
-                            final String title = task['title'] as String;
-                            final List<String> tags = (task['tags']
-                                    as List<dynamic>)
-                                .cast<String>()
-                                .map((t) => _localizeTag(l10n, t))
-                                .toList();
-                            final IconData icon =
-                                task['icon'] as IconData? ?? Icons.check;
-                            final bool useSvg =
-                                task['useSvg'] as bool? ?? false;
-                            final String? svgAsset =
-                                task['svgAsset'] as String?;
-                            final String taskName =
-                                task['taskName'] as String? ?? title;
-
-                            // Localize default task titles based on id
-                            String localizedTitle;
-                            switch (id) {
-                              case 'default_walk_bike_1':
-                                localizedTitle = l10n.defaultWalkBikeTitle;
-                                break;
-                              case 'default_coffee_cup':
-                                localizedTitle = l10n.defaultCoffeeCupTitle;
-                                break;
-                              case 'default_afforestation':
-                                localizedTitle =
-                                    l10n.defaultAfforestationTitle;
-                                break;
-                              default:
-                                localizedTitle = title;
-                            }
-
-                            return Padding(
-                              padding: EdgeInsets.only(bottom: 10.h),
-                              child: _buildTaskCard(
-                                context: context,
-                                icon: icon,
-                                title: localizedTitle,
-                                tags: tags,
-                                useSvg: useSvg,
-                                svgAsset: svgAsset,
-                                taskName: taskName,
-                                showIcon: true,
-                                onSkip: () {
-                                  service.completeDefaultTask(
-                                    id,
-                                    isDone: false,
-                                  );
-                                  EcoToast.show(
-                                    context,
-                                    message: AppLocalizations.of(
-                                      context,
-                                    )!.skippedYourStreakNeedsConsistency,
-                                    isSuccess: false,
-                                  );
-                                },
-                                onDone: () {
-                                  service.completeDefaultTask(id, isDone: true);
-                                  EcoToast.show(
-                                    context,
-                                    message: AppLocalizations.of(
-                                      context,
-                                    )!.taskDone(taskName),
-                                    isSuccess: true,
-                                  );
-                                },
-                              ),
-                            );
-                          }),
+                          ),
                         ],
-                      );
-                    },
+                      ),
+                      SizedBox(height: 16.h),
+
+                      // Daily Eco Score Card
+                      Consumer<HabitService>(
+                        builder: (context, service, child) {
+                          final dailyScore = service.dailyScore.clamp(
+                            0,
+                            100,
+                          ); // Cap at 100
+                          final maxDailyScore = 100; // Max score per day
+                          final progress = (dailyScore / maxDailyScore).clamp(
+                            0.0,
+                            1.0,
+                          );
+
+                          // Determine next level based on total score
+                          String nextLevel;
+                          final l10n = AppLocalizations.of(context)!;
+                          if (service.totalScore < 2000) {
+                            nextLevel = l10n.ecoExplorerRank;
+                          } else if (service.totalScore < 3000) {
+                            nextLevel = l10n.ecoWarrior;
+                          } else if (service.totalScore < 5000) {
+                            nextLevel = l10n.natureGuardian;
+                          } else {
+                            nextLevel = l10n.ecoMaster;
+                          }
+
+                          return Container(
+                            padding: EdgeInsets.all(16.w),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF1F8F5),
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            child: Column(
+                              children: [
+                                // Title Row
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.dailyEcoScore,
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: dailyScore.toString(),
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFF2E7D32),
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: ' / $maxDailyScore',
+                                            style: TextStyle(
+                                              fontSize: 13.sp,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 12.h),
+                                // Progress Bar
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  child: LinearProgressIndicator(
+                                    value: progress,
+                                    minHeight: 8.h,
+                                    backgroundColor: Colors.grey[300],
+                                    valueColor:
+                                        const AlwaysStoppedAnimation<Color>(
+                                          Color(0xFF2E7D32),
+                                        ),
+                                  ),
+                                ),
+                                SizedBox(height: 6.h),
+                                // Next Level Text
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.nextLevel(nextLevel),
+                                    style: TextStyle(
+                                      fontSize: 11.sp,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                // Today's Eco Tasks Section
+                Padding(
+                  padding: EdgeInsets.all(16.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.todaysEcoTasks,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(height: 12.h),
+
+                      // All tasks (habit-based + default)
+                      Consumer<HabitService>(
+                        builder: (context, service, child) {
+                          final l10n = AppLocalizations.of(context)!;
+                          final habitTasks = service.userHabits;
+                          final defaultTasks = service.todayDefaultTasks;
+                          final hasAnyTasks =
+                              habitTasks.isNotEmpty || defaultTasks.isNotEmpty;
+
+                          if (!hasAnyTasks) {
+                            // Empty state
+                            return _buildEmptyState(context);
+                          }
+
+                          return Column(
+                            children: [
+                              // Habit-based tasks from Habits page (no icons)
+                              ...habitTasks.map((habit) {
+                                final tags = [
+                                  habit['category'] as String,
+                                  habit['impact'] as String,
+                                ];
+                                final String title = habit['title'] as String;
+
+                                return Padding(
+                                  padding: EdgeInsets.only(bottom: 10.h),
+                                  child: _buildTaskCard(
+                                    context: context,
+                                    title: title,
+                                    tags: tags,
+                                    taskName: title,
+                                    showIcon: false,
+                                    onSkip: () {
+                                      service.completeHabitTask(
+                                        title,
+                                        isDone: false,
+                                      );
+                                      EcoToast.show(
+                                        context,
+                                        message: AppLocalizations.of(
+                                          context,
+                                        )!.skippedYourStreakNeedsConsistency,
+                                        isSuccess: false,
+                                      );
+                                    },
+                                    onDone: () {
+                                      service.completeHabitTask(
+                                        title,
+                                        isDone: true,
+                                      );
+                                      EcoToast.show(
+                                        context,
+                                        message: AppLocalizations.of(
+                                          context,
+                                        )!.taskDoneStreakStrong(title),
+                                        isSuccess: true,
+                                      );
+                                    },
+                                  ),
+                                );
+                              }),
+
+                              // Default Echo tasks (with icons)
+                              ...defaultTasks.map((task) {
+                                final String id = task['id'] as String;
+                                final String title = task['title'] as String;
+                                final List<String> tags =
+                                    (task['tags'] as List<dynamic>)
+                                        .cast<String>()
+                                        .map((t) => _localizeTag(l10n, t))
+                                        .toList();
+                                final IconData icon =
+                                    task['icon'] as IconData? ?? Icons.check;
+                                final bool useSvg =
+                                    task['useSvg'] as bool? ?? false;
+                                final String? svgAsset =
+                                    task['svgAsset'] as String?;
+                                final String taskName =
+                                    task['taskName'] as String? ?? title;
+
+                                // Localize default task titles based on id
+                                String localizedTitle;
+                                switch (id) {
+                                  case 'default_walk_bike_1':
+                                    localizedTitle = l10n.defaultWalkBikeTitle;
+                                    break;
+                                  case 'default_coffee_cup':
+                                    localizedTitle = l10n.defaultCoffeeCupTitle;
+                                    break;
+                                  case 'default_afforestation':
+                                    localizedTitle =
+                                        l10n.defaultAfforestationTitle;
+                                    break;
+                                  default:
+                                    localizedTitle = title;
+                                }
+
+                                return Padding(
+                                  padding: EdgeInsets.only(bottom: 10.h),
+                                  child: _buildTaskCard(
+                                    context: context,
+                                    icon: icon,
+                                    title: localizedTitle,
+                                    tags: tags,
+                                    useSvg: useSvg,
+                                    svgAsset: svgAsset,
+                                    taskName: taskName,
+                                    showIcon: true,
+                                    onSkip: () {
+                                      service.completeDefaultTask(
+                                        id,
+                                        isDone: false,
+                                      );
+                                      EcoToast.show(
+                                        context,
+                                        message: AppLocalizations.of(
+                                          context,
+                                        )!.skippedYourStreakNeedsConsistency,
+                                        isSuccess: false,
+                                      );
+                                    },
+                                    onDone: () {
+                                      service.completeDefaultTask(
+                                        id,
+                                        isDone: true,
+                                      );
+                                      EcoToast.show(
+                                        context,
+                                        message: AppLocalizations.of(
+                                          context,
+                                        )!.taskDone(taskName),
+                                        isSuccess: true,
+                                      );
+                                    },
+                                  ),
+                                );
+                              }),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -571,8 +584,8 @@ class HomeOne extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileImage() {
-    final imagePath = ProfileService.getProfileImagePath();
+  Widget _buildProfileImage(ProfileService profileService) {
+    final imagePath = profileService.getProfileImagePath();
     if (imagePath != null && File(imagePath).existsSync()) {
       return Image.file(
         File(imagePath),

@@ -45,6 +45,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get history => 'Histórico';
 
   @override
+  String get weekly => 'Semanal';
+
+  @override
+  String get monthly => 'Mensal';
+
+  @override
+  String get allTime => 'Todo o tempo';
+
+  @override
   String get viewHistory => 'Ver Histórico';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get rateUs => 'Avalie-nos';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => 'Suporte';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => 'Política de Privacidade';
@@ -87,6 +102,23 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cancel => 'Cancelar';
 
   @override
+  String get add => 'Adicionar';
+
+  @override
+  String get addThisHabitToYourRoutine => 'Adicionar este hábito à sua rotina?';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen =>
+      'Você pode rastreá-lo diariamente na tela inicial';
+
+  @override
+  String get exit => 'Sair';
+
+  @override
+  String get areYouSureYouWantToExit =>
+      'Tem certeza de que deseja sair do aplicativo?';
+
+  @override
   String get areYouSureYouWantToLogout => 'Tem certeza de que deseja sair?';
 
   @override
@@ -104,6 +136,17 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get logoutFunctionalityComingSoon =>
       'Funcionalidade de saída em breve';
+
+  @override
+  String get resetAllProgress => 'Redefinir Todo o Progresso';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      'Tem certeza de que deseja redefinir todo o progresso? Isso excluirá todas as suas pontuações, hábitos e histórico.';
+
+  @override
+  String get progressResetSuccessfully =>
+      'Todo o progresso foi redefinido com sucesso';
 
   @override
   String get couldNotOpenLink => 'Não foi possível abrir o link';
@@ -207,12 +250,25 @@ class AppLocalizationsPt extends AppLocalizations {
   String get continueButton => 'Continuar';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => 'Por favor, insira seu nome';
 
   @override
   String errorPickingImage(String error) {
     return 'Erro ao selecionar imagem: $error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => 'Escolher da Galeria';

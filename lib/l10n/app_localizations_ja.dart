@@ -45,6 +45,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get history => '履歴';
 
   @override
+  String get weekly => '週間';
+
+  @override
+  String get monthly => '月間';
+
+  @override
+  String get allTime => '全期間';
+
+  @override
   String get viewHistory => '履歴を表示';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get rateUs => '評価する';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => 'サポート';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => 'プライバシーポリシー';
@@ -87,6 +102,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get cancel => 'キャンセル';
 
   @override
+  String get add => '追加';
+
+  @override
+  String get addThisHabitToYourRoutine => 'この習慣をルーチンに追加しますか？';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen => 'ホーム画面で毎日追跡できます';
+
+  @override
+  String get exit => '終了';
+
+  @override
+  String get areYouSureYouWantToExit => 'アプリを終了してもよろしいですか？';
+
+  @override
   String get areYouSureYouWantToLogout => 'ログアウトしてもよろしいですか？';
 
   @override
@@ -102,6 +132,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get logoutFunctionalityComingSoon => 'ログアウト機能は近日公開';
+
+  @override
+  String get resetAllProgress => 'すべての進捗をリセット';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      'すべての進捗をリセットしてもよろしいですか？これにより、すべてのスコア、習慣、履歴が削除されます。';
+
+  @override
+  String get progressResetSuccessfully => 'すべての進捗が正常にリセットされました';
 
   @override
   String get couldNotOpenLink => 'リンクを開けませんでした';
@@ -203,12 +243,25 @@ class AppLocalizationsJa extends AppLocalizations {
   String get continueButton => '続ける';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => 'お名前を入力してください';
 
   @override
   String errorPickingImage(String error) {
     return '画像の選択エラー：$error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => 'ギャラリーから選択';

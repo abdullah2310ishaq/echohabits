@@ -15,8 +15,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HabitService>(
-      builder: (context, habitService, child) {
+    return Consumer2<HabitService, ProfileService>(
+      builder: (context, habitService, profileService, child) {
         return Scaffold(
           backgroundColor: const Color(0xFFF5F5F5),
           body: SingleChildScrollView(
@@ -47,7 +47,9 @@ class Profile extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 26.r,
                               backgroundColor: Colors.white,
-                              child: ClipOval(child: _buildProfileImage()),
+                              child: ClipOval(
+                                child: _buildProfileImage(profileService),
+                              ),
                             ),
                           ),
                           SizedBox(width: 12.w),
@@ -57,7 +59,7 @@ class Profile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  ProfileService.getUserName(),
+                                  profileService.getUserName(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 18.sp,
@@ -84,7 +86,7 @@ class Profile extends StatelessWidget {
                             icon: Icon(
                               Icons.settings,
                               color: Colors.black87,
-                              size: 20.sp,
+                              size: 28.sp,
                             ),
                             onPressed: () {
                               Navigator.of(context).push(
@@ -479,10 +481,7 @@ class Profile extends StatelessWidget {
                 SizedBox(height: 2.h),
                 Text(
                   label,
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    color: Colors.black54,
-                  ),
+                  style: TextStyle(fontSize: 10.sp, color: Colors.black54),
                 ),
               ],
             ),
@@ -553,8 +552,8 @@ class Profile extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileImage() {
-    final imagePath = ProfileService.getProfileImagePath();
+  Widget _buildProfileImage(ProfileService profileService) {
+    final imagePath = profileService.getProfileImagePath();
     if (imagePath != null && File(imagePath).existsSync()) {
       return Image.file(
         File(imagePath),

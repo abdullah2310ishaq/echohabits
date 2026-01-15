@@ -13,11 +13,12 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  String _selectedFilter = 'Weekly';
+  String _selectedFilter = 'weekly';
 
   @override
   Widget build(BuildContext context) {
     final habitService = Provider.of<HabitService>(context);
+    final l10n = AppLocalizations.of(context)!;
     // Filter to show only completed tasks (status == 'done')
     final history = habitService.history
         .where((item) => item['status'] == 'done')
@@ -33,7 +34,7 @@ class _HistoryState extends State<History> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          AppLocalizations.of(context)!.history,
+          l10n.history,
           style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.bold,
@@ -51,11 +52,11 @@ class _HistoryState extends State<History> {
               padding: EdgeInsets.all(16.w),
               child: Row(
                 children: [
-                  _buildFilterButton(context, 'Weekly'),
+                  _buildFilterButton(context, 'weekly', l10n.weekly),
                   SizedBox(width: 10.w),
-                  _buildFilterButton(context, 'Monthly'),
+                  _buildFilterButton(context, 'monthly', l10n.monthly),
                   SizedBox(width: 10.w),
-                  _buildFilterButton(context, 'All Time'),
+                  _buildFilterButton(context, 'allTime', l10n.allTime),
                 ],
               ),
             ),
@@ -73,17 +74,22 @@ class _HistoryState extends State<History> {
                 itemCount: history.length,
                 itemBuilder: (context, index) {
                   final item = history[index];
-                  final String title = item['title'] as String;
+                  final String storedTitle = item['title'] as String;
                   final DateTime timestamp = item['timestamp'] as DateTime;
+                  
+                  // Localize the habit title if it's a known habit
+                  final String localizedTitle = _getLocalizedHabitTitle(context, storedTitle);
 
                   // Format date as "Wednesday, January 14" (day name + month name + day)
-                  final dateFormatter = DateFormat('EEEE, MMMM d');
+                  // Use locale from Localizations to format dates correctly
+                  final locale = Localizations.localeOf(context);
+                  final dateFormatter = DateFormat('EEEE, MMMM d', locale.toString());
                   final String dateLabel = dateFormatter.format(timestamp);
 
                   return Padding(
                     padding: EdgeInsets.only(bottom: 10.h),
                     child: _buildHistoryCard(
-                      habit: title,
+                      habit: localizedTitle,
                       date: dateLabel,
                       isDone: true, // Only showing completed items
                     ),
@@ -97,16 +103,14 @@ class _HistoryState extends State<History> {
     );
   }
 
-  Widget _buildFilterButton(BuildContext context, String label) {
-    final isSelected = _selectedFilter == label;
-    // TODO: Add weekly, monthly, allTime to localization files
-    // For now using English strings - intl will format dates based on locale
+  Widget _buildFilterButton(BuildContext context, String filterKey, String label) {
+    final isSelected = _selectedFilter == filterKey;
 
     return Expanded(
       child: GestureDetector(
         onTap: () {
           setState(() {
-            _selectedFilter = label;
+            _selectedFilter = filterKey;
           });
         },
         child: Container(
@@ -127,6 +131,132 @@ class _HistoryState extends State<History> {
         ),
       ),
     );
+  }
+
+  /// Get localized habit title by matching stored title against English versions
+  String _getLocalizedHabitTitle(BuildContext context, String storedTitle) {
+    final l10n = AppLocalizations.of(context)!;
+    
+    // Map of English titles to localization getters
+    // This handles habits stored in English or other languages
+    final Map<String, String Function()> titleMap = {
+      // Habit titles
+      'Cycle to work': () => l10n.cycleToWork,
+      'Use public transport': () => l10n.usePublicTransport,
+      'Carpool with colleagues': () => l10n.carpoolWithColleagues,
+      'Walk short distances': () => l10n.walkShortDistances,
+      'Maintain bike regularly': () => l10n.maintainBikeRegularly,
+      'Buy bulk food': () => l10n.buyBulkFood,
+      'Compost kitchen waste': () => l10n.compostKitchenWaste,
+      'Plant a mini garden': () => l10n.plantAMiniGarden,
+      'Reduce packaged food': () => l10n.reducePackagedFood,
+      'Choose seasonal fruits': () => l10n.chooseSeasonalFruits,
+      'Cold water wash': () => l10n.coldWaterWash,
+      'Switch off unused lights': () => l10n.switchOffUnusedLights,
+      'Use energy-efficient bulbs': () => l10n.useEnergyEfficientBulbs,
+      'Air dry clothes': () => l10n.airDryClothes,
+      'Use natural ventilation': () => l10n.useNaturalVentilation,
+      'Shorter showers': () => l10n.shorterShowers,
+      'Fix water leaks': () => l10n.fixWaterLeaks,
+      'Collect rainwater for plants': () => l10n.collectRainwaterForPlants,
+      'Reuse RO water': () => l10n.reuseROWater,
+      'Turn off tap while brushing': () => l10n.turnOffTapWhileBrushing,
+      'Carry reusable bags': () => l10n.carryReusableBags,
+      'Buy recycled products': () => l10n.buyRecycledProducts,
+      'Avoid fast fashion': () => l10n.avoidFastFashion,
+      'Choose eco-friendly brands': () => l10n.chooseEcoFriendlyBrands,
+      'Support local business': () => l10n.supportLocalBusiness,
+      'Reduce screen time': () => l10n.reduceScreenTime,
+      'Unsubscribe unwanted mails': () => l10n.unsubscribeUnwantedMails,
+      'Cloud backup cleanup': () => l10n.cloudBackupCleanup,
+      'Turn off auto-play': () => l10n.turnOffAutoPlay,
+      'Digital mindful breaks': () => l10n.digitalMindfulBreaks,
+      'Morning walk': () => l10n.morningWalk,
+      'Practice yoga': () => l10n.practiceYoga,
+      'Healthy sleep routine': () => l10n.healthySleepRoutine,
+      'Drink 2L water': () => l10n.drink2LWater,
+      'Avoid junk snacks': () => l10n.avoidJunkSnacks,
+      'Meditation 5 min/day': () => l10n.meditation5MinDay,
+      'Practice gratitude journaling': () => l10n.practiceGratitudeJournaling,
+      'Breathing exercise': () => l10n.breathingExercise,
+      'Spend time in nature': () => l10n.spendTimeInNature,
+      'Limit negative news': () => l10n.limitNegativeNews,
+      'Track expenses': () => l10n.trackExpenses,
+      'Monthly savings goal': () => l10n.monthlySavingsGoal,
+      'Avoid impulse buying': () => l10n.avoidImpulseBuying,
+      'Invest in SIP': () => l10n.investInSIP,
+      'Use cash-back responsibly': () => l10n.useCashBackResponsibly,
+      // Default task titles
+      'Walked/ Biked instead of driving': () => l10n.defaultWalkBikeTitle,
+      'Used a reusable coffee cup': () => l10n.defaultCoffeeCupTitle,
+      'Afforestation/ Plant a tree for better environment': () => l10n.defaultAfforestationTitle,
+    };
+    
+    // Check if stored title matches English version
+    if (titleMap.containsKey(storedTitle)) {
+      return titleMap[storedTitle]!();
+    }
+    
+    // Check if stored title matches current localized version
+    // This handles cases where title is already in current language
+    final currentLocalizedTitles = {
+      l10n.cycleToWork,
+      l10n.usePublicTransport,
+      l10n.carpoolWithColleagues,
+      l10n.walkShortDistances,
+      l10n.maintainBikeRegularly,
+      l10n.buyBulkFood,
+      l10n.compostKitchenWaste,
+      l10n.plantAMiniGarden,
+      l10n.reducePackagedFood,
+      l10n.chooseSeasonalFruits,
+      l10n.coldWaterWash,
+      l10n.switchOffUnusedLights,
+      l10n.useEnergyEfficientBulbs,
+      l10n.airDryClothes,
+      l10n.useNaturalVentilation,
+      l10n.shorterShowers,
+      l10n.fixWaterLeaks,
+      l10n.collectRainwaterForPlants,
+      l10n.reuseROWater,
+      l10n.turnOffTapWhileBrushing,
+      l10n.carryReusableBags,
+      l10n.buyRecycledProducts,
+      l10n.avoidFastFashion,
+      l10n.chooseEcoFriendlyBrands,
+      l10n.supportLocalBusiness,
+      l10n.reduceScreenTime,
+      l10n.unsubscribeUnwantedMails,
+      l10n.cloudBackupCleanup,
+      l10n.turnOffAutoPlay,
+      l10n.digitalMindfulBreaks,
+      l10n.morningWalk,
+      l10n.practiceYoga,
+      l10n.healthySleepRoutine,
+      l10n.drink2LWater,
+      l10n.avoidJunkSnacks,
+      l10n.meditation5MinDay,
+      l10n.practiceGratitudeJournaling,
+      l10n.breathingExercise,
+      l10n.spendTimeInNature,
+      l10n.limitNegativeNews,
+      l10n.trackExpenses,
+      l10n.monthlySavingsGoal,
+      l10n.avoidImpulseBuying,
+      l10n.investInSIP,
+      l10n.useCashBackResponsibly,
+      l10n.defaultWalkBikeTitle,
+      l10n.defaultCoffeeCupTitle,
+      l10n.defaultAfforestationTitle,
+    };
+    
+    if (currentLocalizedTitles.contains(storedTitle)) {
+      // Already in current language
+      return storedTitle;
+    }
+    
+    // If no match found, return stored title as-is (for custom habits or unknown titles)
+    return storedTitle;
   }
 
   Widget _buildHistoryCard({

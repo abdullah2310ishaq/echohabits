@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "Wöchentlich",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "Monatlich",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "Gesamte Zeit",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "Verlauf anzeigen",
   "@viewHistory": {
     "description": "View history button text"
@@ -104,6 +116,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "Hinzufügen",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "Diese Gewohnheit zu Ihrer Routine hinzufügen?",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "Sie können es täglich auf Ihrem Startbildschirm verfolgen",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "Beenden",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "Sind Sie sicher, dass Sie die App beenden möchten?",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "Sind Sie sicher, dass Sie sich abmelden möchten?",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +160,18 @@
   "logoutFunctionalityComingSoon": "Abmelde-Funktion kommt bald",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "Alle Fortschritte zurücksetzen",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "Sind Sie sicher, dass Sie alle Fortschritte zurücksetzen möchten? Dies löscht alle Ihre Punkte, Gewohnheiten und den Verlauf.",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "Alle Fortschritte wurden erfolgreich zurückgesetzt",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "Link konnte nicht geöffnet werden",
   "@couldNotOpenLink": {

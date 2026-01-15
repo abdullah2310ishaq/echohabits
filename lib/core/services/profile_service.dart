@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 
-class ProfileService {
+class ProfileService extends ChangeNotifier {
   static const String _boxName = 'profileBox';
   static const String _nameKey = 'userName';
   static const String _imagePathKey = 'profileImagePath';
@@ -33,17 +33,17 @@ class ProfileService {
   }
 
   /// Get user name
-  static String getUserName() {
+  String getUserName() {
     return _box?.get(_nameKey, defaultValue: 'Liza') ?? 'Liza';
   }
 
   /// Get profile image path (null if using default)
-  static String? getProfileImagePath() {
+  String? getProfileImagePath() {
     return _box?.get(_imagePathKey);
   }
 
-  /// Save profile data
-  static Future<void> saveProfile({
+  /// Save profile data and notify listeners
+  Future<void> saveProfile({
     required String name,
     String? imagePath,
   }) async {
@@ -54,6 +54,7 @@ class ProfileService {
       await _box?.delete(_imagePathKey);
     }
     await _box?.put(_isSetupCompleteKey, true);
+    notifyListeners(); // Notify all listeners that profile has changed
   }
 
   /// Get greeting based on time

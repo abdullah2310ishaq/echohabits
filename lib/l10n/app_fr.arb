@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "Hebdomadaire",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "Mensuel",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "Tout le temps",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "Voir l'Historique",
   "@viewHistory": {
     "description": "View history button text"
@@ -104,6 +116,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "Ajouter",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "Ajouter cette habitude à votre routine ?",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "Vous pouvez le suivre quotidiennement sur votre écran d'accueil",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "Quitter",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "Êtes-vous sûr de vouloir quitter l'application ?",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "Êtes-vous sûr de vouloir vous déconnecter ?",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +160,18 @@
   "logoutFunctionalityComingSoon": "Fonctionnalité de déconnexion à venir",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "Réinitialiser Tout le Progrès",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cela supprimera tous vos scores, habitudes et historique.",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "Tout le progrès a été réinitialisé avec succès",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "Impossible d'ouvrir le lien",
   "@couldNotOpenLink": {

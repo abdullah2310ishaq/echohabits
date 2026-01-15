@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "Еженедельно",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "Ежемесячно",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "Все время",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "Просмотр Истории",
   "@viewHistory": {
     "description": "View history button text"
@@ -104,6 +116,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "Добавить",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "Добавить эту привычку в вашу рутину?",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "Вы можете отслеживать это ежедневно на главном экране",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "Выход",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "Вы уверены, что хотите выйти из приложения?",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "Вы уверены, что хотите выйти?",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +160,18 @@
   "logoutFunctionalityComingSoon": "Функция выхода скоро",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "Сбросить Весь Прогресс",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "Вы уверены, что хотите сбросить весь прогресс? Это удалит все ваши очки, привычки и историю.",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "Весь прогресс успешно сброшен",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "Не удалось открыть ссылку",
   "@couldNotOpenLink": {

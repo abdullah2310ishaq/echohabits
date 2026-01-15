@@ -91,6 +91,13 @@ class _FirstTimeLanguageSelectionScreenState
       'imageAsset': 'assets/language/korea.svg',
       'isPng': false,
     },
+    {
+      'code': 'ar',
+      'name': 'Arabic',
+      'nativeName': 'العربية',
+      'imageAsset': 'assets/language/sudan.svg',
+      'isPng': false,
+    },
   ];
 
   @override

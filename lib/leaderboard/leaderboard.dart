@@ -10,9 +10,13 @@ import '../core/services/profile_service.dart';
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
-  Widget _buildProfileImage({required bool isCurrentUser, required String avatar}) {
+  Widget _buildProfileImage({
+    required bool isCurrentUser,
+    required String avatar,
+    required ProfileService profileService,
+  }) {
     if (isCurrentUser) {
-      final imagePath = ProfileService.getProfileImagePath();
+      final imagePath = profileService.getProfileImagePath();
       if (imagePath != null && File(imagePath).existsSync()) {
         return Image.file(
           File(imagePath),
@@ -43,8 +47,8 @@ class Leaderboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HabitService>(
-      builder: (context, service, child) {
+    return Consumer2<HabitService, ProfileService>(
+      builder: (context, service, profileService, child) {
         final currentUserScore = service.totalScore;
         final currentUserRankTitle = _getRankTitle(context, currentUserScore);
 
@@ -65,7 +69,7 @@ class Leaderboard extends StatelessWidget {
             'avatar': 'assets/profile.png',
           },
           {
-            'name': ProfileService.getUserName(),
+            'name': profileService.getUserName(),
             'rankTitle': currentUserRankTitle,
             'score': currentUserScore,
             'isCurrentUser': true,
@@ -204,6 +208,7 @@ class Leaderboard extends StatelessWidget {
                             score: user['score'] as int,
                             isCurrentUser: user['isCurrentUser'] as bool,
                             avatar: user['avatar'] as String,
+                            profileService: profileService,
                           ),
                         ),
                       ),
@@ -225,6 +230,7 @@ class Leaderboard extends StatelessWidget {
     required int score,
     required bool isCurrentUser,
     required String avatar,
+    required ProfileService profileService,
   }) {
     return Container(
       padding: EdgeInsets.all(14.w),
@@ -255,6 +261,7 @@ class Leaderboard extends StatelessWidget {
                 child: _buildProfileImage(
                   isCurrentUser: isCurrentUser,
                   avatar: avatar,
+                  profileService: profileService,
                 ),
               ),
             ),

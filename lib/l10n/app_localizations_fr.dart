@@ -45,6 +45,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get history => 'Historique';
 
   @override
+  String get weekly => 'Hebdomadaire';
+
+  @override
+  String get monthly => 'Mensuel';
+
+  @override
+  String get allTime => 'Tout le temps';
+
+  @override
   String get viewHistory => 'Voir l\'Historique';
 
   @override
@@ -66,7 +75,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rateUs => 'Notez-nous';
 
   @override
+  String get moreApps => 'More Apps';
+
+  @override
   String get support => 'Support';
+
+  @override
+  String get feedback => 'Feedback';
 
   @override
   String get privacyPolicy => 'Politique de Confidentialité';
@@ -87,6 +102,24 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cancel => 'Annuler';
 
   @override
+  String get add => 'Ajouter';
+
+  @override
+  String get addThisHabitToYourRoutine =>
+      'Ajouter cette habitude à votre routine ?';
+
+  @override
+  String get youCanTrackItDailyOnYourHomeScreen =>
+      'Vous pouvez le suivre quotidiennement sur votre écran d\'accueil';
+
+  @override
+  String get exit => 'Quitter';
+
+  @override
+  String get areYouSureYouWantToExit =>
+      'Êtes-vous sûr de vouloir quitter l\'application ?';
+
+  @override
   String get areYouSureYouWantToLogout =>
       'Êtes-vous sûr de vouloir vous déconnecter ?';
 
@@ -105,6 +138,17 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get logoutFunctionalityComingSoon =>
       'Fonctionnalité de déconnexion à venir';
+
+  @override
+  String get resetAllProgress => 'Réinitialiser Tout le Progrès';
+
+  @override
+  String get areYouSureYouWantToResetAllProgress =>
+      'Êtes-vous sûr de vouloir réinitialiser tout le progrès ? Cela supprimera tous vos scores, habitudes et historique.';
+
+  @override
+  String get progressResetSuccessfully =>
+      'Tout le progrès a été réinitialisé avec succès';
 
   @override
   String get couldNotOpenLink => 'Impossible d\'ouvrir le lien';
@@ -208,12 +252,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get continueButton => 'Continuer';
 
   @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+
+  @override
   String get pleaseEnterYourName => 'Veuillez entrer votre nom';
 
   @override
   String errorPickingImage(String error) {
     return 'Erreur lors de la sélection de l\'image : $error';
   }
+
+  @override
+  String get noFaceDetected =>
+      'No human face detected. Please upload a photo with a clear face.';
 
   @override
   String get chooseFromGallery => 'Choisir dans la Galerie';

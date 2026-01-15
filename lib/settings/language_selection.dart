@@ -86,6 +86,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
       'imageAsset': 'assets/language/korea.svg',
       'isPng': false,
     },
+    {
+      'code': 'ar',
+      'name': 'Arabic',
+      'nativeName': 'العربية',
+      'imageAsset': 'assets/language/sudan.svg',
+      'isPng': false,
+    },
   ];
 
   @override
@@ -104,7 +111,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.close, color: Color(0xFF2E7D32), size: 28),
+          icon: const Icon(Icons.arrow_back, color: Colors.black87, size: 22),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(

@@ -47,7 +47,7 @@ class _HomeShellState extends State<HomeShell> {
                 children: [
                   // Title
                   Text(
-                    AppLocalizations.of(context)!.logout,
+                    AppLocalizations.of(context)!.exit,
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
@@ -58,7 +58,7 @@ class _HomeShellState extends State<HomeShell> {
                   SizedBox(height: 16.h),
                   // Message
                   Text(
-                    AppLocalizations.of(context)!.areYouSureYouWantToLogout,
+                    AppLocalizations.of(context)!.areYouSureYouWantToExit,
                     style: TextStyle(fontSize: 16.sp, color: Colors.black54),
                     textAlign: TextAlign.center,
                   ),
@@ -103,7 +103,7 @@ class _HomeShellState extends State<HomeShell> {
                             elevation: 0,
                           ),
                           child: Text(
-                            AppLocalizations.of(context)!.logout,
+                            AppLocalizations.of(context)!.exit,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 18.sp,

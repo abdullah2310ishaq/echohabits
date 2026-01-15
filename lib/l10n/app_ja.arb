@@ -48,6 +48,18 @@
   "@history": {
     "description": "History section title"
   },
+  "weekly": "週間",
+  "@weekly": {
+    "description": "Weekly filter option"
+  },
+  "monthly": "月間",
+  "@monthly": {
+    "description": "Monthly filter option"
+  },
+  "allTime": "全期間",
+  "@allTime": {
+    "description": "All time filter option"
+  },
   "viewHistory": "履歴を表示",
   "@viewHistory": {
     "description": "View history button text"
@@ -104,6 +116,26 @@
   "@cancel": {
     "description": "Cancel button text"
   },
+  "add": "追加",
+  "@add": {
+    "description": "Add button text"
+  },
+  "addThisHabitToYourRoutine": "この習慣をルーチンに追加しますか？",
+  "@addThisHabitToYourRoutine": {
+    "description": "Dialog title when adding a habit"
+  },
+  "youCanTrackItDailyOnYourHomeScreen": "ホーム画面で毎日追跡できます",
+  "@youCanTrackItDailyOnYourHomeScreen": {
+    "description": "Description text in add habit dialog"
+  },
+  "exit": "終了",
+  "@exit": {
+    "description": "Exit button text"
+  },
+  "areYouSureYouWantToExit": "アプリを終了してもよろしいですか？",
+  "@areYouSureYouWantToExit": {
+    "description": "Exit confirmation message"
+  },
   "areYouSureYouWantToLogout": "ログアウトしてもよろしいですか？",
   "@areYouSureYouWantToLogout": {
     "description": "Logout confirmation message"
@@ -128,6 +160,18 @@
   "logoutFunctionalityComingSoon": "ログアウト機能は近日公開",
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
+  },
+  "resetAllProgress": "すべての進捗をリセット",
+  "@resetAllProgress": {
+    "description": "Reset all progress option"
+  },
+  "areYouSureYouWantToResetAllProgress": "すべての進捗をリセットしてもよろしいですか？これにより、すべてのスコア、習慣、履歴が削除されます。",
+  "@areYouSureYouWantToResetAllProgress": {
+    "description": "Reset all progress confirmation message"
+  },
+  "progressResetSuccessfully": "すべての進捗が正常にリセットされました",
+  "@progressResetSuccessfully": {
+    "description": "Success message when progress is reset"
   },
   "couldNotOpenLink": "リンクを開けませんでした",
   "@couldNotOpenLink": {
