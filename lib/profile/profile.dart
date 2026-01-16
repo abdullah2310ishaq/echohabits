@@ -13,255 +13,276 @@ import '../core/services/habit_service.dart';
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
+  String _getRankTitle(BuildContext context, int score) {
+    final l10n = AppLocalizations.of(context)!;
+    if (score < 1000) {
+      return l10n.ecoExplorerRank;
+    } else if (score < 2500) {
+      return l10n.ecoBuilder;
+    } else if (score < 5000) {
+      return l10n.ecoChampion;
+    } else if (score < 8000) {
+      return l10n.ecoWarrior;
+    } else if (score < 12000) {
+      return l10n.ecoGuardian;
+    } else {
+      return l10n.planetHero;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<HabitService, ProfileService>(
       builder: (context, habitService, profileService, child) {
         return Scaffold(
           backgroundColor: const Color(0xFFF5F5F5),
-          body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 40.h),
-                // Header Section
-                Container(
-                  padding: EdgeInsets.all(16.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(24.r),
-                      bottomRight: Radius.circular(24.r),
+          body: SafeArea(
+            bottom: false,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20.h),
+                  // Header Section
+                  Container(
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(24.r),
+                        bottomRight: Radius.circular(24.r),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      // Top Row: Avatar, Name, Settings
-                      Row(
-                        children: [
-                          // Avatar with green border
-                          CircleAvatar(
-                            radius: 28.r,
-                            backgroundColor: const Color(0xFF2E7D32),
-                            child: CircleAvatar(
-                              radius: 26.r,
-                              backgroundColor: Colors.white,
-                              child: ClipOval(
-                                child: _buildProfileImage(profileService),
+                    child: Column(
+                      children: [
+                        // Top Row: Avatar, Name, Settings
+                        Row(
+                          children: [
+                            // Avatar with green border
+                            CircleAvatar(
+                              radius: 28.r,
+                              backgroundColor: const Color(0xFF2E7D32),
+                              child: CircleAvatar(
+                                radius: 26.r,
+                                backgroundColor: Colors.white,
+                                child: ClipOval(
+                                  child: _buildProfileImage(profileService),
+                                ),
                               ),
                             ),
+                            SizedBox(width: 12.w),
+                            // Name and Subtitle
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    profileService.getUserName(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF2E7D32),
+                                    ),
+                                  ),
+                                  SizedBox(height: 3.h),
+                                  Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.makingTheWorldGreener,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Settings Icon
+                            IconButton(
+                              icon: Icon(
+                                Icons.settings,
+                                color: Colors.black87,
+                                size: 28.sp,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SettingsScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12.h),
+                        // Rank Badge
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12.w,
+                            vertical: 8.h,
                           ),
-                          SizedBox(width: 12.w),
-                          // Name and Subtitle
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  profileService.getUserName(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF2E7D32),
-                                  ),
-                                ),
-                                SizedBox(height: 3.h),
-                                Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.makingTheWorldGreener,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                              ],
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE8F5E9),
+                            borderRadius: BorderRadius.circular(18.r),
+                            border: Border.all(
+                              color: const Color(0xFF2E7D32),
+                              width: 1,
                             ),
                           ),
-                          // Settings Icon
-                          IconButton(
-                            icon: Icon(
-                              Icons.settings,
-                              color: Colors.black87,
-                              size: 28.sp,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.emoji_events,
+                                color: Colors.amber,
+                                size: 16.sp,
+                              ),
+                              SizedBox(width: 6.w),
+                              Text(
+                                _getRankTitle(context, habitService.totalScore),
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFF2E7D32),
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Main Content
+                  Padding(
+                    padding: EdgeInsets.all(16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Green Score Chart Card
+                        _buildGreenScoreCard(context, habitService),
+                        SizedBox(height: 12.h),
+
+                        // Quick Stats Cards
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _buildStatCard(
+                                svgAsset: 'assets/eco.svg',
+                                iconColor: Colors.orange,
+                                value: habitService.averageActionsPerDay
+                                    .toStringAsFixed(1),
+                                label: AppLocalizations.of(
+                                  context,
+                                )!.avgActionsPerDay,
+                              ),
                             ),
+                            SizedBox(width: 10.w),
+                            Expanded(
+                              child: _buildStatCard(
+                                svgAsset: 'assets/flame.svg',
+                                iconColor: Colors.orange,
+                                value: habitService.currentStreak.toString(),
+                                label: AppLocalizations.of(context)!.dayStreak,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16.h),
+
+                        // Badges Section
+                        Text(
+                          AppLocalizations.of(context)!.badges,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(height: 12.h),
+                        SizedBox(
+                          height: 90.h,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              _buildBadgeCard(
+                                imageAsset: 'assets/firststep.png',
+                                label: AppLocalizations.of(context)!.firstStep,
+                              ),
+                              SizedBox(width: 10.w),
+                              _buildBadgeCard(
+                                icon: Icons.directions_bike,
+                                iconColor: Colors.blue,
+                                label: AppLocalizations.of(context)!.cyclist,
+                              ),
+                              SizedBox(width: 10.w),
+                              _buildBadgeCard(
+                                icon: Icons.water_drop,
+                                iconColor: Colors.blue,
+                                label: AppLocalizations.of(context)!.waterSaver,
+                              ),
+                              SizedBox(width: 10.w),
+                              _buildBadgeCard(
+                                icon: Icons.bolt,
+                                iconColor: Colors.amber,
+                                label: AppLocalizations.of(context)!.energyPr,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 16.h),
+
+                        // History Section
+                        Text(
+                          AppLocalizations.of(context)!.history,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(height: 12.h),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const SettingsScreen(),
+                                  builder: (context) => const History(),
                                 ),
                               );
                             },
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 12.h),
-                      // ECO EXPLORER Badge
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 8.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE8F5E9),
-                          borderRadius: BorderRadius.circular(18.r),
-                          border: Border.all(
-                            color: const Color(0xFF2E7D32),
-                            width: 1,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.emoji_events,
-                              color: Colors.amber,
-                              size: 16.sp,
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: const Color(0xFF2E7D32),
+                              side: const BorderSide(
+                                color: Color(0xFF2E7D32),
+                                width: 1.5,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
                             ),
-                            SizedBox(width: 6.w),
-                            Text(
-                              AppLocalizations.of(context)!.ecoExplorer,
+                            child: Text(
+                              AppLocalizations.of(context)!.viewHistory,
                               style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFF2E7D32),
-                                letterSpacing: 0.5,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 16.h),
+                      ],
+                    ),
                   ),
-                ),
-
-                // Main Content
-                Padding(
-                  padding: EdgeInsets.all(16.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Green Score Chart Card
-                      _buildGreenScoreCard(context, habitService),
-                      SizedBox(height: 12.h),
-
-                      // Quick Stats Cards
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _buildStatCard(
-                              svgAsset: 'assets/eco.svg',
-                              iconColor: Colors.orange,
-                              value: habitService.averageActionsPerDay
-                                  .toStringAsFixed(1),
-                              label: AppLocalizations.of(
-                                context,
-                              )!.avgActionsPerDay,
-                            ),
-                          ),
-                          SizedBox(width: 10.w),
-                          Expanded(
-                            child: _buildStatCard(
-                              svgAsset: 'assets/flame.svg',
-                              iconColor: Colors.orange,
-                              value: habitService.currentStreak.toString(),
-                              label: AppLocalizations.of(context)!.dayStreak,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 16.h),
-
-                      // Badges Section
-                      Text(
-                        AppLocalizations.of(context)!.badges,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      SizedBox(height: 12.h),
-                      SizedBox(
-                        height: 90.h,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            _buildBadgeCard(
-                              imageAsset: 'assets/firststep.png',
-                              label: AppLocalizations.of(context)!.firstStep,
-                            ),
-                            SizedBox(width: 10.w),
-                            _buildBadgeCard(
-                              icon: Icons.directions_bike,
-                              iconColor: Colors.blue,
-                              label: AppLocalizations.of(context)!.cyclist,
-                            ),
-                            SizedBox(width: 10.w),
-                            _buildBadgeCard(
-                              icon: Icons.water_drop,
-                              iconColor: Colors.blue,
-                              label: AppLocalizations.of(context)!.waterSaver,
-                            ),
-                            SizedBox(width: 10.w),
-                            _buildBadgeCard(
-                              icon: Icons.bolt,
-                              iconColor: Colors.amber,
-                              label: AppLocalizations.of(context)!.energyPr,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-
-                      // History Section
-                      Text(
-                        AppLocalizations.of(context)!.history,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      SizedBox(height: 12.h),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const History(),
-                              ),
-                            );
-                          },
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: const Color(0xFF2E7D32),
-                            side: const BorderSide(
-                              color: Color(0xFF2E7D32),
-                              width: 1.5,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            padding: EdgeInsets.symmetric(vertical: 12.h),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.viewHistory,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

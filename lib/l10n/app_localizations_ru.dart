@@ -313,6 +313,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ecoMaster => 'Эко-Мастер';
 
   @override
+  String get ecoBuilder => 'Эко-Строитель';
+
+  @override
+  String get ecoChampion => 'Эко-Чемпион';
+
+  @override
+  String get ecoGuardian => 'Эко-Хранитель';
+
+  @override
+  String get planetHero => 'Герой Планеты';
+
+  @override
   String get hi => 'Привет';
 
   @override

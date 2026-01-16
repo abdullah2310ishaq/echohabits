@@ -32,16 +32,18 @@ class Leaderboard extends StatelessWidget {
 
   String _getRankTitle(BuildContext context, int score) {
     final l10n = AppLocalizations.of(context)!;
-    if (score < 2000) {
-      return l10n.greenStarter;
-    } else if (score < 3000) {
+    if (score < 1000) {
       return l10n.ecoExplorerRank;
+    } else if (score < 2500) {
+      return l10n.ecoBuilder;
     } else if (score < 5000) {
+      return l10n.ecoChampion;
+    } else if (score < 8000) {
       return l10n.ecoWarrior;
-    } else if (score < 10000) {
-      return l10n.natureGuardian;
+    } else if (score < 12000) {
+      return l10n.ecoGuardian;
     } else {
-      return l10n.ecoMaster;
+      return l10n.planetHero;
     }
   }
 

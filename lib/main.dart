@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:habit_tracker/core/services/habit_service.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
 import 'package:habit_tracker/core/services/locale_service.dart';
+import 'package:habit_tracker/core/widgets/global_pointer_gate.dart';
 import 'package:habit_tracker/splash_screen.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 
@@ -56,22 +57,24 @@ class MyApp extends StatelessWidget {
                   data: (mediaQueryData ?? const MediaQueryData()).copyWith(
                     textScaler: TextScaler.linear(1.0),
                   ),
-                  child: MaterialApp(
-                    title: 'Eco Habit Tracker',
-                    debugShowCheckedModeBanner: false,
-                    theme: ThemeData(
-                      colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                  child: GlobalPointerGate(
+                    child: MaterialApp(
+                      title: 'Eco Habit Tracker',
+                      debugShowCheckedModeBanner: false,
+                      theme: ThemeData(
+                        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                      ),
+                      // Localization configuration
+                      localizationsDelegates: const [
+                        AppLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      locale: currentLocale,
+                      home: const SplashScreen(),
                     ),
-                    // Localization configuration
-                    localizationsDelegates: const [
-                      AppLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: AppLocalizations.supportedLocales,
-                    locale: currentLocale,
-                    home: const SplashScreen(),
                   ),
                 ),
               );

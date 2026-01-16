@@ -11,6 +11,23 @@ import '../core/services/profile_service.dart';
 class HomeOne extends StatelessWidget {
   const HomeOne({super.key});
 
+  String _getRankTitle(BuildContext context, int score) {
+    final l10n = AppLocalizations.of(context)!;
+    if (score < 1000) {
+      return l10n.ecoExplorerRank;
+    } else if (score < 2500) {
+      return l10n.ecoBuilder;
+    } else if (score < 5000) {
+      return l10n.ecoChampion;
+    } else if (score < 8000) {
+      return l10n.ecoWarrior;
+    } else if (score < 12000) {
+      return l10n.ecoGuardian;
+    } else {
+      return l10n.planetHero;
+    }
+  }
+
   String _localizeTag(AppLocalizations l10n, String tag) {
     switch (tag) {
       case 'Transport':
@@ -102,43 +119,47 @@ class HomeOne extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // ECO EXPLORER Badge
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10.w,
-                              vertical: 6.h,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFE8F5E9),
-                              borderRadius: BorderRadius.circular(16.r),
-                              border: Border.all(
-                                color: const Color(0xFF2E7D32),
-                                width: 1,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/eco.svg',
-                                  width: 14.w,
-                                  height: 14.h,
-                                  colorFilter: const ColorFilter.mode(
-                                    Color(0xFF2E7D32),
-                                    BlendMode.srcIn,
-                                  ),
+                          // Rank Badge
+                          Consumer<HabitService>(
+                            builder: (context, habitService, child) {
+                              return Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w,
+                                  vertical: 6.h,
                                 ),
-                                SizedBox(width: 4.w),
-                                Text(
-                                  AppLocalizations.of(context)!.ecoExplorer,
-                                  style: TextStyle(
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.bold,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFE8F5E9),
+                                  borderRadius: BorderRadius.circular(16.r),
+                                  border: Border.all(
                                     color: const Color(0xFF2E7D32),
+                                    width: 1,
                                   ),
                                 ),
-                              ],
-                            ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/eco.svg',
+                                      width: 14.w,
+                                      height: 14.h,
+                                      colorFilter: const ColorFilter.mode(
+                                        Color(0xFF2E7D32),
+                                        BlendMode.srcIn,
+                                      ),
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      _getRankTitle(context, habitService.totalScore),
+                                      style: TextStyle(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFF2E7D32),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -160,14 +181,18 @@ class HomeOne extends StatelessWidget {
                           // Determine next level based on total score
                           String nextLevel;
                           final l10n = AppLocalizations.of(context)!;
-                          if (service.totalScore < 2000) {
-                            nextLevel = l10n.ecoExplorerRank;
-                          } else if (service.totalScore < 3000) {
-                            nextLevel = l10n.ecoWarrior;
+                          if (service.totalScore < 1000) {
+                            nextLevel = l10n.ecoBuilder;
+                          } else if (service.totalScore < 2500) {
+                            nextLevel = l10n.ecoChampion;
                           } else if (service.totalScore < 5000) {
-                            nextLevel = l10n.natureGuardian;
+                            nextLevel = l10n.ecoWarrior;
+                          } else if (service.totalScore < 8000) {
+                            nextLevel = l10n.ecoGuardian;
+                          } else if (service.totalScore < 12000) {
+                            nextLevel = l10n.planetHero;
                           } else {
-                            nextLevel = l10n.ecoMaster;
+                            nextLevel = l10n.planetHero; // Already at max level
                           }
 
                           return Container(

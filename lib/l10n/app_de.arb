@@ -398,6 +398,22 @@
   "@ecoMaster": {
     "description": "Rank title for score >= 10000"
   },
+  "ecoBuilder": "Öko-Bauer",
+  "@ecoBuilder": {
+    "description": "Rank title for score 1000-2499"
+  },
+  "ecoChampion": "Öko-Champion",
+  "@ecoChampion": {
+    "description": "Rank title for score 2500-4999"
+  },
+  "ecoGuardian": "Öko-Wächter",
+  "@ecoGuardian": {
+    "description": "Rank title for score 8000-11999"
+  },
+  "planetHero": "Planeten-Held",
+  "@planetHero": {
+    "description": "Rank title for score >= 12000"
+  },
   "hi": "Hallo",
   "@hi": {
     "description": "Greeting prefix"

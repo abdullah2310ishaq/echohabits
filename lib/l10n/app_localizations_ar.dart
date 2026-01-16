@@ -309,6 +309,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ecoMaster => 'سيد بيئي';
 
   @override
+  String get ecoBuilder => 'باني بيئي';
+
+  @override
+  String get ecoChampion => 'بطل بيئي';
+
+  @override
+  String get ecoGuardian => 'حارس بيئي';
+
+  @override
+  String get planetHero => 'بطل الكوكب';
+
+  @override
   String get hi => 'مرحباً';
 
   @override

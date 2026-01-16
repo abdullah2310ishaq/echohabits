@@ -698,6 +698,30 @@ abstract class AppLocalizations {
   /// **'Eco Master'**
   String get ecoMaster;
 
+  /// Rank title for score 1000-2499
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Builder'**
+  String get ecoBuilder;
+
+  /// Rank title for score 2500-4999
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Champion'**
+  String get ecoChampion;
+
+  /// Rank title for score 8000-11999
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Guardian'**
+  String get ecoGuardian;
+
+  /// Rank title for score >= 12000
+  ///
+  /// In en, this message translates to:
+  /// **'Planet Hero'**
+  String get planetHero;
+
   /// Greeting prefix
   ///
   /// In en, this message translates to:

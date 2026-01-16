@@ -306,6 +306,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ecoMaster => '에코 마스터';
 
   @override
+  String get ecoBuilder => '에코 빌더';
+
+  @override
+  String get ecoChampion => '에코 챔피언';
+
+  @override
+  String get ecoGuardian => '에코 가디언';
+
+  @override
+  String get planetHero => '플래닛 히어로';
+
+  @override
   String get hi => '안녕하세요';
 
   @override

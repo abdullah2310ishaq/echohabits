@@ -301,26 +301,31 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 ),
               ),
               // Inner profile image inside a circular mask - covers entire ellipse
-              ClipOval(
-                child: Container(
-                  width: 160.w,
-                  height: 160.h,
-                  color: Colors.white,
-                  child: _isUsingDefaultImage || _selectedImagePath == null
-                      ? Image.asset(
-                          'assets/profile.png',
-                          fit: BoxFit.cover,
-                          width: 160.w,
-                          height: 160.h,
-                          alignment: Alignment.center,
-                        )
-                      : Image.file(
-                          File(_selectedImagePath!),
-                          fit: BoxFit.cover,
-                          width: 160.w,
-                          height: 160.h,
-                          alignment: Alignment.center,
-                        ),
+              SizedBox(
+                width: 160.w,
+                height: 160.w, // Use same width to ensure perfect circle
+                child: ClipOval(
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    width: 160.w,
+                    height: 160.w, // Use same width to ensure perfect circle
+                    color: Colors.white,
+                    child: _isUsingDefaultImage || _selectedImagePath == null
+                        ? Image.asset(
+                            'assets/profile.png',
+                            fit: BoxFit.cover,
+                            width: 160.w,
+                            height: 160.w,
+                            alignment: Alignment.center,
+                          )
+                        : Image.file(
+                            File(_selectedImagePath!),
+                            fit: BoxFit.cover,
+                            width: 160.w,
+                            height: 160.w,
+                            alignment: Alignment.center,
+                          ),
+                  ),
                 ),
               ),
               // Camera badge - positioned slightly more right and up
@@ -399,21 +404,15 @@ class _ProfileFirstState extends State<ProfileFirst> {
               fillColor: const Color(0xFFF5F5F5),
               hintText: AppLocalizations.of(context)!.nameHint,
               hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
-              prefixIcon: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: CircleAvatar(
-                  radius: 14.r,
-                  backgroundColor: Colors.transparent,
-                  child: ClipOval(
-                    child: Image.asset(
-                      'assets/profile.png',
-                      fit: BoxFit.cover,
-                      width: 24.w,
-                      height: 24.h,
-                    ),
-                  ),
+              prefixIcon: ClipOval(
+                clipBehavior: Clip.antiAlias,
+                child: SizedBox(
+                  width: 14.w,
+                  height: 14.w, // Use same width to ensure perfect circle
+                  child: Image.asset('assets/profile.png', fit: BoxFit.contain),
                 ),
               ),
+
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.r),
                 borderSide: BorderSide.none,
@@ -460,9 +459,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
 
                 if (mounted) {
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const HomeShell(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const HomeShell()),
                   );
                 }
               },

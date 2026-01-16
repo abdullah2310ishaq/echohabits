@@ -398,6 +398,22 @@
   "@ecoMaster": {
     "description": "Rank title for score >= 10000"
   },
+  "ecoBuilder": "باني بيئي",
+  "@ecoBuilder": {
+    "description": "Rank title for score 1000-2499"
+  },
+  "ecoChampion": "بطل بيئي",
+  "@ecoChampion": {
+    "description": "Rank title for score 2500-4999"
+  },
+  "ecoGuardian": "حارس بيئي",
+  "@ecoGuardian": {
+    "description": "Rank title for score 8000-11999"
+  },
+  "planetHero": "بطل الكوكب",
+  "@planetHero": {
+    "description": "Rank title for score >= 12000"
+  },
   "hi": "مرحباً",
   "@hi": {
     "description": "Greeting prefix"

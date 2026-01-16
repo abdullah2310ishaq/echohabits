@@ -43,8 +43,39 @@ class AddHabitDialog extends StatelessWidget {
     );
   }
 
+  /// Localize difficulty string
+  String _getLocalizedDifficulty(BuildContext context, String difficulty) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (difficulty) {
+      case 'Easy':
+        return l10n.easy;
+      case 'Medium':
+        return l10n.medium;
+      default:
+        return difficulty;
+    }
+  }
+
+  /// Localize impact string
+  String _getLocalizedImpact(BuildContext context, String impact) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (impact) {
+      case 'High Impact':
+        return l10n.highImpact;
+      case 'Medium Impact':
+        return l10n.mediumImpact;
+      case 'Low Impact':
+        return l10n.lowImpact;
+      default:
+        return impact;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final localizedDifficulty = _getLocalizedDifficulty(context, difficulty);
+    final localizedImpact = _getLocalizedImpact(context, impact);
+
     return Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.r)),
@@ -98,13 +129,13 @@ class AddHabitDialog extends StatelessWidget {
                   SizedBox(width: 6.w),
                   // Difficulty Text
                   Text(
-                    difficulty,
+                    localizedDifficulty,
                     style: TextStyle(fontSize: 12.sp, color: Colors.black54),
                   ),
                   SizedBox(width: 12.w),
                   // Impact Label
                   Text(
-                    impact,
+                    localizedImpact,
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,

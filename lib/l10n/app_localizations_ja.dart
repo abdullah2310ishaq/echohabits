@@ -305,6 +305,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ecoMaster => 'エコマスター';
 
   @override
+  String get ecoBuilder => 'エコビルダー';
+
+  @override
+  String get ecoChampion => 'エコチャンピオン';
+
+  @override
+  String get ecoGuardian => 'エコガーディアン';
+
+  @override
+  String get planetHero => 'プラネットヒーロー';
+
+  @override
   String get hi => 'こんにちは';
 
   @override

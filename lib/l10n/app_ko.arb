@@ -398,6 +398,22 @@
   "@ecoMaster": {
     "description": "Rank title for score >= 10000"
   },
+  "ecoBuilder": "에코 빌더",
+  "@ecoBuilder": {
+    "description": "Rank title for score 1000-2499"
+  },
+  "ecoChampion": "에코 챔피언",
+  "@ecoChampion": {
+    "description": "Rank title for score 2500-4999"
+  },
+  "ecoGuardian": "에코 가디언",
+  "@ecoGuardian": {
+    "description": "Rank title for score 8000-11999"
+  },
+  "planetHero": "플래닛 히어로",
+  "@planetHero": {
+    "description": "Rank title for score >= 12000"
+  },
   "hi": "안녕하세요",
   "@hi": {
     "description": "Greeting prefix"

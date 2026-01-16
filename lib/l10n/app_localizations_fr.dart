@@ -317,6 +317,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ecoMaster => 'Maître Écologique';
 
   @override
+  String get ecoBuilder => 'Constructeur Écologique';
+
+  @override
+  String get ecoChampion => 'Champion Écologique';
+
+  @override
+  String get ecoGuardian => 'Gardien Écologique';
+
+  @override
+  String get planetHero => 'Héros de la Planète';
+
+  @override
   String get hi => 'Salut';
 
   @override

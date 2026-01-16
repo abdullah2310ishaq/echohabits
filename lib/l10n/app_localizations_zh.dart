@@ -305,6 +305,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ecoMaster => '生态大师';
 
   @override
+  String get ecoBuilder => '生态建设者';
+
+  @override
+  String get ecoChampion => '生态冠军';
+
+  @override
+  String get ecoGuardian => '生态守护者';
+
+  @override
+  String get planetHero => '星球英雄';
+
+  @override
   String get hi => '你好';
 
   @override
