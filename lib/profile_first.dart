@@ -24,6 +24,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
   final ImagePicker _imagePicker = ImagePicker();
   String? _selectedImagePath;
   bool _isUsingDefaultImage = true;
+  bool _hasSelectedPhoto = false;
 
   @override
   void dispose() {
@@ -189,6 +190,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
         setState(() {
           _selectedImagePath = savedImage.path;
           _isUsingDefaultImage = false;
+          _hasSelectedPhoto = true;
         });
       }
     } catch (e) {
@@ -270,6 +272,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
                 setState(() {
                   _selectedImagePath = null;
                   _isUsingDefaultImage = true;
+                  _hasSelectedPhoto = true;
                 });
               },
             ),
@@ -297,28 +300,26 @@ class _ProfileFirstState extends State<ProfileFirst> {
                   fit: BoxFit.contain,
                 ),
               ),
-              // Inner profile image inside a circular mask
-              Container(
-                width: 100.w,
-                height: 100.h,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.transparent,
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: ClipOval(
+              // Inner profile image inside a circular mask - covers entire ellipse
+              ClipOval(
+                child: Container(
+                  width: 160.w,
+                  height: 160.h,
+                  color: Colors.white,
                   child: _isUsingDefaultImage || _selectedImagePath == null
                       ? Image.asset(
                           'assets/profile.png',
                           fit: BoxFit.cover,
-                          width: 100.w,
-                          height: 100.h,
+                          width: 160.w,
+                          height: 160.h,
+                          alignment: Alignment.center,
                         )
                       : Image.file(
                           File(_selectedImagePath!),
                           fit: BoxFit.cover,
-                          width: 100.w,
-                          height: 100.h,
+                          width: 160.w,
+                          height: 160.h,
+                          alignment: Alignment.center,
                         ),
                 ),
               ),
@@ -429,29 +430,39 @@ class _ProfileFirstState extends State<ProfileFirst> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () async {
-                if (_nameController.text.trim().isNotEmpty) {
-                  // Save profile data to Hive
-                  final profileService = Provider.of<ProfileService>(
-                    context,
-                    listen: false,
-                  );
-                  await profileService.saveProfile(
-                    name: _nameController.text.trim(),
-                    imagePath: _isUsingDefaultImage ? null : _selectedImagePath,
-                  );
-
-                  if (mounted) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomeShell(),
-                      ),
-                    );
-                  }
-                } else {
+                if (_nameController.text.trim().isEmpty) {
                   EcoToast.show(
                     context,
                     message: AppLocalizations.of(context)!.pleaseEnterYourName,
                     isSuccess: false,
+                  );
+                  return;
+                }
+
+                if (!_hasSelectedPhoto) {
+                  EcoToast.show(
+                    context,
+                    message: AppLocalizations.of(context)!.pleaseSelectPhoto,
+                    isSuccess: false,
+                  );
+                  return;
+                }
+
+                // Save profile data to Hive
+                final profileService = Provider.of<ProfileService>(
+                  context,
+                  listen: false,
+                );
+                await profileService.saveProfile(
+                  name: _nameController.text.trim(),
+                  imagePath: _isUsingDefaultImage ? null : _selectedImagePath,
+                );
+
+                if (mounted) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const HomeShell(),
+                    ),
                   );
                 }
               },

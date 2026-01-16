@@ -264,6 +264,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pleaseEnterYourName => 'Veuillez entrer votre nom';
 
   @override
+  String get pleaseSelectPhoto => 'Veuillez sélectionner une photo';
+
+  @override
   String errorPickingImage(String error) {
     return 'Erreur lors de la sélection de l\'image : $error';
   }

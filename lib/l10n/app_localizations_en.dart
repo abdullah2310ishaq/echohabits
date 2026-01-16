@@ -260,6 +260,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterYourName => 'Please enter your name';
 
   @override
+  String get pleaseSelectPhoto => 'Please select a photo';
+
+  @override
   String errorPickingImage(String error) {
     return 'Error picking image: $error';
   }

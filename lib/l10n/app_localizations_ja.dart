@@ -75,13 +75,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get rateUs => '評価する';
 
   @override
-  String get moreApps => 'More Apps';
+  String get moreApps => 'その他のアプリ';
 
   @override
   String get support => 'サポート';
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => 'フィードバック';
 
   @override
   String get privacyPolicy => 'プライバシーポリシー';
@@ -243,16 +243,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get continueButton => '続ける';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'プロフィールを編集';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => '変更を保存';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => 'プロフィールが正常に更新されました';
 
   @override
   String get pleaseEnterYourName => 'お名前を入力してください';
+
+  @override
+  String get pleaseSelectPhoto => '写真を選択してください';
 
   @override
   String errorPickingImage(String error) {
@@ -260,8 +263,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get noFaceDetected =>
-      'No human face detected. Please upload a photo with a clear face.';
+  String get noFaceDetected => '人の顔が検出されませんでした。顔がはっきり写った写真をアップロードしてください。';
 
   @override
   String get chooseFromGallery => 'ギャラリーから選択';

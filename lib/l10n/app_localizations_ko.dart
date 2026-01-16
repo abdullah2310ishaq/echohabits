@@ -255,6 +255,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get pleaseEnterYourName => '이름을 입력해주세요';
 
   @override
+  String get pleaseSelectPhoto => '사진을 선택해주세요';
+
+  @override
   String errorPickingImage(String error) {
     return '이미지 선택 오류: $error';
   }

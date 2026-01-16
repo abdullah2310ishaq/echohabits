@@ -255,6 +255,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get pleaseEnterYourName => '请输入您的姓名';
 
   @override
+  String get pleaseSelectPhoto => '请选择照片';
+
+  @override
   String errorPickingImage(String error) {
     return '选择图片时出错：$error';
   }

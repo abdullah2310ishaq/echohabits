@@ -602,6 +602,12 @@ abstract class AppLocalizations {
   /// **'Please enter your name'**
   String get pleaseEnterYourName;
 
+  /// Validation message when photo is not selected
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a photo'**
+  String get pleaseSelectPhoto;
+
   /// Error message when image picker fails
   ///
   /// In en, this message translates to:

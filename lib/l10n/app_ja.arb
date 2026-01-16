@@ -88,9 +88,17 @@
   "@rateUs": {
     "description": "Rate us option"
   },
+  "moreApps": "その他のアプリ",
+  "@moreApps": {
+    "description": "More apps option"
+  },
   "support": "サポート",
   "@support": {
     "description": "Support option"
+  },
+  "feedback": "フィードバック",
+  "@feedback": {
+    "description": "Feedback option"
   },
   "privacyPolicy": "プライバシーポリシー",
   "@privacyPolicy": {
@@ -305,9 +313,25 @@
   "@continueButton": {
     "description": "Continue button text"
   },
+  "editProfile": "プロフィールを編集",
+  "@editProfile": {
+    "description": "Edit profile screen title and menu option"
+  },
+  "saveChanges": "変更を保存",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "profileUpdatedSuccessfully": "プロフィールが正常に更新されました",
+  "@profileUpdatedSuccessfully": {
+    "description": "Success message when profile is updated"
+  },
   "pleaseEnterYourName": "お名前を入力してください",
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
+  },
+  "pleaseSelectPhoto": "写真を選択してください",
+  "@pleaseSelectPhoto": {
+    "description": "Validation message when photo is not selected"
   },
   "errorPickingImage": "画像の選択エラー：{error}",
   "@errorPickingImage": {
@@ -317,6 +341,10 @@
         "type": "String"
       }
     }
+  },
+  "noFaceDetected": "人の顔が検出されませんでした。顔がはっきり写った写真をアップロードしてください。",
+  "@noFaceDetected": {
+    "description": "Error message when no face is detected in profile image"
   },
   "chooseFromGallery": "ギャラリーから選択",
   "@chooseFromGallery": {

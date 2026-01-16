@@ -329,6 +329,10 @@
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
   },
+  "pleaseSelectPhoto": "Пожалуйста, выберите фото",
+  "@pleaseSelectPhoto": {
+    "description": "Validation message when photo is not selected"
+  },
   "errorPickingImage": "Ошибка при выборе изображения: {error}",
   "@errorPickingImage": {
     "description": "Error message when image picker fails",

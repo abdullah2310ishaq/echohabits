@@ -260,6 +260,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get pleaseEnterYourName => 'Пожалуйста, введите ваше имя';
 
   @override
+  String get pleaseSelectPhoto => 'Пожалуйста, выберите фото';
+
+  @override
   String errorPickingImage(String error) {
     return 'Ошибка при выборе изображения: $error';
   }

@@ -329,6 +329,10 @@
   "@pleaseEnterYourName": {
     "description": "Validation message when name is empty"
   },
+  "pleaseSelectPhoto": "사진을 선택해주세요",
+  "@pleaseSelectPhoto": {
+    "description": "Validation message when photo is not selected"
+  },
   "errorPickingImage": "이미지 선택 오류: {error}",
   "@errorPickingImage": {
     "description": "Error message when image picker fails",

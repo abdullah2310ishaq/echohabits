@@ -48,10 +48,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     final nameChanged = _nameController.text.trim() != currentName;
 
-    // Check if image changed:
-    // - If user is using default image now but had custom image before
-    // - If user is using custom image now but had default image before
-    // - If both are custom images but paths are different
     final currentIsDefault = currentImagePath == null;
     final newIsDefault = _isUsingDefaultImage || _selectedImagePath == null;
 
@@ -307,27 +303,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   fit: BoxFit.contain,
                 ),
               ),
-              Container(
-                width: 100.w,
-                height: 100.h,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.transparent,
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: ClipOval(
+              ClipOval(
+                child: Container(
+                  width: 160.w,
+                  height: 160.h,
+                  color: Colors.white,
                   child: _isUsingDefaultImage || _selectedImagePath == null
                       ? Image.asset(
                           'assets/profile.png',
                           fit: BoxFit.cover,
-                          width: 100.w,
-                          height: 100.h,
+                          width: 160.w,
+                          height: 160.h,
+                          alignment: Alignment.center,
                         )
                       : Image.file(
                           File(_selectedImagePath!),
                           fit: BoxFit.cover,
-                          width: 100.w,
-                          height: 100.h,
+                          width: 160.w,
+                          height: 160.h,
+                          alignment: Alignment.center,
                         ),
                 ),
               ),
