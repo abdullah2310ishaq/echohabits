@@ -90,6 +90,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get termsOfService => '服务条款';
 
   @override
+  String get communityGuidelines => '社区准则';
+
+  @override
   String get logout => '退出';
 
   @override

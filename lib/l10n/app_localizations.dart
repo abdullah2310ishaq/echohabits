@@ -278,6 +278,12 @@ abstract class AppLocalizations {
   /// **'Terms of Service'**
   String get termsOfService;
 
+  /// Community guidelines option
+  ///
+  /// In en, this message translates to:
+  /// **'Community Guidelines'**
+  String get communityGuidelines;
+
   /// Logout option
   ///
   /// In en, this message translates to:

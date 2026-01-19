@@ -108,6 +108,10 @@
   "@termsOfService": {
     "description": "Terms of service option"
   },
+  "communityGuidelines": "Linee Guida della Comunità",
+  "@communityGuidelines": {
+    "description": "Community guidelines option"
+  },
   "logout": "Esci",
   "@logout": {
     "description": "Logout option"

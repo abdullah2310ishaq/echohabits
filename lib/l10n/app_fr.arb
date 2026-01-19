@@ -108,6 +108,10 @@
   "@termsOfService": {
     "description": "Terms of service option"
   },
+  "communityGuidelines": "Règles de la Communauté",
+  "@communityGuidelines": {
+    "description": "Community guidelines option"
+  },
   "logout": "Déconnexion",
   "@logout": {
     "description": "Logout option"

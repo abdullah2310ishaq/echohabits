@@ -103,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
           if (!context.mounted) return;
           _openExternal(
             context,
-            'https://play.google.com/store/apps/details?id=com.ecohabittracker.app',
+            'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion',
           );
         },
       ),
@@ -116,7 +116,7 @@ class SettingsScreen extends StatelessWidget {
           // Link to Play Store developer page showing all apps
           _openExternal(
             context,
-            'https://play.google.com/store/apps/developer?id=Funloft+Production',
+            'https://play.google.com/store/search?q=pub%3ACodix%20Apps&c=apps',
           );
         },
       ),
@@ -124,28 +124,28 @@ class SettingsScreen extends StatelessWidget {
         iconPath: 'assets/settings/support.svg',
         title: AppLocalizations.of(context)!.support,
         onTap: () =>
-            _openExternal(context, 'mailto:support@ecohabittracker.com'),
+            _openExternal(context, 'mailto:islam24hoursstudio@gmail.com'),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/support.svg',
         title: AppLocalizations.of(context)!.feedback,
         onTap: () =>
-            _openExternal(context, 'mailto:feedback@ecohabittracker.com'),
+            _openExternal(context, 'mailto:islam24hoursstudio@gmail.com'),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/privacypolicy.svg',
         title: AppLocalizations.of(context)!.privacyPolicy,
         onTap: () => _openExternal(
           context,
-          'https://sites.google.com/view/ecohabittracker/privacy-policy',
+          'https://sites.google.com/view/eco-habit-tracker/privacy-policy',
         ),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/terms.svg',
-        title: AppLocalizations.of(context)!.termsOfService,
+        title: AppLocalizations.of(context)!.communityGuidelines,
         onTap: () => _openExternal(
           context,
-          'https://sites.google.com/view/ecohabittracker/terms-of-service',
+          'https://sites.google.com/view/eco-habit-tracker/community-guidelines',
         ),
       ),
       _SettingsOption(

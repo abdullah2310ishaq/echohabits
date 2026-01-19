@@ -90,6 +90,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get termsOfService => 'Términos de Servicio';
 
   @override
+  String get communityGuidelines => 'Pautas de la Comunidad';
+
+  @override
   String get logout => 'Cerrar Sesión';
 
   @override

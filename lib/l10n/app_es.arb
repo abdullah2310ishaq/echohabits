@@ -108,6 +108,10 @@
   "@termsOfService": {
     "description": "Terms of service option"
   },
+  "communityGuidelines": "Pautas de la Comunidad",
+  "@communityGuidelines": {
+    "description": "Community guidelines option"
+  },
   "logout": "Cerrar Sesión",
   "@logout": {
     "description": "Logout option"

@@ -108,6 +108,10 @@
   "@termsOfService": {
     "description": "Terms of service option"
   },
+  "communityGuidelines": "Diretrizes da Comunidade",
+  "@communityGuidelines": {
+    "description": "Community guidelines option"
+  },
   "logout": "Sair",
   "@logout": {
     "description": "Logout option"

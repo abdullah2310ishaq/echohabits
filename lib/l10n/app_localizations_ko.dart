@@ -90,6 +90,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get termsOfService => '서비스 약관';
 
   @override
+  String get communityGuidelines => '커뮤니티 가이드라인';
+
+  @override
   String get logout => '로그아웃';
 
   @override

@@ -90,6 +90,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get termsOfService => '利用規約';
 
   @override
+  String get communityGuidelines => 'コミュニティガイドライン';
+
+  @override
   String get logout => 'ログアウト';
 
   @override

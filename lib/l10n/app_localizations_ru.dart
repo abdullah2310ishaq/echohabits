@@ -90,6 +90,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get termsOfService => 'Условия Использования';
 
   @override
+  String get communityGuidelines => 'Правила Сообщества';
+
+  @override
   String get logout => 'Выйти';
 
   @override

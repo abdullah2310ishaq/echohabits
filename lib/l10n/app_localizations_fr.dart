@@ -90,6 +90,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get termsOfService => 'Conditions d\'Utilisation';
 
   @override
+  String get communityGuidelines => 'Règles de la Communauté';
+
+  @override
   String get logout => 'Déconnexion';
 
   @override

@@ -90,6 +90,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get termsOfService => 'شروط الخدمة';
 
   @override
+  String get communityGuidelines => 'إرشادات المجتمع';
+
+  @override
   String get logout => 'تسجيل الخروج';
 
   @override

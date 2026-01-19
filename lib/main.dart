@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               final currentLocale = localeService.getCurrentLocale();
               final isRTL = currentLocale.languageCode == 'ar';
-              
+
               return Directionality(
                 textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
                 child: MediaQuery(
@@ -62,7 +62,9 @@ class MyApp extends StatelessWidget {
                       title: 'Eco Habit Tracker',
                       debugShowCheckedModeBanner: false,
                       theme: ThemeData(
-                        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                        colorScheme: ColorScheme.fromSeed(
+                          seedColor: Colors.green,
+                        ),
                       ),
                       // Localization configuration
                       localizationsDelegates: const [

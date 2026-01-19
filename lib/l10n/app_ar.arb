@@ -108,6 +108,10 @@
   "@termsOfService": {
     "description": "Terms of service option"
   },
+  "communityGuidelines": "إرشادات المجتمع",
+  "@communityGuidelines": {
+    "description": "Community guidelines option"
+  },
   "logout": "تسجيل الخروج",
   "@logout": {
     "description": "Logout option"
