@@ -266,6 +266,7 @@ class HabitService extends ChangeNotifier {
     required String impact,
     required Color impactColor,
     required BuildContext context,
+    String? titleKey, // Optional stable identifier for 24-hour tracking
   }) {
     final l10n = AppLocalizations.of(context)!;
 
@@ -278,12 +279,27 @@ class HabitService extends ChangeNotifier {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
 
-    if (_habitAddTimestamps.containsKey(title)) {
-      final lastAdded = _habitAddTimestamps[title]!;
+    // Use titleKey as stable identifier if available, otherwise fall back to title
+    // Check BOTH titleKey (for new habits) and title (for backward compatibility with old habits)
+    final keysToCheck = <String>[];
+    if (titleKey != null) {
+      keysToCheck.add(titleKey);
+    }
+    keysToCheck.add(title); // Also check title for backward compatibility
+
+    DateTime? foundTimestamp;
+    for (final key in keysToCheck) {
+      if (_habitAddTimestamps.containsKey(key)) {
+        foundTimestamp = _habitAddTimestamps[key]!;
+        break;
+      }
+    }
+
+    if (foundTimestamp != null) {
       final lastAddedDate = DateTime(
-        lastAdded.year,
-        lastAdded.month,
-        lastAdded.day,
+        foundTimestamp.year,
+        foundTimestamp.month,
+        foundTimestamp.day,
       );
 
       // If added today (same day), don't allow (resets at midnight)
@@ -294,6 +310,7 @@ class HabitService extends ChangeNotifier {
 
     _userHabits.add({
       'title': title,
+      'titleKey': titleKey, // Store titleKey for stable tracking
       'category': category,
       'difficulty': difficulty,
       'difficultyColor': difficultyColor,
@@ -302,8 +319,13 @@ class HabitService extends ChangeNotifier {
       'addedFromHabitsPage': true,
     });
 
-    // Track when this habit was added
-    _habitAddTimestamps[title] = now;
+    // Track when this habit was added using stable identifier (prefer titleKey)
+    final saveKey = titleKey ?? title;
+    _habitAddTimestamps[saveKey] = now;
+    // Also save with title for backward compatibility if titleKey exists
+    if (titleKey != null && titleKey != title) {
+      _habitAddTimestamps[title] = now;
+    }
 
     _saveData();
     notifyListeners();
@@ -330,6 +352,7 @@ class HabitService extends ChangeNotifier {
 
     _addHistoryEntry(
       title: task['title'] as String,
+      titleKey: id, // Use task id as stable identifier for default tasks
       category: (task['tags'] as List).isNotEmpty
           ? task['tags'].first as String
           : null,
@@ -368,6 +391,9 @@ class HabitService extends ChangeNotifier {
 
     _addHistoryEntry(
       title: habit['title'] as String,
+      titleKey:
+          habit['titleKey']
+              as String?, // Use titleKey if available for stable localization
       category: habit['category'] as String?,
       isDefault: false,
       isDone: isDone,
@@ -399,23 +425,23 @@ class HabitService extends ChangeNotifier {
     // Reset scores
     _dailyScore = 0;
     _totalScore = 0;
-    
+
     // Clear history
     _history.clear();
-    
+
     // Clear user habits
     _userHabits.clear();
-    
+
     // Clear habit add timestamps
     _habitAddTimestamps.clear();
-    
+
     // Clear hidden default task IDs
     _hiddenDefaultTaskIds.clear();
-    
+
     // Reset dates
     _lastScoreResetDate = null;
     _lastDefaultReset = null;
-    
+
     // Save all changes to Hive
     if (_box != null) {
       await _box!.put(_dailyScoreKey, 0);
@@ -427,7 +453,7 @@ class HabitService extends ChangeNotifier {
       await _box!.delete(_lastScoreResetDateKey);
       await _box!.delete(_lastDefaultResetKey);
     }
-    
+
     notifyListeners();
   }
 
@@ -486,9 +512,10 @@ class HabitService extends ChangeNotifier {
     final completedToday = _history.where((entry) {
       if (entry['status'] != 'done') return false;
       final timestamp = entry['timestamp'] as DateTime;
-      return timestamp.isAfter(todayStart) || timestamp.isAtSameMomentAs(todayStart);
+      return timestamp.isAfter(todayStart) ||
+          timestamp.isAtSameMomentAs(todayStart);
     }).length;
-    
+
     // Give 3 points to the first 4 completed tasks, 2 points to the rest
     // This ensures we reach exactly 100 when all 48 tasks are completed:
     // 4 tasks * 3 points + 44 tasks * 2 points = 12 + 88 = 100
@@ -505,9 +532,12 @@ class HabitService extends ChangeNotifier {
     required bool isDefault,
     required bool isDone,
     String? category,
+    String?
+    titleKey, // Stable identifier for localization (titleKey for habits, id for default tasks)
   }) {
     _history.insert(0, {
       'title': title,
+      'titleKey': titleKey, // Store stable identifier for proper localization
       'category': category,
       'isDefault': isDefault,
       'status': isDone ? 'done' : 'skipped',
