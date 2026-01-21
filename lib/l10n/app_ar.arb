@@ -44,6 +44,16 @@
   "@energyPr": {
     "description": "Energy Pr badge name"
   },
+  "youHaveUnlockedBadge": "لقد قمت بإلغاء قفل شارة {badge}!",
+  "@youHaveUnlockedBadge": {
+    "description": "Badge unlock notification message",
+    "placeholders": {
+      "badge": {
+        "type": "String",
+        "example": "Cyclist"
+      }
+    }
+  },
   "history": "السجل",
   "@history": {
     "description": "History section title"

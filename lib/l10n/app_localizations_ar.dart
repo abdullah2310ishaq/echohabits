@@ -42,6 +42,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get energyPr => 'موفر الطاقة';
 
   @override
+  String youHaveUnlockedBadge(String badge) {
+    return 'لقد قمت بإلغاء قفل شارة $badge!';
+  }
+
+  @override
   String get history => 'السجل';
 
   @override

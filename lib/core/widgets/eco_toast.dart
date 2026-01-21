@@ -8,6 +8,7 @@ class EcoToast {
     BuildContext context, {
     required String message,
     bool isSuccess = true,
+    Duration duration = const Duration(seconds: 2),
   }) {
     // Remove previous toast if exists (prevent stacking)
     if (_currentOverlayEntry != null) {
@@ -30,7 +31,7 @@ class EcoToast {
     _currentOverlayEntry = overlayEntry;
     overlay.insert(overlayEntry);
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(duration, () {
       try {
         if (overlayEntry.mounted) {
           overlayEntry.remove();

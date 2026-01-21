@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'dart:io';
@@ -8,8 +9,72 @@ import '../core/widgets/eco_toast.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/profile_service.dart';
 
-class HomeOne extends StatelessWidget {
+class HomeOne extends StatefulWidget {
   const HomeOne({super.key});
+
+  @override
+  State<HomeOne> createState() => _HomeOneState();
+}
+
+class _HomeOneState extends State<HomeOne> {
+  bool _showConfetti = false;
+  bool _cyclistUnlocked = false;
+  bool _waterUnlocked = false;
+  bool _energyUnlocked = false;
+
+  String? _checkAndTriggerConfetti(
+    String completedTitle,
+    BuildContext context,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+
+    // Check if this completion unlocks any badge
+    bool unlocksCyclist =
+        completedTitle == l10n.cycleToWork && !_cyclistUnlocked;
+    bool unlocksWater = completedTitle == l10n.reuseROWater && !_waterUnlocked;
+    bool unlocksEnergy =
+        completedTitle == l10n.reduceScreenTime && !_energyUnlocked;
+
+    String? unlockedBadgeName;
+
+    if (unlocksCyclist || unlocksWater || unlocksEnergy) {
+      // Update unlock states and get badge name
+      if (unlocksCyclist) {
+        _cyclistUnlocked = true;
+        unlockedBadgeName = l10n.cyclist;
+      }
+      if (unlocksWater) {
+        _waterUnlocked = true;
+        unlockedBadgeName = l10n.waterSaver;
+      }
+      if (unlocksEnergy) {
+        _energyUnlocked = true;
+        unlockedBadgeName = l10n.energyPr;
+      }
+
+      // Show badge unlock toast
+      if (unlockedBadgeName != null) {
+        EcoToast.show(
+          context,
+          message: l10n.youHaveUnlockedBadge(unlockedBadgeName),
+          isSuccess: true,
+          duration: const Duration(seconds: 2),
+        );
+      }
+
+      // Trigger confetti immediately
+      if (mounted && !_showConfetti) {
+        setState(() => _showConfetti = true);
+        Future.delayed(const Duration(seconds: 2), () {
+          if (mounted) {
+            setState(() => _showConfetti = false);
+          }
+        });
+      }
+      return unlockedBadgeName;
+    }
+    return null;
+  }
 
   String _getRankTitle(BuildContext context, int score) {
     final l10n = AppLocalizations.of(context)!;
@@ -53,107 +118,251 @@ class HomeOne extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize badge states after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final habitService = Provider.of<HabitService>(context, listen: false);
+      final l10n = AppLocalizations.of(context)!;
+
+      _cyclistUnlocked = habitService.history.any(
+        (entry) =>
+            entry['status'] == 'done' && entry['title'] == l10n.cycleToWork,
+      );
+      _waterUnlocked = habitService.history.any(
+        (entry) =>
+            entry['status'] == 'done' && entry['title'] == l10n.reuseROWater,
+      );
+      _energyUnlocked = habitService.history.any(
+        (entry) =>
+            entry['status'] == 'done' &&
+            entry['title'] == l10n.reduceScreenTime,
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<ProfileService>(
       builder: (context, profileService, child) {
-        return Scaffold(
-          backgroundColor: const Color(0xFFF5F5F5),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 40.h),
-                // Header Section with User Info
-                Container(
-                  padding: EdgeInsets.all(16.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(24.r),
-                      bottomRight: Radius.circular(24.r),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      // User Info Row
-                      Row(
+        return Stack(
+          children: [
+            Scaffold(
+              backgroundColor: const Color(0xFFF5F5F5),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 40.h),
+                    // Header Section with User Info
+                    Container(
+                      padding: EdgeInsets.all(16.w),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(24.r),
+                          bottomRight: Radius.circular(24.r),
+                        ),
+                      ),
+                      child: Column(
                         children: [
-                          // Avatar
-                          CircleAvatar(
-                            radius: 24.r,
-                            backgroundColor: const Color(0xFF2E7D32),
-                            child: CircleAvatar(
-                              radius: 22.r,
-                              backgroundColor: Colors.white,
-                              child: ClipOval(
-                                child: _buildProfileImage(profileService),
+                          // User Info Row
+                          Row(
+                            children: [
+                              // Avatar
+                              CircleAvatar(
+                                radius: 24.r,
+                                backgroundColor: const Color(0xFF2E7D32),
+                                child: CircleAvatar(
+                                  radius: 22.r,
+                                  backgroundColor: Colors.white,
+                                  child: ClipOval(
+                                    child: _buildProfileImage(profileService),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(width: 10.w),
-                          // Greeting + Hi/Name on 2 lines (more readable)
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${ProfileService.getGreetingWithContext(context)},',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 13.sp,
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                SizedBox(height: 2.h),
-                                Text(
-                                  '${AppLocalizations.of(context)!.hi} ${profileService.getUserName()} 👋',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 19.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Rank Badge
-                          Consumer<HabitService>(
-                            builder: (context, habitService, child) {
-                              return Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w,
-                                  vertical: 6.h,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFE8F5E9),
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  border: Border.all(
-                                    color: const Color(0xFF2E7D32),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                              SizedBox(width: 10.w),
+                              // Greeting + Hi/Name on 2 lines (more readable)
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SvgPicture.asset(
-                                      'assets/eco.svg',
-                                      width: 14.w,
-                                      height: 14.h,
-                                      colorFilter: const ColorFilter.mode(
-                                        Color(0xFF2E7D32),
-                                        BlendMode.srcIn,
+                                    Text(
+                                      '${ProfileService.getGreetingWithContext(context)},',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(width: 4.w),
+                                    SizedBox(height: 2.h),
                                     Text(
-                                      _getRankTitle(context, habitService.totalScore),
+                                      '${AppLocalizations.of(context)!.hi} ${profileService.getUserName()} 👋',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                        fontSize: 10.sp,
+                                        fontSize: 19.sp,
                                         fontWeight: FontWeight.bold,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // Rank Badge
+                              Consumer<HabitService>(
+                                builder: (context, habitService, child) {
+                                  return Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 6.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFE8F5E9),
+                                      borderRadius: BorderRadius.circular(16.r),
+                                      border: Border.all(
                                         color: const Color(0xFF2E7D32),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/eco.svg',
+                                          width: 14.w,
+                                          height: 14.h,
+                                          colorFilter: const ColorFilter.mode(
+                                            Color(0xFF2E7D32),
+                                            BlendMode.srcIn,
+                                          ),
+                                        ),
+                                        SizedBox(width: 4.w),
+                                        Text(
+                                          _getRankTitle(
+                                            context,
+                                            habitService.totalScore,
+                                          ),
+                                          style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF2E7D32),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 16.h),
+
+                          // Daily Eco Score Card
+                          Consumer<HabitService>(
+                            builder: (context, service, child) {
+                              final dailyScore = service.dailyScore.clamp(
+                                0,
+                                100,
+                              ); // Cap at 100
+                              final maxDailyScore = 100; // Max score per day
+                              final progress = (dailyScore / maxDailyScore)
+                                  .clamp(0.0, 1.0);
+
+                              // Determine next level based on total score
+                              String nextLevel;
+                              final l10n = AppLocalizations.of(context)!;
+                              if (service.totalScore < 1000) {
+                                nextLevel = l10n.ecoBuilder;
+                              } else if (service.totalScore < 2500) {
+                                nextLevel = l10n.ecoChampion;
+                              } else if (service.totalScore < 5000) {
+                                nextLevel = l10n.ecoWarrior;
+                              } else if (service.totalScore < 8000) {
+                                nextLevel = l10n.ecoGuardian;
+                              } else if (service.totalScore < 12000) {
+                                nextLevel = l10n.planetHero;
+                              } else {
+                                nextLevel =
+                                    l10n.planetHero; // Already at max level
+                              }
+
+                              return Container(
+                                padding: EdgeInsets.all(16.w),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF1F8F5),
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                child: Column(
+                                  children: [
+                                    // Title Row
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.dailyEcoScore,
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: dailyScore.toString(),
+                                                style: TextStyle(
+                                                  fontSize: 18.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: const Color(
+                                                    0xFF2E7D32,
+                                                  ),
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ' / $maxDailyScore',
+                                                style: TextStyle(
+                                                  fontSize: 13.sp,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 12.h),
+                                    // Progress Bar
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      child: LinearProgressIndicator(
+                                        value: progress,
+                                        minHeight: 8.h,
+                                        backgroundColor: Colors.grey[300],
+                                        valueColor:
+                                            const AlwaysStoppedAnimation<Color>(
+                                              Color(0xFF2E7D32),
+                                            ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 6.h),
+                                    // Next Level Text
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.nextLevel(nextLevel),
+                                        style: TextStyle(
+                                          fontSize: 11.sp,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -163,284 +372,220 @@ class HomeOne extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16.h),
+                    ),
 
-                      // Daily Eco Score Card
-                      Consumer<HabitService>(
-                        builder: (context, service, child) {
-                          final dailyScore = service.dailyScore.clamp(
-                            0,
-                            100,
-                          ); // Cap at 100
-                          final maxDailyScore = 100; // Max score per day
-                          final progress = (dailyScore / maxDailyScore).clamp(
-                            0.0,
-                            1.0,
-                          );
-
-                          // Determine next level based on total score
-                          String nextLevel;
-                          final l10n = AppLocalizations.of(context)!;
-                          if (service.totalScore < 1000) {
-                            nextLevel = l10n.ecoBuilder;
-                          } else if (service.totalScore < 2500) {
-                            nextLevel = l10n.ecoChampion;
-                          } else if (service.totalScore < 5000) {
-                            nextLevel = l10n.ecoWarrior;
-                          } else if (service.totalScore < 8000) {
-                            nextLevel = l10n.ecoGuardian;
-                          } else if (service.totalScore < 12000) {
-                            nextLevel = l10n.planetHero;
-                          } else {
-                            nextLevel = l10n.planetHero; // Already at max level
-                          }
-
-                          return Container(
-                            padding: EdgeInsets.all(16.w),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF1F8F5),
-                              borderRadius: BorderRadius.circular(16.r),
+                    // Today's Eco Tasks Section
+                    Padding(
+                      padding: EdgeInsets.all(16.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.todaysEcoTasks,
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
                             ),
-                            child: Column(
-                              children: [
-                                // Title Row
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.dailyEcoScore,
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black87,
+                          ),
+                          SizedBox(height: 12.h),
+
+                          // All tasks (habit-based + default)
+                          Consumer<HabitService>(
+                            builder: (context, service, child) {
+                              final l10n = AppLocalizations.of(context)!;
+                              final habitTasks = service.userHabits;
+                              final defaultTasks = service.todayDefaultTasks;
+                              final hasAnyTasks =
+                                  habitTasks.isNotEmpty ||
+                                  defaultTasks.isNotEmpty;
+
+                              if (!hasAnyTasks) {
+                                // Empty state
+                                return _buildEmptyState(context);
+                              }
+
+                              return Column(
+                                children: [
+                                  // Habit-based tasks from Habits page (no icons)
+                                  ...habitTasks.map((habit) {
+                                    final tags = [
+                                      habit['category'] as String,
+                                      habit['impact'] as String,
+                                    ];
+                                    final String title =
+                                        habit['title'] as String;
+
+                                    return Padding(
+                                      padding: EdgeInsets.only(bottom: 10.h),
+                                      child: _buildTaskCard(
+                                        context: context,
+                                        title: title,
+                                        tags: tags,
+                                        taskName: title,
+                                        showIcon: false,
+                                        onSkip: () {
+                                          service.completeHabitTask(
+                                            title,
+                                            isDone: false,
+                                          );
+                                          EcoToast.show(
+                                            context,
+                                            message: AppLocalizations.of(
+                                              context,
+                                            )!.skippedYourStreakNeedsConsistency,
+                                            isSuccess: false,
+                                          );
+                                        },
+                                        onDone: () {
+                                          service.completeHabitTask(
+                                            title,
+                                            isDone: true,
+                                          );
+                                          // Check if badge unlocks and trigger confetti
+                                          final unlockedBadge =
+                                              _checkAndTriggerConfetti(
+                                                title,
+                                                context,
+                                              );
+                                          // Show regular task completion toast only if no badge unlocked
+                                          if (unlockedBadge == null) {
+                                            EcoToast.show(
+                                              context,
+                                              message: AppLocalizations.of(
+                                                context,
+                                              )!.taskDoneStreakStrong(title),
+                                              isSuccess: true,
+                                              duration: const Duration(
+                                                seconds: 2,
+                                              ),
+                                            );
+                                          }
+                                        },
                                       ),
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: dailyScore.toString(),
-                                            style: TextStyle(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF2E7D32),
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: ' / $maxDailyScore',
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                        ],
+                                    );
+                                  }),
+
+                                  // Default Echo tasks (with icons)
+                                  ...defaultTasks.map((task) {
+                                    final String id = task['id'] as String;
+                                    final String title =
+                                        task['title'] as String;
+                                    final List<String> tags =
+                                        (task['tags'] as List<dynamic>)
+                                            .cast<String>()
+                                            .map((t) => _localizeTag(l10n, t))
+                                            .toList();
+                                    final IconData icon =
+                                        task['icon'] as IconData? ??
+                                        Icons.check;
+                                    final bool useSvg =
+                                        task['useSvg'] as bool? ?? false;
+                                    final String? svgAsset =
+                                        task['svgAsset'] as String?;
+                                    final String taskName =
+                                        task['taskName'] as String? ?? title;
+
+                                    // Localize default task titles based on id
+                                    String localizedTitle;
+                                    switch (id) {
+                                      case 'default_walk_bike_1':
+                                        localizedTitle =
+                                            l10n.defaultWalkBikeTitle;
+                                        break;
+                                      case 'default_coffee_cup':
+                                        localizedTitle =
+                                            l10n.defaultCoffeeCupTitle;
+                                        break;
+                                      case 'default_afforestation':
+                                        localizedTitle =
+                                            l10n.defaultAfforestationTitle;
+                                        break;
+                                      default:
+                                        localizedTitle = title;
+                                    }
+
+                                    return Padding(
+                                      padding: EdgeInsets.only(bottom: 10.h),
+                                      child: _buildTaskCard(
+                                        context: context,
+                                        icon: icon,
+                                        title: localizedTitle,
+                                        tags: tags,
+                                        useSvg: useSvg,
+                                        svgAsset: svgAsset,
+                                        taskName: taskName,
+                                        showIcon: true,
+                                        onSkip: () {
+                                          service.completeDefaultTask(
+                                            id,
+                                            isDone: false,
+                                          );
+                                          EcoToast.show(
+                                            context,
+                                            message: AppLocalizations.of(
+                                              context,
+                                            )!.skippedYourStreakNeedsConsistency,
+                                            isSuccess: false,
+                                          );
+                                        },
+                                        onDone: () {
+                                          service.completeDefaultTask(
+                                            id,
+                                            isDone: true,
+                                          );
+                                          // Check if badge unlocks and trigger confetti
+                                          final unlockedBadge =
+                                              _checkAndTriggerConfetti(
+                                                title,
+                                                context,
+                                              );
+                                          // Show regular task completion toast only if no badge unlocked
+                                          if (unlockedBadge == null) {
+                                            EcoToast.show(
+                                              context,
+                                              message: AppLocalizations.of(
+                                                context,
+                                              )!.taskDone(taskName),
+                                              isSuccess: true,
+                                              duration: const Duration(
+                                                seconds: 2,
+                                              ),
+                                            );
+                                          }
+                                        },
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 12.h),
-                                // Progress Bar
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  child: LinearProgressIndicator(
-                                    value: progress,
-                                    minHeight: 8.h,
-                                    backgroundColor: Colors.grey[300],
-                                    valueColor:
-                                        const AlwaysStoppedAnimation<Color>(
-                                          Color(0xFF2E7D32),
-                                        ),
-                                  ),
-                                ),
-                                SizedBox(height: 6.h),
-                                // Next Level Text
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.nextLevel(nextLevel),
-                                    style: TextStyle(
-                                      fontSize: 11.sp,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+                                    );
+                                  }),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-
-                // Today's Eco Tasks Section
-                Padding(
-                  padding: EdgeInsets.all(16.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.todaysEcoTasks,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      SizedBox(height: 12.h),
-
-                      // All tasks (habit-based + default)
-                      Consumer<HabitService>(
-                        builder: (context, service, child) {
-                          final l10n = AppLocalizations.of(context)!;
-                          final habitTasks = service.userHabits;
-                          final defaultTasks = service.todayDefaultTasks;
-                          final hasAnyTasks =
-                              habitTasks.isNotEmpty || defaultTasks.isNotEmpty;
-
-                          if (!hasAnyTasks) {
-                            // Empty state
-                            return _buildEmptyState(context);
-                          }
-
-                          return Column(
-                            children: [
-                              // Habit-based tasks from Habits page (no icons)
-                              ...habitTasks.map((habit) {
-                                final tags = [
-                                  habit['category'] as String,
-                                  habit['impact'] as String,
-                                ];
-                                final String title = habit['title'] as String;
-
-                                return Padding(
-                                  padding: EdgeInsets.only(bottom: 10.h),
-                                  child: _buildTaskCard(
-                                    context: context,
-                                    title: title,
-                                    tags: tags,
-                                    taskName: title,
-                                    showIcon: false,
-                                    onSkip: () {
-                                      service.completeHabitTask(
-                                        title,
-                                        isDone: false,
-                                      );
-                                      EcoToast.show(
-                                        context,
-                                        message: AppLocalizations.of(
-                                          context,
-                                        )!.skippedYourStreakNeedsConsistency,
-                                        isSuccess: false,
-                                      );
-                                    },
-                                    onDone: () {
-                                      service.completeHabitTask(
-                                        title,
-                                        isDone: true,
-                                      );
-                                      EcoToast.show(
-                                        context,
-                                        message: AppLocalizations.of(
-                                          context,
-                                        )!.taskDoneStreakStrong(title),
-                                        isSuccess: true,
-                                      );
-                                    },
-                                  ),
-                                );
-                              }),
-
-                              // Default Echo tasks (with icons)
-                              ...defaultTasks.map((task) {
-                                final String id = task['id'] as String;
-                                final String title = task['title'] as String;
-                                final List<String> tags =
-                                    (task['tags'] as List<dynamic>)
-                                        .cast<String>()
-                                        .map((t) => _localizeTag(l10n, t))
-                                        .toList();
-                                final IconData icon =
-                                    task['icon'] as IconData? ?? Icons.check;
-                                final bool useSvg =
-                                    task['useSvg'] as bool? ?? false;
-                                final String? svgAsset =
-                                    task['svgAsset'] as String?;
-                                final String taskName =
-                                    task['taskName'] as String? ?? title;
-
-                                // Localize default task titles based on id
-                                String localizedTitle;
-                                switch (id) {
-                                  case 'default_walk_bike_1':
-                                    localizedTitle = l10n.defaultWalkBikeTitle;
-                                    break;
-                                  case 'default_coffee_cup':
-                                    localizedTitle = l10n.defaultCoffeeCupTitle;
-                                    break;
-                                  case 'default_afforestation':
-                                    localizedTitle =
-                                        l10n.defaultAfforestationTitle;
-                                    break;
-                                  default:
-                                    localizedTitle = title;
-                                }
-
-                                return Padding(
-                                  padding: EdgeInsets.only(bottom: 10.h),
-                                  child: _buildTaskCard(
-                                    context: context,
-                                    icon: icon,
-                                    title: localizedTitle,
-                                    tags: tags,
-                                    useSvg: useSvg,
-                                    svgAsset: svgAsset,
-                                    taskName: taskName,
-                                    showIcon: true,
-                                    onSkip: () {
-                                      service.completeDefaultTask(
-                                        id,
-                                        isDone: false,
-                                      );
-                                      EcoToast.show(
-                                        context,
-                                        message: AppLocalizations.of(
-                                          context,
-                                        )!.skippedYourStreakNeedsConsistency,
-                                        isSuccess: false,
-                                      );
-                                    },
-                                    onDone: () {
-                                      service.completeDefaultTask(
-                                        id,
-                                        isDone: true,
-                                      );
-                                      EcoToast.show(
-                                        context,
-                                        message: AppLocalizations.of(
-                                          context,
-                                        )!.taskDone(taskName),
-                                        isSuccess: true,
-                                      );
-                                    },
-                                  ),
-                                );
-                              }),
-                            ],
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            if (_showConfetti)
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Lottie.asset(
+                        'assets/confetti.json',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                        repeat: false,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         );
       },
     );

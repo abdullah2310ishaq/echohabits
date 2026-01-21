@@ -182,6 +182,12 @@ abstract class AppLocalizations {
   /// **'Energy Pr'**
   String get energyPr;
 
+  /// Badge unlock notification message
+  ///
+  /// In en, this message translates to:
+  /// **'You have unlocked the {badge} badge!'**
+  String youHaveUnlockedBadge(String badge);
+
   /// History section title
   ///
   /// In en, this message translates to:

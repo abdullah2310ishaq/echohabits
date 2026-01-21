@@ -133,6 +133,7 @@ class _HomeShellState extends State<HomeShell> {
           exit(0);
         }
       },
+
       child: Scaffold(
         body: _screens[_currentIndex],
         bottomNavigationBar: Container(
@@ -189,45 +190,63 @@ class _HomeShellState extends State<HomeShell> {
   }) {
     final isActive = _currentIndex == index;
     final iconSize = index == 0 ? 24.w : 20.w;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (svgAsset != null)
-            SvgPicture.asset(
-              svgAsset,
-              width: iconSize,
-              height: iconSize,
-              colorFilter: const ColorFilter.mode(
-                Colors.white,
-                BlendMode.srcIn,
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        borderRadius: BorderRadius.circular(12.r),
+        splashColor: Colors.white.withOpacity(0.1),
+        highlightColor: Colors.white.withOpacity(0.05),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              svgAsset != null
+                  ? SvgPicture.asset(
+                      svgAsset,
+                      width: iconSize,
+                      height: iconSize,
+                      colorFilter: ColorFilter.mode(
+                        Colors.white.withOpacity(isActive ? 1.0 : 0.8),
+                        BlendMode.srcIn,
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      color: Colors.white.withOpacity(isActive ? 1.0 : 0.8),
+                      size: iconSize,
+                    ),
+              SizedBox(height: 4.h),
+              AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(isActive ? 1.0 : 0.8),
+                  fontSize: 12.sp,
+                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                ),
+                child: Text(label),
               ),
-            )
-          else if (icon != null)
-            Icon(icon, color: Colors.white, size: iconSize),
-          SizedBox(height: 4.h),
-          Text(
-            label,
-            style: TextStyle(color: Colors.white, fontSize: 12.sp),
+              SizedBox(height: 4.h),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                width: isActive ? 20.w : 0,
+                height: 2.h,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(1.r),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 4.h),
-          if (isActive)
-            Container(
-              width: 20.w,
-              height: 2.h,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(1.r),
-              ),
-            )
-          else
-            SizedBox(height: 2.h),
-        ],
+        ),
       ),
     );
   }

@@ -44,6 +44,16 @@
   "@energyPr": {
     "description": "Energy Pr badge name"
   },
+  "youHaveUnlockedBadge": "Você desbloqueou a insígnia {badge}!",
+  "@youHaveUnlockedBadge": {
+    "description": "Badge unlock notification message",
+    "placeholders": {
+      "badge": {
+        "type": "String",
+        "example": "Cyclist"
+      }
+    }
+  },
   "history": "Histórico",
   "@history": {
     "description": "History section title"

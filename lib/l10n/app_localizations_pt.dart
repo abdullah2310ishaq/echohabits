@@ -42,6 +42,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get energyPr => 'Energia Pr';
 
   @override
+  String youHaveUnlockedBadge(String badge) {
+    return 'Você desbloqueou a insígnia $badge!';
+  }
+
+  @override
   String get history => 'Histórico';
 
   @override

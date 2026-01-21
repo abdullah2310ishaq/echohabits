@@ -42,6 +42,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get energyPr => '에너지 전문가';
 
   @override
+  String youHaveUnlockedBadge(String badge) {
+    return '$badge 배지를 잠금 해제했습니다!';
+  }
+
+  @override
   String get history => '기록';
 
   @override

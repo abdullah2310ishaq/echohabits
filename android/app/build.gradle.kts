@@ -46,19 +46,23 @@ android {
             // NOTE: these must exist in android/key.properties
             val storeFilePath = keystoreProperties.getProperty("storeFile")
             if (!storeFilePath.isNullOrBlank()) {
-                storeFile = file(storeFilePath)
+                val keystoreFile = file(storeFilePath)
+                if (keystoreFile.exists()) {
+                    storeFile = keystoreFile
+                    storePassword = keystoreProperties.getProperty("storePassword")
+                    keyAlias = keystoreProperties.getProperty("keyAlias")
+                    keyPassword = keystoreProperties.getProperty("keyPassword")
+                }
             }
-            storePassword = keystoreProperties.getProperty("storePassword")
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
         }
     }
 
     buildTypes {
         release {
-            // Use release keystore (falls back to debug if key.properties missing)
-            signingConfig = if (keystorePropertiesFile.exists()) {
-                signingConfigs.getByName("release")
+            // Use release keystore only if it exists, otherwise use debug signing
+            val releaseConfig = signingConfigs.getByName("release")
+            signingConfig = if (releaseConfig.storeFile != null && releaseConfig.storeFile!!.exists()) {
+                releaseConfig
             } else {
                 signingConfigs.getByName("debug")
             }

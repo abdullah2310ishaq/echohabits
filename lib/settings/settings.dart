@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import '../core/services/locale_service.dart';
 import '../core/services/habit_service.dart';
@@ -10,18 +11,26 @@ import '../core/widgets/eco_toast.dart';
 import '../profile/edit_profile.dart';
 import 'language_selection.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  final ValueNotifier<bool> _tapGateLocked = ValueNotifier<bool>(false);
 
   Future<void> _openExternal(BuildContext context, String url) async {
     if (!context.mounted) return;
-    
+
     try {
       final uri = Uri.parse(url);
       final launched = await launchUrl(
         uri,
         mode: LaunchMode.externalApplication,
       );
+
       if (!launched && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -29,6 +38,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         );
       }
+      
     } catch (e) {
       // Handle any errors silently to prevent navigation issues
       if (context.mounted) {
@@ -47,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
       _SettingsOption(
         iconPath: 'assets/settings/accounts.svg',
         title: AppLocalizations.of(context)!.editProfile,
-        onTap: () {
+        onTap: () async {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const EditProfileScreen()),
@@ -64,7 +74,7 @@ class SettingsScreen extends StatelessWidget {
           );
           final currentLocale = localeService.getCurrentLocale();
           return Text(
-            SettingsScreen._getLanguageName(currentLocale.languageCode),
+            _getLanguageName(currentLocale.languageCode),
             style: TextStyle(
               fontSize: 12.sp,
               color: const Color(0xFF2E7D32),
@@ -72,7 +82,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           );
         },
-        onTap: () {
+        onTap: () async {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -84,24 +94,19 @@ class SettingsScreen extends StatelessWidget {
       _SettingsOption(
         iconPath: 'assets/settings/share.svg',
         title: AppLocalizations.of(context)!.shareApp,
-        onTap: () {
-          // TODO: Implement share functionality
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                AppLocalizations.of(context)!.shareFunctionalityComingSoon,
-              ),
-            ),
-          );
+        onTap: () async {
+          const appLink =
+              'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion';
+          Share.share('Check out Eco Habit Tracker: $appLink');
         },
       ),
       _SettingsOption(
         iconPath: 'assets/settings/rate.svg',
         title: AppLocalizations.of(context)!.rateUs,
-        onTap: () {
+        onTap: () async {
           // Ensure context is still valid before opening external URL
           if (!context.mounted) return;
-          _openExternal(
+          await _openExternal(
             context,
             'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion',
           );
@@ -110,32 +115,27 @@ class SettingsScreen extends StatelessWidget {
       _SettingsOption(
         iconPath: 'assets/settings/share.svg',
         title: AppLocalizations.of(context)!.moreApps,
-        onTap: () {
+        onTap: () async {
           // Ensure context is still valid before opening external URL
           if (!context.mounted) return;
           // Link to Play Store developer page showing all apps
-          _openExternal(
+          await _openExternal(
             context,
             'https://play.google.com/store/search?q=pub%3ACodix%20Apps&c=apps',
           );
         },
       ),
+
       _SettingsOption(
-        iconPath: 'assets/settings/support.svg',
-        title: AppLocalizations.of(context)!.support,
-        onTap: () =>
-            _openExternal(context, 'mailto:islam24hoursstudio@gmail.com'),
-      ),
-      _SettingsOption(
-        iconPath: 'assets/settings/support.svg',
+        iconPath: 'assets/feedback.png',
         title: AppLocalizations.of(context)!.feedback,
-        onTap: () =>
+        onTap: () async =>
             _openExternal(context, 'mailto:islam24hoursstudio@gmail.com'),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/privacypolicy.svg',
         title: AppLocalizations.of(context)!.privacyPolicy,
-        onTap: () => _openExternal(
+        onTap: () async => _openExternal(
           context,
           'https://sites.google.com/view/eco-habit-tracker/privacy-policy',
         ),
@@ -143,7 +143,7 @@ class SettingsScreen extends StatelessWidget {
       _SettingsOption(
         iconPath: 'assets/settings/terms.svg',
         title: AppLocalizations.of(context)!.communityGuidelines,
-        onTap: () => _openExternal(
+        onTap: () async => _openExternal(
           context,
           'https://sites.google.com/view/eco-habit-tracker/community-guidelines',
         ),
@@ -151,7 +151,7 @@ class SettingsScreen extends StatelessWidget {
       _SettingsOption(
         iconPath: 'assets/settings/logout.svg',
         title: AppLocalizations.of(context)!.resetAllProgress,
-        onTap: () {
+        onTap: () async {
           showDialog(
             context: context,
             builder: (context) => Dialog(
@@ -375,7 +375,7 @@ class SettingsScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           itemBuilder: (context, index) {
             final option = options[index];
-            return _SettingsTile(option: option);
+            return _SettingsTile(option: option, tapGateLocked: _tapGateLocked);
           },
           separatorBuilder: (_, __) => Divider(
             height: 1.h,
@@ -406,6 +406,12 @@ class SettingsScreen extends StatelessWidget {
     };
     return languageNames[code] ?? 'English';
   }
+
+  @override
+  void dispose() {
+    _tapGateLocked.dispose();
+    super.dispose();
+  }
 }
 
 class _SettingsOption {
@@ -419,13 +425,35 @@ class _SettingsOption {
   final String iconPath;
   final String title;
   final WidgetBuilder? trailingBuilder;
-  final VoidCallback? onTap;
+  final Future<void> Function()? onTap;
 }
 
-class _SettingsTile extends StatelessWidget {
-  const _SettingsTile({required this.option});
+class _SettingsTile extends StatefulWidget {
+  const _SettingsTile({required this.option, required this.tapGateLocked});
 
   final _SettingsOption option;
+  final ValueNotifier<bool> tapGateLocked;
+
+  @override
+  State<_SettingsTile> createState() => _SettingsTileState();
+}
+
+class _SettingsTileState extends State<_SettingsTile> {
+  Future<void> _handleTap() async {
+    final onTap = widget.option.onTap;
+    if (onTap == null) return;
+    if (widget.tapGateLocked.value) return;
+
+    widget.tapGateLocked.value = true;
+    try {
+      // Run the tap action once.
+      await onTap();
+    } finally {
+      // Small debounce window to prevent double triggers.
+      await Future<void>.delayed(const Duration(milliseconds: 450));
+      widget.tapGateLocked.value = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -437,7 +465,7 @@ class _SettingsTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(color: Colors.transparent),
       child: InkWell(
-        onTap: option.onTap,
+        onTap: widget.option.onTap == null ? null : _handleTap,
         splashColor: Colors.grey.withOpacity(0.1),
         highlightColor: Colors.grey.withOpacity(0.05),
         child: Padding(
@@ -449,23 +477,30 @@ class _SettingsTile extends StatelessWidget {
                 height: 32.h,
                 decoration: const BoxDecoration(),
                 child: Center(
-                  child: SvgPicture.asset(
-                    option.iconPath,
-                    width: 22.w,
-                    height: 22.h,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFF2E7D32),
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  child: widget.option.iconPath.toLowerCase().endsWith('.svg')
+                      ? SvgPicture.asset(
+                          widget.option.iconPath,
+                          width: 22.w,
+                          height: 22.h,
+                          colorFilter: const ColorFilter.mode(
+                            Color(0xFF2E7D32),
+                            BlendMode.srcIn,
+                          ),
+                        )
+                      : Image.asset(
+                          widget.option.iconPath,
+                          width: 22.w,
+                          height: 22.h,
+                          fit: BoxFit.contain,
+                        ),
                 ),
               ),
               SizedBox(width: 10.w),
-              Expanded(child: Text(option.title, style: textStyle)),
-              if (option.trailingBuilder != null)
+              Expanded(child: Text(widget.option.title, style: textStyle)),
+              if (widget.option.trailingBuilder != null)
                 Padding(
                   padding: EdgeInsets.only(right: 6.w),
-                  child: option.trailingBuilder!(context),
+                  child: widget.option.trailingBuilder!(context),
                 ),
               Icon(Icons.chevron_right, color: Color(0xFF2E7D32), size: 22.sp),
             ],

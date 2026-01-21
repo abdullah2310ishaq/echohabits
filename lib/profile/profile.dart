@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -34,6 +35,23 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer2<HabitService, ProfileService>(
       builder: (context, habitService, profileService, child) {
+        final l10n = AppLocalizations.of(context)!;
+
+        // Badge unlock conditions based on completed habits
+        final hasDoneCycleToWork = habitService.history.any(
+          (entry) =>
+              entry['status'] == 'done' && entry['title'] == l10n.cycleToWork,
+        );
+        final hasDoneReuseROWater = habitService.history.any(
+          (entry) =>
+              entry['status'] == 'done' && entry['title'] == l10n.reuseROWater,
+        );
+        final hasDoneReduceScreenTime = habitService.history.any(
+          (entry) =>
+              entry['status'] == 'done' &&
+              entry['title'] == l10n.reduceScreenTime,
+        );
+
         return Scaffold(
           backgroundColor: const Color(0xFFF5F5F5),
           body: SafeArea(
@@ -212,25 +230,29 @@ class Profile extends StatelessWidget {
                             children: [
                               _buildBadgeCard(
                                 imageAsset: 'assets/firststep.png',
-                                label: AppLocalizations.of(context)!.firstStep,
+                                label: l10n.firstStep,
+                                isUnlocked: true,
                               ),
                               SizedBox(width: 10.w),
                               _buildBadgeCard(
                                 icon: Icons.directions_bike,
                                 iconColor: Colors.blue,
-                                label: AppLocalizations.of(context)!.cyclist,
+                                label: l10n.cyclist,
+                                isUnlocked: hasDoneCycleToWork,
                               ),
                               SizedBox(width: 10.w),
                               _buildBadgeCard(
                                 icon: Icons.water_drop,
                                 iconColor: Colors.blue,
-                                label: AppLocalizations.of(context)!.waterSaver,
+                                label: l10n.waterSaver,
+                                isUnlocked: hasDoneReuseROWater,
                               ),
                               SizedBox(width: 10.w),
                               _buildBadgeCard(
                                 icon: Icons.bolt,
                                 iconColor: Colors.amber,
-                                label: AppLocalizations.of(context)!.energyPr,
+                                label: l10n.energyPr,
+                                isUnlocked: hasDoneReduceScreenTime,
                               ),
                             ],
                           ),
@@ -518,8 +540,9 @@ class Profile extends StatelessWidget {
     String? imageAsset,
     Color? iconColor,
     required String label,
+    required bool isUnlocked,
   }) {
-    return Container(
+    final badge = Container(
       width: 88.w,
       height: 52.h,
       padding: EdgeInsets.all(10.w),
@@ -570,6 +593,14 @@ class Profile extends StatelessWidget {
           ),
         ],
       ),
+    );
+
+    if (isUnlocked) return badge;
+
+    // Locked state: same UI/size, just dull + slight blur.
+    return ImageFiltered(
+      imageFilter: ImageFilter.blur(sigmaX: 1.2, sigmaY: 1.2),
+      child: Opacity(opacity: 0.45, child: badge),
     );
   }
 

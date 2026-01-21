@@ -44,6 +44,16 @@
   "@energyPr": {
     "description": "Energy Pr badge name"
   },
+    "youHaveUnlockedBadge": "您已解锁{badge}徽章！",
+  "@youHaveUnlockedBadge": {
+    "description": "Badge unlock notification message",
+    "placeholders": {
+      "badge": {
+        "type": "String",
+        "example": "Cyclist"
+      }
+    }
+  },
   "history": "历史",
   "@history": {
     "description": "History section title"

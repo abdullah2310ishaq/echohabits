@@ -42,6 +42,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get energyPr => '能源专家';
 
   @override
+  String youHaveUnlockedBadge(String badge) {
+    return '您已解锁$badge徽章！';
+  }
+
+  @override
   String get history => '历史';
 
   @override

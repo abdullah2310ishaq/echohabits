@@ -42,6 +42,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get energyPr => 'エネルギー専門家';
 
   @override
+  String youHaveUnlockedBadge(String badge) {
+    return '$badgeバッジのロックを解除しました！';
+  }
+
+  @override
   String get history => '履歴';
 
   @override

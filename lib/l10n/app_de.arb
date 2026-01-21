@@ -44,6 +44,16 @@
   "@energyPr": {
     "description": "Energy Pr badge name"
   },
+  "youHaveUnlockedBadge": "Du hast das {badge} Abzeichen freigeschaltet!",
+  "@youHaveUnlockedBadge": {
+    "description": "Badge unlock notification message",
+    "placeholders": {
+      "badge": {
+        "type": "String",
+        "example": "Cyclist"
+      }
+    }
+  },
   "history": "Verlauf",
   "@history": {
     "description": "History section title"

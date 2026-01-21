@@ -44,6 +44,16 @@
   "@energyPr": {
     "description": "Energy Pr badge name"
   },
+  "youHaveUnlockedBadge": "{badge} 배지를 잠금 해제했습니다!",
+  "@youHaveUnlockedBadge": {
+    "description": "Badge unlock notification message",
+    "placeholders": {
+      "badge": {
+        "type": "String",
+        "example": "Cyclist"
+      }
+    }
+  },
   "history": "기록",
   "@history": {
     "description": "History section title"
