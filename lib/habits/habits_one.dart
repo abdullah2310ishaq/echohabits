@@ -487,10 +487,7 @@ class _HabitsOneState extends State<HabitsOne> {
                   AppLocalizations.of(
                     context,
                   )!.pickOneHabitToBeginYourEcoJourney,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    color: Colors.black54,
-                  ),
+                  style: TextStyle(fontSize: 13.sp, color: Colors.black54),
                 ),
                 SizedBox(height: 16.h),
                 // Filter Bar
@@ -625,10 +622,7 @@ class _HabitsOneState extends State<HabitsOne> {
                     // Difficulty Text
                     Text(
                       localizedDifficulty,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Colors.black54,
-                      ),
+                      style: TextStyle(fontSize: 12.sp, color: Colors.black54),
                     ),
                     SizedBox(width: 12.w),
                     // Impact Label
@@ -654,11 +648,7 @@ class _HabitsOneState extends State<HabitsOne> {
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: IconButton(
-              icon: Icon(
-                Icons.add,
-                color: Colors.black87,
-                size: 20.sp,
-              ),
+              icon: Icon(Icons.add, color: Colors.black87, size: 20.sp),
               onPressed: () {
                 final localizedTitle = _getLocalizedTitle(context, titleKey);
                 AddHabitDialog.show(
@@ -681,6 +671,8 @@ class _HabitsOneState extends State<HabitsOne> {
                     );
                     final result = habitService.addHabit(
                       title: localizedTitle,
+                      titleKey:
+                          titleKey, // Pass stable identifier for 24-hour tracking
                       category: habitData['category'] as String,
                       difficulty: difficulty,
                       difficultyColor: difficultyColor,

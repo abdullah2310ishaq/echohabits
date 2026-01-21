@@ -512,6 +512,7 @@ class Profile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min, // Prevent overflow
               children: [
                 Text(
                   value,
@@ -521,10 +522,14 @@ class Profile extends StatelessWidget {
                     color: Colors.black87,
                   ),
                 ),
-                SizedBox(height: 2.h),
-                Text(
-                  label,
-                  style: TextStyle(fontSize: 10.sp, color: Colors.black54),
+                SizedBox(height: 1.h), // Reduced spacing to prevent overflow
+                Flexible(
+                  child: Text(
+                    label,
+                    style: TextStyle(fontSize: 10.sp, color: Colors.black54),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

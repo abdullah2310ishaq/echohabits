@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../core/services/habit_service.dart';
+import '../core/services/locale_service.dart';
 import '../l10n/app_localizations.dart';
 
 class History extends StatefulWidget {
@@ -17,6 +18,15 @@ class _HistoryState extends State<History> {
 
   @override
   Widget build(BuildContext context) {
+    // Listen to locale changes to rebuild when language changes
+    return Consumer<LocaleService>(
+      builder: (context, localeService, child) {
+        return _buildHistoryContent(context);
+      },
+    );
+  }
+
+  Widget _buildHistoryContent(BuildContext context) {
     final habitService = Provider.of<HabitService>(context);
     final l10n = AppLocalizations.of(context)!;
     // Filter to show only completed tasks (status == 'done')
@@ -75,10 +85,13 @@ class _HistoryState extends State<History> {
                 itemBuilder: (context, index) {
                   final item = history[index];
                   final String storedTitle = item['title'] as String;
+                  final String? titleKey = item['titleKey'] as String?;
                   final DateTime timestamp = item['timestamp'] as DateTime;
                   
-                  // Localize the habit title if it's a known habit
-                  final String localizedTitle = _getLocalizedHabitTitle(context, storedTitle);
+                  // Use titleKey for stable localization, fallback to stored title mapping
+                  final String localizedTitle = titleKey != null
+                      ? _getLocalizedTitleFromKey(context, titleKey)
+                      : _getLocalizedHabitTitle(context, storedTitle);
 
                   // Format date as "Wednesday, January 14" (day name + month name + day)
                   // Use locale from Localizations to format dates correctly
@@ -133,7 +146,117 @@ class _HistoryState extends State<History> {
     );
   }
 
+  /// Get localized title from titleKey (stable identifier)
+  String _getLocalizedTitleFromKey(BuildContext context, String titleKey) {
+    final l10n = AppLocalizations.of(context)!;
+    
+    // Map titleKey to localized getters (same as habits_one.dart)
+    switch (titleKey) {
+      case 'cycleToWork':
+        return l10n.cycleToWork;
+      case 'usePublicTransport':
+        return l10n.usePublicTransport;
+      case 'carpoolWithColleagues':
+        return l10n.carpoolWithColleagues;
+      case 'walkShortDistances':
+        return l10n.walkShortDistances;
+      case 'maintainBikeRegularly':
+        return l10n.maintainBikeRegularly;
+      case 'buyBulkFood':
+        return l10n.buyBulkFood;
+      case 'compostKitchenWaste':
+        return l10n.compostKitchenWaste;
+      case 'plantAMiniGarden':
+        return l10n.plantAMiniGarden;
+      case 'reducePackagedFood':
+        return l10n.reducePackagedFood;
+      case 'chooseSeasonalFruits':
+        return l10n.chooseSeasonalFruits;
+      case 'coldWaterWash':
+        return l10n.coldWaterWash;
+      case 'switchOffUnusedLights':
+        return l10n.switchOffUnusedLights;
+      case 'useEnergyEfficientBulbs':
+        return l10n.useEnergyEfficientBulbs;
+      case 'airDryClothes':
+        return l10n.airDryClothes;
+      case 'useNaturalVentilation':
+        return l10n.useNaturalVentilation;
+      case 'shorterShowers':
+        return l10n.shorterShowers;
+      case 'fixWaterLeaks':
+        return l10n.fixWaterLeaks;
+      case 'collectRainwaterForPlants':
+        return l10n.collectRainwaterForPlants;
+      case 'reuseROWater':
+        return l10n.reuseROWater;
+      case 'turnOffTapWhileBrushing':
+        return l10n.turnOffTapWhileBrushing;
+      case 'carryReusableBags':
+        return l10n.carryReusableBags;
+      case 'buyRecycledProducts':
+        return l10n.buyRecycledProducts;
+      case 'avoidFastFashion':
+        return l10n.avoidFastFashion;
+      case 'chooseEcoFriendlyBrands':
+        return l10n.chooseEcoFriendlyBrands;
+      case 'supportLocalBusiness':
+        return l10n.supportLocalBusiness;
+      case 'reduceScreenTime':
+        return l10n.reduceScreenTime;
+      case 'unsubscribeUnwantedMails':
+        return l10n.unsubscribeUnwantedMails;
+      case 'cloudBackupCleanup':
+        return l10n.cloudBackupCleanup;
+      case 'turnOffAutoPlay':
+        return l10n.turnOffAutoPlay;
+      case 'digitalMindfulBreaks':
+        return l10n.digitalMindfulBreaks;
+      case 'morningWalk':
+        return l10n.morningWalk;
+      case 'practiceYoga':
+        return l10n.practiceYoga;
+      case 'healthySleepRoutine':
+        return l10n.healthySleepRoutine;
+      case 'drink2LWater':
+        return l10n.drink2LWater;
+      case 'avoidJunkSnacks':
+        return l10n.avoidJunkSnacks;
+      case 'meditation5MinDay':
+        return l10n.meditation5MinDay;
+      case 'practiceGratitudeJournaling':
+        return l10n.practiceGratitudeJournaling;
+      case 'breathingExercise':
+        return l10n.breathingExercise;
+      case 'spendTimeInNature':
+        return l10n.spendTimeInNature;
+      case 'limitNegativeNews':
+        return l10n.limitNegativeNews;
+      case 'trackExpenses':
+        return l10n.trackExpenses;
+      case 'monthlySavingsGoal':
+        return l10n.monthlySavingsGoal;
+      case 'avoidImpulseBuying':
+        return l10n.avoidImpulseBuying;
+      case 'investInSIP':
+        return l10n.investInSIP;
+      case 'useCashBackResponsibly':
+        return l10n.useCashBackResponsibly;
+      // Default task IDs
+      case 'default_walk_bike_1':
+        return l10n.defaultWalkBikeTitle;
+      case 'default_coffee_cup':
+        return l10n.defaultCoffeeCupTitle;
+      case 'default_afforestation':
+        return l10n.defaultAfforestationTitle;
+      default:
+        // If titleKey not recognized, return as-is (for custom habits)
+        return titleKey;
+    }
+  }
+
   /// Get localized habit title by matching stored title against English versions
+  /// (Fallback for backward compatibility with old history entries)
   String _getLocalizedHabitTitle(BuildContext context, String storedTitle) {
     final l10n = AppLocalizations.of(context)!;
     

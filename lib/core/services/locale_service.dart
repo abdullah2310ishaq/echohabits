@@ -9,6 +9,9 @@ class LocaleService extends ChangeNotifier {
 
   static Box? _box;
 
+  /// In-memory cache for current locale to prevent stale reads
+  Locale? _cachedLocale;
+
   /// Supported locales
   static const List<Locale> supportedLocales = [
     Locale('en'), // English
@@ -29,19 +32,43 @@ class LocaleService extends ChangeNotifier {
     _box = await Hive.openBox(_boxName);
   }
 
-  /// Get current locale from storage or return default (English)
+  /// Load locale from storage into cache (call after init)
+  void loadLocaleFromStorage() {
+    if (_box == null) {
+      _cachedLocale = const Locale('en');
+      return;
+    }
+    final localeCode = _box!.get(_localeKey, defaultValue: 'en') as String;
+    _cachedLocale = Locale(localeCode);
+  }
+
+  /// Get current locale from cache or storage, or return default (English)
   Locale getCurrentLocale() {
-    if (_box == null) return const Locale('en');
+    // Return cached locale if available
+    if (_cachedLocale != null) return _cachedLocale!;
+
+    // Load from storage if cache is empty
+    if (_box == null) {
+      _cachedLocale = const Locale('en');
+      return _cachedLocale!;
+    }
 
     final localeCode = _box!.get(_localeKey, defaultValue: 'en') as String;
-    return Locale(localeCode);
+    _cachedLocale = Locale(localeCode);
+    return _cachedLocale!;
   }
 
   /// Set locale and save to storage
   Future<void> setLocale(Locale locale) async {
     if (_box == null) return;
 
+    // Update cache first to prevent stale reads
+    _cachedLocale = locale;
+
+    // Save to storage
     await _box!.put(_localeKey, locale.languageCode);
+
+    // Notify listeners after both cache and storage are updated
     notifyListeners();
   }
 

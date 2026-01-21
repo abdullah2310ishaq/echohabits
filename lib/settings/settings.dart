@@ -67,19 +67,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _SettingsOption(
         iconPath: 'assets/settings/language.svg',
         title: AppLocalizations.of(context)!.language,
-        trailingBuilder: (_) {
-          final localeService = Provider.of<LocaleService>(
-            context,
-            listen: false,
-          );
-          final currentLocale = localeService.getCurrentLocale();
-          return Text(
-            _getLanguageName(currentLocale.languageCode),
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: const Color(0xFF2E7D32),
-              fontWeight: FontWeight.w600,
-            ),
+        trailingBuilder: (context) {
+          // Use Consumer to listen to locale changes
+          return Consumer<LocaleService>(
+            builder: (context, localeService, child) {
+              final currentLocale = localeService.getCurrentLocale();
+              return Text(
+                _getLanguageName(currentLocale.languageCode),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: const Color(0xFF2E7D32),
+                  fontWeight: FontWeight.w600,
+                ),
+              );
+            },
           );
         },
         onTap: () async {
