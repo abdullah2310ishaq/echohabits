@@ -550,23 +550,23 @@ class AppLocalizationsDe extends AppLocalizations {
   String get plantingTag => 'Pflanzen';
 
   @override
-  String get onboardingTitle1 => 'Verfolgen Sie Ihre täglichen Öko-Aktionen';
+  String get onboardingTitle1 => 'Setzen Sie sich Ihre grünen Ziele';
 
   @override
   String get onboardingDescription1 =>
-      'Vervollständigen Sie tägliche Aktionen, halten Sie Ihre Serie aufrecht und erhöhen Sie Ihren Öko-Score.';
+      'Entdecken Sie den Kernzweck: Gewohnheiten verfolgen für ein grüneres Leben.';
 
   @override
-  String get onboardingTitle2 => 'Gewohnheiten aufbauen, die bleiben';
+  String get onboardingTitle2 => 'Bauen Sie bessere Routinen auf';
 
   @override
   String get onboardingDescription2 =>
-      'Fügen Sie Gewohnheiten zu Ihrer Routine hinzu, halten Sie Serien aufrecht und verdienen Sie Belohnungen, während Sie konsequent bleiben.';
+      'Entdecken Sie die Gamification- und Social-Funktionen.';
 
   @override
-  String get onboardingTitle3 => 'Wettbewerb. Verdienen. Aufsteigen.';
+  String get onboardingTitle3 => 'Messen Sie Ihren Einfluss';
 
   @override
   String get onboardingDescription3 =>
-      'Steigen Sie in der Bestenliste auf, schalten Sie Abzeichen frei und verfolgen Sie Ihren Fortschritt im Vergleich zu anderen.';
+      'Hervorhebung, wie die App persönlichen Fortschritt und Punkte verfolgt.';
 }

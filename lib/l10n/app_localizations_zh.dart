@@ -536,20 +536,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get plantingTag => '植树';
 
   @override
-  String get onboardingTitle1 => '追踪您的每日生态行动';
+  String get onboardingTitle1 => '设定你的绿色目标';
 
   @override
-  String get onboardingDescription1 => '完成每日行动，保持您的连续记录，并提高您的生态分数。';
+  String get onboardingDescription1 => '介绍核心目的：通过追踪习惯，迈向更环保的生活。';
 
   @override
-  String get onboardingTitle2 => '建立持久的习惯';
+  String get onboardingTitle2 => '建立更好的日常习惯';
 
   @override
-  String get onboardingDescription2 => '将习惯添加到您的日常中，保持连续记录，并在保持一致性的同时获得奖励。';
+  String get onboardingDescription2 => '介绍游戏化与社交功能。';
 
   @override
-  String get onboardingTitle3 => '竞争。获得。升级。';
+  String get onboardingTitle3 => '衡量你的影响力';
 
   @override
-  String get onboardingDescription3 => '攀登排行榜，解锁徽章，并追踪您与他人的进度。';
+  String get onboardingDescription3 => '强调应用如何追踪个人进度和得分。';
 }

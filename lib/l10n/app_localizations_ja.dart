@@ -536,21 +536,20 @@ class AppLocalizationsJa extends AppLocalizations {
   String get plantingTag => '植樹';
 
   @override
-  String get onboardingTitle1 => '毎日のエコアクションを追跡';
+  String get onboardingTitle1 => 'グリーン目標を設定しよう';
 
   @override
-  String get onboardingDescription1 => '毎日のアクションを完了し、連続記録を維持し、エコスコアを上げましょう。';
+  String get onboardingDescription1 => 'よりエコな暮らしのために習慣を記録する—その目的をご紹介します。';
 
   @override
-  String get onboardingTitle2 => '定着する習慣を構築';
+  String get onboardingTitle2 => 'より良いルーティンを作ろう';
 
   @override
-  String get onboardingDescription2 =>
-      'ルーティンに習慣を追加し、連続記録を維持し、一貫性を保つことで報酬を獲得しましょう。';
+  String get onboardingDescription2 => 'ゲーミフィケーションとソーシャル要素を紹介します。';
 
   @override
-  String get onboardingTitle3 => '競争。獲得。レベルアップ。';
+  String get onboardingTitle3 => 'あなたの影響を測ろう';
 
   @override
-  String get onboardingDescription3 => 'リーダーボードを登り、バッジを解除し、他の人との進捗を追跡しましょう。';
+  String get onboardingDescription3 => 'アプリが個人の進捗とスコアを追跡する仕組みを紹介します。';
 }

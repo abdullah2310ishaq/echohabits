@@ -721,27 +721,27 @@
   "@plantingTag": {
     "description": "Tag label for planting"
   },
-  "onboardingTitle1": "تتبع إجراءاتك البيئية اليومية",
+  "onboardingTitle1": "حدّد أهدافك الخضراء",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "أكمل الإجراءات اليومية، حافظ على سلسلتك وزد نقاطك البيئية.",
+  "onboardingDescription1": "نعرّفك بالهدف الأساسي: تتبّع العادات لحياة أكثر خضرة.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "بناء عادات تبقى",
+  "onboardingTitle2": "ابنِ روتينًا أفضل",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "أضف عادات إلى روتينك، حافظ على السلاسل واكسب المكافآت مع الحفاظ على الاتساق.",
+  "onboardingDescription2": "تعرّف على عناصر التلعيب والجانب الاجتماعي.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "تنافس. اكسب. تقدم.",
+  "onboardingTitle3": "قِس تأثيرك",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "تسلق لوحة المتصدرين، افتح الشارات وتتبع تقدمك مقارنة بالآخرين.",
+  "onboardingDescription3": "توضيح كيف يتتبع التطبيق تقدّمك الشخصي ونقاطك.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   }

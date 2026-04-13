@@ -721,27 +721,27 @@
   "@plantingTag": {
     "description": "Tag label for planting"
   },
-  "onboardingTitle1": "Traccia le tue Azioni Ecologiche Giornaliere",
+  "onboardingTitle1": "Definisci i tuoi obiettivi green",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Completa azioni quotidiane, mantieni la tua serie e aumenta il tuo punteggio ecologico.",
+  "onboardingDescription1": "Scopri lo scopo principale: monitorare le abitudini per una vita più sostenibile.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Costruisci Abitudini che Restano",
+  "onboardingTitle2": "Crea routine migliori",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Aggiungi abitudini alla tua routine, mantieni le serie e guadagna ricompense rimanendo costante.",
+  "onboardingDescription2": "Scopri la gamification e l’aspetto sociale.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Competi. Guadagna. Sali di Livello.",
+  "onboardingTitle3": "Misura il tuo impatto",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Scala la classifica, sblocca badge e traccia i tuoi progressi rispetto agli altri.",
+  "onboardingDescription3": "Scopri come l’app monitora i tuoi progressi e il tuo punteggio.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   }

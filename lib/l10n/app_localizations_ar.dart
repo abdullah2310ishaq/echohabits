@@ -543,23 +543,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get plantingTag => 'الزراعة';
 
   @override
-  String get onboardingTitle1 => 'تتبع إجراءاتك البيئية اليومية';
+  String get onboardingTitle1 => 'حدّد أهدافك الخضراء';
 
   @override
   String get onboardingDescription1 =>
-      'أكمل الإجراءات اليومية، حافظ على سلسلتك وزد نقاطك البيئية.';
+      'نعرّفك بالهدف الأساسي: تتبّع العادات لحياة أكثر خضرة.';
 
   @override
-  String get onboardingTitle2 => 'بناء عادات تبقى';
+  String get onboardingTitle2 => 'ابنِ روتينًا أفضل';
 
   @override
   String get onboardingDescription2 =>
-      'أضف عادات إلى روتينك، حافظ على السلاسل واكسب المكافآت مع الحفاظ على الاتساق.';
+      'تعرّف على عناصر التلعيب والجانب الاجتماعي.';
 
   @override
-  String get onboardingTitle3 => 'تنافس. اكسب. تقدم.';
+  String get onboardingTitle3 => 'قِس تأثيرك';
 
   @override
   String get onboardingDescription3 =>
-      'تسلق لوحة المتصدرين، افتح الشارات وتتبع تقدمك مقارنة بالآخرين.';
+      'توضيح كيف يتتبع التطبيق تقدّمك الشخصي ونقاطك.';
 }

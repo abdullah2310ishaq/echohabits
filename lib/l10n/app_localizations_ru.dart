@@ -549,25 +549,23 @@ class AppLocalizationsRu extends AppLocalizations {
   String get plantingTag => 'Посадка';
 
   @override
-  String get onboardingTitle1 =>
-      'Отслеживайте свои ежедневные экологические действия';
+  String get onboardingTitle1 => 'Ставьте свои зелёные цели';
 
   @override
   String get onboardingDescription1 =>
-      'Выполняйте ежедневные действия, поддерживайте свою серию и увеличивайте свой экологический счет.';
+      'Представляем основную идею: отслеживать привычки ради более экологичной жизни.';
 
   @override
-  String get onboardingTitle2 => 'Создавайте привычки, которые остаются';
+  String get onboardingTitle2 => 'Создавайте лучшие привычки';
 
   @override
   String get onboardingDescription2 =>
-      'Добавляйте привычки в свой распорядок, поддерживайте серии и зарабатывайте награды, оставаясь последовательными.';
+      'Откройте для себя геймификацию и социальную составляющую.';
 
   @override
-  String get onboardingTitle3 =>
-      'Соревнуйтесь. Зарабатывайте. Повышайте уровень.';
+  String get onboardingTitle3 => 'Измеряйте свой вклад';
 
   @override
   String get onboardingDescription3 =>
-      'Поднимайтесь в таблице лидеров, разблокируйте значки и отслеживайте свой прогресс по сравнению с другими.';
+      'Узнайте, как приложение отслеживает ваш личный прогресс и баллы.';
 }

@@ -552,23 +552,22 @@ class AppLocalizationsPt extends AppLocalizations {
   String get plantingTag => 'Plantio';
 
   @override
-  String get onboardingTitle1 => 'Rastreie suas Ações Ecológicas Diárias';
+  String get onboardingTitle1 => 'Defina seus objetivos verdes';
 
   @override
   String get onboardingDescription1 =>
-      'Complete ações diárias, mantenha sua sequência e aumente sua pontuação ecológica.';
+      'Apresentamos o propósito central: acompanhar hábitos para uma vida mais sustentável.';
 
   @override
-  String get onboardingTitle2 => 'Construa Hábitos que Permanecem';
+  String get onboardingTitle2 => 'Construa rotinas melhores';
 
   @override
-  String get onboardingDescription2 =>
-      'Adicione hábitos à sua rotina, mantenha sequências e ganhe recompensas enquanto permanece consistente.';
+  String get onboardingDescription2 => 'Conheça a gamificação e o lado social.';
 
   @override
-  String get onboardingTitle3 => 'Compita. Ganhe. Suba de Nível.';
+  String get onboardingTitle3 => 'Meça seu impacto';
 
   @override
   String get onboardingDescription3 =>
-      'Suba na classificação, desbloqueie distintivos e rastreie seu progresso contra outros.';
+      'Veja como o app acompanha seu progresso e sua pontuação.';
 }

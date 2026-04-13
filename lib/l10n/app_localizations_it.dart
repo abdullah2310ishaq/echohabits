@@ -557,23 +557,23 @@ class AppLocalizationsIt extends AppLocalizations {
   String get plantingTag => 'Piantagione';
 
   @override
-  String get onboardingTitle1 => 'Traccia le tue Azioni Ecologiche Giornaliere';
+  String get onboardingTitle1 => 'Definisci i tuoi obiettivi green';
 
   @override
   String get onboardingDescription1 =>
-      'Completa azioni quotidiane, mantieni la tua serie e aumenta il tuo punteggio ecologico.';
+      'Scopri lo scopo principale: monitorare le abitudini per una vita più sostenibile.';
 
   @override
-  String get onboardingTitle2 => 'Costruisci Abitudini che Restano';
+  String get onboardingTitle2 => 'Crea routine migliori';
 
   @override
   String get onboardingDescription2 =>
-      'Aggiungi abitudini alla tua routine, mantieni le serie e guadagna ricompense rimanendo costante.';
+      'Scopri la gamification e l’aspetto sociale.';
 
   @override
-  String get onboardingTitle3 => 'Competi. Guadagna. Sali di Livello.';
+  String get onboardingTitle3 => 'Misura il tuo impatto';
 
   @override
   String get onboardingDescription3 =>
-      'Scala la classifica, sblocca badge e traccia i tuoi progressi rispetto agli altri.';
+      'Scopri come l’app monitora i tuoi progressi e il tuo punteggio.';
 }
