@@ -9,14 +9,28 @@ class AppOpenAdManager {
   static DateTime? _adLoadedAt;
   static bool _isShowingAd = false;
   static bool _isLoadingAd = false;
+  static bool _suppressNextResumeAd = false;
 
   static void initialize() {
     if (!_isEnabled) return;
     _loadAd();
   }
 
+  /// Prevent showing an App Open ad on the next resume.
+  ///
+  /// Useful when launching external activities (image picker, camera, permissions)
+  /// where an interstitial can break the in-flight user action.
+  static void suppressNextResumeOnce() {
+    _suppressNextResumeAd = true;
+  }
+
   static void onAppResumedFromBackground() {
     if (!_isEnabled || _isShowingAd) {
+      return;
+    }
+
+    if (_suppressNextResumeAd) {
+      _suppressNextResumeAd = false;
       return;
     }
 
