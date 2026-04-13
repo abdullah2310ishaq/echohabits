@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/core/theme/app_colors.dart';
+import 'package:provider/provider.dart';
+import 'package:habit_tracker/core/billing/billing_service.dart';
 
 class Paywall extends StatefulWidget {
   const Paywall({super.key});
@@ -42,6 +44,8 @@ class _PaywallState extends State<Paywall> {
 
   @override
   Widget build(BuildContext context) {
+    final billing = context.watch<BillingService>();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -108,7 +112,7 @@ class _PaywallState extends State<Paywall> {
               // Pricing Cards
               _PlanCard(
                 title: 'Weekly Plan',
-                subtitle: '\$4.99 per week',
+                subtitle: billing.weeklyPriceLabel(),
                 isSelected: _selectedPlanIndex == 0,
                 isBestValue: false,
                 onTap: () => setState(() => _selectedPlanIndex = 0),
@@ -116,7 +120,7 @@ class _PaywallState extends State<Paywall> {
               SizedBox(height: 15.h),
               _PlanCard(
                 title: 'Lifetime Access',
-                subtitle: '\$29.99 one-time payment',
+                subtitle: billing.lifetimePriceLabel(),
                 isSelected: _selectedPlanIndex == 1,
                 isBestValue: true,
                 onTap: () => setState(() => _selectedPlanIndex = 1),
@@ -127,7 +131,12 @@ class _PaywallState extends State<Paywall> {
                 width: double.infinity,
                 height: 65.h,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: billing.purchaseInProgress
+                      ? null
+                      : () async {
+                          final isWeekly = _selectedPlanIndex == 0;
+                          await billing.buySelected(weekly: isWeekly);
+                        },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryGreen,
                     foregroundColor: AppColors.textOnDark,
@@ -136,16 +145,55 @@ class _PaywallState extends State<Paywall> {
                     ),
                     elevation: 0,
                   ),
-                  child: Text(
-                    'Go Premium',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: billing.purchaseInProgress
+                      ? SizedBox(
+                          width: 22.w,
+                          height: 22.w,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.5.w,
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          'Go Premium',
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                 ),
               ),
               SizedBox(height: 10.h),
+              if (billing.errorMessage != null)
+                Padding(
+                  padding: EdgeInsets.only(top: 6.h),
+                  child: Text(
+                    billing.errorMessage!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: Colors.red.shade700,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              TextButton(
+                onPressed: billing.purchaseInProgress
+                    ? null
+                    : () async {
+                        await billing.restorePurchases();
+                      },
+                child: Text(
+                  'Restore purchases',
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

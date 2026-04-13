@@ -562,7 +562,7 @@ class _HabitsOneState extends State<HabitsOne> {
                       transitionBuilder: (child, animation) {
                         final currentKey = ValueKey<String>(
                           'habits_${_selectedCategory}_$_listAnimToken',
-                        );
+                        ); 
                         final isIncoming = child.key == currentKey;
 
                         final positionTween = Tween<Offset>(

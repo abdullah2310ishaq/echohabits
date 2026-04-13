@@ -7,6 +7,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/billing/billing_product_ids.dart';
+import 'package:habit_tracker/core/billing/billing_service.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'package:habit_tracker/core/services/habit_service.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
@@ -96,6 +98,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           },
         ),
         ChangeNotifierProvider(create: (_) => ProfileService()),
+        ChangeNotifierProvider(
+          create: (_) => BillingService(
+            weeklyProductId: BillingProductIds.weekly,
+            lifetimeProductId: BillingProductIds.lifetime,
+          )..init(),
+        ),
       ],
       child: Consumer<LocaleService>(
         builder: (context, localeService, child) {
