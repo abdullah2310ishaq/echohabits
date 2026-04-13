@@ -1,6 +1,4 @@
--after changing language navigate the user to the same profile screen, not to the home screen
 -add transition between navigation bar and habit categories
--redesign the toast of the app, do not use emoji
 -add splash screen of the app, use animation no CTA just loading bar and navigete the user
 -add app open and inter ad on splash on remote config+overall remote config
 -add native ad on home screen after 2 tasks on remote config

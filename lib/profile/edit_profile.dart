@@ -8,6 +8,7 @@ import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import '../core/services/profile_service.dart';
 import '../core/widgets/eco_toast.dart';
 
@@ -170,6 +171,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _pickImage(ImageSource source) async {
     try {
+      AppOpenAdManager.suppressNextResumeOnce();
       final XFile? image = await _imagePicker.pickImage(source: source);
       if (image != null) {
         // Validate that the image contains a human face

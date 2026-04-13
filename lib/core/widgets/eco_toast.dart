@@ -24,8 +24,10 @@ class EcoToast {
 
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
-      builder: (context) =>
-          _EcoToastWidget(message: message, isSuccess: isSuccess),
+      builder: (context) => _EcoToastWidget(
+        message: message,
+        tone: isSuccess ? _EcoToastTone.success : _EcoToastTone.error,
+      ),
     );
 
     _currentOverlayEntry = overlayEntry;
@@ -47,14 +49,40 @@ class EcoToast {
   }
 }
 
+enum _EcoToastTone { success, error, info }
+
 class _EcoToastWidget extends StatelessWidget {
   final String message;
-  final bool isSuccess;
+  final _EcoToastTone tone;
 
-  const _EcoToastWidget({required this.message, required this.isSuccess});
+  const _EcoToastWidget({required this.message, required this.tone});
+
+  IconData get _icon => switch (tone) {
+    _EcoToastTone.success => Icons.check_circle_rounded,
+    _EcoToastTone.error => Icons.error_rounded,
+    _EcoToastTone.info => Icons.info_rounded,
+  };
+
+  Color _containerColor(ThemeData theme) {
+    return switch (tone) {
+      _EcoToastTone.success => const Color(0xFF0F3D24),
+      _EcoToastTone.error => const Color(0xFF3D1717),
+      _EcoToastTone.info => const Color(0xFF102A43),
+    };
+  }
+
+  Color _accentColor(ThemeData theme) {
+    return switch (tone) {
+      _EcoToastTone.success => const Color(0xFF2E7D32),
+      _EcoToastTone.error => const Color(0xFFC62828),
+      _EcoToastTone.info => const Color(0xFF1565C0),
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Stack(
       children: [
         Positioned(
@@ -72,10 +100,8 @@ class _EcoToastWidget extends StatelessWidget {
                     vertical: 10.h,
                   ),
                   decoration: BoxDecoration(
-                    color: isSuccess
-                        ? const Color(0xFF2E7D32)
-                        : Colors.orange[700],
-                    borderRadius: BorderRadius.circular(18.r),
+                    color: _containerColor(theme),
+                    borderRadius: BorderRadius.circular(8.r),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.2),
@@ -88,23 +114,34 @@ class _EcoToastWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        width: 28.w,
+                        height: 28.w,
+                        decoration: BoxDecoration(
+                          color: _accentColor(theme).withValues(alpha: 0.18),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Icon(
+                          _icon,
+                          size: 18.sp,
+                          color: _accentColor(theme),
+                        ),
+                      ),
+                      SizedBox(width: 10.w),
                       Flexible(
                         child: Text(
                           message,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            height: 1.25,
                           ),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      if (isSuccess) ...[
-                        SizedBox(width: 6.w),
-                        Text('🔥', style: TextStyle(fontSize: 16.sp)),
-                      ],
                     ],
                   ),
                 ),
