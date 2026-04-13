@@ -66,9 +66,7 @@ class _EcoToastWidget extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 1.sw - 32.w,
-                  ),
+                  constraints: BoxConstraints(maxWidth: 1.sw - 32.w),
                   padding: EdgeInsets.symmetric(
                     horizontal: 14.w,
                     vertical: 10.h,

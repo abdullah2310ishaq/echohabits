@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../core/services/profile_service.dart';
 import '../core/widgets/eco_toast.dart';
 
@@ -25,11 +26,53 @@ class _ProfileFirstState extends State<ProfileFirst> {
   String? _selectedImagePath;
   bool _isUsingDefaultImage = true;
   bool _hasSelectedPhoto = false;
+  bool _hasStoragePermission = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _requestStoragePermission();
+    });
+  }
 
   @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
+  }
+
+  Future<void> _requestStoragePermission() async {
+    if (!mounted || !(Platform.isAndroid || Platform.isIOS)) return;
+
+    PermissionStatus status;
+    if (Platform.isIOS) {
+      status = await Permission.photos.request();
+    } else {
+      final photosStatus = await Permission.photos.request();
+      if (photosStatus.isGranted || photosStatus.isLimited) {
+        status = photosStatus;
+      } else {
+        status = await Permission.storage.request();
+      }
+    }
+
+    if (!mounted) return;
+
+    final granted = status.isGranted || status.isLimited;
+    setState(() {
+      _hasStoragePermission = granted;
+    });
+
+    if (!granted) {
+      EcoToast.show(
+        context,
+        message: AppLocalizations.of(
+          context,
+        )!.errorPickingImage('Storage permission is required to select a photo.'),
+        isSuccess: false,
+      );
+    }
   }
 
   @override
@@ -247,7 +290,11 @@ class _ProfileFirstState extends State<ProfileFirst> {
               ),
               onTap: () {
                 Navigator.pop(context);
-                _pickImage(ImageSource.gallery);
+                if (_hasStoragePermission) {
+                  _pickImage(ImageSource.gallery);
+                } else {
+                  _requestStoragePermission();
+                }
               },
             ),
             ListTile(

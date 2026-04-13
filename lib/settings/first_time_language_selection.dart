@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/admob_ids.dart';
+import 'package:habit_tracker/core/services/ad_visibility_service.dart';
+import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
 import '../onboarding/onboarding.dart';
@@ -115,7 +119,8 @@ class _FirstTimeLanguageSelectionScreenState
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: const SizedBox.shrink(), // No close button for first time
+        automaticallyImplyLeading: false, // No back/close button for first time
+        centerTitle: false,
         title: Text(
           AppLocalizations.of(context)?.chooseALanguage ?? 'Choose a Language',
           style: const TextStyle(
@@ -154,31 +159,47 @@ class _FirstTimeLanguageSelectionScreenState
               ),
               child: Text(
                 AppLocalizations.of(context)?.next ?? 'Next',
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2.5,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(16.w),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.h,
+                ),
+                itemCount: _languages.length,
+                itemBuilder: (context, index) {
+                  final language = _languages[index];
+                  final isSelected = _selectedLanguage == language['code'];
+                  return _buildLanguageCard(
+                    language: language,
+                    isSelected: isSelected,
+                  );
+                },
+              ),
+            ),
           ),
-          itemCount: _languages.length,
-          itemBuilder: (context, index) {
-            final language = _languages[index];
-            final isSelected = _selectedLanguage == language['code'];
-            return _buildLanguageCard(
-              language: language,
-              isSelected: isSelected,
-            );
-          },
-        ),
+          if (AdVisibilityService.shouldShowLanguageNativeAd)
+            NativeAdTile(
+              adUnitId: AdMobIds.nativeLanguageUnitId,
+              factoryId: 'listTileLanguage',
+              height: 130.h,
+              margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+            ),
+        ],
       ),
     );
   }
@@ -193,9 +214,9 @@ class _FirstTimeLanguageSelectionScreenState
         ? const OnboardingScreen()
         : (isProfileSetup ? const HomeShell() : const ProfileFirst());
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => nextScreen),
-    );
+    Navigator.of(
+      context,
+    ).pushReplacement(MaterialPageRoute(builder: (context) => nextScreen));
   }
 
   Widget _buildLanguageCard({
@@ -232,7 +253,7 @@ class _FirstTimeLanguageSelectionScreenState
           child: Row(
             children: [
               // Flag Icon
-              SizedBox( 
+              SizedBox(
                 width: 32,
                 height: 32,
                 child: (language['isPng'] as bool? ?? false)
@@ -256,7 +277,8 @@ class _FirstTimeLanguageSelectionScreenState
                         height: 32,
                         fit: BoxFit.contain,
                         // Graceful fallback if an asset fails to load
-                        placeholderBuilder: (context) => const SizedBox.shrink(),
+                        placeholderBuilder: (context) =>
+                            const SizedBox.shrink(),
                         errorBuilder: (context, _, __) => Text(
                           language['name'] as String,
                           style: const TextStyle(

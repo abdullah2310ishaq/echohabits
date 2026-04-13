@@ -8,6 +8,7 @@ class ProfileService extends ChangeNotifier {
   static const String _imagePathKey = 'profileImagePath';
   static const String _isSetupCompleteKey = 'isSetupComplete';
   static const String _isOnboardingCompleteKey = 'isOnboardingComplete';
+  static const String _isProUserKey = 'isProUser';
 
   static Box? _box;
 
@@ -27,9 +28,19 @@ class ProfileService extends ChangeNotifier {
     return _box?.get(_isOnboardingCompleteKey, defaultValue: false) ?? false;
   }
 
+  /// Check whether ads should be hidden for a Pro user.
+  static bool isProUser() {
+    return _box?.get(_isProUserKey, defaultValue: false) ?? false;
+  }
+
   /// Mark onboarding as completed
   static Future<void> setOnboardingComplete(bool isComplete) async {
     await _box?.put(_isOnboardingCompleteKey, isComplete);
+  }
+
+  /// Store Pro entitlement used to gate ad visibility.
+  static Future<void> setProUser(bool isProUser) async {
+    await _box?.put(_isProUserKey, isProUser);
   }
 
   /// Get user name

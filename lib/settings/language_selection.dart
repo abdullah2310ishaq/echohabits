@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/admob_ids.dart';
+import 'package:habit_tracker/core/services/ad_visibility_service.dart';
+import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
 import '../core/services/locale_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
@@ -159,25 +163,38 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2.5,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(16.w),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2.5,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.h,
+                ),
+                itemCount: _languages.length,
+                itemBuilder: (context, index) {
+                  final language = _languages[index];
+                  final isSelected = _selectedLanguage == language['code'];
+                  return _buildLanguageCard(
+                    language: language,
+                    isSelected: isSelected,
+                  );
+                },
+              ),
+            ),
           ),
-          itemCount: _languages.length,
-          itemBuilder: (context, index) {
-            final language = _languages[index];
-            final isSelected = _selectedLanguage == language['code'];
-            return _buildLanguageCard(
-              language: language,
-              isSelected: isSelected,
-            );
-          },
-        ),
+          if (AdVisibilityService.shouldShowLanguageNativeAd)
+            NativeAdTile(
+              adUnitId: AdMobIds.nativeLanguageUnitId,
+              factoryId: 'listTileLanguage',
+              height: 150.h,
+              margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+            ),
+        ],
       ),
     );
   }

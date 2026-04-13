@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'package:habit_tracker/core/services/habit_service.dart'; 
 import 'package:habit_tracker/core/services/profile_service.dart';
 import 'package:habit_tracker/core/services/locale_service.dart';
@@ -18,6 +21,9 @@ void main() async {
   await ProfileService.init();
   await HabitService.init();
   await LocaleService.init();
+  await Firebase.initializeApp();
+  await RemoteConfigService.init();
+  await MobileAds.instance.initialize();
 
   runApp(const MyApp());
 }
