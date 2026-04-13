@@ -4,6 +4,14 @@ class RemoteConfigService {
   static FirebaseRemoteConfig? _remoteConfig;
   static bool _initialized = false;
 
+  static const String keyShowLanguageNativeAd = 'show_native_language_ad';
+
+  // Splash-specific toggles.
+  static const String keyShowSplashAds = 'show_splash_ads';
+  static const String keyShowSplashAppOpenAd = 'show_splash_app_open_ad';
+  static const String keyShowSplashInterstitialAd =
+      'show_splash_interstitial_ad';
+
   static Future<void> init() async {
     if (_initialized) return;
 
@@ -16,8 +24,10 @@ class RemoteConfigService {
     );
 
     await remoteConfig.setDefaults(const {
-      'show_ads': true,
-      'show_native_language_ad': true,
+      keyShowLanguageNativeAd: true,
+      keyShowSplashAds: true,
+      keyShowSplashAppOpenAd: true,
+      keyShowSplashInterstitialAd: true,
     });
 
     try {
@@ -30,13 +40,35 @@ class RemoteConfigService {
     _initialized = true;
   }
 
+  static Future<void> refresh() async {
+    if (!_initialized) {
+      await init();
+      return;
+    }
+
+    final remoteConfig = _remoteConfig;
+    if (remoteConfig == null) return;
+
+    try {
+      await remoteConfig.fetchAndActivate();
+    } catch (_) {
+      // Keep last activated values.
+    }
+  }
+
   static bool _getBool(String key, {required bool fallback}) {
     if (_remoteConfig == null) return fallback;
     return _remoteConfig!.getBool(key);
   }
 
-  static bool get showAds => _getBool('show_ads', fallback: true);
-
   static bool get showLanguageNativeAd =>
-      _getBool('show_native_language_ad', fallback: true);
+      _getBool(keyShowLanguageNativeAd, fallback: true);
+
+  static bool get showSplashAds => _getBool(keyShowSplashAds, fallback: true);
+
+  static bool get showSplashAppOpenAd =>
+      _getBool(keyShowSplashAppOpenAd, fallback: true);
+
+  static bool get showSplashInterstitialAd =>
+      _getBool(keyShowSplashInterstitialAd, fallback: true);
 }

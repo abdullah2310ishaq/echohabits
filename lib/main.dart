@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'package:habit_tracker/core/services/habit_service.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
@@ -26,6 +27,7 @@ void main() async {
   await RemoteConfigService.init();
   await MobileAds.instance.initialize();
   AppOpenAdManager.initialize();
+  InterstitialAdManager.initialize();
 
   runApp(const MyApp());
 }

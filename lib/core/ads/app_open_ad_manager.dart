@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:habit_tracker/core/ads/admob_ids.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 
 class AppOpenAdManager {
   static const bool _isEnabled = true;
@@ -14,6 +17,49 @@ class AppOpenAdManager {
   static void initialize() {
     if (!_isEnabled) return;
     _loadAd();
+  }
+
+  static Future<bool> showIfAvailable() async {
+    if (!_isEnabled ||
+        _isShowingAd ||
+        !RemoteConfigService.showSplashAppOpenAd) {
+      return false;
+    }
+
+    if (!_isAdAvailable()) {
+      _loadAd();
+      return false;
+    }
+
+    final ad = _appOpenAd;
+    if (ad == null) {
+      _loadAd();
+      return false;
+    }
+
+    final completer = Completer<bool>();
+
+    ad.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        _isShowingAd = false;
+        ad.dispose();
+        _appOpenAd = null;
+        _loadAd();
+        if (!completer.isCompleted) completer.complete(true);
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        _isShowingAd = false;
+        ad.dispose();
+        _appOpenAd = null;
+        _loadAd();
+        if (!completer.isCompleted) completer.complete(false);
+      },
+    );
+
+    _isShowingAd = true;
+    ad.show();
+    _appOpenAd = null;
+    return completer.future;
   }
 
   /// Prevent showing an App Open ad on the next resume.

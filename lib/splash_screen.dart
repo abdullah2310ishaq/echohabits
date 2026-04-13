@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
 import '../onboarding/onboarding.dart';
@@ -41,8 +44,30 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _controller.forward().then((_) {
-      _navigateToNextScreen();
+      _maybeShowAdThenNavigate();
     });
+  }
+
+  Future<void> _maybeShowAdThenNavigate() async {
+    if (!mounted) return;
+
+    // Keep it best-effort and non-blocking. We already initialized RC in `main`,
+    // but this helps when the splash is the first screen after cold start.
+    await RemoteConfigService.refresh();
+    if (!mounted) return;
+
+    if (RemoteConfigService.showSplashAds) {
+      // Priority: App Open > Interstitial
+      final appOpenShown = await AppOpenAdManager.showIfAvailable();
+      if (!mounted) return;
+
+      if (!appOpenShown) {
+        await InterstitialAdManager.showIfAvailable();
+        if (!mounted) return;
+      }
+    }
+
+    _navigateToNextScreen();
   }
 
   void _navigateToNextScreen() {
