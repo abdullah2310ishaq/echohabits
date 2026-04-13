@@ -744,5 +744,41 @@
   "onboardingDescription3": "Hervorhebung, wie die App persönlichen Fortschritt und Punkte verfolgt.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
+  },
+  "paywallEcoHabitTitle": "Eco Habit",
+  "@paywallEcoHabitTitle": {
+    "description": "Paywall title"
+  },
+  "paywallUnlimitedHabitTracking": "Unbegrenztes Gewohnheitstracking",
+  "@paywallUnlimitedHabitTracking": {
+    "description": "Paywall feature: unlimited habit tracking"
+  },
+  "paywallLeaderboardAccess": "Zugriff auf die Rangliste",
+  "@paywallLeaderboardAccess": {
+    "description": "Paywall feature: leaderboard access"
+  },
+  "paywallAdvancedProgressAnalytics": "Erweiterte Fortschrittsanalysen",
+  "@paywallAdvancedProgressAnalytics": {
+    "description": "Paywall feature: advanced progress analytics"
+  },
+  "paywallWeeklyPlan": "Wochenplan",
+  "@paywallWeeklyPlan": {
+    "description": "Paywall plan title: weekly"
+  },
+  "paywallLifetimeAccess": "Lebenslanger Zugriff",
+  "@paywallLifetimeAccess": {
+    "description": "Paywall plan title: lifetime"
+  },
+  "paywallBestValue": "Bestes Angebot",
+  "@paywallBestValue": {
+    "description": "Paywall badge label for best value plan"
+  },
+  "paywallGoPremium": "Premium freischalten",
+  "@paywallGoPremium": {
+    "description": "Paywall primary CTA button text"
+  },
+  "paywallRestorePurchases": "Käufe wiederherstellen",
+  "@paywallRestorePurchases": {
+    "description": "Paywall button text: restore purchases"
   }
 }

@@ -562,4 +562,31 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingDescription3 =>
       'توضيح كيف يتتبع التطبيق تقدّمك الشخصي ونقاطك.';
+
+  @override
+  String get paywallEcoHabitTitle => 'إيكو هابت';
+
+  @override
+  String get paywallUnlimitedHabitTracking => 'تتبّع عادات غير محدود';
+
+  @override
+  String get paywallLeaderboardAccess => 'الوصول إلى لوحة المتصدرين';
+
+  @override
+  String get paywallAdvancedProgressAnalytics => 'تحليلات متقدمة للتقدم';
+
+  @override
+  String get paywallWeeklyPlan => 'الخطة الأسبوعية';
+
+  @override
+  String get paywallLifetimeAccess => 'وصول مدى الحياة';
+
+  @override
+  String get paywallBestValue => 'أفضل قيمة';
+
+  @override
+  String get paywallGoPremium => 'اشترك بريميوم';
+
+  @override
+  String get paywallRestorePurchases => 'استعادة المشتريات';
 }

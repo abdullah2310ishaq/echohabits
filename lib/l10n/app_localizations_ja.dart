@@ -552,4 +552,31 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get onboardingDescription3 => 'アプリが個人の進捗とスコアを追跡する仕組みを紹介します。';
+
+  @override
+  String get paywallEcoHabitTitle => 'Eco Habit';
+
+  @override
+  String get paywallUnlimitedHabitTracking => '無制限の習慣トラッキング';
+
+  @override
+  String get paywallLeaderboardAccess => 'ランキングにアクセス';
+
+  @override
+  String get paywallAdvancedProgressAnalytics => '高度な進捗分析';
+
+  @override
+  String get paywallWeeklyPlan => '週間プラン';
+
+  @override
+  String get paywallLifetimeAccess => '永久アクセス';
+
+  @override
+  String get paywallBestValue => 'お得';
+
+  @override
+  String get paywallGoPremium => 'プレミアムにする';
+
+  @override
+  String get paywallRestorePurchases => '購入を復元';
 }

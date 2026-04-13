@@ -553,4 +553,31 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get onboardingDescription3 => '앱이 개인 진행 상황과 점수를 어떻게 추적하는지 보여줍니다.';
+
+  @override
+  String get paywallEcoHabitTitle => 'Eco Habit';
+
+  @override
+  String get paywallUnlimitedHabitTracking => '무제한 습관 추적';
+
+  @override
+  String get paywallLeaderboardAccess => '리더보드 이용';
+
+  @override
+  String get paywallAdvancedProgressAnalytics => '고급 진행 분석';
+
+  @override
+  String get paywallWeeklyPlan => '주간 플랜';
+
+  @override
+  String get paywallLifetimeAccess => '평생 이용';
+
+  @override
+  String get paywallBestValue => '최고의 가치';
+
+  @override
+  String get paywallGoPremium => '프리미엄 시작';
+
+  @override
+  String get paywallRestorePurchases => '구매 복원';
 }

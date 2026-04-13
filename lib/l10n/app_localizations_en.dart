@@ -565,4 +565,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingDescription3 =>
       'Emphasizing how the app tracks personal progress and score .';
+
+  @override
+  String get paywallEcoHabitTitle => 'Eco Habit';
+
+  @override
+  String get paywallUnlimitedHabitTracking => 'Unlimited Habit Tracking';
+
+  @override
+  String get paywallLeaderboardAccess => 'Leaderboard Access';
+
+  @override
+  String get paywallAdvancedProgressAnalytics => 'Advanced Progress Analytics';
+
+  @override
+  String get paywallWeeklyPlan => 'Weekly Plan';
+
+  @override
+  String get paywallLifetimeAccess => 'Lifetime Access';
+
+  @override
+  String get paywallBestValue => 'Best Value';
+
+  @override
+  String get paywallGoPremium => 'Go Premium';
+
+  @override
+  String get paywallRestorePurchases => 'Restore purchases';
 }

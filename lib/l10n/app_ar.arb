@@ -744,5 +744,41 @@
   "onboardingDescription3": "توضيح كيف يتتبع التطبيق تقدّمك الشخصي ونقاطك.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
+  },
+  "paywallEcoHabitTitle": "إيكو هابت",
+  "@paywallEcoHabitTitle": {
+    "description": "Paywall title"
+  },
+  "paywallUnlimitedHabitTracking": "تتبّع عادات غير محدود",
+  "@paywallUnlimitedHabitTracking": {
+    "description": "Paywall feature: unlimited habit tracking"
+  },
+  "paywallLeaderboardAccess": "الوصول إلى لوحة المتصدرين",
+  "@paywallLeaderboardAccess": {
+    "description": "Paywall feature: leaderboard access"
+  },
+  "paywallAdvancedProgressAnalytics": "تحليلات متقدمة للتقدم",
+  "@paywallAdvancedProgressAnalytics": {
+    "description": "Paywall feature: advanced progress analytics"
+  },
+  "paywallWeeklyPlan": "الخطة الأسبوعية",
+  "@paywallWeeklyPlan": {
+    "description": "Paywall plan title: weekly"
+  },
+  "paywallLifetimeAccess": "وصول مدى الحياة",
+  "@paywallLifetimeAccess": {
+    "description": "Paywall plan title: lifetime"
+  },
+  "paywallBestValue": "أفضل قيمة",
+  "@paywallBestValue": {
+    "description": "Paywall badge label for best value plan"
+  },
+  "paywallGoPremium": "اشترك بريميوم",
+  "@paywallGoPremium": {
+    "description": "Paywall primary CTA button text"
+  },
+  "paywallRestorePurchases": "استعادة المشتريات",
+  "@paywallRestorePurchases": {
+    "description": "Paywall button text: restore purchases"
   }
 }

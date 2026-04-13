@@ -568,4 +568,33 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get onboardingDescription3 =>
       'Узнайте, как приложение отслеживает ваш личный прогресс и баллы.';
+
+  @override
+  String get paywallEcoHabitTitle => 'Eco Habit';
+
+  @override
+  String get paywallUnlimitedHabitTracking =>
+      'Безлимитное отслеживание привычек';
+
+  @override
+  String get paywallLeaderboardAccess => 'Доступ к таблице лидеров';
+
+  @override
+  String get paywallAdvancedProgressAnalytics =>
+      'Расширенная аналитика прогресса';
+
+  @override
+  String get paywallWeeklyPlan => 'Недельный план';
+
+  @override
+  String get paywallLifetimeAccess => 'Пожизненный доступ';
+
+  @override
+  String get paywallBestValue => 'Лучшая цена';
+
+  @override
+  String get paywallGoPremium => 'Перейти на Premium';
+
+  @override
+  String get paywallRestorePurchases => 'Восстановить покупки';
 }

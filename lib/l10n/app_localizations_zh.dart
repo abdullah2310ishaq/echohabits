@@ -552,4 +552,31 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get onboardingDescription3 => '强调应用如何追踪个人进度和得分。';
+
+  @override
+  String get paywallEcoHabitTitle => 'Eco Habit';
+
+  @override
+  String get paywallUnlimitedHabitTracking => '无限习惯追踪';
+
+  @override
+  String get paywallLeaderboardAccess => '排行榜访问';
+
+  @override
+  String get paywallAdvancedProgressAnalytics => '高级进度分析';
+
+  @override
+  String get paywallWeeklyPlan => '每周方案';
+
+  @override
+  String get paywallLifetimeAccess => '终身访问';
+
+  @override
+  String get paywallBestValue => '超值推荐';
+
+  @override
+  String get paywallGoPremium => '开通高级版';
+
+  @override
+  String get paywallRestorePurchases => '恢复购买';
 }

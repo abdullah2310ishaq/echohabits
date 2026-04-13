@@ -1171,6 +1171,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Emphasizing how the app tracks personal progress and score .'**
   String get onboardingDescription3;
+
+  /// Paywall title
+  ///
+  /// In en, this message translates to:
+  /// **'Eco Habit'**
+  String get paywallEcoHabitTitle;
+
+  /// Paywall feature: unlimited habit tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited Habit Tracking'**
+  String get paywallUnlimitedHabitTracking;
+
+  /// Paywall feature: leaderboard access
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard Access'**
+  String get paywallLeaderboardAccess;
+
+  /// Paywall feature: advanced progress analytics
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced Progress Analytics'**
+  String get paywallAdvancedProgressAnalytics;
+
+  /// Paywall plan title: weekly
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Plan'**
+  String get paywallWeeklyPlan;
+
+  /// Paywall plan title: lifetime
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime Access'**
+  String get paywallLifetimeAccess;
+
+  /// Paywall badge label for best value plan
+  ///
+  /// In en, this message translates to:
+  /// **'Best Value'**
+  String get paywallBestValue;
+
+  /// Paywall primary CTA button text
+  ///
+  /// In en, this message translates to:
+  /// **'Go Premium'**
+  String get paywallGoPremium;
+
+  /// Paywall button text: restore purchases
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get paywallRestorePurchases;
 }
 
 class _AppLocalizationsDelegate

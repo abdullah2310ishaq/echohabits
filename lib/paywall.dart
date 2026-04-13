@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/core/theme/app_colors.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/core/billing/billing_service.dart';
 
@@ -45,6 +46,7 @@ class _PaywallState extends State<Paywall> {
   @override
   Widget build(BuildContext context) {
     final billing = context.watch<BillingService>();
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -83,7 +85,7 @@ class _PaywallState extends State<Paywall> {
 
               Center(
                 child: Text(
-                  'Eco Habit',
+                  l10n.paywallEcoHabitTitle,
                   style: TextStyle(
                     fontSize: 32.sp,
                     fontWeight: FontWeight.w500,
@@ -96,22 +98,22 @@ class _PaywallState extends State<Paywall> {
               // Feature list using SVGs
               _FeatureTile(
                 svgAsset: 'assets/svgonee.svg',
-                text: 'Unlimited Habit Tracking',
+                text: l10n.paywallUnlimitedHabitTracking,
               ),
               SizedBox(height: 12.h),
               _FeatureTile(
                 svgAsset: 'assets/svgtwo.svg',
-                text: 'Leaderboard Access',
+                text: l10n.paywallLeaderboardAccess,
               ),
               SizedBox(height: 12.h),
               _FeatureTile(
                 svgAsset: 'assets/svgthree.svg',
-                text: 'Advanced Progress Analytics',
+                text: l10n.paywallAdvancedProgressAnalytics,
               ),
               SizedBox(height: 25.h),
               // Pricing Cards
               _PlanCard(
-                title: 'Weekly Plan',
+                title: l10n.paywallWeeklyPlan,
                 subtitle: billing.weeklyPriceLabel(),
                 isSelected: _selectedPlanIndex == 0,
                 isBestValue: false,
@@ -119,7 +121,7 @@ class _PaywallState extends State<Paywall> {
               ),
               SizedBox(height: 15.h),
               _PlanCard(
-                title: 'Lifetime Access',
+                title: l10n.paywallLifetimeAccess,
                 subtitle: billing.lifetimePriceLabel(),
                 isSelected: _selectedPlanIndex == 1,
                 isBestValue: true,
@@ -157,7 +159,7 @@ class _PaywallState extends State<Paywall> {
                           ),
                         )
                       : Text(
-                          'Go Premium',
+                          l10n.paywallGoPremium,
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
@@ -186,7 +188,7 @@ class _PaywallState extends State<Paywall> {
                         await billing.restorePurchases();
                       },
                 child: Text(
-                  'Restore purchases',
+                  l10n.paywallRestorePurchases,
                   style: TextStyle(
                     fontSize: 13.sp,
                     color: AppColors.textSecondary,
@@ -216,7 +218,7 @@ class _FeatureTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(6.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: Offset(0, 2.h),
           ),
@@ -234,7 +236,6 @@ class _FeatureTile extends StatelessWidget {
             padding: EdgeInsets.all(10.w),
             child: SvgPicture.asset(
               svgAsset,
-              cacheColorFilter: true,
               colorFilter: const ColorFilter.mode(
                 AppColors.primaryGreen,
                 BlendMode.srcIn,
@@ -272,6 +273,7 @@ class _PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = isSelected;
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: Stack(
@@ -341,7 +343,7 @@ class _PlanCard extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Best Value',
+                  l10n.paywallBestValue,
                   style: TextStyle(
                     color: AppColors.primaryGreen,
                     fontWeight: FontWeight.bold,
@@ -359,7 +361,7 @@ class _PlanCard extends StatelessWidget {
     final isDark = isSelected;
     final color = isDark
         ? Colors.white
-        : AppColors.textSecondary.withOpacity(0.35);
+        : AppColors.textSecondary.withValues(alpha: 0.35);
     return Container(
       width: 22.w,
       height: 22.w,

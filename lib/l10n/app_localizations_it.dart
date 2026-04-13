@@ -576,4 +576,33 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get onboardingDescription3 =>
       'Scopri come l’app monitora i tuoi progressi e il tuo punteggio.';
+
+  @override
+  String get paywallEcoHabitTitle => 'Eco Habit';
+
+  @override
+  String get paywallUnlimitedHabitTracking =>
+      'Monitoraggio abitudini illimitato';
+
+  @override
+  String get paywallLeaderboardAccess => 'Accesso alla classifica';
+
+  @override
+  String get paywallAdvancedProgressAnalytics =>
+      'Analisi avanzate dei progressi';
+
+  @override
+  String get paywallWeeklyPlan => 'Piano settimanale';
+
+  @override
+  String get paywallLifetimeAccess => 'Accesso a vita';
+
+  @override
+  String get paywallBestValue => 'Miglior valore';
+
+  @override
+  String get paywallGoPremium => 'Passa a Premium';
+
+  @override
+  String get paywallRestorePurchases => 'Ripristina acquisti';
 }
