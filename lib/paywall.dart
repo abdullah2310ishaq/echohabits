@@ -16,6 +16,16 @@ class Paywall extends StatefulWidget {
 class _PaywallState extends State<Paywall> {
   int _selectedPlanIndex = 1; // 0 = Weekly, 1 = Lifetime
   bool _didPrecache = false;
+  bool _showCloseButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
+      setState(() => _showCloseButton = true);
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -51,7 +61,7 @@ class _PaywallState extends State<Paywall> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 2.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,18 +76,25 @@ class _PaywallState extends State<Paywall> {
                     height: 120.w,
                     fit: BoxFit.contain,
                   ),
-                  IconButton(
-                    onPressed: () => Navigator.of(context).maybePop(),
-                    icon: Icon(
-                      Icons.close,
-                      size: 28.w,
-                      color: AppColors.textPrimary,
-                    ),
-                    visualDensity: VisualDensity.compact,
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(
-                      minWidth: 40.w,
-                      minHeight: 40.w,
+                  IgnorePointer(
+                    ignoring: !_showCloseButton,
+                    child: AnimatedOpacity(
+                      opacity: _showCloseButton ? 1 : 0,
+                      duration: const Duration(milliseconds: 200),
+                      child: IconButton(
+                        onPressed: () => Navigator.of(context).maybePop(),
+                        icon: Icon(
+                          Icons.close,
+                          size: 28.w,
+                          color: AppColors.textPrimary,
+                        ),
+                        visualDensity: VisualDensity.compact,
+                        padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(
+                          minWidth: 40.w,
+                          minHeight: 40.w,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -196,6 +213,9 @@ class _PaywallState extends State<Paywall> {
                   ),
                 ),
               ),
+
+              // Extra space for very small screens / gesture bar.
+              SizedBox(height: 14.h),
             ],
           ),
         ),
