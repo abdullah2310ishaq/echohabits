@@ -38,7 +38,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         );
       }
-      
     } catch (e) {
       // Handle any errors silently to prevent navigation issues
       if (context.mounted) {
@@ -116,6 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _SettingsOption(
         iconPath: 'assets/settings/share.svg',
         title: AppLocalizations.of(context)!.moreApps,
+        showAdTag: true,
         onTap: () async {
           // Ensure context is still valid before opening external URL
           if (!context.mounted) return;
@@ -421,12 +421,14 @@ class _SettingsOption {
     required this.title,
     this.trailingBuilder,
     this.onTap,
+    this.showAdTag = false,
   });
 
   final String iconPath;
   final String title;
   final WidgetBuilder? trailingBuilder;
   final Future<void> Function()? onTap;
+  final bool showAdTag;
 }
 
 class _SettingsTile extends StatefulWidget {
@@ -497,7 +499,37 @@ class _SettingsTileState extends State<_SettingsTile> {
                 ),
               ),
               SizedBox(width: 10.w),
-              Expanded(child: Text(widget.option.title, style: textStyle)),
+              Expanded(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(widget.option.title, style: textStyle),
+                    ),
+                    if (widget.option.showAdTag) ...[
+                      SizedBox(width: 6.w),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 6.w,
+                          vertical: 2.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFF8400),
+                          borderRadius: BorderRadius.circular(24.r),
+                        ),
+                        child: Text(
+                          'AD',
+                          style: TextStyle(
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            height: 1.1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
               if (widget.option.trailingBuilder != null)
                 Padding(
                   padding: EdgeInsets.only(right: 6.w),

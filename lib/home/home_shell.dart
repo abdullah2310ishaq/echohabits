@@ -9,14 +9,16 @@ import '../leaderboard/leaderboard.dart';
 import '../profile/profile.dart';
 
 class HomeShell extends StatefulWidget {
-  const HomeShell({super.key});
+  const HomeShell({super.key, this.initialIndex = 0});
+
+  final int initialIndex;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
 }
 
 class _HomeShellState extends State<HomeShell> {
-  int _currentIndex = 0;
+  late int _currentIndex;
 
   final List<Widget> _screens = [
     const HomeOne(),
@@ -24,6 +26,13 @@ class _HomeShellState extends State<HomeShell> {
     const Leaderboard(),
     const Profile(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    final maxIndex = _screens.length - 1;
+    _currentIndex = widget.initialIndex.clamp(0, maxIndex);
+  }
 
   Future<bool?> _showExitDialog(BuildContext context) async {
     return showDialog<bool>(

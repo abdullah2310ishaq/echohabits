@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-import 'package:habit_tracker/core/ads/admob_ids.dart';
-import 'package:habit_tracker/core/services/ad_visibility_service.dart';
-import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
+import 'package:habit_tracker/home/home_shell.dart';
 import '../core/services/locale_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
@@ -138,8 +136,12 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       );
                       await localeService.setLocaleByCode(_selectedLanguage!);
                       if (context.mounted) {
-                        // Go back to HomeShell (root) after changing language
-                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (_) => const HomeShell(initialIndex: 3),
+                          ),
+                          (route) => false,
+                        );
                       }
                     }
                   : null,
@@ -157,44 +159,34 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               ),
               child: Text(
                 AppLocalizations.of(context)!.next,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(16.w),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 2.5,
-                  crossAxisSpacing: 16.w,
-                  mainAxisSpacing: 16.h,
-                ),
-                itemCount: _languages.length,
-                itemBuilder: (context, index) {
-                  final language = _languages[index];
-                  final isSelected = _selectedLanguage == language['code'];
-                  return _buildLanguageCard(
-                    language: language,
-                    isSelected: isSelected,
-                  );
-                },
-              ),
-            ),
+      body: Padding(
+        padding: EdgeInsets.all(16.w),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2.5,
+            crossAxisSpacing: 16.w,
+            mainAxisSpacing: 16.h,
           ),
-          if (AdVisibilityService.shouldShowLanguageNativeAd)
-            NativeAdTile(
-              adUnitId: AdMobIds.nativeLanguageUnitId,
-              factoryId: 'listTileLanguage',
-              height: 150.h,
-              margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
-            ),
-        ],
+          itemCount: _languages.length,
+          itemBuilder: (context, index) {
+            final language = _languages[index];
+            final isSelected = _selectedLanguage == language['code'];
+            return _buildLanguageCard(
+              language: language,
+              isSelected: isSelected,
+            );
+          },
+        ),
       ),
     );
   }
@@ -233,7 +225,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: Row(
             children: [
               // Flag Icon
-              SizedBox( 
+              SizedBox(
                 width: 32,
                 height: 32,
                 child: (language['isPng'] as bool? ?? false)
@@ -257,7 +249,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         height: 32,
                         fit: BoxFit.contain,
                         // Graceful fallback if an asset fails to load
-                        placeholderBuilder: (context) => const SizedBox.shrink(),
+                        placeholderBuilder: (context) =>
+                            const SizedBox.shrink(),
                         errorBuilder: (context, _, __) => Text(
                           language['name'] as String,
                           style: const TextStyle(

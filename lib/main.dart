@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
-import 'package:habit_tracker/core/services/habit_service.dart'; 
+import 'package:habit_tracker/core/services/habit_service.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
 import 'package:habit_tracker/core/services/locale_service.dart';
 import 'package:habit_tracker/core/widgets/global_pointer_gate.dart';
@@ -24,12 +25,47 @@ void main() async {
   await Firebase.initializeApp();
   await RemoteConfigService.init();
   await MobileAds.instance.initialize();
+  AppOpenAdManager.initialize();
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  bool _wasInBackground = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.hidden) {
+      _wasInBackground = true;
+      return;
+    }
+
+    if (state == AppLifecycleState.resumed && _wasInBackground) {
+      _wasInBackground = false;
+      AppOpenAdManager.onAppResumedFromBackground();
+    }
+  }
 
   // This widget is the root of your application.
   @override
@@ -72,7 +108,9 @@ class MyApp extends StatelessWidget {
                   ),
                   child: GlobalPointerGate(
                     child: MaterialApp(
-                      key: ValueKey(currentLocale.languageCode), // Force rebuild on locale change
+                      key: ValueKey(
+                        currentLocale.languageCode,
+                      ), // Force rebuild on locale change
                       title: 'Eco Habit Tracker',
                       debugShowCheckedModeBanner: false,
                       theme: ThemeData(
@@ -92,17 +130,26 @@ class MyApp extends StatelessWidget {
                       // Use onGenerateRoute to skip splash if app is already initialized
                       onGenerateRoute: (settings) {
                         // Check if app is already initialized (language selected, onboarding done, profile setup)
-                        final isLanguageSelected = localeService.isLanguageSelected();
-                        final isProfileSetup = ProfileService.isProfileSetupComplete();
-                        final isOnboardingComplete = ProfileService.isOnboardingComplete();
-                        
+                        final isLanguageSelected = localeService
+                            .isLanguageSelected();
+                        final isProfileSetup =
+                            ProfileService.isProfileSetupComplete();
+                        final isOnboardingComplete =
+                            ProfileService.isOnboardingComplete();
+
                         // If app is fully initialized, go directly to home (skip splash)
-                        if (isLanguageSelected && isOnboardingComplete && isProfileSetup) {
-                          return MaterialPageRoute(builder: (_) => const HomeShell());
+                        if (isLanguageSelected &&
+                            isOnboardingComplete &&
+                            isProfileSetup) {
+                          return MaterialPageRoute(
+                            builder: (_) => const HomeShell(),
+                          );
                         }
-                        
+
                         // Otherwise show splash screen (first time or incomplete setup)
-                        return MaterialPageRoute(builder: (_) => const SplashScreen());
+                        return MaterialPageRoute(
+                          builder: (_) => const SplashScreen(),
+                        );
                       },
                     ),
                   ),
