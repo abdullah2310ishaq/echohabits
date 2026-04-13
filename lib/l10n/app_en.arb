@@ -721,27 +721,27 @@
   "@plantingTag": {
     "description": "Tag label for planting"
   },
-  "onboardingTitle1": "Track Your Daily Eco Actions",
+  "onboardingTitle1": "Set Your Green Goals",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Complete daily actions, maintain your streak, and increase your eco score.",
+  "onboardingDescription1": "Introducing the core purpose tracking  habits for a greener life",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Build Habits That Stick",
+  "onboardingTitle2": "Build Better Routines",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Add habits to your routine, maintain streaks, and earn rewards as you stay consistent.",
+  "onboardingDescription2": "Introducing the gamification and social aspect.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Compete. Earn. Level Up.",
+  "onboardingTitle3": "Measure Your Impact",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Climb the leaderboard, unlock badges, and track your progress against others.",
+  "onboardingDescription3": "Emphasizing how the app tracks personal progress and score .",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   }

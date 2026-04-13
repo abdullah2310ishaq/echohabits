@@ -1139,37 +1139,37 @@ abstract class AppLocalizations {
   /// First onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Track Your Daily Eco Actions'**
+  /// **'Set Your Green Goals'**
   String get onboardingTitle1;
 
   /// First onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Complete daily actions, maintain your streak, and increase your eco score.'**
+  /// **'Introducing the core purpose tracking  habits for a greener life'**
   String get onboardingDescription1;
 
   /// Second onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Build Habits That Stick'**
+  /// **'Build Better Routines'**
   String get onboardingTitle2;
 
   /// Second onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Add habits to your routine, maintain streaks, and earn rewards as you stay consistent.'**
+  /// **'Introducing the gamification and social aspect.'**
   String get onboardingDescription2;
 
   /// Third onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Compete. Earn. Level Up.'**
+  /// **'Measure Your Impact'**
   String get onboardingTitle3;
 
   /// Third onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Climb the leaderboard, unlock badges, and track your progress against others.'**
+  /// **'Emphasizing how the app tracks personal progress and score .'**
   String get onboardingDescription3;
 }
 

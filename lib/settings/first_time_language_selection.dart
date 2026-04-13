@@ -196,7 +196,7 @@ class _FirstTimeLanguageSelectionScreenState
             NativeAdTile(
               adUnitId: AdMobIds.nativeLanguageUnitId,
               factoryId: 'listTileLanguage',
-              height: 130.h,
+              height: 150.h,
               margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
             ),
         ],
