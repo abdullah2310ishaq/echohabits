@@ -15,6 +15,7 @@ class HabitsOne extends StatefulWidget {
 
 class _HabitsOneState extends State<HabitsOne> {
   String _selectedCategory = 'All';
+  int _listAnimToken = 0;
 
   final List<String> _categories = [
     'All',
@@ -507,6 +508,7 @@ class _HabitsOneState extends State<HabitsOne> {
                           onSelected: (selected) {
                             setState(() {
                               _selectedCategory = category;
+                              _listAnimToken++;
                             });
                           },
                           backgroundColor: Colors.grey[200],
@@ -532,32 +534,82 @@ class _HabitsOneState extends State<HabitsOne> {
 
           // Main List View
           Expanded(
-            child: ListView(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.pickAHabitToAdd,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                ..._filteredHabits.map(
-                  (habit) => Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: _buildHabitCard(
-                      context: context,
-                      titleKey: habit['titleKey'] as String,
-                      difficulty: habit['difficulty'] as String,
-                      difficultyColor: habit['difficultyColor'] as Color,
-                      impact: habit['impact'] as String,
-                      impactColor: habit['impactColor'] as Color,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.pickAHabitToAdd,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 12.h),
+                  Expanded(
+                    child: AnimatedSwitcher(
+                      // Tuned for a smooth "blend": slower in, quicker out.
+                      duration: const Duration(milliseconds: 1500),
+                      reverseDuration: Duration.zero,
+                      switchInCurve: Curves.easeIn,
+                      switchOutCurve: Curves.easeInCubic,
+                      layoutBuilder: (currentChild, previousChildren) {
+                        // Show only the new child; drop the old one immediately.
+                        return currentChild ?? const SizedBox.shrink();
+                      },
+                      transitionBuilder: (child, animation) {
+                        final currentKey = ValueKey<String>(
+                          'habits_${_selectedCategory}_$_listAnimToken',
+                        );
+                        final isIncoming = child.key == currentKey;
+
+                        final positionTween = Tween<Offset>(
+                          begin: const Offset(0.14, 0.0),
+                          end: Offset.zero,
+                        );
+
+                        return FadeTransition(
+                          opacity: isIncoming
+                              ? animation
+                              : const AlwaysStoppedAnimation(0),
+                          child: SlideTransition(
+                            position: animation.drive(
+                              positionTween.chain(
+                                CurveTween(curve: Curves.easeOutCubic),
+                              ),
+                            ),
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: ListView.builder(
+                        key: ValueKey<String>(
+                          'habits_${_selectedCategory}_$_listAnimToken',
+                        ),
+                        padding: EdgeInsets.zero,
+                        itemCount: _filteredHabits.length,
+                        itemBuilder: (context, index) {
+                          final habit = _filteredHabits[index];
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 10.h),
+                            child: _buildHabitCard(
+                              context: context,
+                              titleKey: habit['titleKey'] as String,
+                              difficulty: habit['difficulty'] as String,
+                              difficultyColor:
+                                  habit['difficultyColor'] as Color,
+                              impact: habit['impact'] as String,
+                              impactColor: habit['impactColor'] as Color,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

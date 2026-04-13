@@ -19,7 +19,7 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   late int _currentIndex;
-  late final PageController _pageController;
+  int _screenAnimToken = 0;
 
   final List<Widget> _screens = [
     const HomeOne(),
@@ -33,13 +33,6 @@ class _HomeShellState extends State<HomeShell> {
     super.initState();
     final maxIndex = _screens.length - 1;
     _currentIndex = widget.initialIndex.clamp(0, maxIndex);
-    _pageController = PageController(initialPage: _currentIndex);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   Future<bool?> _showExitDialog(BuildContext context) async {
@@ -152,14 +145,40 @@ class _HomeShellState extends State<HomeShell> {
       },
 
       child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          onPageChanged: (index) {
-            if (_currentIndex == index) return;
-            setState(() => _currentIndex = index);
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 720),
+          reverseDuration: Duration.zero,
+          switchInCurve: Curves.easeInCirc,
+          switchOutCurve: Curves.easeInCubic,
+          layoutBuilder: (currentChild, previousChildren) {
+            // Show only the new child; drop the old one immediately.
+            return currentChild ?? const SizedBox.shrink();
           },
-          children: _screens,
+          transitionBuilder: (child, animation) {
+            final currentKey = ValueKey<String>(
+              'home_${_currentIndex}_$_screenAnimToken',
+            );
+            final isIncoming = child.key == currentKey;
+
+            return FadeTransition(
+              opacity: isIncoming
+                  ? animation
+                  : const AlwaysStoppedAnimation<double>(0),
+              child: SlideTransition(
+                position: animation.drive(
+                  Tween<Offset>(
+                    begin: const Offset(0.14, 0.0),
+                    end: Offset.zero,
+                  ).chain(CurveTween(curve: Curves.easeOutCubic)),
+                ),
+                child: child,
+              ),
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey<String>('home_${_currentIndex}_$_screenAnimToken'),
+            child: _screens[_currentIndex],
+          ),
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
@@ -228,12 +247,10 @@ class _HomeShellState extends State<HomeShell> {
       child: InkWell(
         onTap: () {
           if (_currentIndex == index) return;
-          setState(() => _currentIndex = index);
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 260),
-            curve: Curves.fastOutSlowIn,
-          );
+          setState(() {
+            _currentIndex = index;
+            _screenAnimToken++;
+          });
         },
         borderRadius: BorderRadius.circular(12.r),
         splashColor: Colors.white.withOpacity(0.1),

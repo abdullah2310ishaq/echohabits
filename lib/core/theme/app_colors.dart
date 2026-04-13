@@ -20,4 +20,3 @@ abstract final class AppColors {
 
   static const shadow = Color(0x14000000); // 8% black
 }
-
