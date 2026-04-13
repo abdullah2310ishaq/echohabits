@@ -377,7 +377,7 @@ abstract class AppLocalizations {
   /// Reset all progress option
   ///
   /// In en, this message translates to:
-  /// **'Reset All Progress'**
+  /// **'Reset'**
   String get resetAllProgress;
 
   /// Reset all progress confirmation message

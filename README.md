@@ -2,7 +2,6 @@
 -after changing language navigate the user to the same profile screen, not to the home screen
 -add "AD" after more apps in drawer
 -add app open ad over all, when user comes back from cache.
-
 -add transition between navigation bar and habit categories
 -redesign the toast of the app, do not use emoji
 -add splash screen of the app, use animation no CTA just loading bar and navigete the user

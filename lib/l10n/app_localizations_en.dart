@@ -144,7 +144,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Logout functionality coming soon';
 
   @override
-  String get resetAllProgress => 'Reset All Progress';
+  String get resetAllProgress => 'Reset';
 
   @override
   String get areYouSureYouWantToResetAllProgress =>

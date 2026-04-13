@@ -183,7 +183,7 @@
   "@logoutFunctionalityComingSoon": {
     "description": "Logout functionality placeholder message"
   },
-  "resetAllProgress": "Reset All Progress",
+  "resetAllProgress": "Reset",
   "@resetAllProgress": {
     "description": "Reset all progress option"
   },

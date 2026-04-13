@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:habit_tracker/core/ads/admob_ids.dart';
+import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/locale_service.dart';
 import '../l10n/app_localizations.dart';
@@ -14,6 +16,7 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+  static const bool _showNativeAd = true;
   String _selectedFilter = 'weekly';
 
   @override
@@ -87,7 +90,7 @@ class _HistoryState extends State<History> {
                   final String storedTitle = item['title'] as String;
                   final String? titleKey = item['titleKey'] as String?;
                   final DateTime timestamp = item['timestamp'] as DateTime;
-                  
+
                   // Use titleKey for stable localization, fallback to stored title mapping
                   final String localizedTitle = titleKey != null
                       ? _getLocalizedTitleFromKey(context, titleKey)
@@ -96,7 +99,10 @@ class _HistoryState extends State<History> {
                   // Format date as "Wednesday, January 14" (day name + month name + day)
                   // Use locale from Localizations to format dates correctly
                   final locale = Localizations.localeOf(context);
-                  final dateFormatter = DateFormat('EEEE, MMMM d', locale.toString());
+                  final dateFormatter = DateFormat(
+                    'EEEE, MMMM d',
+                    locale.toString(),
+                  );
                   final String dateLabel = dateFormatter.format(timestamp);
 
                   return Padding(
@@ -110,13 +116,24 @@ class _HistoryState extends State<History> {
                 },
               ),
             ),
+            if (_showNativeAd)
+              NativeAdTile(
+                adUnitId: AdMobIds.nativeMediumUnitId,
+                factoryId: 'listTileLanguage',
+                height: 150.h,
+                margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFilterButton(BuildContext context, String filterKey, String label) {
+  Widget _buildFilterButton(
+    BuildContext context,
+    String filterKey,
+    String label,
+  ) {
     final isSelected = _selectedFilter == filterKey;
 
     return Expanded(
@@ -149,7 +166,7 @@ class _HistoryState extends State<History> {
   /// Get localized title from titleKey (stable identifier)
   String _getLocalizedTitleFromKey(BuildContext context, String titleKey) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Map titleKey to localized getters (same as habits_one.dart)
     switch (titleKey) {
       case 'cycleToWork':
@@ -259,7 +276,7 @@ class _HistoryState extends State<History> {
   /// (Fallback for backward compatibility with old history entries)
   String _getLocalizedHabitTitle(BuildContext context, String storedTitle) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Map of English titles to localization getters
     // This handles habits stored in English or other languages
     final Map<String, String Function()> titleMap = {
@@ -312,14 +329,15 @@ class _HistoryState extends State<History> {
       // Default task titles
       'Walked/ Biked instead of driving': () => l10n.defaultWalkBikeTitle,
       'Used a reusable coffee cup': () => l10n.defaultCoffeeCupTitle,
-      'Afforestation/ Plant a tree for better environment': () => l10n.defaultAfforestationTitle,
+      'Afforestation/ Plant a tree for better environment': () =>
+          l10n.defaultAfforestationTitle,
     };
-    
+
     // Check if stored title matches English version
     if (titleMap.containsKey(storedTitle)) {
       return titleMap[storedTitle]!();
     }
-    
+
     // Check if stored title matches current localized version
     // This handles cases where title is already in current language
     final currentLocalizedTitles = {
@@ -372,12 +390,12 @@ class _HistoryState extends State<History> {
       l10n.defaultCoffeeCupTitle,
       l10n.defaultAfforestationTitle,
     };
-    
+
     if (currentLocalizedTitles.contains(storedTitle)) {
       // Already in current language
       return storedTitle;
     }
-    
+
     // If no match found, return stored title as-is (for custom habits or unknown titles)
     return storedTitle;
   }
