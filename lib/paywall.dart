@@ -1,21 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-// Assuming these are defined in your AppColors,
-// otherwise, replace with standard Colors.
-class AppColors {
-  static const Color background = Color(0xFFF4F7F6);
-  static const Color surface = Colors.white;
-  static const Color textPrimary = Color(0xFF1A1A1A);
-  static const Color textSecondary = Color(0xFF757575);
-  static const Color primaryGreen = Color(0xFF388E3C);
-  static const Color deepGreen = Color(0xFF2D6A2E);
-  static const Color lightGreenTint = Color(0xFFE8F5E9);
-  static const Color textOnDark = Colors.white;
-  static const Color accentBlue = Color(0xFF2196F3);
-  static const Color shadow = Color(0x1A000000);
-}
+import 'package:habit_tracker/core/theme/app_colors.dart';
 
 class Paywall extends StatefulWidget {
   const Paywall({super.key});
@@ -26,6 +12,33 @@ class Paywall extends StatefulWidget {
 
 class _PaywallState extends State<Paywall> {
   int _selectedPlanIndex = 1; // 0 = Weekly, 1 = Lifetime
+  bool _didPrecache = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_didPrecache) return;
+    _didPrecache = true;
+
+    // Warm up heavy assets so opening this screen doesn't stutter.
+    precacheImage(const AssetImage('assets/paywall.png'), context);
+
+    // Precache SVGs (first decode can be expensive on some devices).
+    // flutter_svg 2.x uses the `svg` cache + asset loaders.
+    Future.microtask(() async {
+      await _warmUpSvg('assets/svgonee.svg');
+      await _warmUpSvg('assets/svgtwo.svg');
+      await _warmUpSvg('assets/svgthree.svg');
+    });
+  }
+
+  Future<void> _warmUpSvg(String assetPath) async {
+    final loader = SvgAssetLoader(assetPath);
+    await svg.cache.putIfAbsent(
+      loader.cacheKey(null),
+      () => loader.loadBytes(null),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,7 @@ class _PaywallState extends State<Paywall> {
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0.h),
+          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 2.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,7 +55,7 @@ class _PaywallState extends State<Paywall> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    'assets/paywall.png', // Updated asset name
+                    'assets/paywall.png',
                     width: 120.w,
                     height: 120.w,
                     fit: BoxFit.contain,
@@ -54,10 +67,16 @@ class _PaywallState extends State<Paywall> {
                       size: 28.w,
                       color: AppColors.textPrimary,
                     ),
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsets.zero,
+                    constraints: BoxConstraints(
+                      minWidth: 40.w,
+                      minHeight: 40.w,
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 2.h),
+
               Center(
                 child: Text(
                   'Eco Habit',
@@ -68,30 +87,30 @@ class _PaywallState extends State<Paywall> {
                   ),
                 ),
               ),
+
               SizedBox(height: 20.h),
               // Feature list using SVGs
               _FeatureTile(
-                svgAsset: 'assets/svgonee.svg', // Updated asset name
+                svgAsset: 'assets/svgonee.svg',
                 text: 'Unlimited Habit Tracking',
               ),
               SizedBox(height: 12.h),
               _FeatureTile(
-                svgAsset: 'assets/svgtwo.svg', // Updated asset name
+                svgAsset: 'assets/svgtwo.svg',
                 text: 'Leaderboard Access',
               ),
               SizedBox(height: 12.h),
               _FeatureTile(
-                svgAsset: 'assets/svgthree.svg', // Updated asset name
+                svgAsset: 'assets/svgthree.svg',
                 text: 'Advanced Progress Analytics',
               ),
-              const Spacer(),
+              SizedBox(height: 25.h),
               // Pricing Cards
               _PlanCard(
                 title: 'Weekly Plan',
                 subtitle: '\$4.99 per week',
                 isSelected: _selectedPlanIndex == 0,
                 isBestValue: false,
-                isDark: false,
                 onTap: () => setState(() => _selectedPlanIndex = 0),
               ),
               SizedBox(height: 15.h),
@@ -100,14 +119,13 @@ class _PaywallState extends State<Paywall> {
                 subtitle: '\$29.99 one-time payment',
                 isSelected: _selectedPlanIndex == 1,
                 isBestValue: true,
-                isDark: true,
                 onTap: () => setState(() => _selectedPlanIndex = 1),
               ),
               SizedBox(height: 30.h),
               // Main Action Button
               SizedBox(
                 width: double.infinity,
-                height: 56.h,
+                height: 65.h,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -147,10 +165,10 @@ class _FeatureTile extends StatelessWidget {
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(6.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withOpacity(0.3),
             blurRadius: 8,
             offset: Offset(0, 2.h),
           ),
@@ -168,6 +186,7 @@ class _FeatureTile extends StatelessWidget {
             padding: EdgeInsets.all(10.w),
             child: SvgPicture.asset(
               svgAsset,
+              cacheColorFilter: true,
               colorFilter: const ColorFilter.mode(
                 AppColors.primaryGreen,
                 BlendMode.srcIn,
@@ -195,16 +214,16 @@ class _PlanCard extends StatelessWidget {
     required this.subtitle,
     required this.isSelected,
     required this.isBestValue,
-    required this.isDark,
     required this.onTap,
   });
 
   final String title, subtitle;
-  final bool isSelected, isBestValue, isDark;
+  final bool isSelected, isBestValue;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isSelected;
     return GestureDetector(
       onTap: onTap,
       child: Stack(
@@ -215,13 +234,19 @@ class _PlanCard extends StatelessWidget {
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
               color: isDark ? AppColors.deepGreen : AppColors.surface,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(32.r),
               border: Border.all(
-                color: (!isDark && isSelected)
-                    ? AppColors.accentBlue
-                    : Colors.transparent,
+                color: !isDark ? Colors.transparent : Colors.transparent,
                 width: 2.w,
               ),
+              boxShadow: [
+                if (!isDark)
+                  BoxShadow(
+                    color: AppColors.shadow,
+                    blurRadius: 10.r,
+                    offset: Offset(0, 4.h),
+                  ),
+              ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -283,9 +308,10 @@ class _PlanCard extends StatelessWidget {
   }
 
   Widget _buildRadioDot() {
+    final isDark = isSelected;
     final color = isDark
         ? Colors.white
-        : (isSelected ? AppColors.accentBlue : Colors.grey[300]!);
+        : AppColors.textSecondary.withOpacity(0.35);
     return Container(
       width: 22.w,
       height: 22.w,
@@ -298,7 +324,10 @@ class _PlanCard extends StatelessWidget {
               child: Container(
                 width: 10.w,
                 height: 10.w,
-                decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
               ),
             )
           : null,
