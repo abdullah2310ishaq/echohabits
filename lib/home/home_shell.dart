@@ -19,6 +19,7 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   late int _currentIndex;
+  late final PageController _pageController;
 
   final List<Widget> _screens = [
     const HomeOne(),
@@ -32,6 +33,13 @@ class _HomeShellState extends State<HomeShell> {
     super.initState();
     final maxIndex = _screens.length - 1;
     _currentIndex = widget.initialIndex.clamp(0, maxIndex);
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   Future<bool?> _showExitDialog(BuildContext context) async {
@@ -144,7 +152,15 @@ class _HomeShellState extends State<HomeShell> {
       },
 
       child: Scaffold(
-        body: _screens[_currentIndex],
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (index) {
+            if (_currentIndex == index) return;
+            setState(() => _currentIndex = index);
+          },
+          children: _screens,
+        ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             color: const Color(0xFF2E7D32),
@@ -160,27 +176,34 @@ class _HomeShellState extends State<HomeShell> {
             child: Padding(
               padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavItem(
-                    label: AppLocalizations.of(context)!.home,
-                    index: 0,
-                    svgAsset: 'assets/home.svg',
+                  Expanded(
+                    child: _buildNavItem(
+                      label: AppLocalizations.of(context)!.home,
+                      index: 0,
+                      svgAsset: 'assets/home.svg',
+                    ),
                   ),
-                  _buildNavItem(
-                    icon: Icons.list,
-                    label: AppLocalizations.of(context)!.habitLibrary,
-                    index: 1,
+                  Expanded(
+                    child: _buildNavItem(
+                      icon: Icons.list,
+                      label: AppLocalizations.of(context)!.habitLibrary,
+                      index: 1,
+                    ),
                   ),
-                  _buildNavItem(
-                    label: AppLocalizations.of(context)!.leaderboard,
-                    index: 2,
-                    svgAsset: 'assets/leader.svg',
+                  Expanded(
+                    child: _buildNavItem(
+                      label: AppLocalizations.of(context)!.leaderboard,
+                      index: 2,
+                      svgAsset: 'assets/leader.svg',
+                    ),
                   ),
-                  _buildNavItem(
-                    label: AppLocalizations.of(context)!.setUpYourProfile,
-                    index: 3,
-                    svgAsset: 'assets/profile.svg',
+                  Expanded(
+                    child: _buildNavItem(
+                      label: AppLocalizations.of(context)!.setUpYourProfile,
+                      index: 3,
+                      svgAsset: 'assets/profile.svg',
+                    ),
                   ),
                 ],
               ),
@@ -204,49 +227,64 @@ class _HomeShellState extends State<HomeShell> {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          setState(() {
-            _currentIndex = index;
-          });
+          if (_currentIndex == index) return;
+          setState(() => _currentIndex = index);
+          _pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 260),
+            curve: Curves.fastOutSlowIn,
+          );
         },
         borderRadius: BorderRadius.circular(12.r),
         splashColor: Colors.white.withOpacity(0.1),
         highlightColor: Colors.white.withOpacity(0.05),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(vertical: 8.h),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              svgAsset != null
-                  ? SvgPicture.asset(
-                      svgAsset,
-                      width: iconSize,
-                      height: iconSize,
-                      colorFilter: ColorFilter.mode(
-                        Colors.white.withOpacity(isActive ? 1.0 : 0.8),
-                        BlendMode.srcIn,
+              AnimatedScale(
+                scale: isActive ? 1.12 : 1.0,
+                duration: const Duration(milliseconds: 220),
+                curve: Curves.easeOutBack,
+                child: svgAsset != null
+                    ? SvgPicture.asset(
+                        svgAsset,
+                        width: iconSize,
+                        height: iconSize,
+                        colorFilter: ColorFilter.mode(
+                          Colors.white.withOpacity(isActive ? 1.0 : 0.8),
+                          BlendMode.srcIn,
+                        ),
+                      )
+                    : Icon(
+                        icon,
+                        color: Colors.white.withOpacity(isActive ? 1.0 : 0.8),
+                        size: iconSize,
                       ),
-                    )
-                  : Icon(
-                      icon,
-                      color: Colors.white.withOpacity(isActive ? 1.0 : 0.8),
-                      size: iconSize,
-                    ),
+              ),
               SizedBox(height: 4.h),
               AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
+                curve: Curves.easeOutCubic,
                 style: TextStyle(
                   color: Colors.white.withOpacity(isActive ? 1.0 : 0.8),
                   fontSize: 12.sp,
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                 ),
-                child: Text(label),
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               SizedBox(height: 4.h),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                width: isActive ? 20.w : 0,
+                // Avoid "back" curves here: they overshoot < 0 and can create negative widths.
+                curve: Curves.easeOutCubic,
+                width: isActive ? 20.w : 0.0,
                 height: 2.h,
                 decoration: BoxDecoration(
                   color: Colors.white,

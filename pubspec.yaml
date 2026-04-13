@@ -54,6 +54,7 @@ dependencies:
   google_mobile_ads: ^7.0.0
   firebase_remote_config: ^5.4.7
   permission_handler: ^12.0.1
+  turn_page_transition: ^0.5.0
 
 dev_dependencies:
   flutter_test:
@@ -103,6 +104,10 @@ flutter:
     - assets/tree.svg
     - assets/leaderboard.svg
     - assets/flame.svg
+    - assets/paywall.png
+    - assets/svgonee.svg
+    - assets/svgtwo.svg
+    - assets/svgthree.svg
     - assets/firststep.png
     - assets/settings/
     - assets/language/

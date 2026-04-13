@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:habit_tracker/paywall.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -148,6 +149,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
           context,
           'https://sites.google.com/view/eco-habit-tracker/community-guidelines',
         ),
+      ),
+
+      //paywall
+      _SettingsOption(
+        iconPath: 'assets/settings/paywall.svg',
+        title: 'Paywall',
+        onTap: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Paywall()),
+          );
+        },
       ),
       _SettingsOption(
         iconPath: 'assets/settings/logout.svg',
