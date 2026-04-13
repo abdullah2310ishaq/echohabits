@@ -23,6 +23,8 @@ class _SplashScreenState extends State<SplashScreen>
   late final AnimationController _controller;
   late final Animation<double> _logoOpacity;
   late final Animation<double> _textOpacity;
+  late final Animation<Offset> _textSlide;
+  bool _navStarted = false;
 
   @override
   void initState() {
@@ -43,7 +45,21 @@ class _SplashScreenState extends State<SplashScreen>
       curve: const Interval(0.4, 1.0, curve: Curves.easeIn),
     );
 
-    _controller.forward().then((_) {
+    _textSlide = Tween<Offset>(begin: const Offset(0, 0.12), end: Offset.zero)
+        .animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: const Interval(0.4, 1.0, curve: Curves.easeOutCubic),
+          ),
+        );
+
+    // Start animation.
+    _controller.forward();
+
+    // Keep splash visible for now (10 seconds), then continue flow.
+    Future.delayed(const Duration(seconds: 4), () {
+      if (!mounted || _navStarted) return;
+      _navStarted = true;
       _maybeShowAdThenNavigate();
     });
   }
@@ -108,33 +124,50 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Logo that fades in first
-                Opacity(opacity: _logoOpacity.value, child: _buildLogo()),
-                SizedBox(height: 16.h),
-                // Text appears slightly after logo
-                Opacity(opacity: _textOpacity.value, child: _buildTitle()),
-              ],
-            );
-          },
-        ),
+      body: Stack(
+        children: [
+          Center(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Logo that fades in first
+                    SizedBox(height: 16.h),
+                    // Text appears slightly after logo (fade + slide)
+                    Opacity(
+                      opacity: _textOpacity.value,
+                      child: SlideTransition(
+                        position: _textSlide,
+                        child: _buildTitle(),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 18.h,
+            child: Center(
+              child: SizedBox(
+                width: 28.w,
+                height: 28.w,
+                child: CircularProgressIndicator(
+                  strokeWidth: 3.w,
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                    Color(0xFF327032),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-    );
-  }
-
-  Widget _buildLogo() {
-    return Image.asset(
-      'assets/logo.png',
-      width: 96.w,
-      height: 96.h,
-      fit: BoxFit.contain,
     );
   }
 
@@ -145,7 +178,7 @@ class _SplashScreenState extends State<SplashScreen>
         color: const Color(0xFF327032),
         fontWeight: FontWeight.w700,
         letterSpacing: 1.sp,
-        fontSize: 26.sp,
+        fontSize: 29.sp,
       ),
     );
   }

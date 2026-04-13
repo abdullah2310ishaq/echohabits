@@ -3,6 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'dart:io';
+import 'package:provider/provider.dart';
+import 'package:habit_tracker/core/ads/admob_ids.dart';
+import 'package:habit_tracker/core/services/ad_visibility_service.dart';
+import 'package:habit_tracker/core/services/habit_service.dart';
+import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
 import 'home_one.dart';
 import '../habits/habits_one.dart';
 import '../leaderboard/leaderboard.dart';
@@ -180,54 +185,81 @@ class _HomeShellState extends State<HomeShell> {
             child: _screens[_currentIndex],
           ),
         ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF2E7D32),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10.r,
-                offset: Offset(0, -2.h),
-              ),
-            ],
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _buildNavItem(
-                      label: AppLocalizations.of(context)!.home,
-                      index: 0,
-                      svgAsset: 'assets/home.svg',
-                    ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Consumer<HabitService>(
+              builder: (context, habitService, child) {
+                final shouldShow =
+                    _currentIndex == 0 &&
+                    AdVisibilityService.shouldShowHomeShellNativeAd(
+                      completedActionsToday: habitService.completedActionsToday,
+                    );
+
+                if (!shouldShow) return const SizedBox.shrink();
+
+                return SafeArea(
+                  top: false,
+                  child: NativeAdTile(
+                    adUnitId: AdMobIds.nativeMediumUnitId,
+                    factoryId: 'listTileLanguage',
+                    height: 150.h,
+                    margin: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 8.h),
                   ),
-                  Expanded(
-                    child: _buildNavItem(
-                      icon: Icons.list,
-                      label: AppLocalizations.of(context)!.habitLibrary,
-                      index: 1,
-                    ),
-                  ),
-                  Expanded(
-                    child: _buildNavItem(
-                      label: AppLocalizations.of(context)!.leaderboard,
-                      index: 2,
-                      svgAsset: 'assets/leader.svg',
-                    ),
-                  ),
-                  Expanded(
-                    child: _buildNavItem(
-                      label: AppLocalizations.of(context)!.setUpYourProfile,
-                      index: 3,
-                      svgAsset: 'assets/profile.svg',
-                    ),
+                );
+              },
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF2E7D32),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10.r,
+                    offset: Offset(0, -2.h),
                   ),
                 ],
               ),
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 12.h, bottom: 8.h),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildNavItem(
+                          label: AppLocalizations.of(context)!.home,
+                          index: 0,
+                          svgAsset: 'assets/home.svg',
+                        ),
+                      ),
+                      Expanded(
+                        child: _buildNavItem(
+                          icon: Icons.list,
+                          label: AppLocalizations.of(context)!.habitLibrary,
+                          index: 1,
+                        ),
+                      ),
+                      Expanded(
+                        child: _buildNavItem(
+                          label: AppLocalizations.of(context)!.leaderboard,
+                          index: 2,
+                          svgAsset: 'assets/leader.svg',
+                        ),
+                      ),
+                      Expanded(
+                        child: _buildNavItem(
+                          label: AppLocalizations.of(context)!.setUpYourProfile,
+                          index: 3,
+                          svgAsset: 'assets/profile.svg',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

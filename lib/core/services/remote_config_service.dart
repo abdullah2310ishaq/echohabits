@@ -5,6 +5,7 @@ class RemoteConfigService {
   static bool _initialized = false;
 
   static const String keyShowLanguageNativeAd = 'show_native_language_ad';
+  static const String keyShowHomeShellNativeAd = 'show_native_home_shell_ad';
 
   // Splash-specific toggles.
   static const String keyShowSplashAds = 'show_splash_ads';
@@ -25,6 +26,7 @@ class RemoteConfigService {
 
     await remoteConfig.setDefaults(const {
       keyShowLanguageNativeAd: true,
+      keyShowHomeShellNativeAd: true,
       keyShowSplashAds: true,
       keyShowSplashAppOpenAd: true,
       keyShowSplashInterstitialAd: true,
@@ -63,6 +65,9 @@ class RemoteConfigService {
 
   static bool get showLanguageNativeAd =>
       _getBool(keyShowLanguageNativeAd, fallback: true);
+
+  static bool get showHomeShellNativeAd =>
+      _getBool(keyShowHomeShellNativeAd, fallback: true);
 
   static bool get showSplashAds => _getBool(keyShowSplashAds, fallback: true);
 

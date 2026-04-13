@@ -5,4 +5,10 @@ class AdVisibilityService {
   static bool get shouldShowLanguageNativeAd =>
       !ProfileService.isProUser() &&
       RemoteConfigService.showLanguageNativeAd;
+
+  static bool shouldShowHomeShellNativeAd({required int completedActionsToday}) {
+    return !ProfileService.isProUser() &&
+        RemoteConfigService.showHomeShellNativeAd &&
+        completedActionsToday >= 2;
+  }
 }

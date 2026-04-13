@@ -551,7 +551,7 @@ class _HabitsOneState extends State<HabitsOne> {
                   Expanded(
                     child: AnimatedSwitcher(
                       // Tuned for a smooth "blend": slower in, quicker out.
-                      duration: const Duration(milliseconds: 1500),
+                      duration: const Duration(milliseconds: 800),
                       reverseDuration: Duration.zero,
                       switchInCurve: Curves.easeIn,
                       switchOutCurve: Curves.easeInCubic,

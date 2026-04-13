@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +19,12 @@ import 'package:habit_tracker/home/home_shell.dart';
 void main() async {
   // Ensure Flutter binding is initialized before async operations
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Lock orientation to portrait only.
+  await SystemChrome.setPreferredOrientations(const [
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // Initialize Hive for local storage
   await ProfileService.init();

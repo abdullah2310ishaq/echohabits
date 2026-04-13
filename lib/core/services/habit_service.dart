@@ -550,6 +550,18 @@ class HabitService extends ChangeNotifier {
     return _history.where((entry) => entry['status'] == 'done').length;
   }
 
+  /// Get number of completed actions for today (only 'done' status).
+  int get completedActionsToday {
+    if (_history.isEmpty) return 0;
+    final now = DateTime.now();
+    final todayStart = DateTime(now.year, now.month, now.day);
+    return _history.where((entry) {
+      if (entry['status'] != 'done') return false;
+      final timestamp = entry['timestamp'] as DateTime;
+      return timestamp.isAfter(todayStart) || timestamp.isAtSameMomentAs(todayStart);
+    }).length;
+  }
+
   /// Get current streak (consecutive days with at least one completed task)
   int get currentStreak {
     if (_history.isEmpty) return 0;
