@@ -39,7 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   firebase_core: ^3.0.0
   share_plus: ^10.0.2
-  lottie: ^3.0.0
+  lottie: ^3.3.3
   flutter_svg: ^2.0.9
   fl_chart: ^0.66.0
   url_launcher: ^6.2.5
@@ -109,6 +109,8 @@ flutter:
     - assets/svgtwo.svg
     - assets/svgthree.svg
     - assets/firststep.png
+    - assets/pro_animation.json
+  
     - assets/settings/
     - assets/language/
     

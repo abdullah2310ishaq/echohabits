@@ -30,21 +30,13 @@ class _ProfileFirstState extends State<ProfileFirst> {
   bool _hasStoragePermission = false;
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _requestStoragePermission();
-    });
-  }
-
-  @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
   }
 
-  Future<void> _requestStoragePermission() async {
-    if (!mounted || !(Platform.isAndroid || Platform.isIOS)) return;
+  Future<bool> _requestStoragePermission() async {
+    if (!mounted || !(Platform.isAndroid || Platform.isIOS)) return false;
 
     PermissionStatus status;
     if (Platform.isIOS) {
@@ -61,7 +53,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
       }
     }
 
-    if (!mounted) return;
+    if (!mounted) return false;
 
     final granted = status.isGranted || status.isLimited;
     setState(() {
@@ -77,6 +69,8 @@ class _ProfileFirstState extends State<ProfileFirst> {
         isSuccess: false,
       );
     }
+
+    return granted;
   }
 
   @override
@@ -295,11 +289,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
               ),
               onTap: () {
                 Navigator.pop(context);
-                if (_hasStoragePermission) {
-                  _pickImage(ImageSource.gallery);
-                } else {
-                  _requestStoragePermission();
-                }
+                _handleGalleryTap();
               },
             ),
             ListTile(
@@ -421,6 +411,18 @@ class _ProfileFirstState extends State<ProfileFirst> {
         ),
       ],
     );
+  }
+
+  Future<void> _handleGalleryTap() async {
+    if (_hasStoragePermission) {
+      await _pickImage(ImageSource.gallery);
+      return;
+    }
+
+    final granted = await _requestStoragePermission();
+    if (granted && mounted) {
+      await _pickImage(ImageSource.gallery);
+    }
   }
 
   Widget _buildInputCard() {

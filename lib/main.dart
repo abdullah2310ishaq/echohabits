@@ -27,6 +27,10 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
+  );
 
   // Initialize Hive for local storage
   await ProfileService.init();
@@ -144,6 +148,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       ],
                       supportedLocales: AppLocalizations.supportedLocales,
                       locale: currentLocale,
+                      builder: (context, child) {
+                        return SafeArea(
+                          top: false,
+                          child: child ?? const SizedBox.shrink(),
+                        );
+                      },
                       // Use onGenerateRoute to skip splash if app is already initialized
                       onGenerateRoute: (settings) {
                         // Check if app is already initialized (language selected, onboarding done, profile setup)
