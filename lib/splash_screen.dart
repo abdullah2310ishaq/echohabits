@@ -20,24 +20,21 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
+  static const Duration _minimumSplashDuration = Duration(seconds: 4);
   late final AnimationController _controller;
-  late final Animation<double> _logoOpacity;
   late final Animation<double> _textOpacity;
   late final Animation<Offset> _textSlide;
-  bool _navStarted = false;
+  late final bool _isFirstTimeUser;
 
   @override
   void initState() {
     super.initState();
+    final localeService = Provider.of<LocaleService>(context, listen: false);
+    _isFirstTimeUser = !localeService.isLanguageSelected();
 
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
-    );
-
-    _logoOpacity = CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
     );
 
     _textOpacity = CurvedAnimation(
@@ -56,31 +53,32 @@ class _SplashScreenState extends State<SplashScreen>
     // Start animation.
     _controller.forward();
 
-    // Keep splash visible for now (10 seconds), then continue flow.
-    Future.delayed(const Duration(seconds: 4), () {
-      if (!mounted || _navStarted) return;
-      _navStarted = true;
-      _maybeShowAdThenNavigate();
-    });
+    _maybeShowAdThenNavigate();
   }
 
   Future<void> _maybeShowAdThenNavigate() async {
     if (!mounted) return;
+    final startTime = DateTime.now();
 
     // Keep it best-effort and non-blocking. We already initialized RC in `main`,
     // but this helps when the splash is the first screen after cold start.
     await RemoteConfigService.refresh();
     if (!mounted) return;
 
-    if (RemoteConfigService.showSplashAds) {
-      // Priority: App Open > Interstitial
-      final appOpenShown = await AppOpenAdManager.showIfAvailable();
-      if (!mounted) return;
+    // Always attempt to show an ad after splash.
+    // Priority: App Open > Interstitial.
+    final appOpenShown = await AppOpenAdManager.showIfAvailable();
+    if (!mounted) return;
 
-      if (!appOpenShown) {
-        await InterstitialAdManager.showIfAvailable();
-        if (!mounted) return;
-      }
+    if (!appOpenShown) {
+      await InterstitialAdManager.showIfAvailable();
+      if (!mounted) return;
+    }
+
+    final elapsedTime = DateTime.now().difference(startTime);
+    if (elapsedTime < _minimumSplashDuration) {
+      await Future.delayed(_minimumSplashDuration - elapsedTime);
+      if (!mounted) return;
     }
 
     _navigateToNextScreen();
@@ -157,17 +155,32 @@ class _SplashScreenState extends State<SplashScreen>
               top: false,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 18.h),
-                child: Center(
-                  child: SizedBox(
-                    width: 28.w,
-                    height: 28.w,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3.w,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFF327032),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 28.w,
+                      height: 28.w,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 3.w,
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          Color(0xFF327032),
+                        ),
                       ),
                     ),
-                  ),
+                    if (!_isFirstTimeUser) ...[
+                      SizedBox(height: 8.h),
+                      Text(
+                        'This action may perform an ad',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 11.sp,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),

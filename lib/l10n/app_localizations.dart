@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Weekly'**
   String get weekly;
 
+  /// Today filter option
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
   /// Monthly filter option
   ///
   /// In en, this message translates to:

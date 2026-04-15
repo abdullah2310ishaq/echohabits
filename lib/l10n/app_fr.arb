@@ -62,6 +62,10 @@
   "@weekly": {
     "description": "Weekly filter option"
   },
+  "today": "Aujourd'hui",
+  "@today": {
+    "description": "Today filter option"
+  },
   "monthly": "Mensuel",
   "@monthly": {
     "description": "Monthly filter option"

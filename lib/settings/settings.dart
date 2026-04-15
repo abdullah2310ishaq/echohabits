@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/home/home_shell.dart';
 import '../core/services/locale_service.dart';
 import '../core/services/habit_service.dart';
 import '../core/widgets/eco_toast.dart';
@@ -84,12 +85,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
           );
         },
         onTap: () async {
-          Navigator.push(
+          final languageChanged = await Navigator.push<bool>(
             context,
             MaterialPageRoute(
               builder: (context) => const LanguageSelectionScreen(),
             ),
           );
+
+          if (languageChanged == true && context.mounted) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => const HomeShell(initialIndex: 3)),
+              (route) => false,
+            );
+          }
         },
       ),
       _SettingsOption(

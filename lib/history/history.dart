@@ -32,10 +32,33 @@ class _HistoryState extends State<History> {
   Widget _buildHistoryContent(BuildContext context) {
     final habitService = Provider.of<HabitService>(context);
     final l10n = AppLocalizations.of(context)!;
-    // Filter to show only completed tasks (status == 'done')
-    final history = habitService.history
-        .where((item) => item['status'] == 'done')
-        .toList();
+    final now = DateTime.now();
+    final startOfToday = DateTime(now.year, now.month, now.day);
+    final startOfTomorrow = startOfToday.add(const Duration(days: 1));
+    final startOfWeek = startOfToday.subtract(const Duration(days: 6));
+    final startOfMonth = DateTime(now.year, now.month, 1);
+
+    // Show completed tasks and apply selected time filter.
+    // Weekly and monthly ranges explicitly include today's entries.
+    final history = habitService.history.where((item) {
+      if (item['status'] != 'done') return false;
+      final timestamp = item['timestamp'] as DateTime;
+
+      switch (_selectedFilter) {
+        case 'today':
+          return !timestamp.isBefore(startOfToday) &&
+              timestamp.isBefore(startOfTomorrow);
+        case 'weekly':
+          return !timestamp.isBefore(startOfWeek) &&
+              timestamp.isBefore(startOfTomorrow);
+        case 'monthly':
+          return !timestamp.isBefore(startOfMonth) &&
+              timestamp.isBefore(startOfTomorrow);
+        case 'allTime':
+        default:
+          return true;
+      }
+    }).toList();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
@@ -65,6 +88,12 @@ class _HistoryState extends State<History> {
               padding: EdgeInsets.all(16.w),
               child: Row(
                 children: [
+                  _buildFilterButton(
+                    context,
+                    'today',
+                    l10n.today,
+                  ),
+                  SizedBox(width: 10.w),
                   _buildFilterButton(context, 'weekly', l10n.weekly),
                   SizedBox(width: 10.w),
                   _buildFilterButton(context, 'monthly', l10n.monthly),

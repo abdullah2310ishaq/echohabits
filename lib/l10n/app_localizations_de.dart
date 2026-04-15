@@ -53,6 +53,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get weekly => 'Wöchentlich';
 
   @override
+  String get today => 'Heute';
+
+  @override
   String get monthly => 'Monatlich';
 
   @override

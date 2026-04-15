@@ -62,6 +62,10 @@
   "@weekly": {
     "description": "Weekly filter option"
   },
+  "today": "今天",
+  "@today": {
+    "description": "Today filter option"
+  },
   "monthly": "每月",
   "@monthly": {
     "description": "Monthly filter option"

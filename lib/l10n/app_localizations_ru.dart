@@ -53,6 +53,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get weekly => 'Еженедельно';
 
   @override
+  String get today => 'Сегодня';
+
+  @override
   String get monthly => 'Ежемесячно';
 
   @override

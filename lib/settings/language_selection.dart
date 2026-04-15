@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-import 'package:habit_tracker/home/home_shell.dart';
 import '../core/services/locale_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
@@ -134,14 +133,19 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         context,
                         listen: false,
                       );
-                      await localeService.setLocaleByCode(_selectedLanguage!);
+                      final previousLanguageCode = localeService
+                          .getCurrentLocale()
+                          .languageCode;
+                      final selectedLanguageCode = _selectedLanguage!;
+                      final hasLanguageChanged =
+                          selectedLanguageCode != previousLanguageCode;
+
+                      if (hasLanguageChanged) {
+                        await localeService.setLocaleByCode(selectedLanguageCode);
+                      }
+
                       if (context.mounted) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (_) => const HomeShell(initialIndex: 3),
-                          ),
-                          (route) => false,
-                        );
+                        Navigator.of(context).pop(hasLanguageChanged);
                       }
                     }
                   : null,

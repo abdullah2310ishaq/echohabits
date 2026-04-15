@@ -62,6 +62,10 @@
   "@weekly": {
     "description": "Weekly filter option"
   },
+  "today": "오늘",
+  "@today": {
+    "description": "Today filter option"
+  },
   "monthly": "월간",
   "@monthly": {
     "description": "Monthly filter option"

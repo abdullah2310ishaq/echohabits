@@ -62,6 +62,10 @@
   "@weekly": {
     "description": "Weekly filter option"
   },
+  "today": "Hoy",
+  "@today": {
+    "description": "Today filter option"
+  },
   "monthly": "Mensual",
   "@monthly": {
     "description": "Monthly filter option"

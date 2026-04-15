@@ -53,6 +53,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get weekly => '每周';
 
   @override
+  String get today => '今天';
+
+  @override
   String get monthly => '每月';
 
   @override

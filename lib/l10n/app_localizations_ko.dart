@@ -53,6 +53,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get weekly => '주간';
 
   @override
+  String get today => '오늘';
+
+  @override
   String get monthly => '월간';
 
   @override

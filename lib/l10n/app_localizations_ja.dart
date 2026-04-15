@@ -53,6 +53,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get weekly => '週間';
 
   @override
+  String get today => '今日';
+
+  @override
   String get monthly => '月間';
 
   @override

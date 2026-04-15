@@ -151,7 +151,7 @@ class _HomeShellState extends State<HomeShell> {
 
       child: Scaffold(
         body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 720),
+          duration: const Duration(milliseconds: 520),
           reverseDuration: Duration.zero,
           switchInCurve: Curves.easeInCirc,
           switchOutCurve: Curves.easeInCubic,

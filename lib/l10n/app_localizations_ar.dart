@@ -53,6 +53,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get weekly => 'أسبوعي';
 
   @override
+  String get today => 'اليوم';
+
+  @override
   String get monthly => 'شهري';
 
   @override

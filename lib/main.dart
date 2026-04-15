@@ -16,7 +16,6 @@ import 'package:habit_tracker/core/services/locale_service.dart';
 import 'package:habit_tracker/core/widgets/global_pointer_gate.dart';
 import 'package:habit_tracker/splash_screen.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-import 'package:habit_tracker/home/home_shell.dart';
 
 void main() async {
   // Ensure Flutter binding is initialized before async operations
@@ -129,9 +128,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   ),
                   child: GlobalPointerGate(
                     child: MaterialApp(
-                      key: ValueKey(
-                        currentLocale.languageCode,
-                      ), // Force rebuild on locale change
                       title: 'Eco Habit Tracker',
                       debugShowCheckedModeBanner: false,
                       theme: ThemeData(
@@ -154,26 +150,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           child: child ?? const SizedBox.shrink(),
                         );
                       },
-                      // Use onGenerateRoute to skip splash if app is already initialized
+                      // Always start from splash for a consistent launch experience.
                       onGenerateRoute: (settings) {
-                        // Check if app is already initialized (language selected, onboarding done, profile setup)
-                        final isLanguageSelected = localeService
-                            .isLanguageSelected();
-                        final isProfileSetup =
-                            ProfileService.isProfileSetupComplete();
-                        final isOnboardingComplete =
-                            ProfileService.isOnboardingComplete();
-
-                        // If app is fully initialized, go directly to home (skip splash)
-                        if (isLanguageSelected &&
-                            isOnboardingComplete &&
-                            isProfileSetup) {
-                          return MaterialPageRoute(
-                            builder: (_) => const HomeShell(),
-                          );
-                        }
-
-                        // Otherwise show splash screen (first time or incomplete setup)
                         return MaterialPageRoute(
                           builder: (_) => const SplashScreen(),
                         );
