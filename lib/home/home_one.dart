@@ -336,13 +336,21 @@ class _HomeOneState extends State<HomeOne> {
                                     (taskCards.length > 1 && index == 1);
                                 if (shouldInsertAdAfterTask) {
                                   taskAndAdItems.add(
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 10.h),
-                                      child: NativeAdTile(
-                                        adUnitId: AdMobIds.nativeMediumUnitId,
-                                        factoryId: 'listTileLanguage',
-                                        height: 150.h,
-                                        margin: EdgeInsets.zero,
+                                    KeyedSubtree(
+                                      key: const ValueKey<String>(
+                                        'home_one_native_ad_slot',
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 10.h),
+                                        child: NativeAdTile(
+                                          key: const ValueKey<String>(
+                                            'home_one_native_ad_tile',
+                                          ),
+                                          adUnitId: AdMobIds.nativeMediumUnitId,
+                                          factoryId: 'listTileLanguage',
+                                          height: 150.h,
+                                          margin: EdgeInsets.zero,
+                                        ),
                                       ),
                                     ),
                                   );

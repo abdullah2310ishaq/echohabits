@@ -98,6 +98,8 @@ class Profile extends StatelessWidget {
                                   Text(
                                     profileService.getUserName(),
                                     textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 18.sp,
                                       fontWeight: FontWeight.bold,
