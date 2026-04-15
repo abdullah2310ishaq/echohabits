@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import 'package:habit_tracker/core/theme/app_colors.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -153,6 +154,7 @@ class _PaywallState extends State<Paywall> {
                   onPressed: billing.purchaseInProgress
                       ? null
                       : () async {
+                          AppOpenAdManager.suppressNextResumeOnce();
                           final isWeekly = _selectedPlanIndex == 0;
                           await billing.buySelected(weekly: isWeekly);
                         },
@@ -202,6 +204,7 @@ class _PaywallState extends State<Paywall> {
                 onPressed: billing.purchaseInProgress
                     ? null
                     : () async {
+                        AppOpenAdManager.suppressNextResumeOnce();
                         await billing.restorePurchases();
                       },
                 child: Text(

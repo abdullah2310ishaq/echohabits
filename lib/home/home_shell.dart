@@ -3,11 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'dart:io';
-import 'package:provider/provider.dart';
-import 'package:habit_tracker/core/ads/admob_ids.dart';
-import 'package:habit_tracker/core/services/ad_visibility_service.dart';
-import 'package:habit_tracker/core/services/habit_service.dart';
-import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
 import 'home_one.dart';
 import '../habits/habits_one.dart';
 import '../leaderboard/leaderboard.dart';
@@ -188,27 +183,8 @@ class _HomeShellState extends State<HomeShell> {
         bottomNavigationBar: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Consumer<HabitService>(
-              builder: (context, habitService, child) {
-                final shouldShow =
-                    _currentIndex == 0 &&
-                    AdVisibilityService.shouldShowHomeShellNativeAd(
-                      completedActionsToday: habitService.completedActionsToday,
-                    );
-
-                if (!shouldShow) return const SizedBox.shrink();
-
-                return SafeArea(
-                  top: false,
-                  child: NativeAdTile(
-                    adUnitId: AdMobIds.nativeMediumUnitId,
-                    factoryId: 'listTileLanguage',
-                    height: 150.h,
-                    margin: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 8.h),
-                  ),
-                );
-              },
-            ),
+            // HomeShell native ad disabled for now.
+            // Ad rendering is moved to HomeOne task list.
             Container(
               decoration: BoxDecoration(
                 color: const Color(0xFF2E7D32),

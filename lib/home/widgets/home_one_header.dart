@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import 'package:habit_tracker/core/services/habit_service.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/paywall.dart';
 import 'package:provider/provider.dart';
 
 class HomeOneHeader extends StatelessWidget {
   const HomeOneHeader({
     super.key,
     required this.profileService,
-    required this.getRankTitle,
     required this.buildProfileImage,
   });
 
   final ProfileService profileService;
-  final String Function(BuildContext context, int score) getRankTitle;
   final Widget Function(ProfileService profileService) buildProfileImage;
 
   @override
@@ -73,41 +73,23 @@ class HomeOneHeader extends StatelessWidget {
               ),
               Consumer<HabitService>(
                 builder: (context, habitService, child) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.w,
-                      vertical: 6.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE8F5E9),
-                      borderRadius: BorderRadius.circular(16.r),
-                      border: Border.all(
-                        color: const Color(0xFF2E7D32),
-                        width: 1,
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(16.r),
+                    onTap: () {
+                      AppOpenAdManager.suppressNextResumeOnce();
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const Paywall()),
+                      );
+                    },
+                    child: Container(
+                      width: 72.w,
+                      height: 65.h,
+                      alignment: Alignment.center,
+                      child: Lottie.asset(
+                        'assets/pro_animation.json',
+                        repeat: true,
+                        fit: BoxFit.contain,
                       ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/eco.svg',
-                          width: 14.w,
-                          height: 14.h,
-                          colorFilter: const ColorFilter.mode(
-                            Color(0xFF2E7D32),
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                        Text(
-                          getRankTitle(context, habitService.totalScore),
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF2E7D32),
-                          ),
-                        ),
-                      ],
                     ),
                   );
                 },

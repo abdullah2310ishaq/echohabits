@@ -58,30 +58,42 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _maybeShowAdThenNavigate() async {
     if (!mounted) return;
-    final startTime = DateTime.now();
+    // Keep splash visible for 4 seconds first.
+    await Future.delayed(_minimumSplashDuration);
+    if (!mounted) return;
 
-    // Keep it best-effort and non-blocking. We already initialized RC in `main`,
-    // but this helps when the splash is the first screen after cold start.
+    // Refresh remote config before ad decision.
     await RemoteConfigService.refresh();
     if (!mounted) return;
 
-    // Always attempt to show an ad after splash.
-    // Priority: App Open > Interstitial.
-    final appOpenShown = await AppOpenAdManager.showIfAvailable();
-    if (!mounted) return;
-
-    if (!appOpenShown) {
-      await InterstitialAdManager.showIfAvailable();
-      if (!mounted) return;
-    }
-
-    final elapsedTime = DateTime.now().difference(startTime);
-    if (elapsedTime < _minimumSplashDuration) {
-      await Future.delayed(_minimumSplashDuration - elapsedTime);
+    if (RemoteConfigService.showSplashAds) {
+      await _showSplashAdWithRetry();
       if (!mounted) return;
     }
 
     _navigateToNextScreen();
+  }
+
+  Future<void> _showSplashAdWithRetry() async {
+    const maxAttempts = 8;
+    const retryDelay = Duration(milliseconds: 750);
+
+    for (var attempt = 0; attempt < maxAttempts; attempt++) {
+      if (!mounted) return;
+
+      // Priority: App Open > Interstitial.
+      final appOpenShown = await AppOpenAdManager.showIfAvailable();
+      if (!mounted) return;
+      if (appOpenShown) return;
+
+      final interstitialShown = await InterstitialAdManager.showIfAvailable();
+      if (!mounted) return;
+      if (interstitialShown) return;
+
+      if (attempt < maxAttempts - 1) {
+        await Future.delayed(retryDelay);
+      }
+    }
   }
 
   void _navigateToNextScreen() {
@@ -116,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
+  }   
 
   @override
   Widget build(BuildContext context) {

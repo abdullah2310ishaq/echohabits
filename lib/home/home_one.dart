@@ -4,8 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/admob_ids.dart';
 import 'dart:io';
 import '../core/widgets/eco_toast.dart';
+import '../core/widgets/native_ad_tile.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/profile_service.dart';
 import 'widgets/home_one_header.dart';
@@ -77,23 +79,6 @@ class _HomeOneState extends State<HomeOne> {
     return null;
   }
 
-  String _getRankTitle(BuildContext context, int score) {
-    final l10n = AppLocalizations.of(context)!;
-    if (score < 1000) {
-      return l10n.ecoExplorerRank;
-    } else if (score < 2500) {
-      return l10n.ecoBuilder;
-    } else if (score < 5000) {
-      return l10n.ecoChampion;
-    } else if (score < 8000) {
-      return l10n.ecoWarrior;
-    } else if (score < 12000) {
-      return l10n.ecoGuardian;
-    } else {
-      return l10n.planetHero;
-    }
-  }
-
   String _localizeTag(AppLocalizations l10n, String tag) {
     switch (tag) {
       case 'Transport':
@@ -157,7 +142,6 @@ class _HomeOneState extends State<HomeOne> {
                     SizedBox(height: 40.h),
                     HomeOneHeader(
                       profileService: profileService,
-                      getRankTitle: _getRankTitle,
                       buildProfileImage: _buildProfileImage,
                     ),
 
@@ -192,160 +176,180 @@ class _HomeOneState extends State<HomeOne> {
                                 return _buildEmptyState(context);
                               }
 
-                              return Column(
-                                children: [
-                                  // Habit-based tasks from Habits page (no icons)
-                                  ...habitTasks.map((habit) {
-                                    final tags = [
-                                      habit['category'] as String,
-                                      habit['impact'] as String,
-                                    ];
-                                    final String title =
-                                        habit['title'] as String;
+                              final taskCards = <Widget>[];
 
-                                    return Padding(
-                                      padding: EdgeInsets.only(bottom: 10.h),
-                                      child: _buildTaskCard(
-                                        context: context,
-                                        title: title,
-                                        tags: tags,
-                                        taskName: title,
-                                        showIcon: false,
-                                        onSkip: () {
-                                          service.completeHabitTask(
+                              // Habit-based tasks from Habits page (no icons)
+                              for (final habit in habitTasks) {
+                                final tags = [
+                                  habit['category'] as String,
+                                  habit['impact'] as String,
+                                ];
+                                final String title = habit['title'] as String;
+
+                                taskCards.add(
+                                  _buildTaskCard(
+                                    context: context,
+                                    title: title,
+                                    tags: tags,
+                                    taskName: title,
+                                    showIcon: false,
+                                    onSkip: () {
+                                      service.completeHabitTask(
+                                        title,
+                                        isDone: false,
+                                      );
+                                      EcoToast.show(
+                                        context,
+                                        message: AppLocalizations.of(
+                                          context,
+                                        )!.skippedYourStreakNeedsConsistency,
+                                        isSuccess: false,
+                                      );
+                                    },
+                                    onDone: () {
+                                      service.completeHabitTask(
+                                        title,
+                                        isDone: true,
+                                      );
+                                      // Check if badge unlocks and trigger confetti
+                                      final unlockedBadge =
+                                          _checkAndTriggerConfetti(
                                             title,
-                                            isDone: false,
-                                          );
-                                          EcoToast.show(
                                             context,
-                                            message: AppLocalizations.of(
-                                              context,
-                                            )!.skippedYourStreakNeedsConsistency,
-                                            isSuccess: false,
                                           );
-                                        },
-                                        onDone: () {
-                                          service.completeHabitTask(
+                                      // Show regular task completion toast only if no badge unlocked
+                                      if (unlockedBadge == null) {
+                                        EcoToast.show(
+                                          context,
+                                          message: AppLocalizations.of(
+                                            context,
+                                          )!.taskDoneStreakStrong(title),
+                                          isSuccess: true,
+                                          duration: const Duration(seconds: 2),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                );
+                              }
+
+                              // Default Echo tasks (with icons)
+                              for (final task in defaultTasks) {
+                                final String id = task['id'] as String;
+                                final String title = task['title'] as String;
+                                final List<String> tags =
+                                    (task['tags'] as List<dynamic>)
+                                        .cast<String>()
+                                        .map((t) => _localizeTag(l10n, t))
+                                        .toList();
+                                final IconData icon =
+                                    task['icon'] as IconData? ?? Icons.check;
+                                final bool useSvg =
+                                    task['useSvg'] as bool? ?? false;
+                                final String? svgAsset =
+                                    task['svgAsset'] as String?;
+                                final String taskName =
+                                    task['taskName'] as String? ?? title;
+
+                                // Localize default task titles based on id
+                                String localizedTitle;
+                                switch (id) {
+                                  case 'default_walk_bike_1':
+                                    localizedTitle = l10n.defaultWalkBikeTitle;
+                                    break;
+                                  case 'default_coffee_cup':
+                                    localizedTitle = l10n.defaultCoffeeCupTitle;
+                                    break;
+                                  case 'default_afforestation':
+                                    localizedTitle =
+                                        l10n.defaultAfforestationTitle;
+                                    break;
+                                  default:
+                                    localizedTitle = title;
+                                }
+
+                                taskCards.add(
+                                  _buildTaskCard(
+                                    context: context,
+                                    icon: icon,
+                                    title: localizedTitle,
+                                    tags: tags,
+                                    useSvg: useSvg,
+                                    svgAsset: svgAsset,
+                                    taskName: taskName,
+                                    showIcon: true,
+                                    onSkip: () {
+                                      service.completeDefaultTask(
+                                        id,
+                                        isDone: false,
+                                      );
+                                      EcoToast.show(
+                                        context,
+                                        message: AppLocalizations.of(
+                                          context,
+                                        )!.skippedYourStreakNeedsConsistency,
+                                        isSuccess: false,
+                                      );
+                                    },
+                                    onDone: () {
+                                      service.completeDefaultTask(
+                                        id,
+                                        isDone: true,
+                                      );
+                                      // Check if badge unlocks and trigger confetti
+                                      final unlockedBadge =
+                                          _checkAndTriggerConfetti(
                                             title,
-                                            isDone: true,
-                                          );
-                                          // Check if badge unlocks and trigger confetti
-                                          final unlockedBadge =
-                                              _checkAndTriggerConfetti(
-                                                title,
-                                                context,
-                                              );
-                                          // Show regular task completion toast only if no badge unlocked
-                                          if (unlockedBadge == null) {
-                                            EcoToast.show(
-                                              context,
-                                              message: AppLocalizations.of(
-                                                context,
-                                              )!.taskDoneStreakStrong(title),
-                                              isSuccess: true,
-                                              duration: const Duration(
-                                                seconds: 2,
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    );
-                                  }),
-
-                                  // Default Echo tasks (with icons)
-                                  ...defaultTasks.map((task) {
-                                    final String id = task['id'] as String;
-                                    final String title =
-                                        task['title'] as String;
-                                    final List<String> tags =
-                                        (task['tags'] as List<dynamic>)
-                                            .cast<String>()
-                                            .map((t) => _localizeTag(l10n, t))
-                                            .toList();
-                                    final IconData icon =
-                                        task['icon'] as IconData? ??
-                                        Icons.check;
-                                    final bool useSvg =
-                                        task['useSvg'] as bool? ?? false;
-                                    final String? svgAsset =
-                                        task['svgAsset'] as String?;
-                                    final String taskName =
-                                        task['taskName'] as String? ?? title;
-
-                                    // Localize default task titles based on id
-                                    String localizedTitle;
-                                    switch (id) {
-                                      case 'default_walk_bike_1':
-                                        localizedTitle =
-                                            l10n.defaultWalkBikeTitle;
-                                        break;
-                                      case 'default_coffee_cup':
-                                        localizedTitle =
-                                            l10n.defaultCoffeeCupTitle;
-                                        break;
-                                      case 'default_afforestation':
-                                        localizedTitle =
-                                            l10n.defaultAfforestationTitle;
-                                        break;
-                                      default:
-                                        localizedTitle = title;
-                                    }
-
-                                    return Padding(
-                                      padding: EdgeInsets.only(bottom: 10.h),
-                                      child: _buildTaskCard(
-                                        context: context,
-                                        icon: icon,
-                                        title: localizedTitle,
-                                        tags: tags,
-                                        useSvg: useSvg,
-                                        svgAsset: svgAsset,
-                                        taskName: taskName,
-                                        showIcon: true,
-                                        onSkip: () {
-                                          service.completeDefaultTask(
-                                            id,
-                                            isDone: false,
-                                          );
-                                          EcoToast.show(
                                             context,
-                                            message: AppLocalizations.of(
-                                              context,
-                                            )!.skippedYourStreakNeedsConsistency,
-                                            isSuccess: false,
                                           );
-                                        },
-                                        onDone: () {
-                                          service.completeDefaultTask(
-                                            id,
-                                            isDone: true,
-                                          );
-                                          // Check if badge unlocks and trigger confetti
-                                          final unlockedBadge =
-                                              _checkAndTriggerConfetti(
-                                                title,
-                                                context,
-                                              );
-                                          // Show regular task completion toast only if no badge unlocked
-                                          if (unlockedBadge == null) {
-                                            EcoToast.show(
-                                              context,
-                                              message: AppLocalizations.of(
-                                                context,
-                                              )!.taskDone(taskName),
-                                              isSuccess: true,
-                                              duration: const Duration(
-                                                seconds: 2,
-                                              ),
-                                            );
-                                          }
-                                        },
+                                      // Show regular task completion toast only if no badge unlocked
+                                      if (unlockedBadge == null) {
+                                        EcoToast.show(
+                                          context,
+                                          message: AppLocalizations.of(
+                                            context,
+                                          )!.taskDone(taskName),
+                                          isSuccess: true,
+                                          duration: const Duration(seconds: 2),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                );
+                              }
+
+                              final taskAndAdItems = <Widget>[];
+                              for (
+                                var index = 0;
+                                index < taskCards.length;
+                                index++
+                              ) {
+                                taskAndAdItems.add(
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 10.h),
+                                    child: taskCards[index],
+                                  ),
+                                );
+
+                                final shouldInsertAdAfterTask =
+                                    (taskCards.length == 1 && index == 0) ||
+                                    (taskCards.length > 1 && index == 1);
+                                if (shouldInsertAdAfterTask) {
+                                  taskAndAdItems.add(
+                                    Padding(
+                                      padding: EdgeInsets.only(bottom: 10.h),
+                                      child: NativeAdTile(
+                                        adUnitId: AdMobIds.nativeMediumUnitId,
+                                        factoryId: 'listTileLanguage',
+                                        height: 150.h,
+                                        margin: EdgeInsets.zero,
                                       ),
-                                    );
-                                  }),
-                                ],
-                              );
+                                    ),
+                                  );
+                                }
+                              }
+
+                              return Column(children: taskAndAdItems);
                             },
                           ),
                         ],
