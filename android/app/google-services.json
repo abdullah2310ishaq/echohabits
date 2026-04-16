@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "471272550937",
-    "project_id": "eco-habit-tracker-b74f3",
-    "storage_bucket": "eco-habit-tracker-b74f3.firebasestorage.app"
+    "project_number": "48905255779",
+    "project_id": "eco-habit-5215c",
+    "storage_bucket": "eco-habit-5215c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:471272550937:android:4ab0b7b3f5f59736f1b088",
+        "mobilesdk_app_id": "1:48905255779:android:98ad3cd657ded4c52d7156",
         "android_client_info": {
-          "package_name": "com.eco.habit.tracker.companion"
+          "package_name": "com.eco.habit.tracker.companion.climate.change"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBEDMYc-nsS5t4vReYZojrqJuCGP4rYxns"
+          "current_key": "AIzaSyCpD85nqDRfV4U4CiJCg5sIrAPTyAA18RI"
         }
       ],
       "services": {

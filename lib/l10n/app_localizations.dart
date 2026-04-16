@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// The title of the application
   ///
   /// In en, this message translates to:
-  /// **'Eco Habit Tracker'**
+  /// **'Eco Habit'**
   String get appTitle;
 
   /// Profile subtitle text

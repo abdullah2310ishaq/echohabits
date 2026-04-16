@@ -75,23 +75,38 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _showSplashAdWithRetry() async {
-    const maxAttempts = 8;
-    const retryDelay = Duration(milliseconds: 750);
+    const maxWaitForAppOpen = Duration(seconds: 3);
+    const appOpenCheckInterval = Duration(milliseconds: 300);
+    Duration waited = Duration.zero;
 
-    for (var attempt = 0; attempt < maxAttempts; attempt++) {
+    // Give App Open ad a short priority window before falling back.
+    while (waited < maxWaitForAppOpen) {
       if (!mounted) return;
 
-      // Priority: App Open > Interstitial.
-      final appOpenShown = await AppOpenAdManager.showIfAvailable();
+      if (AppOpenAdManager.isAdAvailable()) {
+        final appOpenShown = await AppOpenAdManager.showIfAvailable();
+        if (!mounted) return;
+        if (appOpenShown) return;
+      } else {
+        AppOpenAdManager.loadAdIfNeeded();
+      }
+
+      await Future.delayed(appOpenCheckInterval);
+      waited += appOpenCheckInterval;
+    }
+
+    const interstitialAttempts = 3;
+    const interstitialRetryDelay = Duration(milliseconds: 500);
+
+    for (var attempt = 0; attempt < interstitialAttempts; attempt++) {
       if (!mounted) return;
-      if (appOpenShown) return;
 
       final interstitialShown = await InterstitialAdManager.showIfAvailable();
       if (!mounted) return;
       if (interstitialShown) return;
 
-      if (attempt < maxAttempts - 1) {
-        await Future.delayed(retryDelay);
+      if (attempt < interstitialAttempts - 1) {
+        await Future.delayed(interstitialRetryDelay);
       }
     }
   }
@@ -128,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }   
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +219,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildTitle() {
     return Text(
-      'ECO HABIT TRACKER',
+      'Eco Habit',
       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
         color: const Color(0xFF327032),
         fontWeight: FontWeight.w700,

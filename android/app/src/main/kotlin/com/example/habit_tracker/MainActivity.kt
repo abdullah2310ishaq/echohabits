@@ -1,4 +1,4 @@
-package com.eco.habit.tracker.companion
+package com.eco.habit.tracker.companion.climate.change
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine

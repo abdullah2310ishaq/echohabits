@@ -19,6 +19,20 @@ class AppOpenAdManager {
     _loadAd();
   }
 
+  static bool isAdAvailable() {
+    if (!_isEnabled ||
+        _isShowingAd ||
+        !RemoteConfigService.showSplashAppOpenAd) {
+      return false;
+    }
+    return _isAdAvailable();
+  }
+
+  static void loadAdIfNeeded() {
+    if (!_isEnabled) return;
+    _loadAd();
+  }
+
   static Future<bool> showIfAvailable() async {
     if (!_isEnabled ||
         _isShowingAd ||

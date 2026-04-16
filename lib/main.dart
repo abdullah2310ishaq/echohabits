@@ -128,7 +128,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   ),
                   child: GlobalPointerGate(
                     child: MaterialApp(
-                      title: 'Eco Habit Tracker',
+                      title: 'Eco Habit',
                       debugShowCheckedModeBanner: false,
                       theme: ThemeData(
                         colorScheme: ColorScheme.fromSeed(

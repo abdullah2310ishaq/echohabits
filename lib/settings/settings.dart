@@ -106,8 +106,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: AppLocalizations.of(context)!.shareApp,
         onTap: () async {
           const appLink =
-              'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion';
-          Share.share('Check out Eco Habit Tracker: $appLink');
+              'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion.climate.change';
+          Share.share('Check out Eco Habit: $appLink');
         },
       ),
       _SettingsOption(
@@ -118,7 +118,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           if (!context.mounted) return;
           await _openExternal(
             context,
-            'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion',
+            'https://play.google.com/store/apps/details?id=com.eco.habit.tracker.companion.climate.change',
           );
         },
       ),
@@ -132,7 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // Link to Play Store developer page showing all apps
           await _openExternal(
             context,
-            'https://play.google.com/store/search?q=pub%3ACodix%20Apps&c=apps',
+            'https://play.google.com/store/search?q=pub:Gaming+Tech+Ltd&c=apps',
           );
         },
       ),
@@ -141,14 +141,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         iconPath: 'assets/feedback.png',
         title: AppLocalizations.of(context)!.feedback,
         onTap: () async =>
-            _openExternal(context, 'mailto:islam24hoursstudio@gmail.com'),
+            _openExternal(context, 'mailto:gamingtechukltd@gmail.com'),
       ),
       _SettingsOption(
         iconPath: 'assets/settings/privacypolicy.svg',
         title: AppLocalizations.of(context)!.privacyPolicy,
         onTap: () async => _openExternal(
           context,
-          'https://sites.google.com/view/eco-habit-tracker/privacy-policy',
+          'https://sites.google.com/view/privacy-policy-ecohabit/eco-habit-privacy-policy',
         ),
       ),
       _SettingsOption(
@@ -156,7 +156,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: AppLocalizations.of(context)!.communityGuidelines,
         onTap: () async => _openExternal(
           context,
-          'https://sites.google.com/view/eco-habit-tracker/community-guidelines',
+          'https://sites.google.com/view/privacy-policy-ecohabit/community-guidelines',
         ),
       ),
 

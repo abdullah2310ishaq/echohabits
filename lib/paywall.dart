@@ -265,13 +265,19 @@ class _FeatureTile extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 16.w),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+          SizedBox(width: 12.w),
+
+          // ✅ FIX HERE
+          Expanded(
+            child: Text(
+              text,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
           ),
         ],

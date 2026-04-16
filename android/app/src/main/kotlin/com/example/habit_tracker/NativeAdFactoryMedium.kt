@@ -1,4 +1,4 @@
-package com.eco.habit.tracker.companion
+package com.eco.habit.tracker.companion.climate.change
 
 import android.view.LayoutInflater
 import android.view.View

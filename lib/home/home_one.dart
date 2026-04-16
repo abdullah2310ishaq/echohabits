@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:habit_tracker/core/ads/admob_ids.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'dart:io';
 import '../core/widgets/eco_toast.dart';
 import '../core/widgets/native_ad_tile.dart';
@@ -14,7 +15,6 @@ import 'widgets/home_one_header.dart';
 
 class HomeOne extends StatefulWidget {
   const HomeOne({super.key});
-
   @override
   State<HomeOne> createState() => _HomeOneState();
 }
@@ -319,6 +319,8 @@ class _HomeOneState extends State<HomeOne> {
                               }
 
                               final taskAndAdItems = <Widget>[];
+                              final isHomeNativeAdEnabled =
+                                  RemoteConfigService.showHomeShellNativeAd;
                               for (
                                 var index = 0;
                                 index < taskCards.length;
@@ -334,7 +336,8 @@ class _HomeOneState extends State<HomeOne> {
                                 final shouldInsertAdAfterTask =
                                     (taskCards.length == 1 && index == 0) ||
                                     (taskCards.length > 1 && index == 1);
-                                if (shouldInsertAdAfterTask) {
+                                if (isHomeNativeAdEnabled &&
+                                    shouldInsertAdAfterTask) {
                                   taskAndAdItems.add(
                                     KeyedSubtree(
                                       key: const ValueKey<String>(
