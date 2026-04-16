@@ -54,11 +54,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     _autoScrollTimer?.cancel();
     _autoScrollTimer = Timer.periodic(const Duration(seconds: 2), (_) {
       if (!mounted || !_pageController.hasClients) return;
-      if (_currentPage >= _pages.length - 1) {
-        _autoScrollTimer?.cancel();
-        return;
-      }
-      _pageController.nextPage(
+      final nextPageIndex = (_currentPage + 1) % _pages.length;
+      _pageController.animateToPage(
+        nextPageIndex,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
