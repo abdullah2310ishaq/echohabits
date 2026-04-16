@@ -100,16 +100,89 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: PageView.builder(
-          controller: _pageController,
-          onPageChanged: _onPageChanged,
-          itemCount: _pages.length,
-          itemBuilder: (context, index) {
-            return _buildOnboardingPage(context, _pages[index], index);
-          },
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: _onPageChanged,
+                itemCount: _pages.length,
+                itemBuilder: (context, index) {
+                  return _buildOnboardingPage(context, _pages[index], index);
+                },
+              ),
+            ),
+            SizedBox(height: 28.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                _pages.length,
+                (dotIndex) => _buildPageIndicator(dotIndex == _currentPage),
+              ),
+            ),
+            SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 0.4.sw,
+                    child: TextButton(
+                      onPressed: _skipOnboarding,
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.grey[600],
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          l10n.skip,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: _nextPage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2E7D32),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 12.h,
+                      ),
+                      minimumSize: Size(120.w, 48.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.r),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      _currentPage == _pages.length - 1
+                          ? l10n.continueButton
+                          : l10n.next,
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 16.h),
+          ],
         ),
       ),
     );
@@ -124,29 +197,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final title = _getLocalizedString(l10n, pageData.titleKey);
     final description = _getLocalizedString(l10n, pageData.descriptionKey);
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Column(
-        children: [
-          const SizedBox.shrink(),
-          // Top illustration area with onboarding images
-          SizedBox(
-            height: 0.4.sh,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned(
-                  left: -20.w,
-                  right: -20.w,
-                  top: 0,
-                  bottom: 0,
-                  child: _buildOnboardingIllustration(pageData, index),
-                ),
-              ],
-            ),
+    return Column(
+      children: [
+        const SizedBox.shrink(),
+        // Top illustration area with onboarding images
+        SizedBox(
+          height: 0.4.sh,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: _buildOnboardingIllustration(pageData, index),
+              ),
+            ],
           ),
-          SizedBox(height: 180.h),
-          Text(
+        ),
+        SizedBox(height: 180.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Text(
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -156,8 +229,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 1.2,
             ),
           ),
-          SizedBox(height: 12.h),
-          Text(
+        ),
+        SizedBox(height: 12.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Text(
             description,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -166,71 +242,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 1.5,
             ),
           ),
-          SizedBox(height: 28.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              _pages.length,
-              (dotIndex) => _buildPageIndicator(dotIndex == _currentPage),
-            ),
-          ),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 0.4.sw,
-                child: TextButton(
-                  onPressed: _skipOnboarding,
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.grey[600],
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
-                      vertical: 8.h,
-                    ),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      l10n.skip,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: _nextPage,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2E7D32),
-                  foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 12.h,
-                  ),
-                  minimumSize: Size(120.w, 48.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  _currentPage == _pages.length - 1
-                      ? l10n.continueButton
-                      : l10n.next,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16.h),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -308,25 +321,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ];
     }
 
-    // Page 2 & 3: left + right + bottom fades
+    // Page 2 & 3: bottom fade only (keep full-width background visible)
     return [
-      Positioned.fill(
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [
-                backgroundColor.withValues(alpha: 0.35),
-                backgroundColor.withValues(alpha: 0.0),
-                backgroundColor.withValues(alpha: 0.0),
-                backgroundColor.withValues(alpha: 0.35),
-              ],
-              stops: const [0.0, 0.12, 0.88, 1.0],
-            ),
-          ),
-        ),
-      ),
       Positioned.fill(
         child: DecoratedBox(
           decoration: BoxDecoration(

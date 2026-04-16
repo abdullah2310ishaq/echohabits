@@ -501,10 +501,13 @@ class HabitService extends ChangeNotifier {
     }
   }
 
-  /// Calculate score points for a completed task
-  /// Total unique tasks: 45 unique habits + 3 defaults = 48 tasks
-  /// To reach 100 points: 100 / 48 ≈ 2.083 points per task
-  /// Strategy: Give 2 points to 44 tasks and 3 points to 4 tasks = 44*2 + 4*3 = 88 + 12 = 100
+  /// Calculate score points for a completed task.
+  ///
+  /// Current task availability reaches 47 completable tasks in a day.
+  /// To make sure users can still hit 100:
+  /// - Give 3 points to the first 6 completed tasks
+  /// - Give 2 points to the remaining tasks
+  /// Total: 6*3 + 41*2 = 18 + 82 = 100
   int _calculateTaskScore(Map<String, dynamic> task) {
     // Count how many tasks have been completed today (before this one)
     final today = DateTime.now();
@@ -516,11 +519,10 @@ class HabitService extends ChangeNotifier {
           timestamp.isAtSameMomentAs(todayStart);
     }).length;
 
-    // Give 3 points to the first 4 completed tasks, 2 points to the rest
-    // This ensures we reach exactly 100 when all 48 tasks are completed:
-    // 4 tasks * 3 points + 44 tasks * 2 points = 12 + 88 = 100
+    // Give 3 points to the first 6 completed tasks, 2 points to the rest.
+    // This ensures we reach 100 when all currently completable tasks are done.
     // Note: completedToday includes the current task since history is added before score calculation
-    if (completedToday <= 4) {
+    if (completedToday <= 6) {
       return 3;
     } else {
       return 2;
