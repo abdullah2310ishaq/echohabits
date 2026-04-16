@@ -26,14 +26,13 @@ class BillingService extends ChangeNotifier {
   bool _storeAvailable = false;
   bool _isLoadingProducts = false;
   bool _purchaseInProgress = false;
-  String? _errorMessage;
 
   final Map<String, ProductDetails> _products = {};
 
   bool get storeAvailable => _storeAvailable;
   bool get isLoadingProducts => _isLoadingProducts;
   bool get purchaseInProgress => _purchaseInProgress;
-  String? get errorMessage => _errorMessage;
+  String? get errorMessage => null;
 
   ProductDetails? get weeklyProduct => _products[weeklyProductId];
   ProductDetails? get lifetimeProduct => _products[lifetimeProductId];
@@ -70,7 +69,6 @@ class BillingService extends ChangeNotifier {
     if (_isLoadingProducts) return;
 
     _isLoadingProducts = true;
-    _errorMessage = null;
     notifyListeners();
 
     final ids = <String>{weeklyProductId, lifetimeProductId};
@@ -122,7 +120,6 @@ class BillingService extends ChangeNotifier {
       return;
     }
 
-    _errorMessage = null;
     notifyListeners();
 
     final product = weekly ? weeklyProduct : lifetimeProduct;
@@ -201,7 +198,6 @@ class BillingService extends ChangeNotifier {
   }
 
   void _setError(String message) {
-    _errorMessage = message;
     _log('ERROR: $message');
   }
 

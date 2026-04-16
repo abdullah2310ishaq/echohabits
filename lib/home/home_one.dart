@@ -81,10 +81,28 @@ class _HomeOneState extends State<HomeOne> {
 
   String _localizeTag(AppLocalizations l10n, String tag) {
     switch (tag) {
+      case 'All':
+        return l10n.all;
       case 'Transport':
         return l10n.transport;
+      case 'Food':
+        return l10n.food;
+      case 'Home':
+        return l10n.home;
+      case 'Water':
+        return l10n.water;
+      case 'Shopping':
+        return l10n.shopping;
       case 'Waste':
         return l10n.waste;
+      case 'Digital':
+        return l10n.digital;
+      case 'Fitness':
+        return l10n.fitness;
+      case 'Mindfulness':
+        return l10n.mindfulness;
+      case 'Savings':
+        return l10n.savings;
       case 'High Impact':
         return l10n.highImpact;
       case 'Medium Impact':
@@ -180,9 +198,12 @@ class _HomeOneState extends State<HomeOne> {
 
                               // Habit-based tasks from Habits page (no icons)
                               for (final habit in habitTasks) {
+                                final String category =
+                                    habit['category'] as String;
+                                final String impact = habit['impact'] as String;
                                 final tags = [
-                                  habit['category'] as String,
-                                  habit['impact'] as String,
+                                  _localizeTag(l10n, category),
+                                  _localizeTag(l10n, impact),
                                 ];
                                 final String title = habit['title'] as String;
 
@@ -308,7 +329,7 @@ class _HomeOneState extends State<HomeOne> {
                                           context,
                                           message: AppLocalizations.of(
                                             context,
-                                          )!.taskDone(taskName),
+                                          )!.taskDone(localizedTitle),
                                           isSuccess: true,
                                           duration: const Duration(seconds: 2),
                                         );

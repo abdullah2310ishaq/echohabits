@@ -558,7 +558,8 @@ class HabitService extends ChangeNotifier {
     return _history.where((entry) {
       if (entry['status'] != 'done') return false;
       final timestamp = entry['timestamp'] as DateTime;
-      return timestamp.isAfter(todayStart) || timestamp.isAtSameMomentAs(todayStart);
+      return timestamp.isAfter(todayStart) ||
+          timestamp.isAtSameMomentAs(todayStart);
     }).length;
   }
 

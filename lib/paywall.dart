@@ -62,7 +62,7 @@ class _PaywallState extends State<Paywall> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 2.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,23 +112,23 @@ class _PaywallState extends State<Paywall> {
                 ),
               ),
 
-              SizedBox(height: 20.h),
+              SizedBox(height: 16.h),
               // Feature list using SVGs
               _FeatureTile(
                 svgAsset: 'assets/svgonee.svg',
                 text: l10n.paywallUnlimitedHabitTracking,
               ),
-              SizedBox(height: 12.h),
+              SizedBox(height: 10.h),
               _FeatureTile(
                 svgAsset: 'assets/svgtwo.svg',
                 text: l10n.paywallLeaderboardAccess,
               ),
-              SizedBox(height: 12.h),
+              SizedBox(height: 10.h),
               _FeatureTile(
                 svgAsset: 'assets/svgthree.svg',
                 text: l10n.paywallAdvancedProgressAnalytics,
               ),
-              SizedBox(height: 25.h),
+              SizedBox(height: 35.h),
               // Pricing Cards
               _PlanCard(
                 title: l10n.paywallWeeklyPlan,
@@ -137,7 +137,7 @@ class _PaywallState extends State<Paywall> {
                 isBestValue: false,
                 onTap: () => setState(() => _selectedPlanIndex = 0),
               ),
-              SizedBox(height: 15.h),
+              SizedBox(height: 10.h),
               _PlanCard(
                 title: l10n.paywallLifetimeAccess,
                 subtitle: billing.lifetimePriceLabel(),
@@ -145,11 +145,13 @@ class _PaywallState extends State<Paywall> {
                 isBestValue: true,
                 onTap: () => setState(() => _selectedPlanIndex = 1),
               ),
-              SizedBox(height: 30.h),
+
+              SizedBox(height: 50),
+
               // Main Action Button
               SizedBox(
                 width: double.infinity,
-                height: 65.h,
+                height: 55.h,
                 child: ElevatedButton(
                   onPressed: billing.purchaseInProgress
                       ? null
@@ -186,39 +188,26 @@ class _PaywallState extends State<Paywall> {
                         ),
                 ),
               ),
-              SizedBox(height: 10.h),
-              if (billing.errorMessage != null)
-                Padding(
-                  padding: EdgeInsets.only(top: 6.h),
-                  child: Text(
-                    billing.errorMessage!,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.red.shade700,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              TextButton(
-                onPressed: billing.purchaseInProgress
-                    ? null
-                    : () async {
-                        AppOpenAdManager.suppressNextResumeOnce();
-                        await billing.restorePurchases();
-                      },
-                child: Text(
-                  l10n.paywallRestorePurchases,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+              SizedBox(height: 3.h),
+              // TextButton(
+              //   onPressed: billing.purchaseInProgress
+              //       ? null
+              //       : () async {
+              //           AppOpenAdManager.suppressNextResumeOnce();
+              //           await billing.restorePurchases();
+              //         },
+              //   child: Text(
+              //     l10n.paywallRestorePurchases,
+              //     style: TextStyle(
+              //       fontSize: 13.sp,
+              //       color: AppColors.textSecondary,
+              //       fontWeight: FontWeight.w600,
+              //     ),
+              //   ),
+              // ),
 
               // Extra space for very small screens / gesture bar.
-              SizedBox(height: 14.h),
+              SizedBox(height: 10.h),
             ],
           ),
         ),
@@ -313,7 +302,7 @@ class _PlanCard extends StatelessWidget {
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
               color: isDark ? AppColors.deepGreen : AppColors.surface,
-              borderRadius: BorderRadius.circular(32.r),
+              borderRadius: BorderRadius.circular(28.r),
               border: Border.all(
                 color: !isDark ? Colors.transparent : Colors.transparent,
                 width: 2.w,
