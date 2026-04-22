@@ -10,7 +10,10 @@ import 'package:path/path.dart' as path;
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+// NOTE: Ads are temporarily disabled.
+//
+// Original ad-related import preserved for later re-enable:
+// import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import '../core/services/profile_service.dart';
 import '../core/widgets/eco_toast.dart';
 
@@ -40,15 +43,18 @@ class _ProfileFirstState extends State<ProfileFirst> {
 
     PermissionStatus status;
     if (Platform.isIOS) {
-      AppOpenAdManager.suppressNextResumeOnce();
+      // NOTE: Ads are temporarily disabled.
+      // AppOpenAdManager.suppressNextResumeOnce();
       status = await Permission.photos.request();
     } else {
-      AppOpenAdManager.suppressNextResumeOnce();
+      // NOTE: Ads are temporarily disabled.
+      // AppOpenAdManager.suppressNextResumeOnce();
       final photosStatus = await Permission.photos.request();
       if (photosStatus.isGranted || photosStatus.isLimited) {
         status = photosStatus;
       } else {
-        AppOpenAdManager.suppressNextResumeOnce();
+        // NOTE: Ads are temporarily disabled.
+        // AppOpenAdManager.suppressNextResumeOnce();
         status = await Permission.storage.request();
       }
     }
@@ -206,7 +212,8 @@ class _ProfileFirstState extends State<ProfileFirst> {
 
   Future<void> _pickImage(ImageSource source) async {
     try {
-      AppOpenAdManager.suppressNextResumeOnce();
+      // NOTE: Ads are temporarily disabled.
+      // AppOpenAdManager.suppressNextResumeOnce();
       final XFile? image = await _imagePicker.pickImage(source: source);
       if (image != null) {
         // Validate that the image contains a human face

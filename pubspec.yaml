@@ -51,7 +51,6 @@ dependencies:
   flutter_screenutil: ^5.9.3
   google_mlkit_face_detection: ^0.13.1
   path: ^1.9.1
-  google_mobile_ads: ^7.0.0
   firebase_remote_config: ^5.4.7
   permission_handler: ^12.0.1
   in_app_purchase: ^3.2.0
@@ -109,7 +108,8 @@ flutter:
     - assets/svgtwo.svg
     - assets/svgthree.svg
     - assets/firststep.png
-    - assets/pro_animation.json
+    # NOTE: "pro" Lottie json temporarily disabled.
+    # - assets/pro_animation.json
   
     - assets/settings/
     - assets/language/

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
-import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+// NOTE: Ads are temporarily disabled.
+//
+// Original ad-related imports preserved for later re-enable:
+// import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+// import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
@@ -66,14 +69,21 @@ class _SplashScreenState extends State<SplashScreen>
     await RemoteConfigService.refresh();
     if (!mounted) return;
 
-    if (RemoteConfigService.showSplashAds) {
-      await _showSplashAdWithRetry();
-      if (!mounted) return;
-    }
+    // NOTE: Ads are temporarily disabled.
+    //
+    // Original ad flow preserved for later re-enable:
+    // if (RemoteConfigService.showSplashAds) {
+    //   await _showSplashAdWithRetry();
+    //   if (!mounted) return;
+    // }
 
     _navigateToNextScreen();
   }
 
+  // NOTE: Ads are temporarily disabled.
+  //
+  // Original ad retry logic preserved for later re-enable:
+  /*
   Future<void> _showSplashAdWithRetry() async {
     const maxWaitForAppOpen = Duration(seconds: 3);
     const appOpenCheckInterval = Duration(milliseconds: 300);
@@ -110,6 +120,7 @@ class _SplashScreenState extends State<SplashScreen>
       }
     }
   }
+  */
 
   void _navigateToNextScreen() {
     if (!mounted) return;
@@ -197,15 +208,18 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     if (!_isFirstTimeUser) ...[
                       SizedBox(height: 8.h),
-                      Text(
-                        'This action may perform an ad',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 11.sp,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                      // NOTE: Ads are temporarily disabled.
+                      //
+                      // Original disclaimer preserved for later re-enable:
+                      // Text(
+                      //   'This action may perform an ad',
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //     fontSize: 11.sp,
+                      //     color: Colors.black54,
+                      //     fontWeight: FontWeight.w400,
+                      //   ),
+                      // ),
                     ],
                   ],
                 ),

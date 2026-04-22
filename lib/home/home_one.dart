@@ -4,11 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-import 'package:habit_tracker/core/ads/admob_ids.dart';
-import 'package:habit_tracker/core/services/remote_config_service.dart';
+// NOTE: Ads are temporarily disabled.
+//
+// Original ad-related imports preserved for later re-enable:
+// import 'package:habit_tracker/core/ads/admob_ids.dart';
+// import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'dart:io';
 import '../core/widgets/eco_toast.dart';
-import '../core/widgets/native_ad_tile.dart';
+// import '../core/widgets/native_ad_tile.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/profile_service.dart';
 import 'widgets/home_one_header.dart';
@@ -340,8 +343,11 @@ class _HomeOneState extends State<HomeOne> {
                               }
 
                               final taskAndAdItems = <Widget>[];
-                              final isHomeNativeAdEnabled =
-                                  RemoteConfigService.showHomeShellNativeAd;
+                              // NOTE: Ads are temporarily disabled.
+                              //
+                              // Original flag preserved for later re-enable:
+                              // final isHomeNativeAdEnabled =
+                              //     RemoteConfigService.showHomeShellNativeAd;
                               for (
                                 var index = 0;
                                 index < taskCards.length;
@@ -354,6 +360,10 @@ class _HomeOneState extends State<HomeOne> {
                                   ),
                                 );
 
+                                // NOTE: Ads are temporarily disabled.
+                                //
+                                // Original insertion logic preserved for later re-enable:
+                                /*
                                 final shouldInsertAdAfterTask =
                                     (taskCards.length == 1 && index == 0) ||
                                     (taskCards.length > 1 && index == 1);
@@ -379,6 +389,7 @@ class _HomeOneState extends State<HomeOne> {
                                     ),
                                   );
                                 }
+                                */
                               }
 
                               return Column(children: taskAndAdItems);

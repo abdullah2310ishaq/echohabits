@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+// NOTE: Ads are temporarily disabled.
+//
+// Original ad-related import preserved for later re-enable:
+// import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+//
+// NOTE: "pro" Lottie json is removed/disabled for now.
+// Original import preserved for later re-enable:
+// import 'package:lottie/lottie.dart';
 import 'package:habit_tracker/core/services/habit_service.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-import 'package:habit_tracker/paywall.dart';
 import 'package:provider/provider.dart';
 
 class HomeOneHeader extends StatelessWidget {
@@ -71,6 +76,12 @@ class HomeOneHeader extends StatelessWidget {
                   ],
                 ),
               ),
+              // NOTE: "PRO" entry temporarily disabled.
+              //
+              // Original paywall entry preserved for later re-enable:
+              /*
+              import 'package:habit_tracker/paywall.dart';
+              
               Consumer<HabitService>(
                 builder: (context, habitService, child) {
                   return InkWell(
@@ -94,6 +105,7 @@ class HomeOneHeader extends StatelessWidget {
                   );
                 },
               ),
+              */
             ],
           ),
           SizedBox(height: 16.h),
