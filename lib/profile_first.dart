@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'home/home_shell.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:permission_handler/permission_handler.dart';
-// NOTE: Ads are temporarily disabled.
-//
-// Original ad-related import preserved for later re-enable:
-// import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import '../core/services/profile_service.dart';
 import '../core/widgets/eco_toast.dart';
 
@@ -30,53 +25,11 @@ class _ProfileFirstState extends State<ProfileFirst> {
   String? _selectedImagePath;
   bool _isUsingDefaultImage = true;
   bool _hasSelectedPhoto = false;
-  bool _hasStoragePermission = false;
 
   @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
-  }
-
-  Future<bool> _requestStoragePermission() async {
-    if (!mounted || !(Platform.isAndroid || Platform.isIOS)) return false;
-
-    PermissionStatus status;
-    if (Platform.isIOS) {
-      // NOTE: Ads are temporarily disabled.
-      // AppOpenAdManager.suppressNextResumeOnce();
-      status = await Permission.photos.request();
-    } else {
-      // NOTE: Ads are temporarily disabled.
-      // AppOpenAdManager.suppressNextResumeOnce();
-      final photosStatus = await Permission.photos.request();
-      if (photosStatus.isGranted || photosStatus.isLimited) {
-        status = photosStatus;
-      } else {
-        // NOTE: Ads are temporarily disabled.
-        // AppOpenAdManager.suppressNextResumeOnce();
-        status = await Permission.storage.request();
-      }
-    }
-
-    if (!mounted) return false;
-
-    final granted = status.isGranted || status.isLimited;
-    setState(() {
-      _hasStoragePermission = granted;
-    });
-
-    if (!granted) {
-      EcoToast.show(
-        context,
-        message: AppLocalizations.of(
-          context,
-        )!.errorPickingImage('Storage permission is required to select a photo.'),
-        isSuccess: false,
-      );
-    }
-
-    return granted;
   }
 
   @override
@@ -212,8 +165,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
 
   Future<void> _pickImage(ImageSource source) async {
     try {
-      // NOTE: Ads are temporarily disabled.
-      // AppOpenAdManager.suppressNextResumeOnce();
+      AppOpenAdManager.suppressNextResumeOnce();
       final XFile? image = await _imagePicker.pickImage(source: source);
       if (image != null) {
         // Validate that the image contains a human face
@@ -297,17 +249,6 @@ class _ProfileFirstState extends State<ProfileFirst> {
               onTap: () {
                 Navigator.pop(context);
                 _handleGalleryTap();
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.camera_alt, size: 22.sp),
-              title: Text(
-                AppLocalizations.of(context)!.takeAPhoto,
-                style: TextStyle(fontSize: 14.sp),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.camera);
               },
             ),
             ListTile(
@@ -396,10 +337,10 @@ class _ProfileFirstState extends State<ProfileFirst> {
                     ],
                   ),
                   child: Center(
-                    child: SvgPicture.asset(
-                      'assets/camera.svg',
-                      width: 18.w,
-                      height: 18.h,
+                    child: Icon(
+                      Icons.photo_library,
+                      size: 18.sp,
+                      color: Colors.black87,
                     ),
                   ),
                 ),
@@ -421,15 +362,7 @@ class _ProfileFirstState extends State<ProfileFirst> {
   }
 
   Future<void> _handleGalleryTap() async {
-    if (_hasStoragePermission) {
-      await _pickImage(ImageSource.gallery);
-      return;
-    }
-
-    final granted = await _requestStoragePermission();
-    if (granted && mounted) {
-      await _pickImage(ImageSource.gallery);
-    }
+    await _pickImage(ImageSource.gallery);
   }
 
   Widget _buildInputCard() {

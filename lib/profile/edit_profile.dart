@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -8,10 +7,7 @@ import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-// NOTE: Ads are temporarily disabled.
-//
-// Original ad-related import preserved for later re-enable:
-// import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import '../core/services/profile_service.dart';
 import '../core/widgets/eco_toast.dart';
 
@@ -174,8 +170,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _pickImage(ImageSource source) async {
     try {
-      // NOTE: Ads are temporarily disabled.
-      // AppOpenAdManager.suppressNextResumeOnce();
+      AppOpenAdManager.suppressNextResumeOnce();
       final XFile? image = await _imagePicker.pickImage(source: source);
       if (image != null) {
         // Validate that the image contains a human face
@@ -261,17 +256,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.camera_alt, size: 22.sp),
-              title: Text(
-                AppLocalizations.of(context)!.takeAPhoto,
-                style: TextStyle(fontSize: 14.sp),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.camera);
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.image, size: 22.sp),
               title: Text(
                 AppLocalizations.of(context)!.useDefaultImage,
@@ -349,10 +333,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ],
                   ),
                   child: Center(
-                    child: SvgPicture.asset(
-                      'assets/camera.svg',
-                      width: 18.w,
-                      height: 18.h,
+                    child: Icon(
+                      Icons.photo_library,
+                      size: 18.sp,
+                      color: Colors.black87,
                     ),
                   ),
                 ),

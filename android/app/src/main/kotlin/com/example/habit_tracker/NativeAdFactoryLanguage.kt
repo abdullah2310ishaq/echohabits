@@ -1,12 +1,16 @@
 package com.eco.habit.tracker.companion.climate.change
 
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
-import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
+// NOTE: Ads are temporarily disabled.
+//
+// Original native ad implementation preserved for later re-enable:
+/*
+// import android.view.View
+// import android.widget.ImageView
+// import android.widget.TextView
+// import com.google.android.gms.ads.nativead.NativeAd
+// import com.google.android.gms.ads.nativead.NativeAdView
+// import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 
 class NativeAdFactoryLanguage(
     private val layoutInflater: LayoutInflater,
@@ -64,3 +68,9 @@ class NativeAdFactoryLanguage(
         return adView
     }
 }
+*/
+
+// No-op stub to keep Android build compiling while ads are disabled.
+class NativeAdFactoryLanguage(
+    @Suppress("UNUSED_PARAMETER") private val layoutInflater: LayoutInflater,
+)

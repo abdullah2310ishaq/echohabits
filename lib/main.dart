@@ -3,13 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
-// NOTE: Ads are temporarily disabled.
-//
-// Original ad-related import preserved for later re-enable:
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-// import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
-// import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
 import 'package:habit_tracker/core/billing/billing_product_ids.dart';
 import 'package:habit_tracker/core/billing/billing_service.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
@@ -19,6 +16,7 @@ import 'package:habit_tracker/core/services/locale_service.dart';
 import 'package:habit_tracker/core/widgets/global_pointer_gate.dart';
 import 'package:habit_tracker/splash_screen.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/navigation/app_navigator.dart';
 
 void main() async {
   // Ensure Flutter binding is initialized before async operations
@@ -40,12 +38,9 @@ void main() async {
   await LocaleService.init();
   await Firebase.initializeApp();
   await RemoteConfigService.init();
-  // NOTE: Ads are temporarily disabled.
-  //
-  // Original initialization preserved for later re-enable:
-  // await MobileAds.instance.initialize();
-  // AppOpenAdManager.initialize();
-  // InterstitialAdManager.initialize();
+  await MobileAds.instance.initialize();
+  AppOpenAdManager.initialize();
+  InterstitialAdManager.initialize();
 
   runApp(const MyApp());
 }
@@ -83,8 +78,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
     if (state == AppLifecycleState.resumed && _wasInBackground) {
       _wasInBackground = false;
-      // NOTE: Ads are temporarily disabled.
-      // AppOpenAdManager.onAppResumedFromBackground();
+      AppOpenAdManager.onAppResumedFromBackground();
     }
   }
 
@@ -137,6 +131,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     child: MaterialApp(
                       title: 'Eco Habit',
                       debugShowCheckedModeBanner: false,
+                      navigatorKey: AppNavigator.navigatorKey,
                       theme: ThemeData(
                         colorScheme: ColorScheme.fromSeed(
                           seedColor: Colors.green,

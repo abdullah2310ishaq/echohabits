@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_presenter.dart';
 
 /// Central app state for habits, today's tasks, and history.
 ///
@@ -15,11 +16,16 @@ class HabitService extends ChangeNotifier {
   static const String _lastDefaultResetKey = 'lastDefaultReset';
   static const String _hiddenDefaultTaskIdsKey = 'hiddenDefaultTaskIds';
   static const String _habitAddTimestampsKey = 'habitAddTimestamps';
+  static const String _habitAddsSinceInterstitialKey = 'habitAddsSinceInter';
+  static const String _habitDonesSinceInterstitialKey = 'habitDonesSinceInter';
 
   static Box? _box;
 
   /// Map to track when habits were added (title -> timestamp)
   final Map<String, DateTime> _habitAddTimestamps = {};
+
+  int _habitAddsSinceInterstitial = 0;
+  int _habitDonesSinceInterstitial = 0;
 
   /// Initialize Hive box and load data
   static Future<void> init() async {
@@ -109,6 +115,11 @@ class HabitService extends ChangeNotifier {
       });
     }
 
+    _habitAddsSinceInterstitial =
+        _box!.get(_habitAddsSinceInterstitialKey, defaultValue: 0) as int;
+    _habitDonesSinceInterstitial =
+        _box!.get(_habitDonesSinceInterstitialKey, defaultValue: 0) as int;
+
     // Ensure scores are fresh (reset if needed)
     _ensureScoreFresh();
     _ensureDefaultTasksFresh();
@@ -172,6 +183,15 @@ class HabitService extends ChangeNotifier {
       timestampsToSave[key] = value.toIso8601String();
     });
     await _box!.put(_habitAddTimestampsKey, timestampsToSave);
+
+    await _box!.put(
+      _habitAddsSinceInterstitialKey,
+      _habitAddsSinceInterstitial,
+    );
+    await _box!.put(
+      _habitDonesSinceInterstitialKey,
+      _habitDonesSinceInterstitial,
+    );
   }
 
   /// User‑added habits (from Habits page) that should appear on Home.
@@ -319,6 +339,8 @@ class HabitService extends ChangeNotifier {
       'addedFromHabitsPage': true,
     });
 
+    _onHabitAddedForInterstitial();
+
     // Track when this habit was added using stable identifier (prefer titleKey)
     final saveKey = titleKey ?? title;
     _habitAddTimestamps[saveKey] = now;
@@ -407,10 +429,44 @@ class HabitService extends ChangeNotifier {
       final newDailyScore = _dailyScore + points;
       _dailyScore = newDailyScore.clamp(0, 100);
       _totalScore += points; // Total score continues to accumulate
+
+      _onHabitDoneForInterstitial();
     }
 
     _saveData();
     notifyListeners();
+  }
+
+  void _onHabitAddedForInterstitial() {
+    _habitAddsSinceInterstitial += 1;
+
+    if (_habitAddsSinceInterstitial < 3) {
+      return;
+    }
+
+    _habitAddsSinceInterstitial = 0;
+    _tryShowInterstitial();
+  }
+
+  void _onHabitDoneForInterstitial() {
+    _habitDonesSinceInterstitial += 1;
+
+    if (_habitDonesSinceInterstitial < 3) {
+      return;
+    }
+
+    _habitDonesSinceInterstitial = 0;
+    _tryShowInterstitial();
+  }
+
+  void _tryShowInterstitial() {
+    Future<void>(() async {
+      try {
+        await InterstitialAdPresenter.showWithLoadingDialogIfPossible();
+      } catch (_) {
+        // Swallow errors to avoid breaking the user flow.
+      }
+    });
   }
 
   /// Clear all user‑added habits.

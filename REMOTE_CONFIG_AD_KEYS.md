@@ -3,3 +3,4 @@
 3) `show_splash_interstitial_ad` (Boolean)
 4) `show_native_language_ad` (Boolean)
 
+flutter run --release --dart-define=ADS_TEST_MODE=true
