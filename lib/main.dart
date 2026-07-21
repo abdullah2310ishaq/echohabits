@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/ads/ads_logger.dart';
 import 'package:habit_tracker/core/billing/billing_product_ids.dart';
 import 'package:habit_tracker/core/billing/billing_service.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
@@ -38,6 +40,18 @@ void main() async {
   await LocaleService.init();
   await Firebase.initializeApp();
   await RemoteConfigService.init();
+
+  AdsLogger.logConfig();
+
+  if (kDebugMode) {
+    // Ensures consistent test ads on this device during development.
+    await MobileAds.instance.updateRequestConfiguration(
+      RequestConfiguration(
+        testDeviceIds: const ['3155AA20FAA8F538B527C6F31F44F5E8'],
+      ),
+    );
+  }
+
   await MobileAds.instance.initialize();
   AppOpenAdManager.initialize();
   InterstitialAdManager.initialize();

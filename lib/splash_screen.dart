@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
-import 'package:habit_tracker/core/ads/interstitial_ad_presenter.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_presenter.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
@@ -75,41 +74,13 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _showSplashAdWithRetry() async {
-    const maxWaitForAppOpen = Duration(seconds: 3);
-    const appOpenCheckInterval = Duration(milliseconds: 300);
-    Duration waited = Duration.zero;
-
-    // Give App Open ad a short priority window before falling back.
-    while (waited < maxWaitForAppOpen) {
-      if (!mounted) return;
-
-      if (AppOpenAdManager.isAdAvailable()) {
-        final appOpenShown = await AppOpenAdManager.showIfAvailable();
-        if (!mounted) return;
-        if (appOpenShown) return;
-      } else {
-        AppOpenAdManager.loadAdIfNeeded();
-      }
-
-      await Future.delayed(appOpenCheckInterval);
-      waited += appOpenCheckInterval;
-    }
-
-    const interstitialAttempts = 3;
-    const interstitialRetryDelay = Duration(milliseconds: 500);
-
-    for (var attempt = 0; attempt < interstitialAttempts; attempt++) {
-      if (!mounted) return;
-
-      final interstitialShown =
-          await InterstitialAdPresenter.showWithLoadingDialogIfPossible();
-      if (!mounted) return;
-      if (interstitialShown) return;
-
-      if (attempt < interstitialAttempts - 1) {
-        await Future.delayed(interstitialRetryDelay);
-      }
-    }
+    // Splash policy: App Open is required, with a splash-only loading modal.
+    //
+    // If no ad is returned within the time window, we still proceed to avoid
+    // blocking the user indefinitely.
+    await AppOpenAdPresenter.showFromSplash(
+      maxWait: const Duration(seconds: 12),
+    );
   }
 
   void _navigateToNextScreen() {

@@ -12,6 +12,7 @@ class RemoteConfigService {
   static const String keyShowSplashAppOpenAd = 'show_splash_app_open_ad';
   static const String keyShowSplashInterstitialAd =
       'show_splash_interstitial_ad';
+  
 
   static Future<void> init() async {
     if (_initialized) return;
@@ -29,7 +30,7 @@ class RemoteConfigService {
       keyShowHomeShellNativeAd: true,
       keyShowSplashAds: true,
       keyShowSplashAppOpenAd: true,
-      keyShowSplashInterstitialAd: true,
+      keyShowSplashInterstitialAd: false,
     });
 
     try {
