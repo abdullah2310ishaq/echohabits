@@ -11,7 +11,7 @@ import java.util.Properties
 
         android {
             namespace = "com.eco.habit.tracker.companion.climate.change"
-            compileSdk = flutter.compileSdkVersion
+            compileSdk = 36
             ndkVersion = flutter.ndkVersion
 
             compileOptions {
@@ -25,10 +25,10 @@ import java.util.Properties
 
             defaultConfig {
                 applicationId = "com.eco.habit.tracker.companion.climate.change"
-                minSdk = flutter.minSdkVersion
-                targetSdk = flutter.targetSdkVersion
-                versionCode = flutter.versionCode
-                versionName = flutter.versionName
+                minSdk = 24
+                targetSdk = 36
+                versionCode = 6
+                versionName = "5.0.1"
             }
 
             // Release signing (keystore.jks) via android/key.properties
