@@ -1231,6 +1231,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Restore purchases'**
   String get paywallRestorePurchases;
+
+  /// Disclaimer shown on splash screen while an ad is loading
+  ///
+  /// In en, this message translates to:
+  /// **'This action may show an ad'**
+  String get splashAdNotice;
 }
 
 class _AppLocalizationsDelegate

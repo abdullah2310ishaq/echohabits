@@ -784,5 +784,9 @@
   "paywallRestorePurchases": "구매 복원",
   "@paywallRestorePurchases": {
     "description": "Paywall button text: restore purchases"
+  },
+  "splashAdNotice": "이 작업은 광고를 표시할 수 있습니다",
+  "@splashAdNotice": {
+    "description": "Disclaimer shown on splash screen while an ad is loading"
   }
 }

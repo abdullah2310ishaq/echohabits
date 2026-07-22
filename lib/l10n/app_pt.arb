@@ -784,5 +784,9 @@
   "paywallRestorePurchases": "Restaurar compras",
   "@paywallRestorePurchases": {
     "description": "Paywall button text: restore purchases"
+  },
+  "splashAdNotice": "Esta ação pode exibir um anúncio",
+  "@splashAdNotice": {
+    "description": "Disclaimer shown on splash screen while an ad is loading"
   }
 }

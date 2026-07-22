@@ -592,4 +592,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => 'استعادة المشتريات';
+
+  @override
+  String get splashAdNotice => 'قد يعرض هذا الإجراء إعلانًا';
 }

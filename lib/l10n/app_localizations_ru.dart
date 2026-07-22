@@ -600,4 +600,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => 'Восстановить покупки';
+
+  @override
+  String get splashAdNotice => 'Это действие может показать рекламу';
 }

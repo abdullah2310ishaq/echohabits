@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
 import 'package:habit_tracker/core/services/profile_service.dart';
@@ -24,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
   late final AnimationController _controller;
   late final Animation<double> _textOpacity;
   late final Animation<Offset> _textSlide;
+  bool _showAdNotice = false;
 
   @override
   void initState() {
@@ -70,6 +72,10 @@ class _SplashScreenState extends State<SplashScreen>
       AppOpenAdManager.instance.bootstrapCacheAfterSplash();
       _navigateToNextScreen();
       return;
+    }
+
+    if (mounted) {
+      setState(() => _showAdNotice = true);
     }
 
     // If both are true, interstitial takes priority (not both).
@@ -161,16 +167,36 @@ class _SplashScreenState extends State<SplashScreen>
               child: Padding(
                 padding: EdgeInsets.only(bottom: 18.h),
                 child: Center(
-                  child: SizedBox(
-                    width: 20.w,
-                    height: 20.w,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.w,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFF327032),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 20.w,
+                      height: 20.w,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.w,
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          Color(0xFF327032),
+                        ),
                       ),
                     ),
-                  ),
+                    if (_showAdNotice) ...[
+                      SizedBox(height: 12.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24.w),
+                        child: Text(
+                          AppLocalizations.of(context)!.splashAdNotice,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
                 ),
               ),
             ),

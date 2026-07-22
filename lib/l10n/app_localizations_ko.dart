@@ -583,4 +583,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => '구매 복원';
+
+  @override
+  String get splashAdNotice => '이 작업은 광고를 표시할 수 있습니다';
 }

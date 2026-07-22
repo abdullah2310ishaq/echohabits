@@ -582,4 +582,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => '恢复购买';
+
+  @override
+  String get splashAdNotice => '此操作可能会展示广告';
 }

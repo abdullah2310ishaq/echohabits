@@ -582,4 +582,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => '購入を復元';
+
+  @override
+  String get splashAdNotice => 'この操作により広告が表示される場合があります';
 }

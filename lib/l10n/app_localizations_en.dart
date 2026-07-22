@@ -595,4 +595,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => 'Restore purchases';
+
+  @override
+  String get splashAdNotice => 'This action may show an ad';
 }

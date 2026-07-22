@@ -606,4 +606,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get paywallRestorePurchases => 'Restaurer les achats';
+
+  @override
+  String get splashAdNotice => 'Cette action peut afficher une publicité';
 }
