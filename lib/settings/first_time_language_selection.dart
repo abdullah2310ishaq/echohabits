@@ -3,13 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-// NOTE: Ads are temporarily disabled.
-//
-// Original ad-related imports preserved for later re-enable:
-// import 'package:habit_tracker/core/ads/admob_ids.dart';
-// import 'package:habit_tracker/core/services/ad_visibility_service.dart';
-// import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
-import '../core/services/profile_service.dart';
+import 'package:habit_tracker/core/ads/native_small_ad_view.dart';
+import 'package:habit_tracker/core/services/profile_service.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/services/locale_service.dart';
 import '../onboarding/onboarding.dart';
 import '../home/home_shell.dart';
@@ -195,16 +191,9 @@ class _FirstTimeLanguageSelectionScreenState
               ),
             ),
           ),
-          // NOTE: Ads are temporarily disabled.
-          //
-          // Original native ad widget preserved for later re-enable:
-          // if (AdVisibilityService.shouldShowLanguageNativeAd)
-          //   NativeAdTile(
-          //     adUnitId: AdMobIds.nativeLanguageUnitId,
-          //     factoryId: 'listTileLanguage',
-          //     height: 150.h,
-          //     margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
-          //   ),
+          if (!ProfileService.isProUser() &&
+              RemoteConfigService.languageNativeAd)
+            const NativeSmallAdView(),
         ],
       ),
     );

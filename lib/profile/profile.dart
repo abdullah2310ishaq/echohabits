@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/banner_ad_view.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'dart:io';
 import '../history/history.dart';
 import '../settings/settings.dart';
@@ -259,6 +261,17 @@ class Profile extends StatelessWidget {
                             ],
                           ),
                         ),
+                        if (!ProfileService.isProUser() &&
+                            RemoteConfigService.profileBannerAd) ...[
+                          SizedBox(height: 12.h),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.r),
+                              child: const AdaptiveBannerAdView(),
+                            ),
+                          ),
+                        ],
                         SizedBox(height: 16.h),
 
                         // History Section

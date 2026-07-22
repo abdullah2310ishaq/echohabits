@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/ads/native_small_ad_view.dart';
+import 'package:habit_tracker/core/services/profile_service.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/widgets/add_habit_dialog.dart';
 import '../core/widgets/eco_toast.dart';
 import '../core/services/habit_service.dart';
@@ -16,6 +21,23 @@ class HabitsOne extends StatefulWidget {
 class _HabitsOneState extends State<HabitsOne> {
   String _selectedCategory = 'All';
   int _listAnimToken = 0;
+  int _habitAddsSinceInterstitial = 0;
+
+  void _onHabitAdded(BuildContext context) {
+    if (ProfileService.isProUser() ||
+        !RemoteConfigService.habitAddInterAd) {
+      return;
+    }
+
+    _habitAddsSinceInterstitial += 1;
+    if (_habitAddsSinceInterstitial < 3) {
+      return;
+    }
+
+    _habitAddsSinceInterstitial = 0;
+    AppOpenAdManager.suppressNextResumeOnce();
+    InterstitialAdManager.show(context: context);
+  }
 
   final List<String> _categories = [
     'All',
@@ -584,19 +606,18 @@ class _HabitsOneState extends State<HabitsOne> {
                           ),
                         );
                       },
-                      child: ListView.builder(
+                      child: ListView(
                         key: ValueKey<String>(
                           'habits_${_selectedCategory}_$_listAnimToken',
                         ),
                         padding: EdgeInsets.zero,
-                        itemCount: _filteredHabits.length,
-                        itemBuilder: (context, index) {
-                          final habit = _filteredHabits[index];
-                          return Padding(
+                        children: _filteredHabits.expand((habit) {
+                          final titleKey = habit['titleKey'] as String;
+                          final card = Padding(
                             padding: EdgeInsets.only(bottom: 10.h),
                             child: _buildHabitCard(
                               context: context,
-                              titleKey: habit['titleKey'] as String,
+                              titleKey: titleKey,
                               difficulty: habit['difficulty'] as String,
                               difficultyColor:
                                   habit['difficultyColor'] as Color,
@@ -604,7 +625,21 @@ class _HabitsOneState extends State<HabitsOne> {
                               impactColor: habit['impactColor'] as Color,
                             ),
                           );
-                        },
+
+                          if (titleKey == 'carpoolWithColleagues' &&
+                              !ProfileService.isProUser() &&
+                              RemoteConfigService.habitCarpoolNativeAd) {
+                            return [
+                              card,
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10.h),
+                                child: const NativeSmallAdView(),
+                              ),
+                            ];
+                          }
+
+                          return [card];
+                        }).toList(),
                       ),
                     ),
                   ),
@@ -738,6 +773,10 @@ class _HabitsOneState extends State<HabitsOne> {
                       message: result['message'] as String,
                       isSuccess: result['success'] as bool,
                     );
+
+                    if (result['success'] as bool) {
+                      _onHabitAdded(context);
+                    }
                   },
                 );
               },

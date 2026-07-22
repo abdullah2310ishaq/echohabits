@@ -4,15 +4,19 @@ class RemoteConfigService {
   static FirebaseRemoteConfig? _remoteConfig;
   static bool _initialized = false;
 
-  static const String keyShowLanguageNativeAd = 'show_native_language_ad';
+  static const String keyLanguageNativeAd = 'language_native_ad';
+  static const String keyLeaderboardNativeAd = 'leaderboard_native_ad';
+  static const String keyHabitCarpoolNativeAd = 'habit_carpool_native_ad';
+  static const String keyHistoryNativeAd = 'history_native_ad';
+  static const String keyHomeScreenTaskCompleteInterAd =
+      'home_screen_task_complete_inter_ad';
+  static const String keyNavigationBarInterAd = 'navigation_bar_inter_ad';
+  static const String keyProfileBannerAd = 'profile_banner_ad';
+  static const String keyHabitAddInterAd = 'habit_add_inter_ad';
   static const String keyShowHomeShellNativeAd = 'show_native_home_shell_ad';
-
-  // Splash-specific toggles.
-  static const String keyShowSplashAds = 'show_splash_ads';
-  static const String keyShowSplashAppOpenAd = 'show_splash_app_open_ad';
-  static const String keyShowSplashInterstitialAd =
-      'show_splash_interstitial_ad';
-  
+  static const String keySplashAppOpenAd = 'splash_app_open_ad';
+  static const String keySplashInterAd = 'splash_inter_ad';
+  static const String keyCacheAppOpenAd = 'cache_app_open_ad';
 
   static Future<void> init() async {
     if (_initialized) return;
@@ -21,16 +25,23 @@ class RemoteConfigService {
     await remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: const Duration(seconds: 10),
-        minimumFetchInterval: const Duration(hours: 1),
+        minimumFetchInterval: const Duration(seconds: 0),
       ),
     );
 
     await remoteConfig.setDefaults(const {
-      keyShowLanguageNativeAd: true,
+      keyLanguageNativeAd: true,
+      keyLeaderboardNativeAd: true,
+      keyHabitCarpoolNativeAd: true,
+      keyHistoryNativeAd: true,
+      keyHomeScreenTaskCompleteInterAd: true,
+      keyNavigationBarInterAd: true,
+      keyProfileBannerAd: true,
+      keyHabitAddInterAd: true,
       keyShowHomeShellNativeAd: true,
-      keyShowSplashAds: true,
-      keyShowSplashAppOpenAd: true,
-      keyShowSplashInterstitialAd: false,
+      keySplashAppOpenAd: true,
+      keySplashInterAd: false,
+      keyCacheAppOpenAd: true,
     });
 
     try {
@@ -64,17 +75,38 @@ class RemoteConfigService {
     return _remoteConfig!.getBool(key);
   }
 
-  static bool get showLanguageNativeAd =>
-      _getBool(keyShowLanguageNativeAd, fallback: true);
+  static bool get languageNativeAd =>
+      _getBool(keyLanguageNativeAd, fallback: true);
+
+  static bool get leaderboardNativeAd =>
+      _getBool(keyLeaderboardNativeAd, fallback: true);
+
+  static bool get habitCarpoolNativeAd =>
+      _getBool(keyHabitCarpoolNativeAd, fallback: true);
+
+  static bool get historyNativeAd =>
+      _getBool(keyHistoryNativeAd, fallback: true);
+
+  static bool get homeScreenTaskCompleteInterAd =>
+      _getBool(keyHomeScreenTaskCompleteInterAd, fallback: true);
+
+  static bool get navigationBarInterAd =>
+      _getBool(keyNavigationBarInterAd, fallback: true);
+
+  static bool get profileBannerAd =>
+      _getBool(keyProfileBannerAd, fallback: true);
+
+  static bool get habitAddInterAd =>
+      _getBool(keyHabitAddInterAd, fallback: true);
 
   static bool get showHomeShellNativeAd =>
       _getBool(keyShowHomeShellNativeAd, fallback: true);
 
-  static bool get showSplashAds => _getBool(keyShowSplashAds, fallback: true);
+  static bool get splashAppOpenAd =>
+      _getBool(keySplashAppOpenAd, fallback: true);
 
-  static bool get showSplashAppOpenAd =>
-      _getBool(keyShowSplashAppOpenAd, fallback: true);
+  static bool get splashInterAd => _getBool(keySplashInterAd, fallback: false);
 
-  static bool get showSplashInterstitialAd =>
-      _getBool(keyShowSplashInterstitialAd, fallback: true);
+  static bool get cacheAppOpenAd =>
+      _getBool(keyCacheAppOpenAd, fallback: true);
 }

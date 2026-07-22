@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
 import '../core/services/profile_service.dart';
+import '../core/services/profile_image_service.dart';
 import '../core/widgets/eco_toast.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -20,7 +16,6 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController _nameController;
-  final ImagePicker _imagePicker = ImagePicker();
   String? _selectedImagePath;
   bool _isUsingDefaultImage = true;
   bool _hasChanges = false;
@@ -168,73 +163,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Future<void> _pickImage(ImageSource source) async {
-    try {
-      AppOpenAdManager.suppressNextResumeOnce();
-      final XFile? image = await _imagePicker.pickImage(source: source);
-      if (image != null) {
-        // Validate that the image contains a human face
-        final hasFace = await _validateFaceInImage(image.path);
+  Future<void> _pickImageFromGallery() async {
+    final result = await ProfileImageService.pickFromGalleryAndCrop(context);
+    if (!mounted) return;
 
-        if (!hasFace) {
-          if (mounted) {
-            EcoToast.show(
-              context,
-              message: AppLocalizations.of(context)!.noFaceDetected,
-              isSuccess: false,
-            );
-          }
-          return;
-        }
-
-        final appDir = await getApplicationDocumentsDirectory();
-        final fileName = path.basename(image.path);
-        final savedImage = File(path.join(appDir.path, fileName));
-        await File(image.path).copy(savedImage.path);
-
-        setState(() {
-          _selectedImagePath = savedImage.path;
-          _isUsingDefaultImage = false;
-        });
-        _checkForChanges();
-      }
-    } catch (e) {
-      if (mounted) {
-        EcoToast.show(
-          context,
-          message: AppLocalizations.of(
-            context,
-          )!.errorPickingImage(e.toString()),
-          isSuccess: false,
-        );
-      }
-    }
-  }
-
-  /// Validate that the image contains at least one human face
-  Future<bool> _validateFaceInImage(String imagePath) async {
-    try {
-      final inputImage = InputImage.fromFilePath(imagePath);
-      final faceDetector = FaceDetector(
-        options: FaceDetectorOptions(
-          enableContours: false,
-          enableLandmarks: false,
-          enableClassification: false,
-          enableTracking: false,
-          minFaceSize: 0.1,
-          performanceMode: FaceDetectorMode.fast,
-        ),
+    if (result.error == ProfileImagePickError.noFaceDetected) {
+      EcoToast.show(
+        context,
+        message: AppLocalizations.of(context)!.noFaceDetected,
+        isSuccess: false,
       );
-
-      final List<Face> faces = await faceDetector.processImage(inputImage);
-      await faceDetector.close();
-
-      // Return true if at least one face is detected
-      return faces.isNotEmpty;
-    } catch (e) {
-      // If face detection fails, reject the image for safety
-      return false;
+      return;
     }
+
+    if (result.error == ProfileImagePickError.failed) {
+      EcoToast.show(
+        context,
+        message: AppLocalizations.of(context)!.errorPickingImage(
+          result.errorMessage ?? 'unknown error',
+        ),
+        isSuccess: false,
+      );
+      return;
+    }
+
+    if (result.imagePath == null) {
+      return;
+    }
+
+    setState(() {
+      _selectedImagePath = result.imagePath;
+      _isUsingDefaultImage = false;
+    });
+    _checkForChanges();
   }
 
   Future<void> _showImageSourceDialog() async {
@@ -252,7 +213,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               onTap: () {
                 Navigator.pop(context);
-                _pickImage(ImageSource.gallery);
+                _pickImageFromGallery();
               },
             ),
             ListTile(

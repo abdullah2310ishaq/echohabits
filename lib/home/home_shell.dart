@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/services/profile_service.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'dart:io';
 import 'home_one.dart';
 import '../habits/habits_one.dart';
@@ -20,6 +24,7 @@ class HomeShell extends StatefulWidget {
 class _HomeShellState extends State<HomeShell> {
   late int _currentIndex;
   int _screenAnimToken = 0;
+  int _navClicksSinceInterstitial = 0;
 
   final List<Widget> _screens = [
     const HomeOne(),
@@ -130,6 +135,22 @@ class _HomeShellState extends State<HomeShell> {
         );
       },
     );
+  }
+
+  void _onBottomNavTap(BuildContext context) {
+    if (ProfileService.isProUser() ||
+        !RemoteConfigService.navigationBarInterAd) {
+      return;
+    }
+
+    _navClicksSinceInterstitial += 1;
+    if (_navClicksSinceInterstitial < 4) {
+      return;
+    }
+
+    _navClicksSinceInterstitial = 0;
+    AppOpenAdManager.suppressNextResumeOnce();
+    InterstitialAdManager.show(context: context);
   }
 
   @override
@@ -259,6 +280,7 @@ class _HomeShellState extends State<HomeShell> {
             _currentIndex = index;
             _screenAnimToken++;
           });
+          _onBottomNavTap(context);
         },
         borderRadius: BorderRadius.circular(12.r),
         splashColor: Colors.white.withOpacity(0.1),

@@ -86,4 +86,10 @@ class LocaleService extends ChangeNotifier {
     if (_box == null) return false;
     return _box!.get(_languageSelectedKey, defaultValue: false) as bool;
   }
+
+  /// Static check for ad eligibility without [BuildContext].
+  static bool isLanguageSelectedFromStorage() {
+    if (_box == null) return false;
+    return _box!.get(_languageSelectedKey, defaultValue: false) as bool;
+  }
 }

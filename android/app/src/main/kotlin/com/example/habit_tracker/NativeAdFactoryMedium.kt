@@ -1,74 +1,46 @@
 package com.eco.habit.tracker.companion.climate.change
 
+import android.content.Context
 import android.view.LayoutInflater
-// NOTE: Ads are temporarily disabled.
-//
-// Original native ad implementation preserved for later re-enable:
-/*
-// import android.view.View
-// import android.widget.Button
-// import android.widget.ImageView
-// import android.widget.TextView
-// import com.google.android.gms.ads.nativead.NativeAd
-// import com.google.android.gms.ads.nativead.NativeAdView
-// import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import com.google.android.gms.ads.nativead.MediaView
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdView
+import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 
-class NativeAdFactoryMedium(
-    private val layoutInflater: LayoutInflater,
-) : GoogleMobileAdsPlugin.NativeAdFactory {
+class NativeAdFactoryMedium(private val context: Context) : GoogleMobileAdsPlugin.NativeAdFactory {
+
     override fun createNativeAd(
         nativeAd: NativeAd,
-        customOptions: MutableMap<String, Any>?,
+        customOptions: MutableMap<String, Any>?
     ): NativeAdView {
-        val adView = layoutInflater.inflate(
-            R.layout.native_ads_medium,
-            null,
-        ) as NativeAdView
+        val adView = LayoutInflater.from(context)
+            .inflate(R.layout.native_ads_medium, null) as NativeAdView
 
-        val headlineView = adView.findViewById<TextView>(R.id.native_ad_headline)
-        val bodyView = adView.findViewById<TextView>(R.id.native_ad_body)
-        val iconView = adView.findViewById<ImageView>(R.id.native_ad_icon)
-        val buttonView = adView.findViewById<Button>(R.id.native_ad_button)
+        adView.mediaView = adView.findViewById(R.id.native_ad_media)
+        adView.headlineView = adView.findViewById(R.id.native_ad_headline)
+        adView.bodyView = adView.findViewById(R.id.native_ad_body)
+        adView.iconView = adView.findViewById(R.id.native_ad_icon)
+        adView.callToActionView = adView.findViewById(R.id.native_ad_button)
 
-        headlineView.text = nativeAd.headline
+        (adView.headlineView as? TextView)?.text = nativeAd.headline
+        (adView.bodyView as? TextView)?.text = nativeAd.body
 
-        val bodyText = nativeAd.body.orEmpty().trim()
-        if (bodyText.isNotEmpty()) {
-            bodyView.visibility = View.VISIBLE
-            bodyView.text = bodyText
-        } else {
-            bodyView.visibility = View.GONE
-        }
-
-        val iconDrawable = nativeAd.icon?.drawable
-        if (iconDrawable != null) {
+        val icon = nativeAd.icon
+        val iconView = adView.iconView
+        if (icon != null && iconView is ImageView) {
+            iconView.setImageDrawable(icon.drawable)
             iconView.visibility = View.VISIBLE
-            iconView.setImageDrawable(iconDrawable)
         } else {
-            iconView.visibility = View.GONE
+            iconView?.visibility = View.GONE
         }
 
-        val ctaText = nativeAd.callToAction.orEmpty().trim()
-        if (ctaText.isNotEmpty()) {
-            buttonView.visibility = View.VISIBLE
-            buttonView.text = ctaText
-        } else {
-            buttonView.visibility = View.GONE
-        }
+        (adView.callToActionView as? Button)?.text = nativeAd.callToAction
 
-        adView.headlineView = headlineView
-        adView.bodyView = bodyView
-        adView.iconView = iconView
-        adView.callToActionView = buttonView
-        adView.mediaView = null
         adView.setNativeAd(nativeAd)
-
         return adView
     }
 }
-*/
-
-// No-op stub to keep Android build compiling while ads are disabled.
-class NativeAdFactoryMedium(
-    @Suppress("UNUSED_PARAMETER") private val layoutInflater: LayoutInflater,
-)

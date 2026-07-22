@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import '../core/ads/native_small_ad_view.dart';
 import '../core/services/locale_service.dart';
+import '../core/services/profile_service.dart';
+import '../core/services/remote_config_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -192,6 +195,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           },
         ),
       ),
+      bottomNavigationBar:    (!ProfileService.isProUser() &&
+        RemoteConfigService.languageNativeAd) ?
+     NativeSmallAdView() : SizedBox.shrink(),
     );
   }
 

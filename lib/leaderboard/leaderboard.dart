@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
+import 'package:habit_tracker/core/ads/native_small_ad_view.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/profile_service.dart';
 
@@ -200,11 +202,14 @@ class Leaderboard extends StatelessWidget {
                       ),
                       SizedBox(height: 12.h),
                       // Rankings List
-                      ...rankings.map(
-                        (user) => Padding(
+                      ...rankings.asMap().entries.expand((entry) {
+                        final rank = entry.key + 1;
+                        final user = entry.value;
+                        final card = Padding(
                           padding: EdgeInsets.only(bottom: 10.h),
                           child: _buildRankingCard(
                             context: context,
+                            rank: rank,
                             name: user['name'] as String,
                             rankTitle: user['rankTitle'] as String,
                             score: user['score'] as int,
@@ -212,8 +217,22 @@ class Leaderboard extends StatelessWidget {
                             avatar: user['avatar'] as String,
                             profileService: profileService,
                           ),
-                        ),
-                      ),
+                        );
+
+                        if (user['name'] == 'Alex T' &&
+                            !ProfileService.isProUser() &&
+                            RemoteConfigService.leaderboardNativeAd) {
+                          return [
+                            card,
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 10.h),
+                              child: const NativeSmallAdView(),
+                            ),
+                          ];
+                        }
+
+                        return [card];
+                      }),
                     ],
                   ),
                 ),
@@ -227,6 +246,7 @@ class Leaderboard extends StatelessWidget {
 
   Widget _buildRankingCard({
     required BuildContext context,
+    required int rank,
     required String name,
     required String rankTitle,
     required int score,
@@ -252,6 +272,21 @@ class Leaderboard extends StatelessWidget {
       ),
       child: Row(
         children: [
+          SizedBox(
+            width: 28.w,
+            child: Text(
+              '$rank',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+                color: isCurrentUser
+                    ? const Color(0xFF2E7D32)
+                    : Colors.black54,
+              ),
+            ),
+          ),
+          SizedBox(width: 8.w),
           // Avatar
           CircleAvatar(
             radius: 24.r,

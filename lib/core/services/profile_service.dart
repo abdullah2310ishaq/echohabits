@@ -2,6 +2,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 
+import 'locale_service.dart';
+
 class ProfileService extends ChangeNotifier {
   static const String _boxName = 'profileBox';
   static const String _nameKey = 'userName';
@@ -41,6 +43,14 @@ class ProfileService extends ChangeNotifier {
   /// Store Pro entitlement used to gate ad visibility.
   static Future<void> setProUser(bool isProUser) async {
     await _box?.put(_isProUserKey, isProUser);
+  }
+
+  /// True when language + onboarding are done and user is not Pro.
+  static bool isEligibleForAds() {
+    if (isProUser()) {
+      return false;
+    }
+    return LocaleService.isLanguageSelectedFromStorage() && isOnboardingComplete();
   }
 
   /// Get user name

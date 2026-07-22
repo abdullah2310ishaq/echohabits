@@ -6,9 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
-import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
-import 'package:habit_tracker/core/ads/ads_logger.dart';
 import 'package:habit_tracker/core/billing/billing_product_ids.dart';
 import 'package:habit_tracker/core/billing/billing_service.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
@@ -41,8 +38,6 @@ void main() async {
   await Firebase.initializeApp();
   await RemoteConfigService.init();
 
-  AdsLogger.logConfig();
-
   if (kDebugMode) {
     // Ensures consistent test ads on this device during development.
     await MobileAds.instance.updateRequestConfiguration(
@@ -53,50 +48,13 @@ void main() async {
   }
 
   await MobileAds.instance.initialize();
-  AppOpenAdManager.initialize();
-  InterstitialAdManager.initialize();
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  bool _wasInBackground = false;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused ||
-        state == AppLifecycleState.inactive ||
-        state == AppLifecycleState.hidden) {
-      _wasInBackground = true;
-      return;
-    }
-
-    if (state == AppLifecycleState.resumed && _wasInBackground) {
-      _wasInBackground = false;
-      AppOpenAdManager.onAppResumedFromBackground();
-    }
-  }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

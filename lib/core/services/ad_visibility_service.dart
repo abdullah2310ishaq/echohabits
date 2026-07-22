@@ -3,8 +3,7 @@ import 'package:habit_tracker/core/services/remote_config_service.dart';
 
 class AdVisibilityService {
   static bool get shouldShowLanguageNativeAd =>
-      !ProfileService.isProUser() &&
-      RemoteConfigService.showLanguageNativeAd;
+      !ProfileService.isProUser() && RemoteConfigService.languageNativeAd;
 
   static bool shouldShowHomeShellNativeAd({required int completedActionsToday}) {
     return !ProfileService.isProUser() &&

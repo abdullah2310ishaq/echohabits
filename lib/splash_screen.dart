@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:habit_tracker/core/ads/app_open_ad_presenter.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/services/profile_service.dart';
 import 'package:habit_tracker/core/services/remote_config_service.dart';
-import '../core/services/profile_service.dart';
 import '../core/services/locale_service.dart';
 import '../onboarding/onboarding.dart';
 import '../profile_first.dart';
@@ -23,13 +24,10 @@ class _SplashScreenState extends State<SplashScreen>
   late final AnimationController _controller;
   late final Animation<double> _textOpacity;
   late final Animation<Offset> _textSlide;
-  late final bool _isFirstTimeUser;
 
   @override
   void initState() {
     super.initState();
-    final localeService = Provider.of<LocaleService>(context, listen: false);
-    _isFirstTimeUser = !localeService.isLanguageSelected();
 
     _controller = AnimationController(
       vsync: this,
@@ -49,38 +47,52 @@ class _SplashScreenState extends State<SplashScreen>
           ),
         );
 
-    // Start animation.
     _controller.forward();
-
-    _maybeShowAdThenNavigate();
+    _startSplashFlow();
   }
 
-  Future<void> _maybeShowAdThenNavigate() async {
-    if (!mounted) return;
-    // Keep splash visible for 4 seconds first.
+  Future<void> _startSplashFlow() async {
     await Future.delayed(_minimumSplashDuration);
     if (!mounted) return;
 
-    // Refresh remote config before ad decision.
     await RemoteConfigService.refresh();
     if (!mounted) return;
 
-    if (RemoteConfigService.showSplashAds) {
-      await _showSplashAdWithRetry();
+    if (!ProfileService.isEligibleForAds()) {
+      _navigateToNextScreen();
+      return;
+    }
+
+    final showInter = RemoteConfigService.splashInterAd;
+    final showAppOpen = RemoteConfigService.splashAppOpenAd;
+
+    if (!showInter && !showAppOpen) {
+      AppOpenAdManager.instance.bootstrapCacheAfterSplash();
+      _navigateToNextScreen();
+      return;
+    }
+
+    // If both are true, interstitial takes priority (not both).
+    if (showInter) {
+      await InterstitialAdManager.show(
+        context: context,
+        showLoadingDialog: false,
+      );
+      if (!mounted) return;
+      AppOpenAdManager.instance.bootstrapCacheAfterSplash();
+      _navigateToNextScreen();
+      return;
+    }
+
+    if (showAppOpen) {
+      await AppOpenAdManager.instance.showSplashAppOpenAd(
+        context,
+        showLoadingDialog: false,
+      );
       if (!mounted) return;
     }
 
     _navigateToNextScreen();
-  }
-
-  Future<void> _showSplashAdWithRetry() async {
-    // Splash policy: App Open is required, with a splash-only loading modal.
-    //
-    // If no ad is returned within the time window, we still proceed to avoid
-    // blocking the user indefinitely.
-    await AppOpenAdPresenter.showFromSplash(
-      maxWait: const Duration(seconds: 12),
-    );
   }
 
   void _navigateToNextScreen() {
@@ -93,16 +105,12 @@ class _SplashScreenState extends State<SplashScreen>
 
     Widget nextScreen;
     if (!isLanguageSelected) {
-      // First time - show language selection
       nextScreen = const FirstTimeLanguageSelectionScreen();
     } else if (!isOnboardingComplete) {
-      // Language selected but onboarding not completed
       nextScreen = const OnboardingScreen();
     } else if (isProfileSetup) {
-      // Language selected + onboarding complete + profile setup - go to home
       nextScreen = const HomeShell();
     } else {
-      // Language selected + onboarding complete but profile not setup - go to profile setup
       nextScreen = const ProfileFirst();
     }
 
@@ -131,9 +139,7 @@ class _SplashScreenState extends State<SplashScreen>
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Logo that fades in first
                     SizedBox(height: 16.h),
-                    // Text appears slightly after logo (fade + slide)
                     Opacity(
                       opacity: _textOpacity.value,
                       child: SlideTransition(
@@ -154,32 +160,17 @@ class _SplashScreenState extends State<SplashScreen>
               top: false,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 18.h),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      width: 28.w,
-                      height: 28.w,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3.w,
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color(0xFF327032),
-                        ),
+                child: Center(
+                  child: SizedBox(
+                    width: 20.w,
+                    height: 20.w,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.w,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Color(0xFF327032),
                       ),
                     ),
-                    if (!_isFirstTimeUser) ...[
-                      SizedBox(height: 8.h),
-                      Text(
-                        'This action may perform an ad',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 11.sp,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ],
+                  ),
                 ),
               ),
             ),

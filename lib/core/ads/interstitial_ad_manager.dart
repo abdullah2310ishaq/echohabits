@@ -1,129 +1,146 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:habit_tracker/core/ads/admob_ids.dart';
-import 'package:habit_tracker/core/ads/ads_logger.dart';
-import 'package:habit_tracker/core/services/remote_config_service.dart';
-import 'package:flutter/foundation.dart';
+import 'package:habit_tracker/core/navigation/app_navigator.dart';
 
 class InterstitialAdManager {
-  static const Duration _maxCacheAge = Duration(hours: 4);
+  InterstitialAdManager._();
 
-  static InterstitialAd? _interstitialAd;
-  static DateTime? _adLoadedAt;
-  static bool _isLoadingAd = false;
   static bool _isShowingAd = false;
 
-  static void initialize() {
-    _loadAd();
-  }
-
-  /// Shows an interstitial if it is available.
-  ///
-  /// - When [fromSplash] is true, it respects splash remote-config gates.
-  /// - When [fromSplash] is false, it is allowed outside splash (e.g. habits flow).
-  static Future<bool> showIfAvailable({bool fromSplash = false}) async {
-    if (_isShowingAd) {
-      AdsLogger.log('skip showIfAvailable (already showing)', tag: 'InterstitialAd');
-      return false;
-    }
-
-    if (fromSplash &&
-        (!RemoteConfigService.showSplashAds ||
-            !RemoteConfigService.showSplashInterstitialAd)) {
-      AdsLogger.log(
-        'skip fromSplash due to remote config (showSplashAds=${RemoteConfigService.showSplashAds}, showSplashInterstitial=${RemoteConfigService.showSplashInterstitialAd})',
-        tag: 'InterstitialAd',
-      );
-      return false;
-    }
-
-    if (!_isAdAvailable()) {
-      AdsLogger.log('not available -> load', tag: 'InterstitialAd');
-      _loadAd();
-      return false;
-    }
-
-    final ad = _interstitialAd;
-    if (ad == null) {
-      AdsLogger.log('available=true but ad==null -> load', tag: 'InterstitialAd');
-      _loadAd();
-      return false;
-    }
-
-    final completer = Completer<bool>();
-
-    ad.fullScreenContentCallback = FullScreenContentCallback(
-      onAdDismissedFullScreenContent: (ad) {
-        AdsLogger.log('dismissed', tag: 'InterstitialAd');
-        _isShowingAd = false;
-        ad.dispose();
-        _interstitialAd = null;
-        _loadAd();
-        if (!completer.isCompleted) completer.complete(true);
-      },
-      onAdFailedToShowFullScreenContent: (ad, error) {
-        AdsLogger.log(
-          'failedToShow code=${error.code} message=${error.message}',
-          tag: 'InterstitialAd',
+  static void _showLoading(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return PopScope(
+          canPop: false,
+          child: Dialog(
+            insetPadding: EdgeInsets.symmetric(horizontal: 36.w),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14.r),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 18.w,
+                    height: 18.w,
+                    child: CircularProgressIndicator(strokeWidth: 2.w),
+                  ),
+                  SizedBox(width: 12.w),
+                  Text(
+                    'Loading ad…',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
-        _isShowingAd = false;
-        ad.dispose();
-        _interstitialAd = null;
-        _loadAd();
-        if (!completer.isCompleted) completer.complete(false);
-      },
-      onAdShowedFullScreenContent: (ad) {
-        AdsLogger.log('showed', tag: 'InterstitialAd');
       },
     );
-
-    _isShowingAd = true;
-    AdsLogger.log('show() fromSplash=$fromSplash', tag: 'InterstitialAd');
-    ad.show();
-    _interstitialAd = null;
-    return completer.future;
   }
 
-  static bool _isAdAvailable() {
-    if (_interstitialAd == null || _adLoadedAt == null) {
-      return false;
+  static void _hideLoading(BuildContext context) {
+    final navigator = Navigator.of(context, rootNavigator: true);
+    if (navigator.canPop()) {
+      navigator.pop();
     }
-    return DateTime.now().difference(_adLoadedAt!) < _maxCacheAge;
   }
 
-  static void _loadAd() {
-    if (_isLoadingAd || _isAdAvailable()) {
+  /// Loads and shows an interstitial ad.
+  /// Completes after the ad is dismissed or if load/show fails.
+  static Future<void> show({
+    String? adUnitId,
+    BuildContext? context,
+    bool showLoadingDialog = true,
+    VoidCallback? onComplete,
+  }) async {
+    if (_isShowingAd) {
+      onComplete?.call();
       return;
     }
 
-    _isLoadingAd = true;
-    if (kDebugMode) {
-      debugPrint('[InterstitialAd] loading... unitId=${AdMobIds.interstitialUnitId}');
+    final unitId = adUnitId ?? AdIds.testInterId;
+    final dialogContext =
+        context ?? AppNavigator.navigatorKey.currentContext;
+    final completer = Completer<void>();
+
+    void complete() {
+      onComplete?.call();
+      if (!completer.isCompleted) {
+        completer.complete();
+      }
     }
-    InterstitialAd.load(
-      adUnitId: AdMobIds.interstitialUnitId,
+
+    if (showLoadingDialog &&
+        dialogContext != null &&
+        dialogContext.mounted) {
+      _showLoading(dialogContext);
+    }
+
+    await InterstitialAd.load(
+      adUnitId: unitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
-          _interstitialAd?.dispose();
-          _interstitialAd = ad;
-          _adLoadedAt = DateTime.now();
-          _isLoadingAd = false;
-          if (kDebugMode) {
-            debugPrint('[InterstitialAd] loaded');
+          if (showLoadingDialog &&
+              dialogContext != null &&
+              dialogContext.mounted) {
+            _hideLoading(dialogContext);
           }
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdShowedFullScreenContent: (ad) {
+              _isShowingAd = true;
+              if (kDebugMode) {
+                debugPrint('[InterstitialAd] showed');
+              }
+            },
+            onAdDismissedFullScreenContent: (ad) {
+              _isShowingAd = false;
+              ad.dispose();
+              if (kDebugMode) {
+                debugPrint('[InterstitialAd] dismissed');
+              }
+              complete();
+            },
+            onAdFailedToShowFullScreenContent: (ad, error) {
+              _isShowingAd = false;
+              ad.dispose();
+              if (kDebugMode) {
+                debugPrint('[InterstitialAd] failedToShow: $error');
+              }
+              complete();
+            },
+          );
+
+          ad.show();
         },
         onAdFailedToLoad: (error) {
-          _isLoadingAd = false;
-          _interstitialAd = null;
-          if (kDebugMode) {
-            debugPrint(
-              '[InterstitialAd] failedToLoad code=${error.code} message=${error.message}',
-            );
+          if (showLoadingDialog &&
+              dialogContext != null &&
+              dialogContext.mounted) {
+            _hideLoading(dialogContext);
           }
+          if (kDebugMode) {
+            debugPrint('[InterstitialAd] failedToLoad: $error');
+          }
+          complete();
         },
       ),
     );
+
+    return completer.future;
   }
 }

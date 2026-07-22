@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-// NOTE: Ads are temporarily disabled.
-//
-// Original ad-related imports preserved for later re-enable:
-// import 'package:habit_tracker/core/ads/admob_ids.dart';
-// import 'package:habit_tracker/core/widgets/native_ad_tile.dart';
+import 'package:habit_tracker/core/ads/native_small_ad_view.dart';
+import 'package:habit_tracker/core/services/profile_service.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import '../core/services/habit_service.dart';
 import '../core/services/locale_service.dart';
 import '../l10n/app_localizations.dart';
@@ -19,10 +17,6 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  // NOTE: Ads are temporarily disabled.
-  //
-  // Original flag preserved for later re-enable:
-  // static const bool _showNativeAd = true;
   String _selectedFilter = 'weekly';
 
   @override
@@ -151,16 +145,9 @@ class _HistoryState extends State<History> {
                 },
               ),
             ),
-            // NOTE: Ads are temporarily disabled.
-            //
-            // Original ad widget preserved for later re-enable:
-            // if (_showNativeAd)
-            //   NativeAdTile(
-            //     adUnitId: AdMobIds.nativeMediumUnitId,
-            //     factoryId: 'listTileLanguage',
-            //     height: 150.h,
-            //     margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 12.h),
-            //   ),
+            if (!ProfileService.isProUser() &&
+                RemoteConfigService.historyNativeAd)
+              const NativeSmallAdView(),
           ],
         ),
       ),

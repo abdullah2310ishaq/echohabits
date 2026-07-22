@@ -4,11 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
-// NOTE: Ads are temporarily disabled.
-//
-// Original ad-related imports preserved for later re-enable:
-// import 'package:habit_tracker/core/ads/admob_ids.dart';
-// import 'package:habit_tracker/core/services/remote_config_service.dart';
+import 'package:habit_tracker/core/ads/app_open_ad_manager.dart';
+import 'package:habit_tracker/core/ads/interstitial_ad_manager.dart';
+import 'package:habit_tracker/core/services/remote_config_service.dart';
 import 'dart:io';
 import '../core/widgets/eco_toast.dart';
 // import '../core/widgets/native_ad_tile.dart';
@@ -27,6 +25,23 @@ class _HomeOneState extends State<HomeOne> {
   bool _cyclistUnlocked = false;
   bool _waterUnlocked = false;
   bool _energyUnlocked = false;
+  int _taskCompletionsSinceInterstitial = 0;
+
+  void _onHomeTaskCompleted(BuildContext context) {
+    if (ProfileService.isProUser() ||
+        !RemoteConfigService.homeScreenTaskCompleteInterAd) {
+      return;
+    }
+
+    _taskCompletionsSinceInterstitial += 1;
+    if (_taskCompletionsSinceInterstitial < 2) {
+      return;
+    }
+
+    _taskCompletionsSinceInterstitial = 0;
+    AppOpenAdManager.suppressNextResumeOnce();
+    InterstitialAdManager.show(context: context);
+  }
 
   String? _checkAndTriggerConfetti(
     String completedTitle,
@@ -235,6 +250,7 @@ class _HomeOneState extends State<HomeOne> {
                                         title,
                                         isDone: true,
                                       );
+                                      _onHomeTaskCompleted(context);
                                       // Check if badge unlocks and trigger confetti
                                       final unlockedBadge =
                                           _checkAndTriggerConfetti(
@@ -320,6 +336,7 @@ class _HomeOneState extends State<HomeOne> {
                                         id,
                                         isDone: true,
                                       );
+                                      _onHomeTaskCompleted(context);
                                       // Check if badge unlocks and trigger confetti
                                       final unlockedBadge =
                                           _checkAndTriggerConfetti(
