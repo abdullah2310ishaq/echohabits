@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,43 @@ import 'package:habit_tracker/core/widgets/global_pointer_gate.dart';
 import 'package:habit_tracker/splash_screen.dart';
 import 'package:habit_tracker/l10n/app_localizations.dart';
 import 'package:habit_tracker/core/navigation/app_navigator.dart';
+Future<void> requestConsentAndShowForm(VoidCallback onConsentHandled) async {
+  ConsentRequestParameters params = ConsentRequestParameters();
+  ConsentInformation consentInfo = ConsentInformation.instance;
 
+  consentInfo.requestConsentInfoUpdate(
+    params,
+        () async {
+      final status = await consentInfo.getConsentStatus();
+      final isConsentRequired = await consentInfo.isConsentFormAvailable();
+
+      if (isConsentRequired && status == ConsentStatus.required) {
+        // Show consent form and wait for user action
+        ConsentForm.loadConsentForm(
+              (ConsentForm consentForm) {
+            consentForm.show((FormError? formError) {
+              // User has accepted or rejected, or form error
+              onConsentHandled();
+            });
+          },
+              (formError) {
+            // Failed to load form, proceed but log error
+            print('Consent form load error: ${formError.message}');
+            onConsentHandled();
+          },
+        );
+      } else {
+        // Consent not required (non-EEA), or already handled
+        onConsentHandled();
+      }
+    },
+        (FormError error) {
+      // Handle consent info update error if needed
+      print('Consent info update error: \\${error.message}');
+      onConsentHandled();
+    },
+  );
+}
 void main() async {
   // Ensure Flutter binding is initialized before async operations
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +85,11 @@ void main() async {
   }
 
   await MobileAds.instance.initialize();
-
+  final completer = Completer<void>();
+  requestConsentAndShowForm(() {
+    completer.complete();
+  });
+  await completer.future;
   runApp(const MyApp());
 }
 

@@ -27,8 +27,8 @@ import java.util.Properties
                 applicationId = "com.eco.habit.tracker.companion.climate.change"
                 minSdk = 24
                 targetSdk = 36
-                versionCode = 6
-                versionName = "5.0.1"
+                versionCode = 7
+                versionName = "5.0.2"
             }
 
             // Release signing (keystore.jks) via android/key.properties
